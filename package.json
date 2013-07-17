@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Igor Ribeiro Lima",
+    "email": "lima.igorrribeiro@gmail.com",
+    "website": "http://github.com/igorlima"
+  },
+  "name": "CoffeeScript-by_trevor-Burnham",
+  "description": "Learning CoffeeScript",
+  "version": "0.0.1",
+  "homepage": "https://github.com/igorlima/CoffeeScript-by-Trevor-Burnham",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:igorlima/CoffeeScript-by-Trevor-Burnham.git"
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-jasmine": "*",
+    "grunt-contrib-jshint":  "*",
+    "grunt-contrib-coffee":  "*",
+    "grunt-contrib-watch":   "*"
+  }
+}
