@@ -1,0 +1,5 @@
+node_modules/
+_SpecRunner.html
+.grunt
+src/js/*
+spec/js/*
