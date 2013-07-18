@@ -14,6 +14,11 @@ module.exports = function(grunt) {
       all: ['Gruntfile.js']
     },
 
+    clean: {
+      spec:   ['spec/js/**/*.js'],
+      source: ['src/js/**/*.js']
+    },
+
     coffee: {
       spec: {
         expand: true,
@@ -36,7 +41,7 @@ module.exports = function(grunt) {
     watch: {
       main: {
         files: ['spec/coffee/**/*.coffee', 'src/coffee/**/*.coffee'],
-        tasks: ['coffee', 'jasmine']
+        tasks: ['clean', 'coffee', 'jasmine']
       }
     }
 
@@ -46,7 +51,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
-  grunt.registerTask('default', ['jshint', 'coffee', 'jasmine']);
+  grunt.registerTask('default', ['jshint', 'clean', 'coffee', 'jasmine']);
 
 };
