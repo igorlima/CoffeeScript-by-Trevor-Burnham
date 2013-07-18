@@ -6,3 +6,5 @@
 
     @size = -> size
 
+  inRange: (x) ->
+    0 <= x < @size()
