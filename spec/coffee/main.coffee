@@ -30,3 +30,7 @@ describe "Grid class", ->
 
     it "should be a size 5", ->
       expect(grid.size()).toBe 5
+
+    it "coordinates (2,3) should be set", ->
+      expect(grid.set x: 2, y: 3, value: 'a').toBe true
+      expect(grid.get x: 2, y: 3).toBe 'a'
