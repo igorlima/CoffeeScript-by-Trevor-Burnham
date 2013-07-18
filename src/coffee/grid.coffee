@@ -2,7 +2,7 @@
 
   constructor: (options={}) ->
     {size} = options
-    throw "Size not given" if (not size) or size < 0
+    throw "Grid size not given" if (not size) or size < 0
 
     @size = -> size
 
