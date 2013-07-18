@@ -4,13 +4,13 @@ describe "Grid class", ->
   describe "Methods util", ->
     generic_grid = new Grid size: 4
 
-    it "An exception will be raised if a size is not given", ->
+    it "an exception will be raised if a size is not given", ->
       expect( -> new Grid() ).toThrow()
 
-    it "An exception will be raised if a size is 0", ->
+    it "an exception will be raised if a size is 0", ->
       expect( -> new Grid size: 0 ).toThrow()
 
-    it "An exception will be raised if a size is less than 0", ->
+    it "an exception will be raised if a size is less than 0", ->
       expect( -> new Grid size: -1 ).toThrow()
 
     it "4 should NOT be in range if the grid has size 4", ->
