@@ -6,5 +6,8 @@
 
     @size = -> size
 
-  inRange: (x) ->
-    0 <= x < @size()
+  inRange: (num) ->
+    (@isInteger num) and 0 <= num < @size()
+
+  isInteger: (num) ->
+    num is Math.round num
