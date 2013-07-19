@@ -9,10 +9,9 @@
     coordinates[row] = [] for row in [0...size]
     @set = (coordinate) ->
       {x, y, value} = coordinate
-      if @inRange(x) and @inRange(y)
-        coordinates[x][y] = value
-      else
-        coordinates[x][y] = undefined
+      if @inRange(x) and @inRange(y) then coordinates[x][y] = value
+      else coordinates[x][y] = undefined
+
       !!coordinates[x][y]
 
     @get = (coordinate) ->
