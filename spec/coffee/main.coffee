@@ -1,7 +1,7 @@
 
 describe "Grid class", ->
 
-  describe "Methods util", ->
+  describe "Methods util: inRange / isInteger", ->
     generic_grid = new Grid size: 4
 
     it "an exception will be raised if a size is not given", ->
