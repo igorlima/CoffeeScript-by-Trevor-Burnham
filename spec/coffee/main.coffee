@@ -25,6 +25,12 @@ describe "Grid class", ->
     it "3.1 should NOT be in range, because it's NOT an integer", ->
       expect( generic_grid.inRange 3.1 ).not.toBe true
 
+    it "the word 'DOES' should be a word", ->
+      expect( generic_grid.isWord 'DOES' ).toBe true
+
+    it "the word 'THINKING' should NOT be a word from a grid which has a size 4", ->
+      expect( generic_grid.isWord 'THINKING' ).not.toBe true
+
   describe "5x5 project", ->
     grid = new Grid size: 5
 

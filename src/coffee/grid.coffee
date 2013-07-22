@@ -18,6 +18,10 @@
       {x, y} = coordinate
       coordinates[x][y]
 
+    wordList = (word for word in Words when word.length <= size)
+    @isWord = (str) ->
+      str in wordList
+
   inRange: (num) ->
     (@isInteger num) and 0 <= num < @size()
 
