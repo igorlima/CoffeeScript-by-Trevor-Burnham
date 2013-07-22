@@ -41,6 +41,9 @@ describe "Grid class", ->
         'Y', 'Z'
       ]
 
+    it "a random letter should be a letter from the alphabet", ->
+      expect( generic_grid.alphabet() ).toContain generic_grid.randomLetter()
+
   describe "5x5 project", ->
     grid = new Grid size: 5
 

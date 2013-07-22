@@ -40,3 +40,10 @@
 
   alphabet: ->
     (letter for letter of tileCounts).sort()
+
+  randomLetter: ->
+    randomNumber = Math.ceil Math.random() * @totalTiles()
+    x = 1
+    for letter in @alphabet()
+      x += tileCounts[letter]
+      return letter if x > randomNumber
