@@ -44,6 +44,29 @@ describe "Grid class", ->
     it "a random letter should be a letter from the alphabet", ->
       expect( generic_grid.alphabet() ).toContain generic_grid.randomLetter()
 
+    it "the grid should 4x4 if the size is 4", ->
+      generic_grid.generateNewGrid()
+      grid = generic_grid.grid
+      expect( grid.length ).toBe 4
+      expect( grid[0].length ).toBe 4
+
+    it "the 'str' method should be
+
+            A | A | A | A
+            A | A | A | A
+            A | A | A | A
+            A | A | A | A
+
+        in a square 4x4 if the size is 4", ->
+      generic_grid.generateNewGrid()
+      grid_string_rows = generic_grid.str().split '\n'
+
+      regex = /^[ ]([A-Z][ ][|][ ]){3}/
+      expect( grid_string_rows[0] ).toMatch regex
+      expect( grid_string_rows[1] ).toMatch regex
+      expect( grid_string_rows[2] ).toMatch regex
+      expect( grid_string_rows[3] ).toMatch regex
+
   describe "5x5 project", ->
     grid = new Grid size: 5
 

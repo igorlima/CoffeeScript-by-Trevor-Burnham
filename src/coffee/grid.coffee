@@ -49,3 +49,15 @@
     for letter in @alphabet()
       x += tileCounts[letter]
       return letter if x > randomNumber
+
+  generateNewGrid: ->
+    @grid = for x in [0...@size()]
+      for y in [0...@size()]
+        @randomLetter()
+
+  str: ->
+    rows = for x in [0...@size()]
+      for y in [0...@size()]
+        @grid[y][x]
+    rowStrings = (' ' + row.join(' | ') for row in rows)
+    rowStrings.join '\n'
