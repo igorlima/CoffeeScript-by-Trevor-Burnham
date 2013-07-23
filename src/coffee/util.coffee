@@ -37,5 +37,10 @@ Util.printGrid = (grid) ->
   rowStrings = (' ' + row.join(' | ') for row in rows)
   rowStrings.join '\n'
 
+Util.matrix = (grid) ->
+  for x in [0...grid.length]
+    for y in [0...grid[x].length]
+      grid[x][y]
+
 Util.wordList = (size) ->
   (word for word in Words when word.length <= size)

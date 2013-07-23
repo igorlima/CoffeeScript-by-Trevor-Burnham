@@ -65,3 +65,22 @@ describe "Util class", ->
   it "the word list with 2 letters should contains the word 'DO'", ->
     wordList = Util.wordList 2
     expect( wordList ).toContain 'DO'
+
+  it "the matrix of following grid 4x4 method should be
+        A | A | A | A
+        X | A | B | A
+        Z | C | A | A
+        Y | A | A | A
+      ", ->
+
+    matrix = Util.matrix [
+      ['A', 'A', 'A', 'A']
+      ['X', 'A', 'B', 'A']
+      ['Z', 'C', 'A', 'A']
+      ['Y', 'A', 'A', 'A']
+    ]
+
+    expect( matrix[0] ).toEqual ['A', 'A', 'A', 'A']
+    expect( matrix[1] ).toEqual ['X', 'A', 'B', 'A']
+    expect( matrix[2] ).toEqual ['Z', 'C', 'A', 'A']
+    expect( matrix[3] ).toEqual ['Y', 'A', 'A', 'A']
