@@ -1,4 +1,7 @@
 describe "Util class", ->
+
+  it "3 should be an integer", ->
+    expect( Util.isInteger 3 ).toBe true
   
   it "1.1 should NOT be an integer", ->
     expect( Util.isInteger 1.1 ).toBe false
