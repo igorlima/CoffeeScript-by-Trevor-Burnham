@@ -95,13 +95,13 @@ describe "Util class", ->
       expect( word ).toBe 'SEGA'
 
     it "the list of vertical words should contains 'DO', 'DOE' and 'DOES'", ->
-      words = Util.wordsVertical grid: grid, range: 4, x: 1, y: 0
+      words = Util.verticalWords grid: grid, range: 4, x: 1, y: 0
       expect( words ).toContain "DO"
       expect( words ).toContain "DOE"
       expect( words ).toContain "DOES"
 
     it "the list of vertical words should contains 'DO', 'DOE' and 'DOES'", ->
-      words = Util.wordsVertical grid: grid, range: 4, x: 1, y: 1
+      words = Util.verticalWords grid: grid, range: 4, x: 1, y: 1
       expect( words ).toContain "DO"
       expect( words ).toContain "DOE"
       expect( words ).toContain "DOES"

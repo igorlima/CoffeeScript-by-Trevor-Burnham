@@ -65,11 +65,16 @@ Util.wordDiagonal_lowerLeft_to_upperRight = (params) ->
   {grid, range, x: col, y: row} = params
   @word params, (i) -> grid[row-i]?[col+i]
 
-Util.wordsVertical = (params) ->
+Util.words = (params, function_to_match_word) ->
   {grid, range, x, y} = params
   words = []
   for word_length in [MIN_WORD_LENGTH..range]
     for offset in [0...word_length]
-      word = Util.wordVertical {grid, x, y: y - offset, range: word_length}
+      word = function_to_match_word word_length, offset
       words.push word if word? and not (word in words)
   words
+
+Util.verticalWords = (params) ->
+  {grid, range, x, y} = params
+  Util.words params, (word_length, offset) ->
+    Util.wordVertical {grid, x, y: y - offset, range: word_length}
