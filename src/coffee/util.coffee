@@ -31,9 +31,7 @@ Util.generateGrid = (size) ->
       Tile.randomLetter()
 
 Util.printGrid = (grid) ->
-  rows = for x in [0...grid.length]
-    for y in [0...grid[x].length]
-      grid[x][y]
+  rows = @matrix grid
   rowStrings = (' ' + row.join(' | ') for row in rows)
   rowStrings.join '\n'
 
