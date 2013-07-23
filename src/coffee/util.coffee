@@ -30,6 +30,6 @@ Util.generateGrid = (size) ->
 Util.printGrid = (grid) ->
   rows = for x in [0...grid.length]
     for y in [0...grid[x].length]
-      grid[y][x]
+      grid[x][y]
   rowStrings = (' ' + row.join(' | ') for row in rows)
   rowStrings.join '\n'

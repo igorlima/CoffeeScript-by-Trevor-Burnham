@@ -52,8 +52,7 @@ describe "Util class", ->
       ['A', 'A', 'A', 'A']
     ]).split '\n'
 
-    regex = /^[ ]([A-Z][ ][|][ ]){3}/
-    expect( grid_string_rows[0] ).toMatch regex
-    expect( grid_string_rows[1] ).toMatch regex
-    expect( grid_string_rows[2] ).toMatch regex
-    expect( grid_string_rows[3] ).toMatch regex
+    expect( grid_string_rows[0] ).toMatch "A [|] A [|] A [|] A"
+    expect( grid_string_rows[1] ).toMatch "A [|] A [|] B [|] A"
+    expect( grid_string_rows[2] ).toMatch "A [|] C [|] A [|] A"
+    expect( grid_string_rows[3] ).toMatch "A [|] A [|] A [|] A"
