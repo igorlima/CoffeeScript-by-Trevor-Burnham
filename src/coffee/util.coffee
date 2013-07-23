@@ -1,5 +1,4 @@
 Util = @Util = class
-MIN_WORD_LENGTH = Util.MIN_WORD_LENGTH = 2
 
 Util.isInteger = (num) ->
   num is Math.round num
@@ -40,64 +39,3 @@ Util.printGrid = (grid) ->
 
 Util.wordList = (size) ->
   (word for word in Words when word.length <= size)
-
-Util.word = (params, funcDirectionLetter) ->
-  {grid, range, x: col, y: row} = params
-  word = ""
-  for i in [0...range]
-    letter = funcDirectionLetter i
-    word += letter if letter?
-  word if word.length is range
-
-Util.wordVertical = (params) ->
-  {grid, range, x: col, y: row} = params
-  @word params, (i) -> grid[row+i]?[col]
-
-Util.wordHorizontal = (params) ->
-  {grid, range, x: col, y: row} = params
-  @word params, (i) -> grid[row]?[col+i]
-
-Util.wordDiagonal_upperLeft_to_lowerRight = (params) ->
-  {grid, range, x: col, y: row} = params
-  @word params, (i) -> grid[row+i]?[col+i]
-
-Util.wordDiagonal_lowerLeft_to_upperRight = (params) ->
-  {grid, range, x: col, y: row} = params
-  @word params, (i) -> grid[row-i]?[col+i]
-
-Util.words = (params, function_to_match_word) ->
-  {grid, range, x, y} = params
-  words = []
-  for word_length in [MIN_WORD_LENGTH..range]
-    for offset in [0...word_length]
-      word = function_to_match_word word_length, offset
-      words.push word if word? and not (word in words)
-  words
-
-Util.verticalWords = (params) ->
-  {grid, range, x, y} = params
-  Util.words params, (word_length, offset) ->
-    Util.wordVertical {grid, x, y: y - offset, range: word_length}
-
-Util.horizontalWords = (params) ->
-  {grid, range, x, y} = params
-  Util.words params, (word_length, offset) ->
-    Util.wordHorizontal {grid, x: x - offset, y, range: word_length}
-
-Util.diagonalWords_upperLeft_to_lowerRight = (params) ->
-  {grid, range, x, y} = params
-  Util.words params, (word_length, offset) ->
-    Util.wordDiagonal_upperLeft_to_lowerRight {grid, x: x - offset, y: y - offset, range: word_length}
-
-Util.diagonalWords_lowerLeft_to_upperRight = (params) ->
-  {grid, range, x, y} = params
-  Util.words params, (word_length, offset) ->
-    Util.wordDiagonal_lowerLeft_to_upperRight {grid, x: x - offset, y: y + offset, range: word_length}
-
-Util.allWords = (params) ->
-  allWords = []
-  for finderWords in [Util.verticalWords, Util.horizontalWords, Util.diagonalWords_upperLeft_to_lowerRight, Util.diagonalWords_lowerLeft_to_upperRight]
-    words = finderWords params
-    for word in words
-      allWords.push word unless word in allWords
-  allWords
