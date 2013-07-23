@@ -66,22 +66,42 @@ describe "Util class", ->
     wordList = Util.wordList 2
     expect( wordList ).toContain 'DO'
 
-  # it "the word 'DOES' should match on (1,0) in the following grid
-  #       A | D | A | A
-  #       A | O | A | A
-  #       A | E | A | A
-  #       A | S | A | A
-  #     ", ->
+  describe "Words through the following grid ", ->
+    grid = [
+      ['B', 'D', 'A', 'A']
+      ['D', 'O', 'G', 'S']
+      ['A', 'E', 'S', 'A']
+      ['S', 'S', 'A', 'S']
+    ]
 
-  #   options =
-  #     grid: [
-  #       ['A', 'D', 'A', 'A']
-  #       ['A', 'O', 'A', 'A']
-  #       ['A', 'E', 'A', 'A']
-  #       ['A', 'S', 'A', 'A']
-  #     ]
-  #     wordList: ["DOES"]
-  #     x: 1
-  #     y: 0
+    it "the word verticaly from (x:1, y:0) with length 2 sould be 'DO'", ->
+      word = Util.wordVertical grid: grid, range: 2, x: 1, y: 0
+      expect( word ).toBe 'DO'
 
-  #   expect( Util.matchWords options ).toBe true
+    it "the word verticaly from (x:1, y:3) with length 2 sould be 'undefined', because the word 'S' is less than length 2", ->
+      word = Util.wordVertical grid: grid, range: 2, x: 1, y: 3
+      expect( word ).not.toBeDefined()
+
+    it "the word horizontaly from (x:0, y:1) with length 3 sould be 'DOG'", ->
+      word = Util.wordHorizontal grid: grid, range: 3, x: 0, y: 1
+      expect( word ).toBe 'DOG'
+
+    it "the word diagonaly upper-left to lower-right from (x:0, y:0) with length 4 sould be 'BOSS'", ->
+      word = Util.wordDiagonal_upperLeft_to_lowerRight grid: grid, range: 4, x: 0, y: 0
+      expect( word ).toBe 'BOSS'
+
+    it "the word diagonaly lower-left to upper-right from (x:0, y:3) with length 4 sould be 'SEGA'", ->
+      word = Util.wordDiagonal_lowerLeft_to_upperRight grid: grid, range: 4, x: 0, y: 3
+      expect( word ).toBe 'SEGA'
+
+    it "the list of vertical words should contains 'DO', 'DOE' and 'DOES'", ->
+      words = Util.wordsVertical grid: grid, range: 4, x: 1, y: 0
+      expect( words ).toContain "DO"
+      expect( words ).toContain "DOE"
+      expect( words ).toContain "DOES"
+
+    it "the list of vertical words should contains 'DO', 'DOE' and 'DOES'", ->
+      words = Util.wordsVertical grid: grid, range: 4, x: 1, y: 1
+      expect( words ).toContain "DO"
+      expect( words ).toContain "DOE"
+      expect( words ).toContain "DOES"

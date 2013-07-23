@@ -1,4 +1,5 @@
 Util = @Util = class
+MIN_WORD_LENGTH = Util.MIN_WORD_LENGTH = 2
 
 Util.isInteger = (num) ->
   num is Math.round num
@@ -39,3 +40,36 @@ Util.printGrid = (grid) ->
 
 Util.wordList = (size) ->
   (word for word in Words when word.length <= size)
+
+Util.word = (params, funcDirectionLetter) ->
+  {grid, range, x: col, y: row} = params
+  word = ""
+  for i in [0...range]
+    letter = funcDirectionLetter i
+    word += letter if letter?
+  word if word.length >= range
+
+Util.wordVertical = (params) ->
+  {grid, range, x: col, y: row} = params
+  @word params, (i) -> grid[row+i]?[col]
+
+Util.wordHorizontal = (params) ->
+  {grid, range, x: col, y: row} = params
+  @word params, (i) -> grid[row]?[col+i]
+
+Util.wordDiagonal_upperLeft_to_lowerRight = (params) ->
+  {grid, range, x: col, y: row} = params
+  @word params, (i) -> grid[row+i]?[col+i]
+
+Util.wordDiagonal_lowerLeft_to_upperRight = (params) ->
+  {grid, range, x: col, y: row} = params
+  @word params, (i) -> grid[row-i]?[col+i]
+
+Util.wordsVertical = (params) ->
+  {grid, range, x, y} = params
+  words = []
+  for word_length in [MIN_WORD_LENGTH..range]
+    for offset in [0...word_length]
+      word = Util.wordVertical {grid, x, y: y - offset, range: word_length}
+      words.push word if word? and not (word in words)
+  words
