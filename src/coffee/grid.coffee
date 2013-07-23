@@ -30,10 +30,7 @@
       str in wordList
 
   inRange: (num) ->
-    (@isInteger num) and 0 <= num < @size()
-
-  isInteger: (num) ->
-    num is Math.round num
+    Util.inRange value: num, size: @size()
 
   totalTiles: ->
     totalTiles = 0
