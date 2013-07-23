@@ -8,8 +8,8 @@ Score = @Score = class
   constructor: (options={}) ->
     {grid} = options
 
-    @printGrid = ->
-      Util.printGrid grid
+    @printGrid = -> Util.printGrid grid
+    @matrix = -> Util.matrix grid
 
     @move = (swapCoordinates) ->
       {x1: col1, y1: row1, x2: col2, y2: row2} = swapCoordinates
