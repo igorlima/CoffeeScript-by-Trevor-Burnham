@@ -13,17 +13,13 @@
     @size = -> size
 
     coordinates = []
-    coordinates[row] = [] for row in [0...size]
     @set = (coordinate) ->
       {x, y, value} = coordinate
-      if @inRange(x) and @inRange(y) then coordinates[x][y] = value
-      else coordinates[x][y] = undefined
-
-      !!coordinates[x][y]
+      Util.setCoordinate { coordinates, range: size, x, y, value }
 
     @get = (coordinate) ->
       {x, y} = coordinate
-      coordinates[x][y]
+      Util.getCoordinate { coordinates, x, y }
 
     wordList = (word for word in Words when word.length <= size)
     @isWord = (str) ->
