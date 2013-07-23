@@ -47,7 +47,7 @@ Util.word = (params, funcDirectionLetter) ->
   for i in [0...range]
     letter = funcDirectionLetter i
     word += letter if letter?
-  word if word.length >= range
+  word if word.length is range
 
 Util.wordVertical = (params) ->
   {grid, range, x: col, y: row} = params
@@ -78,3 +78,8 @@ Util.verticalWords = (params) ->
   {grid, range, x, y} = params
   Util.words params, (word_length, offset) ->
     Util.wordVertical {grid, x, y: y - offset, range: word_length}
+
+Util.horizontalWords = (params) ->
+  {grid, range, x, y} = params
+  Util.words params, (word_length, offset) ->
+    Util.wordHorizontal {grid, x, y: y, range: word_length}
