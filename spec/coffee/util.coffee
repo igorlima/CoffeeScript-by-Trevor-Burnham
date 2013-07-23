@@ -117,3 +117,19 @@ describe "Util class", ->
       expect( words ).toContain "DO"
       expect( words ).toContain "DOG"
       expect( words ).toContain "DOGS"
+
+    it "the list of diagnonal words upper-left to lower-right from (x: 0, y:0) should contains 'BOSS'", ->
+      words = Util.diagonalWords_upperLeft_to_lowerRight grid: grid, range: 4, x: 0, y: 0
+      expect( words ).toContain "BOSS"
+
+    it "the list of diagnonal words upper-left to lower-right from (x: 1, y:1) should contains 'BOSS'", ->
+      words = Util.diagonalWords_upperLeft_to_lowerRight grid: grid, range: 4, x: 1, y: 1
+      expect( words ).toContain "BOSS"
+
+    it "the list of diagnonal words lower-left to upper-right from (x: 0, y:3) should contains 'SEGA'", ->
+      words = Util.diagonalWords_lowerLeft_to_upperRight grid: grid, range: 4, x: 0, y: 3
+      expect( words ).toContain "SEGA"
+
+    it "the list of diagnonal words lower-left to upper-right from (x: 1, y:2) should contains 'SEGA'", ->
+      words = Util.diagonalWords_lowerLeft_to_upperRight grid: grid, range: 4, x: 1, y: 2
+      expect( words ).toContain "SEGA"

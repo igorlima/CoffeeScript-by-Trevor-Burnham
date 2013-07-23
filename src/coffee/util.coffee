@@ -83,3 +83,13 @@ Util.horizontalWords = (params) ->
   {grid, range, x, y} = params
   Util.words params, (word_length, offset) ->
     Util.wordHorizontal {grid, x: x - offset, y, range: word_length}
+
+Util.diagonalWords_upperLeft_to_lowerRight = (params) ->
+  {grid, range, x, y} = params
+  Util.words params, (word_length, offset) ->
+    Util.wordDiagonal_upperLeft_to_lowerRight {grid, x: x - offset, y: y - offset, range: word_length}
+
+Util.diagonalWords_lowerLeft_to_upperRight = (params) ->
+  {grid, range, x, y} = params
+  Util.words params, (word_length, offset) ->
+    Util.wordDiagonal_lowerLeft_to_upperRight {grid, x: x - offset, y: y + offset, range: word_length}
