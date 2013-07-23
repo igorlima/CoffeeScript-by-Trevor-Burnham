@@ -33,3 +33,6 @@ Util.printGrid = (grid) ->
       grid[x][y]
   rowStrings = (' ' + row.join(' | ') for row in rows)
   rowStrings.join '\n'
+
+Util.wordList = (size) ->
+  (word for word in Words when word.length <= size)

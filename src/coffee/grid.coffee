@@ -14,7 +14,7 @@
       {x, y} = coordinate
       Util.getCoordinate { coordinates, x, y }
 
-    wordList = (word for word in Words when word.length <= size)
+    wordList = Util.wordList size
     @isWord = (str) ->
       str in wordList
 

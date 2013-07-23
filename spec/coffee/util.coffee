@@ -56,3 +56,11 @@ describe "Util class", ->
     expect( grid_string_rows[1] ).toMatch "A [|] A [|] B [|] A"
     expect( grid_string_rows[2] ).toMatch "A [|] C [|] A [|] A"
     expect( grid_string_rows[3] ).toMatch "A [|] A [|] A [|] A"
+
+  it "the word list with 2 letters should NOT contains the word 'DOES', because it has 4 letters instead", ->
+    wordList = Util.wordList 2
+    expect( wordList ).not.toContain 'DOES'
+
+  it "the word list with 2 letters should contains the word 'DO'", ->
+    wordList = Util.wordList 2
+    expect( wordList ).toContain 'DO'
