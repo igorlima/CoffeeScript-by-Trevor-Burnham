@@ -111,3 +111,9 @@ describe "Util class", ->
       expect( words ).toContain "DO"
       expect( words ).toContain "DOG"
       expect( words ).toContain "DOGS"
+
+    it "the list of horizontal words from (x: 0, y:1) should contains 'DO', 'DOG' and 'DOGS'", ->
+      words = Util.horizontalWords grid: grid, range: 4, x: 1, y: 1
+      expect( words ).toContain "DO"
+      expect( words ).toContain "DOG"
+      expect( words ).toContain "DOGS"

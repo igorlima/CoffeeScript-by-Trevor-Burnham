@@ -82,4 +82,4 @@ Util.verticalWords = (params) ->
 Util.horizontalWords = (params) ->
   {grid, range, x, y} = params
   Util.words params, (word_length, offset) ->
-    Util.wordHorizontal {grid, x, y: y, range: word_length}
+    Util.wordHorizontal {grid, x: x - offset, y, range: word_length}
