@@ -19,9 +19,6 @@ describe "Grid class", ->
     it "3 should be in range if the grid has size 4", ->
       expect( generic_grid.inRange 3 ).toBe true
 
-    it "1.1 should NOT be an integer", ->
-      expect( generic_grid.isInteger 1.1 ).not.toBe true
-
     it "3.1 should NOT be in range, because it's NOT an integer", ->
       expect( generic_grid.inRange 3.1 ).not.toBe true
 
