@@ -1,5 +1,19 @@
 describe "Util class", ->
 
+  grid_for_printing = [
+    ['A', 'A', 'A', 'A']
+    ['A', 'A', 'B', 'A']
+    ['A', 'C', 'A', 'A']
+    ['A', 'A', 'A', 'A']
+  ]
+
+  grid_for_matrixing = [
+    ['A', 'A', 'A', 'A']
+    ['X', 'A', 'B', 'A']
+    ['Z', 'C', 'A', 'A']
+    ['Y', 'A', 'A', 'A']
+  ]
+
   it "3 should be an integer", ->
     expect( Util.isInteger 3 ).toBe true
   
@@ -45,14 +59,7 @@ describe "Util class", ->
         A | C | A | A
         A | A | A | A
       ", ->
-
-    grid_string_rows = (Util.printGrid [
-      ['A', 'A', 'A', 'A']
-      ['A', 'A', 'B', 'A']
-      ['A', 'C', 'A', 'A']
-      ['A', 'A', 'A', 'A']
-    ]).split '\n'
-
+    grid_string_rows = (Util.printGrid grid_for_printing).split '\n'
     expect( grid_string_rows[0] ).toMatch "A [|] A [|] A [|] A"
     expect( grid_string_rows[1] ).toMatch "A [|] A [|] B [|] A"
     expect( grid_string_rows[2] ).toMatch "A [|] C [|] A [|] A"
@@ -72,14 +79,7 @@ describe "Util class", ->
         Z | C | A | A
         Y | A | A | A
       ", ->
-
-    matrix = Util.matrix [
-      ['A', 'A', 'A', 'A']
-      ['X', 'A', 'B', 'A']
-      ['Z', 'C', 'A', 'A']
-      ['Y', 'A', 'A', 'A']
-    ]
-
+    matrix = Util.matrix grid_for_matrixing
     expect( matrix[0] ).toEqual ['A', 'A', 'A', 'A']
     expect( matrix[1] ).toEqual ['X', 'A', 'B', 'A']
     expect( matrix[2] ).toEqual ['Z', 'C', 'A', 'A']
