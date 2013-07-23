@@ -14,19 +14,19 @@ describe "Grid class", ->
       expect( -> new Grid size: -1 ).toThrow()
 
     it "4 should NOT be in range if the grid has size 4", ->
-      expect( generic_grid.inRange 4 ).not.toBe true
+      expect( generic_grid.inRange 4 ).toBe false
 
     it "3 should be in range if the grid has size 4", ->
       expect( generic_grid.inRange 3 ).toBe true
 
     it "3.1 should NOT be in range, because it's NOT an integer", ->
-      expect( generic_grid.inRange 3.1 ).not.toBe true
+      expect( generic_grid.inRange 3.1 ).toBe false
 
     it "the word 'DOES' should be a word", ->
       expect( generic_grid.isWord 'DOES' ).toBe true
 
     it "the word 'THINKING' should NOT be a word from a grid which has a size 4", ->
-      expect( generic_grid.isWord 'THINKING' ).not.toBe true
+      expect( generic_grid.isWord 'THINKING' ).toBe false
 
   describe "5x5 project", ->
     grid = new Grid size: 5

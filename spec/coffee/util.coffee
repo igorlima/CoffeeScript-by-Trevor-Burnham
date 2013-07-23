@@ -10,7 +10,7 @@ describe "Util class", ->
     expect( Util.inRange value: 3, size: 4 ).toBe true
 
   it "4 should NOT be in range if the size is 4", ->
-    expect( Util.inRange value: 4, size: 4 ).not.toBe true
+    expect( Util.inRange value: 4, size: 4 ).toBe false
 
   it "coordinate (2,3) should NOT be set, if the coordenate is not in range", ->
     options = coordinates: [], range: 3, x: 2, y: 3, value: 'a'
@@ -45,14 +45,12 @@ describe "Util class", ->
 
       ", ->
 
-    grid = [
+    grid_string_rows = (Util.printGrid [
       ['A', 'A', 'A', 'A']
       ['A', 'A', 'B', 'A']
       ['A', 'C', 'A', 'A']
       ['A', 'A', 'A', 'A']
-    ]
-    str_grid = Util.printGrid { grid }
-    grid_string_rows = str_grid.split '\n'
+    ]).split '\n'
 
     regex = /^[ ]([A-Z][ ][|][ ]){3}/
     expect( grid_string_rows[0] ).toMatch regex

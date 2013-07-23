@@ -28,8 +28,7 @@ Util.generateGrid = (options) ->
     for y in [0...size]
       Tile.randomLetter()
 
-Util.printGrid = (params) ->
-  {grid} = params
+Util.printGrid = (grid) ->
   rows = for x in [0...grid.length]
     for y in [0...grid[x].length]
       grid[y][x]
