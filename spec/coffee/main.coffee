@@ -28,6 +28,14 @@ describe "Grid class", ->
     it "the word 'THINKING' should NOT be a word from a grid which has a size 4", ->
       expect( generic_grid.isWord 'THINKING' ).toBe false
 
+    it "the printing of grid should be defined", ->
+      expect( generic_grid.str() ).toBeDefined()
+
+    it "the printing of grid should have 16 letter in a grid 4x4", ->
+      printing = generic_grid.str()
+      letters = printing.match /[A-Z]/g
+      expect( letters.length ).toBe 16
+
   describe "5x5 project", ->
     grid = new Grid size: 5
 

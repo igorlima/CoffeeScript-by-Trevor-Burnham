@@ -25,12 +25,12 @@ describe "Util class", ->
     expect( Util.getCoordinate options ).toBe 'a'
 
   it "the generate grid should create a grid 2x2 if the size is 2", ->
-    grid = Util.generateGrid size: 2
+    grid = Util.generateGrid 2
     expect( grid.length ).toBe 2
     expect( grid[0].length ).toBe 2
 
   it "the generate grid should create a grid with letters from the alphabet", ->
-    grid = Util.generateGrid size: 2
+    grid = Util.generateGrid 2
     expect( Tile.alphabet() ).toContain grid[0][0]
     expect( Tile.alphabet() ).toContain grid[0][1]
     expect( Tile.alphabet() ).toContain grid[1][0]

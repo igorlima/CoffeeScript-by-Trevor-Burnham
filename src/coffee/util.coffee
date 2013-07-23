@@ -22,8 +22,7 @@ Util.getCoordinate = (params) ->
   {coordinates, x, y} = params
   coordinates[x][y]
 
-Util.generateGrid = (options) ->
-  {size} = options
+Util.generateGrid = (size) ->
   for x in [0...size]
     for y in [0...size]
       Tile.randomLetter()
