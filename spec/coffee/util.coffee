@@ -23,3 +23,39 @@ describe "Util class", ->
   it "coordinate (2,3) should be 'a', if [[],[],['','','','a']]", ->
     options = coordinates: [[],[],['','','','a']], x: 2, y: 3
     expect( Util.getCoordinate options ).toBe 'a'
+
+  it "the generate grid should create a grid 2x2 if the size is 2", ->
+    grid = Util.generateGrid size: 2
+    expect( grid.length ).toBe 2
+    expect( grid[0].length ).toBe 2
+
+  it "the generate grid should create a grid with letters from the alphabet", ->
+    grid = Util.generateGrid size: 2
+    expect( Tile.alphabet() ).toContain grid[0][0]
+    expect( Tile.alphabet() ).toContain grid[0][1]
+    expect( Tile.alphabet() ).toContain grid[1][0]
+    expect( Tile.alphabet() ).toContain grid[1][1]
+
+  it "the printing of grid 4x4 method should be
+
+          A | A | A | A
+          A | A | B | A
+          A | C | A | A
+          A | A | A | A
+
+      ", ->
+
+    grid = [
+      ['A', 'A', 'A', 'A']
+      ['A', 'A', 'B', 'A']
+      ['A', 'C', 'A', 'A']
+      ['A', 'A', 'A', 'A']
+    ]
+    str_grid = Util.printGrid { grid }
+    grid_string_rows = str_grid.split '\n'
+
+    regex = /^[ ]([A-Z][ ][|][ ]){3}/
+    expect( grid_string_rows[0] ).toMatch regex
+    expect( grid_string_rows[1] ).toMatch regex
+    expect( grid_string_rows[2] ).toMatch regex
+    expect( grid_string_rows[3] ).toMatch regex

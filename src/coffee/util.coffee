@@ -21,3 +21,17 @@ Util.setCoordinate = (params) ->
 Util.getCoordinate = (params) ->
   {coordinates, x, y} = params
   coordinates[x][y]
+
+Util.generateGrid = (options) ->
+  {size} = options
+  for x in [0...size]
+    for y in [0...size]
+      Tile.randomLetter()
+
+Util.printGrid = (params) ->
+  {grid} = params
+  rows = for x in [0...grid.length]
+    for y in [0...grid[x].length]
+      grid[y][x]
+  rowStrings = (' ' + row.join(' | ') for row in rows)
+  rowStrings.join '\n'
