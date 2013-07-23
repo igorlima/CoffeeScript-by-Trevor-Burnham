@@ -4,8 +4,11 @@ Util.isInteger = (num) ->
   num is Math.round num
 
 Util.inRange = (params) ->
-  {value, size} = params
-  (@isInteger value) and 0 <= value < size
+  {value, size, x, y} = params
+  if value?
+    (@isInteger value) and 0 <= value < size
+  else if x? and y?
+    (@inRange {value: x, size}) and (@inRange {value: y, size})
 
 Util.setCoordinate = (params) ->
   {coordinates, range, x, y, value} = params

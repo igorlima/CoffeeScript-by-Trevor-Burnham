@@ -12,6 +12,9 @@ describe "Util class", ->
   it "4 should NOT be in range if the size is 4", ->
     expect( Util.inRange value: 4, size: 4 ).toBe false
 
+  it "(3,2) should be in range if the size is 4", ->
+    expect( Util.inRange x: 3, y: 2, size: 4 ).toBe true
+
   it "coordinate (2,3) should NOT be set, if the coordenate is not in range", ->
     options = coordinates: [], range: 3, x: 2, y: 3, value: 'a'
     expect( Util.setCoordinate options ).toBe false
@@ -37,12 +40,10 @@ describe "Util class", ->
     expect( Tile.alphabet() ).toContain grid[1][1]
 
   it "the printing of grid 4x4 method should be
-
-          A | A | A | A
-          A | A | B | A
-          A | C | A | A
-          A | A | A | A
-
+        A | A | A | A
+        A | A | B | A
+        A | C | A | A
+        A | A | A | A
       ", ->
 
     grid_string_rows = (Util.printGrid [
@@ -64,3 +65,23 @@ describe "Util class", ->
   it "the word list with 2 letters should contains the word 'DO'", ->
     wordList = Util.wordList 2
     expect( wordList ).toContain 'DO'
+
+  # it "the word 'DOES' should match on (1,0) in the following grid
+  #       A | D | A | A
+  #       A | O | A | A
+  #       A | E | A | A
+  #       A | S | A | A
+  #     ", ->
+
+  #   options =
+  #     grid: [
+  #       ['A', 'D', 'A', 'A']
+  #       ['A', 'O', 'A', 'A']
+  #       ['A', 'E', 'A', 'A']
+  #       ['A', 'S', 'A', 'A']
+  #     ]
+  #     wordList: ["DOES"]
+  #     x: 1
+  #     y: 0
+
+  #   expect( Util.matchWords options ).toBe true
