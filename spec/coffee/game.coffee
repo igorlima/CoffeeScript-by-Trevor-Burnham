@@ -90,15 +90,18 @@ describe "Game class", ->
       expect( letters.length ).toBe 16
 
   describe "5x5 project", ->
-    game = new Game
-      words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
-      grid: [
-        ['A', 'A', 'A', 'A', 'A']
-        ['X', 'A', 'I', 'O', 'A']
-        ['Z', 'C', 'D', 'D', 'G']
-        ['Y', 'A', 'D', 'E', 'A']
-        ['M', 'O', 'V', 'S', 'T']
-      ]
+    game = undefined
+    words = ['DOES', 'DO', 'DID', 'GET', 'MOVE']
+    grid = [
+      ['A', 'A', 'A', 'A', 'A']
+      ['X', 'A', 'I', 'O', 'A']
+      ['Z', 'C', 'D', 'D', 'G']
+      ['Y', 'A', 'D', 'E', 'A']
+      ['M', 'O', 'V', 'S', 'T']
+    ]
+
+    beforeEach ->
+      game = new Game {words, grid}
 
     it "should be a size 5", ->
       expect(game.size()).toBe 5
