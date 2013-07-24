@@ -1,4 +1,4 @@
-@Grid = class
+@Game = class
 
   constructor: (options={}) ->
     {size} = options
