@@ -8,7 +8,7 @@ describe "Score class", ->
       ['A', 'E', 'S', 'A']
       ['S', 'S', 'I', 'S']
     ]
-    dictionary = ['DOES', 'DO', 'THINK', 'BATH', 'DOGS', 'BOSS', 'DOG', 'SEGA']
+    dictionary = ['DOES', 'DO', 'THINK', 'BATH', 'DOGS', 'BOSS', 'DOG', 'SEGA', 'OGA']
     score = new Score {grid, dictionary}
 
   it "the printing of grid should be a square 4x4", ->
@@ -84,3 +84,12 @@ describe "Score class", ->
     {moveScore, newWords} = Score.moveScore {grid, swapCoordinates, dictionary}
     expect( newWords ).toContain 'BOSS'
     expect( newWords ).toContain 'DOES'
+
+  it "the new words should NOT contain 'DOGS', after moving letter 'G' from (x:2, y:1) to (x:2, y:2).
+      Because this word already existed", ->
+    {moveScore, newWords} = score.moveScore x1: 2, y1: 1, x2: 2, y2: 2
+    expect( newWords ).not.toContain 'DOGS'
+
+  it "the new words should contain 'OGA', after moving letter 'G' from (x:3, y:0) to (x:3, y:1)", ->
+    {moveScore, newWords} = score.moveScore x1: 3, y1: 0, x2: 3, y2: 1
+    expect( newWords ).toContain 'OGA'

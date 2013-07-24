@@ -11,7 +11,8 @@ Score = @Score = class
     @printGrid = -> Util.printGrid grid
     @matrix = -> Util.matrix grid
 
-    #@move = (swapCoordinates) -> Score.move {grid, swapCoordinates}
+    @moveScore = (swapCoordinates) ->
+      Score.moveScore {grid, dictionary, swapCoordinates}
 
     @scoreWord = (word) ->
       if word in dictionary then Score.scoreWord word else 0
