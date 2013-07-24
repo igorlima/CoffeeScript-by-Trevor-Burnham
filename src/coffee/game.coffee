@@ -3,9 +3,16 @@ Game = @Game = class
   constructor: (options={}) ->
     {size, words} = options
     throw "Grid size not given" unless Game.isValidSize size
-    @size = -> size
-
     grid = Util.generateGrid size
+    wordList = Util.wordList {size, words}
+
+    @size = -> size
+    @isWord = (str) ->
+      WordFinder.isWord word: str, dictionary: wordList
+
+    @str = -> Util.printGrid grid
+    @matrix = -> Util.matrix grid
+
     @set = (coordinate) ->
       {x, y, value} = coordinate
       Util.setCoordinate { coordinates: grid, range: size, x, y, value }
@@ -13,13 +20,6 @@ Game = @Game = class
     @get = (coordinate) ->
       {x, y} = coordinate
       Util.getCoordinate { coordinates: grid, x, y }
-
-    wordList = Util.wordList {size, words}
-    @isWord = (str) ->
-      WordFinder.isWord word: str, dictionary: wordList
-
-    @str = -> Util.printGrid grid
-    @matrix = -> Util.matrix grid
 
   inRange: (num) ->
     Util.inRange value: num, range: @size()
