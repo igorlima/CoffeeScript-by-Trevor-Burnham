@@ -84,3 +84,47 @@ describe "Util class", ->
     expect( matrix[1] ).toEqual ['X', 'A', 'B', 'A']
     expect( matrix[2] ).toEqual ['Z', 'C', 'A', 'A']
     expect( matrix[3] ).toEqual ['Y', 'A', 'A', 'A']
+
+  it "the following matrix should be a matrix quadratic 4x4
+        A | A | A | A
+        X | A | B | A
+        Z | C | A | A
+        Y | A | A | A
+      ", ->
+    expect( Util.isMatrixQuadratic grid_for_matrixing ).toBe true
+
+  it "the following matrix should NOT be a matrix quadratic
+        A | A | A | A
+        X | A | B | A
+        Z | C | A
+        Y | A | A | A
+      because the rows does NOT 4 columns each one
+      ", ->
+    expect( Util.isMatrixQuadratic [
+      ['A', 'A', 'A', 'A']
+      ['X', 'A', 'B', 'A']
+      ['Z', 'C', 'A']
+      ['Y', 'A', 'A', 'A']
+    ] ).toBe false
+
+  it "the following matrix should have a size as 4
+        A | A | A | A
+        X | A | B | A
+        Z | C | A | A
+        Y | A | A | A
+      ", ->
+    expect( Util.sizeMatrix grid_for_matrixing ).toBe 4
+
+  it "the following matrix should NOT have a size
+        A | A | A | A
+        X | A | B | A
+        Z | C | A
+        Y | A | A | A
+      because this matrix is NOT a matrix quadratic
+      ", ->
+    expect( Util.sizeMatrix [
+      ['A', 'A', 'A', 'A']
+      ['X', 'A', 'B', 'A']
+      ['Z', 'C', 'A']
+      ['Y', 'A', 'A', 'A']
+    ] ).not.toBeDefined()

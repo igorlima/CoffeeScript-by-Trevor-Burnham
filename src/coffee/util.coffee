@@ -43,3 +43,11 @@ Util.matrix = (grid) ->
 Util.wordList = (params) ->
   {size, words} = params
   (word for word in words when word.length <= size)
+
+Util.isMatrixQuadratic = (matrix) ->
+  for row in matrix
+    return false unless matrix.length is row.length
+  true
+
+Util.sizeMatrix = (matrix) ->
+  if @isMatrixQuadratic matrix then matrix.length else undefined
