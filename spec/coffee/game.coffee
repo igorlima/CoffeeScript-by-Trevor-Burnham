@@ -91,17 +91,17 @@ describe "Game class", ->
 
   describe "5x5 project", ->
     game = undefined
-    words = ['DOES', 'DO', 'DID', 'GET', 'MOVE']
-    grid = [
-      ['A', 'A', 'A', 'A', 'A']
-      ['X', 'A', 'I', 'O', 'A']
-      ['Z', 'C', 'D', 'D', 'G']
-      ['Y', 'A', 'D', 'E', 'A']
-      ['M', 'O', 'V', 'S', 'T']
-    ]
 
     beforeEach ->
-      game = new Game {words, grid}
+      game = new Game
+        words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
+        grid: [
+          ['A', 'A', 'A', 'A', 'A']
+          ['X', 'A', 'I', 'O', 'A']
+          ['Z', 'C', 'D', 'D', 'G']
+          ['Y', 'A', 'D', 'E', 'A']
+          ['M', 'O', 'V', 'S', 'T']
+        ]
 
     it "should be a size 5", ->
       expect(game.size()).toBe 5
@@ -109,3 +109,18 @@ describe "Game class", ->
     it "moving from (x: 3, y: 3) to (x: 4, y: 3) SHOULD have the word 'GET' as a new word", ->
       {scoreMove, newWords} = game.move x1: 3, y1: 3, x2: 4, y2: 3
       expect( newWords ).toContain 'GET'
+
+    it "moving from (x: 3, y: 3) to (x: 3, y: 4) SHOULD have the following grid
+        A | A | A | A | A
+        X | A | I | O | A
+        Z | C | D | D | G
+        Y | A | D | S | A
+        M | O | V | E | T
+      ", ->
+      game.move x1: 3, y1: 3, x2: 3, y2: 4
+      matrix = game.matrix()
+      expect( matrix[0] ).toEqual ['A', 'A', 'A', 'A', 'A']
+      expect( matrix[1] ).toEqual ['X', 'A', 'I', 'O', 'A']
+      expect( matrix[2] ).toEqual ['Z', 'C', 'D', 'D', 'G']
+      expect( matrix[3] ).toEqual ['Y', 'A', 'D', 'S', 'A']
+      expect( matrix[4] ).toEqual ['M', 'O', 'V', 'E', 'T']
