@@ -59,6 +59,10 @@ describe "Game class", ->
       expect( matrix[2].length ).toBe 4
       expect( matrix[3].length ).toBe 4
 
+    it "coordinates (2,3) should be set", ->
+      expect(generic_game.set x: 2, y: 3, value: 'a').toBe true
+      expect(generic_game.get x: 2, y: 3).toBe 'a'
+
   describe "Using a given grid instead of a randomic one", ->
     game_with_a_given_matrix_not_quadratic = new Game size: 4, words: ['DO', 'GET', 'AS'], grid: [['D', 'A']]
     game_with_a_given_grid = new Game
@@ -90,7 +94,3 @@ describe "Game class", ->
 
     it "should be a size 5", ->
       expect(game.size()).toBe 5
-
-    it "coordinates (2,3) should be set", ->
-      expect(game.set x: 2, y: 3, value: 'a').toBe true
-      expect(game.get x: 2, y: 3).toBe 'a'
