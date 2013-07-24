@@ -2,7 +2,7 @@ Game = @Game = class
 
   constructor: (options={}) ->
     {size, words} = options
-    throw "Grid size not given" if (not !!size) or size < 0
+    throw "Grid size not given" unless Game.isValidSize size
     @size = -> size
 
     grid = Util.generateGrid size
