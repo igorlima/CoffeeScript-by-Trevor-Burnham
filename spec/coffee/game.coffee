@@ -1,10 +1,13 @@
 
 describe "Game class", ->
 
-  describe "Methods util: inRange / isInteger", ->
-    generic_game = new Game size: 4
+  describe "a generic game", ->
+    generic_game = new Game size: 4, words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
 
-    it "an exception will be raised if a size is not given", ->
+    it "an exception will be raised if a words property is not given", ->
+      expect( -> new Game size: 2 ).toThrow()
+
+    it "an exception will be raised if a size property is not given", ->
       expect( -> new Game() ).toThrow()
 
     it "an exception will be raised if a size is 0", ->
@@ -45,7 +48,7 @@ describe "Game class", ->
       expect( matrix[3].length ).toBe 4
 
   describe "5x5 project", ->
-    game = new Game size: 5
+    game = new Game size: 5, words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
 
     it "should be a size 5", ->
       expect(game.size()).toBe 5

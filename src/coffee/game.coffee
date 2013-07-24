@@ -1,7 +1,7 @@
 @Game = class
 
   constructor: (options={}) ->
-    {size} = options
+    {size, words} = options
     throw "Grid size not given" if (not !!size) or size < 0
     @size = -> size
 
@@ -14,7 +14,7 @@
       {x, y} = coordinate
       Util.getCoordinate { coordinates, x, y }
 
-    wordList = Util.wordList size
+    wordList = Util.wordList {size, words}
     @isWord = (str) ->
       WordFinder.isWord word: str, dictionary: wordList
 

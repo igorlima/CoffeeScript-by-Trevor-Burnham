@@ -40,5 +40,6 @@ Util.matrix = (grid) ->
     for y in [0...grid[x].length]
       grid[x][y]
 
-Util.wordList = (size) ->
-  (word for word in Words when word.length <= size)
+Util.wordList = (params) ->
+  {size, words} = params
+  (word for word in words when word.length <= size)
