@@ -18,8 +18,8 @@
     @isWord = (str) ->
       WordFinder.isWord word: str, dictionary: wordList
 
-    @str = ->
-      Util.printGrid coordinates
+    @str = -> Util.printGrid coordinates
+    @matrix = -> Util.matrix coordinates
 
   inRange: (num) ->
     Util.inRange value: num, size: @size()

@@ -36,6 +36,14 @@ describe "Grid class", ->
       letters = printing.match /[A-Z]/g
       expect( letters.length ).toBe 16
 
+    it "the matrix of grid should have 4 rows and 4 columns in a grid 4x4", ->
+      matrix = generic_grid.matrix()
+      expect( matrix.length ).toBe 4
+      expect( matrix[0].length ).toBe 4
+      expect( matrix[1].length ).toBe 4
+      expect( matrix[2].length ).toBe 4
+      expect( matrix[3].length ).toBe 4
+
   describe "5x5 project", ->
     grid = new Grid size: 5
 
