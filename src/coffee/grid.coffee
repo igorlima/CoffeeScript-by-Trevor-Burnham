@@ -16,7 +16,7 @@
 
     wordList = Util.wordList size
     @isWord = (str) ->
-      str in wordList
+      WordFinder.isWord word: str, dictionary: wordList
 
     @str = ->
       Util.printGrid coordinates
