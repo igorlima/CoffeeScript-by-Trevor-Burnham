@@ -128,3 +128,32 @@ describe "Util class", ->
       ['Z', 'C', 'A']
       ['Y', 'A', 'A', 'A']
     ] ).not.toBeDefined()
+
+  describe "valid swap coordinates (moving)", ->
+
+    it "from (x: 0, y: 0) to (x: 0, y: 1) SHOULD be a valid move, because it's doing a lower vertical move", ->
+      expect( Util.isValidSwapCoordinates x1: 0, y1: 0, x2: 0, y2: 1 ).toBe true
+
+    it "from (x: 0, y: 1) to (x: 0, y: 0) SHOULD be a valid move, because it's doing a upper vertical move", ->
+      expect( Util.isValidSwapCoordinates x1: 0, y1: 1, x2: 0, y2: 0 ).toBe true
+
+    it "from (x: 0, y: 0) to (x: 1, y: 0) SHOULD be a valid move, because it's doing a right horizontal move", ->
+      expect( Util.isValidSwapCoordinates x1: 0, y1: 0, x2: 1, y2: 0 ).toBe true
+
+    it "from (x: 1, y: 0) to (x: 0, y: 0) SHOULD be a valid move, because it's doing a left horizontal move", ->
+      expect( Util.isValidSwapCoordinates x1: 1, y1: 0, x2: 0, y2: 0 ).toBe true
+
+    it "from (x: 0, y: 0) to (x: 1, y: 1) SHOULD NOT be a valid move, because it's moving diagonaly (upper left to lower right)", ->
+      expect( Util.isValidSwapCoordinates x1: 0, y1: 0, x2: 1, y2: 1 ).toBe false
+
+    it "from (x: 1, y: 1) to (x: 0, y: 0) SHOULD NOT be a valid move, because it's moving diagonaly (lower right to upper left)", ->
+      expect( Util.isValidSwapCoordinates x1: 1, y1: 1, x2: 0, y2: 0 ).toBe false
+
+    it "from (x: 0, y: 1) to (x: 1, y: 0) SHOULD NOT be a valid move, because it's moving diagonaly (lower left to upper right)", ->
+      expect( Util.isValidSwapCoordinates x1: 0, y1: 1, x2: 1, y2: 0 ).toBe false
+
+    it "from (x: 1, y: 0) to (x: 0, y: 1) SHOULD NOT be a valid move, because it's moving diagonaly (upper right to lower left)", ->
+      expect( Util.isValidSwapCoordinates x1: 1, y1: 0, x2: 0, y2: 1 ).toBe false
+
+    it "from (x: -1, y: 0) to (x: 0, y: 0) whith the range as 4 SHOULD NOT be a valid move, because it SHOULD validate if there is a negative coordinate", ->
+      expect( Util.isValidSwapCoordinates x1: -1, y1: 0, x2: 0, y2: 0, range: 4 ).toBe false

@@ -51,3 +51,14 @@ Util.isMatrixQuadratic = (matrix) ->
 
 Util.sizeMatrix = (matrix) ->
   if @isMatrixQuadratic matrix then matrix.length else undefined
+
+Util.isValidSwapCoordinates = (params) ->
+  {x1, y1, x2, y2, range} = params
+  isMovingHorizontaly = Math.abs( x2 - x1 ) is 1
+  isMovingVerticaly = Math.abs( y2 - y1 ) is 1
+  isMovingDiagonaly = isMovingHorizontaly and isMovingVerticaly
+  isValid = if isMovingDiagonaly then false else isMovingHorizontaly or isMovingVerticaly
+  if isValid and range?
+    @inRange( x: x1, y: y1, size: range ) and @inRange( x: x2, y: y2, size: range )
+  else
+    isValid
