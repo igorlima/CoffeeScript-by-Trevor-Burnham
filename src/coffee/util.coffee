@@ -45,6 +45,7 @@ Util.wordList = (params) ->
   (word for word in words when word.length <= size)
 
 Util.isMatrixQuadratic = (matrix) ->
+  return false unless matrix
   for row in matrix
     return false unless matrix.length is row.length
   true

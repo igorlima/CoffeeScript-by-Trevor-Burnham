@@ -85,6 +85,9 @@ describe "Util class", ->
     expect( matrix[2] ).toEqual ['Z', 'C', 'A', 'A']
     expect( matrix[3] ).toEqual ['Y', 'A', 'A', 'A']
 
+  it "undefined should NOT be a matrix quadratic", ->
+    expect( Util.isMatrixQuadratic() ).toBe false
+
   it "the following matrix should be a matrix quadratic 4x4
         A | A | A | A
         X | A | B | A

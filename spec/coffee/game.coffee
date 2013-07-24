@@ -60,6 +60,7 @@ describe "Game class", ->
       expect( matrix[3].length ).toBe 4
 
   describe "Using a given grid instead of a randomic one", ->
+    game_with_a_given_matrix_not_quadratic = new Game size: 4, words: ['DO', 'GET', 'AS'], grid: [['D', 'A']]
     game_with_a_given_grid = new Game
       size: 4
       words: ['DOES', 'DO', 'DID', 'GET', 'AS']
@@ -75,6 +76,14 @@ describe "Game class", ->
 
     it "when a grid is given, the size should be the same as the given one", ->
       expect( game_with_a_given_grid.size() ).toBe 2
+
+    it "if the given grid is NOT quadratic, it should have the size given", ->
+      expect( game_with_a_given_matrix_not_quadratic.size() ).toBe 4
+
+    it "if the given grid is NOT quadratic, it should have the dimension of the size given", ->
+      printing = game_with_a_given_matrix_not_quadratic.str()
+      letters = printing.match /[A-Z]/g
+      expect( letters.length ).toBe 16
 
   describe "5x5 project", ->
     game = new Game size: 5, words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
