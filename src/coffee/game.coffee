@@ -22,7 +22,7 @@ Game = @Game = class
     @matrix = -> Util.matrix grid
 
   inRange: (num) ->
-    Util.inRange value: num, size: @size()
+    Util.inRange value: num, range: @size()
 
 Game.isValidSize = (size) ->
   if (not size) or size < 0 then false else true

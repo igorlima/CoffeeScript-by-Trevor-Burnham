@@ -20,14 +20,14 @@ describe "Util class", ->
   it "1.1 should NOT be an integer", ->
     expect( Util.isInteger 1.1 ).toBe false
 
-  it "3 should be in range if the size is 4", ->
-    expect( Util.inRange value: 3, size: 4 ).toBe true
+  it "3 should be in range if the range is 4", ->
+    expect( Util.inRange value: 3, range: 4 ).toBe true
 
-  it "4 should NOT be in range if the size is 4", ->
-    expect( Util.inRange value: 4, size: 4 ).toBe false
+  it "4 should NOT be in range if the range is 4", ->
+    expect( Util.inRange value: 4, range: 4 ).toBe false
 
-  it "(3,2) should be in range if the size is 4", ->
-    expect( Util.inRange x: 3, y: 2, size: 4 ).toBe true
+  it "(3,2) should be in range if the range is 4", ->
+    expect( Util.inRange x: 3, y: 2, range: 4 ).toBe true
 
   it "coordinate (2,3) should NOT be set, if the coordenate is not in range", ->
     options = coordinates: [], range: 3, x: 2, y: 3, value: 'a'

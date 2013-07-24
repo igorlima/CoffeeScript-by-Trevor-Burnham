@@ -4,17 +4,17 @@ Util.isInteger = (num) ->
   num is Math.round num
 
 Util.inRange = (params) ->
-  {value, size, x, y} = params
+  {value, range, x, y} = params
   if value?
-    (@isInteger value) and 0 <= value < size
+    (@isInteger value) and 0 <= value < range
   else if x? and y?
-    (@inRange {value: x, size}) and (@inRange {value: y, size})
+    (@inRange {value: x, range}) and (@inRange {value: y, range})
 
 Util.setCoordinate = (params) ->
   {coordinates, range, x, y, value} = params
   coordinates[x] ||= []
 
-  if @inRange( value: x, size: range ) and @inRange( value: y, size: range )
+  if @inRange( value: x, range: range ) and @inRange( value: y, range: range )
     coordinates[x][y] = value
   else
     coordinates[x][y] = undefined
