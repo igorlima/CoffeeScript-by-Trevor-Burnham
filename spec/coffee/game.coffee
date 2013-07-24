@@ -4,17 +4,29 @@ describe "Game class", ->
   describe "a generic game", ->
     generic_game = new Game size: 4, words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
 
-    it "an exception will be raised if a words property is not given", ->
+    it "an exception will be raised if a 'words' property is not given", ->
       expect( -> new Game size: 2 ).toThrow()
+
+    it "the undefined should NOT be a valid size", ->
+      expect( Game.isValidSize() ).toBe false
 
     it "an exception will be raised if a size property is not given", ->
       expect( -> new Game() ).toThrow()
 
+    it "the number 0 should NOT be a valid size", ->
+      expect( Game.isValidSize 0 ).toBe false
+
     it "an exception will be raised if a size is 0", ->
       expect( -> new Game size: 0 ).toThrow()
 
+    it "the number -1 should NOT be a valid size, because this number is less than 0", ->
+      expect( Game.isValidSize -1 ).toBe false
+
     it "an exception will be raised if a size is less than 0", ->
       expect( -> new Game size: -1 ).toThrow()
+
+    it "the number 4 should be a valid size, because it is greater than 0", ->
+      expect( Game.isValidSize 4 ).toBe true
 
     it "4 should NOT be in range if the game has a grid with size 4", ->
       expect( generic_game.inRange 4 ).toBe false

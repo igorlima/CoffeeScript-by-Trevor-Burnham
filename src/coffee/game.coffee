@@ -1,4 +1,4 @@
-@Game = class
+Game = @Game = class
 
   constructor: (options={}) ->
     {size, words} = options
@@ -23,3 +23,6 @@
 
   inRange: (num) ->
     Util.inRange value: num, size: @size()
+
+Game.isValidSize = (size) ->
+  if (not size) or size < 0 then false else true
