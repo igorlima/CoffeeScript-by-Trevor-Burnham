@@ -1,9 +1,9 @@
 Game = @Game = class
 
   constructor: (options={}) ->
-    {size, words} = options
+    {size, words, grid} = options
     throw "Grid size not given" unless Game.isValidSize size
-    grid = Util.generateGrid size
+    grid or= Util.generateGrid size
     wordList = Util.wordList {size, words}
 
     @size = -> size
