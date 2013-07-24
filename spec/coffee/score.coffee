@@ -1,16 +1,15 @@
 describe "Score class", ->
-  score = undefined
+  score = grid = dictionary = undefined
 
   beforeEach ->
-    score = new Score
-      grid: [
-        ['D', 'B', 'O', 'A']
-        ['D', 'O', 'G', 'S']
-        ['A', 'E', 'S', 'A']
-        ['S', 'S', 'I', 'S']
-      ]
-      dictionary: ['DOES', 'DO', 'THINK', 'BATH', 'DOGS', 'BOSS', 'DOG', 'SEGA']
-
+    grid = [
+      ['D', 'B', 'O', 'A']
+      ['D', 'O', 'G', 'S']
+      ['A', 'E', 'S', 'A']
+      ['S', 'S', 'I', 'S']
+    ]
+    dictionary = ['DOES', 'DO', 'THINK', 'BATH', 'DOGS', 'BOSS', 'DOG', 'SEGA']
+    score = new Score {grid, dictionary}
 
   it "the printing of grid should be a square 4x4", ->
     grid_string_rows = score.printGrid().split '\n'
