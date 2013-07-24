@@ -14,7 +14,7 @@ Util.setCoordinate = (params) ->
   {coordinates, range, x, y, value} = params
   coordinates[x] ||= []
 
-  if @inRange( value: x, range: range ) and @inRange( value: y, range: range )
+  if @inRange({ value: x, range }) and @inRange({ value: y, range })
     coordinates[x][y] = value
   else
     coordinates[x][y] = undefined
