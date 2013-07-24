@@ -8,10 +8,12 @@ Game = @Game = class
     throw "Grid size not given" unless Game.isValidSize size
     grid or= Util.generateGrid size
     wordList = Util.wordList {size, words}
+    score = new Score grid: grid, dictionary: words
 
     @size = -> size
     @isWord = (str) ->
       WordFinder.isWord word: str, dictionary: wordList
+    @move = (swapCoordinates) -> score.moveScore swapCoordinates
 
     @str = -> Util.printGrid grid
     @matrix = -> Util.matrix grid

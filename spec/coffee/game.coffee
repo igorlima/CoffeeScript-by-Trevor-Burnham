@@ -102,3 +102,7 @@ describe "Game class", ->
 
     it "should be a size 5", ->
       expect(game.size()).toBe 5
+
+    it "moving from (x: 3, y: 3) to (x: 4, y: 3) SHOULD have the word 'GET' as a new word", ->
+      {scoreMove, newWords} = game.move x1: 3, y1: 3, x2: 4, y2: 3
+      expect( newWords ).toContain 'GET'
