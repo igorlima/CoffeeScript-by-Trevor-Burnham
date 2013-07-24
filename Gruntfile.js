@@ -38,10 +38,26 @@ module.exports = function(grunt) {
       }
     },
 
+    concat: {
+      main: {
+        files: {
+          'dist/main.js': ['src/js/**/*.js']
+        }
+      }
+    },
+
+    uglify: {
+      main: {
+        files: {
+          'dist/main.min.js': ['dist/main.js']
+        }
+      }
+    },
+
     watch: {
       main: {
         files: ['spec/coffee/**/*.coffee', 'src/coffee/**/*.coffee'],
-        tasks: ['clean', 'coffee', 'jasmine']
+        tasks: ['clean', 'coffee', 'jasmine', 'concat', 'uglify']
       }
     }
 
@@ -52,7 +68,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('default', ['jshint', 'clean', 'coffee', 'jasmine']);
+  grunt.registerTask('default', ['jshint', 'clean', 'coffee', 'jasmine', 'concat', 'uglify']);
 
 };
