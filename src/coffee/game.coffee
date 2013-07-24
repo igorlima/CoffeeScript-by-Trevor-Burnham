@@ -2,6 +2,7 @@ Game = @Game = class
 
   constructor: (options={}) ->
     {size, words, grid} = options
+    size = Util.sizeMatrix grid if grid?
     throw "Grid size not given" unless Game.isValidSize size
     grid or= Util.generateGrid size
     wordList = Util.wordList {size, words}

@@ -60,7 +60,7 @@ describe "Game class", ->
       expect( matrix[3].length ).toBe 4
 
   describe "Using a given grid instead of a randomic one", ->
-    game = new Game
+    game_with_a_given_grid = new Game
       size: 4
       words: ['DOES', 'DO', 'DID', 'GET', 'AS']
       grid: [
@@ -69,9 +69,12 @@ describe "Game class", ->
       ]
 
     it "when a grid is given, it should be the given one", ->
-      matrix = game.matrix()
+      matrix = game_with_a_given_grid.matrix()
       expect( matrix[0] ).toEqual ['D', 'A']
       expect( matrix[1] ).toEqual ['S', 'O']
+
+    it "when a grid is given, the size should be the same as the given one", ->
+      expect( game_with_a_given_grid.size() ).toBe 2
 
   describe "5x5 project", ->
     game = new Game size: 5, words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
