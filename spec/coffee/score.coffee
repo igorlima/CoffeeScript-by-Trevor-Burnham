@@ -47,3 +47,26 @@ describe "Score class", ->
     expect( words ).toContain 'DOG'
     expect( words ).toContain 'DOGS'
     expect( words ).toContain 'SEGA'
+
+  it "the words 'THINK' and 'BATH' should be new words", ->
+    words_before_moving = ['DOES', 'DO', 'DOGS', 'BOSS']
+    words_after_moving = ['DOES', 'DO', 'THINK', 'BATH']
+    new_words = Score.newWords before: words_before_moving, after: words_after_moving
+    expect( new_words ).toContain 'THINK'
+    expect( new_words ).toContain 'BATH'
+
+  it "the words 'DOES' and 'DO' should NOT be new words, because these words were already in the list", ->
+    words_before_moving = ['DOES', 'DO', 'DOGS', 'BOSS']
+    words_after_moving = ['DOES', 'DO', 'THINK', 'BATH']
+    new_words = Score.newWords before: words_before_moving, after: words_after_moving
+    expect( new_words ).not.toContain 'DOES'
+    expect( new_words ).not.toContain 'DO'
+
+  it "the new words 'THINK' and 'BATH' should be scored with 42 points
+      THINK has 12 points
+      BATH has 9 points
+      two words have the MULTIPLIER as 2
+      Then the total points should be (12+9)*2 = 42
+      ", ->
+    new_words = ['THINK', 'BATH']
+    expect( Score.scoreWords new_words ).toBe 42

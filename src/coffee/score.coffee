@@ -31,3 +31,12 @@ Score.scoreWord = (word) ->
   score = 0
   score += VALUES[letter] for letter in word
   score
+
+Score.scoreWords = (words) ->
+  [score, multiplier] = [0, words.length]
+  score += @scoreWord word for word in words
+  score * multiplier
+
+Score.newWords = (params) ->
+  {before: words_before, after: words_after} = params
+  new_word for new_word in words_after when new_word not in words_before
