@@ -40,3 +40,10 @@ describe "Score class", ->
 
   it "the point of 'CLOUD' from the object 'score' should be 0, because this word doesn't belong the dictionary", ->
     expect( score.scoreWord 'CLOUD' ).toBe 0
+
+  it "the words from the grid should contain ['DO', 'DOG', 'DOGS', 'SEGA']", ->
+    words = score.words()
+    expect( words ).toContain 'DO'
+    expect( words ).toContain 'DOG'
+    expect( words ).toContain 'DOGS'
+    expect( words ).toContain 'SEGA'

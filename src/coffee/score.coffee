@@ -19,6 +19,14 @@ Score = @Score = class
     @scoreWord = (word) ->
       if word in dictionary then Score.scoreWord word else 0
 
+    @words = ->
+      [words, SIZE] = [[], grid.length]
+      for x in [0...SIZE]
+        for y in [0...SIZE]
+          words_on_xy = WordFinder.all {grid, dictionary, x, y, range: SIZE}
+          words.push word for word in words_on_xy when word not in words
+      words
+
 Score.scoreWord = (word) ->
   score = 0
   score += VALUES[letter] for letter in word
