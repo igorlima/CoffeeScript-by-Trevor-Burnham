@@ -11,10 +11,7 @@ Score = @Score = class
     @printGrid = -> Util.printGrid grid
     @matrix = -> Util.matrix grid
 
-    @move = (swapCoordinates) ->
-      {x1: col1, y1: row1, x2: col2, y2: row2} = swapCoordinates
-      [firstLetter, secondLetter] = [grid[row1][col1], grid[row2][col2]]
-      [grid[row1][col1], grid[row2][col2]] = [secondLetter, firstLetter]
+    @move = (swapCoordinates) -> Score.move {grid, swapCoordinates}
 
     @scoreWord = (word) ->
       if word in dictionary then Score.scoreWord word else 0
@@ -26,6 +23,12 @@ Score = @Score = class
           words_on_xy = WordFinder.all {grid, dictionary, x, y, range: SIZE}
           words.push word for word in words_on_xy when word not in words
       words
+
+Score.move = (params) ->
+  {grid, swapCoordinates: {x1: col1, y1: row1, x2: col2, y2: row2} } = params
+  [firstLetter, secondLetter] = [grid[row1][col1], grid[row2][col2]]
+  [grid[row1][col1], grid[row2][col2]] = [secondLetter, firstLetter]
+  grid
 
 Score.scoreWord = (word) ->
   score = 0

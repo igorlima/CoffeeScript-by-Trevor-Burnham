@@ -19,6 +19,15 @@ describe "Score class", ->
     expect( grid_string_rows[3] ).toMatch "S [|] S [|] I [|] S"
 
   it "the letter 'B' should move from (x:1, y:0) to (x:0, y:0)", ->
+    swapCoordinates = x1: 1, y1: 0, x2: 0, y2: 0
+    Score.move {grid, swapCoordinates}
+    matrix = Util.matrix grid
+    expect( matrix[0] ).toMatch ['B', 'D', 'O', 'A']
+    expect( matrix[1] ).toMatch ['D', 'O', 'G', 'S']
+    expect( matrix[2] ).toMatch ['A', 'E', 'S', 'A']
+    expect( matrix[3] ).toMatch ['S', 'S', 'I', 'S']
+
+  it "the letter 'B' should move from (x:1, y:0) to (x:0, y:0)", ->
     score.move x1: 1, y1: 0, x2: 0, y2: 0
     matrix = score.matrix()
     expect( matrix[0] ).toMatch ['B', 'D', 'O', 'A']
