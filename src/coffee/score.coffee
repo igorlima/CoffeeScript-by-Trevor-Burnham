@@ -16,19 +16,30 @@ Score = @Score = class
     @scoreWord = (word) ->
       if word in dictionary then Score.scoreWord word else 0
 
-    @words = ->
-      [words, SIZE] = [[], grid.length]
-      for x in [0...SIZE]
-        for y in [0...SIZE]
-          words_on_xy = WordFinder.all {grid, dictionary, x, y, range: SIZE}
-          words.push word for word in words_on_xy when word not in words
-      words
+    @words = -> Score.words {grid, dictionary}
+
+Score.words = (params) ->
+  {grid, dictionary} = params
+  [words, SIZE] = [[], grid.length]
+  for x in [0...SIZE]
+    for y in [0...SIZE]
+      words_on_xy = WordFinder.all {grid, dictionary, x, y, range: SIZE}
+      words.push word for word in words_on_xy when word not in words
+  words
 
 Score.move = (params) ->
   {grid, swapCoordinates: {x1: col1, y1: row1, x2: col2, y2: row2} } = params
   [firstLetter, secondLetter] = [grid[row1][col1], grid[row2][col2]]
   [grid[row1][col1], grid[row2][col2]] = [secondLetter, firstLetter]
   grid
+
+Score.moveScore = (params) ->
+  {grid, dictionary, swapCoordinates} = params
+  words_before_moving = @words {grid, dictionary}
+  @move {grid, swapCoordinates}
+  words_after_moving = @words {grid, dictionary}
+  new_words = @newWords before: words_before_moving, after: words_after_moving
+  {scoreMove: @scoreWords(new_words), newWords: new_words}
 
 Score.scoreWord = (word) ->
   score = 0

@@ -50,6 +50,13 @@ describe "Score class", ->
     expect( score.scoreWord 'CLOUD' ).toBe 0
 
   it "the words from the grid should contain ['DO', 'DOG', 'DOGS', 'SEGA']", ->
+    words = Score.words {grid, dictionary}
+    expect( words ).toContain 'DO'
+    expect( words ).toContain 'DOG'
+    expect( words ).toContain 'DOGS'
+    expect( words ).toContain 'SEGA'
+
+  it "the words from the grid should contain ['DO', 'DOG', 'DOGS', 'SEGA']", ->
     words = score.words()
     expect( words ).toContain 'DO'
     expect( words ).toContain 'DOG'
@@ -78,3 +85,9 @@ describe "Score class", ->
       ", ->
     new_words = ['THINK', 'BATH']
     expect( Score.scoreWords new_words ).toBe 42
+
+  it "the letter 'B' should have 'BOSS' and 'DOES' as new words, when move from (x:1, y:0) to (x:0, y:0)", ->
+    swapCoordinates = x1: 1, y1: 0, x2: 0, y2: 0
+    {moveScore, newWords} = Score.moveScore {grid, swapCoordinates, dictionary}
+    expect( newWords ).toContain 'BOSS'
+    expect( newWords ).toContain 'DOES'
