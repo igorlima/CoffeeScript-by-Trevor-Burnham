@@ -1,22 +1,22 @@
 TileFinder = @TileFinder = class
-MIN_WORD_LENGTH = TileFinder.MIN_WORD_LENGTH = 2
+MIN_TILE_LENGTH = TileFinder.MIN_TILE_LENGTH = 2
 
 findOne = (params, funcDirectionLetter) ->
   {grid, range, x: col, y: row} = params
-  word = ""
+  tile = ""
   for i in [0...range]
     letter = funcDirectionLetter i
-    word += letter if letter?
-  word if word.length is range
+    tile += letter if letter?
+  tile if tile.length is range
 
-findMany = (params, function_to_match_word) ->
+findMany = (params, function_to_match_tile) ->
   {grid, range, x, y} = params
-  words = []
-  for word_length in [MIN_WORD_LENGTH..range]
-    for offset in [0...word_length]
-      word = function_to_match_word word_length, offset
-      words.push word if word? and not (word in words)
-  words
+  tiles = []
+  for tile_length in [MIN_TILE_LENGTH..range]
+    for offset in [0...tile_length]
+      tile = function_to_match_tile tile_length, offset
+      tiles.push tile if tile? and not (tile in tiles)
+  tiles
 
 TileFinder.verticalOne = (params) ->
   {grid, range, x: col, y: row} = params
@@ -34,30 +34,30 @@ TileFinder.diagonalOne_lowerLeft_to_upperRight = (params) ->
   {grid, range, x: col, y: row} = params
   findOne params, (i) -> grid[row-i]?[col+i]
 
-TileFinder.verticalWords = (params) ->
+TileFinder.verticalTiles = (params) ->
   {grid, range, x, y} = params
-  findMany params, (word_length, offset) ->
-    TileFinder.verticalOne {grid, x, y: y - offset, range: word_length}
+  findMany params, (tile_length, offset) ->
+    TileFinder.verticalOne {grid, x, y: y - offset, range: tile_length}
 
-TileFinder.horizontalWords = (params) ->
+TileFinder.horizontalTiles = (params) ->
   {grid, range, x, y} = params
-  findMany params, (word_length, offset) ->
-    TileFinder.horizontalOne {grid, x: x - offset, y, range: word_length}
+  findMany params, (tile_length, offset) ->
+    TileFinder.horizontalOne {grid, x: x - offset, y, range: tile_length}
 
-TileFinder.diagonalWords_upperLeft_to_lowerRight = (params) ->
+TileFinder.diagonalTiles_upperLeft_to_lowerRight = (params) ->
   {grid, range, x, y} = params
-  findMany params, (word_length, offset) ->
-    TileFinder.diagonalOne_upperLeft_to_lowerRight {grid, x: x - offset, y: y - offset, range: word_length}
+  findMany params, (tile_length, offset) ->
+    TileFinder.diagonalOne_upperLeft_to_lowerRight {grid, x: x - offset, y: y - offset, range: tile_length}
 
-TileFinder.diagonalWords_lowerLeft_to_upperRight = (params) ->
+TileFinder.diagonalTiles_lowerLeft_to_upperRight = (params) ->
   {grid, range, x, y} = params
-  findMany params, (word_length, offset) ->
-    TileFinder.diagonalOne_lowerLeft_to_upperRight {grid, x: x - offset, y: y + offset, range: word_length}
+  findMany params, (tile_length, offset) ->
+    TileFinder.diagonalOne_lowerLeft_to_upperRight {grid, x: x - offset, y: y + offset, range: tile_length}
 
 TileFinder.all = (params) ->
-  allWords = []
-  for finderWords in [@verticalWords, @horizontalWords, @diagonalWords_upperLeft_to_lowerRight, @diagonalWords_lowerLeft_to_upperRight]
-    words = finderWords params
-    for word in words
-      allWords.push word unless word in allWords
-  allWords
+  allTiles = []
+  for finderTiles in [@verticalTiles, @horizontalTiles, @diagonalTiles_upperLeft_to_lowerRight, @diagonalTiles_lowerLeft_to_upperRight]
+    tiles = finderTiles params
+    for tile in tiles
+      allTiles.push tile unless tile in allTiles
+  allTiles
