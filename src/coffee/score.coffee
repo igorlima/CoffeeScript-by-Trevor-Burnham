@@ -6,7 +6,7 @@ VALUES =
 
 Score = @Score = class
   constructor: (options={}) ->
-    {grid} = options
+    {grid, dictionary} = options
 
     @printGrid = -> Util.printGrid grid
     @matrix = -> Util.matrix grid
@@ -15,3 +15,11 @@ Score = @Score = class
       {x1: col1, y1: row1, x2: col2, y2: row2} = swapCoordinates
       [firstLetter, secondLetter] = [grid[row1][col1], grid[row2][col2]]
       [grid[row1][col1], grid[row2][col2]] = [secondLetter, firstLetter]
+
+    @scoreWord = (word) ->
+      if word in dictionary then Score.scoreWord word else 0
+
+Score.scoreWord = (word) ->
+  score = 0
+  score += VALUES[letter] for letter in word
+  score

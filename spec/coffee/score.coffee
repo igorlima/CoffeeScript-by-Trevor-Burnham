@@ -2,12 +2,15 @@ describe "Score class", ->
   score = undefined
 
   beforeEach ->
-    score = new Score grid: [
-      ['D', 'B', 'O', 'A']
-      ['D', 'O', 'G', 'S']
-      ['A', 'E', 'S', 'A']
-      ['S', 'S', 'I', 'S']
-    ]
+    score = new Score
+      grid: [
+        ['D', 'B', 'O', 'A']
+        ['D', 'O', 'G', 'S']
+        ['A', 'E', 'S', 'A']
+        ['S', 'S', 'I', 'S']
+      ]
+      dictionary: ['DOES', 'DO', 'THINK', 'BATH', 'DOGS', 'BOSS', 'DOG', 'SEGA']
+
 
   it "the printing of grid should be a square 4x4", ->
     grid_string_rows = score.printGrid().split '\n'
@@ -31,3 +34,9 @@ describe "Score class", ->
     expect( matrix[1] ).toMatch ['D', 'O', 'S', 'S']
     expect( matrix[2] ).toMatch ['A', 'E', 'G', 'A']
     expect( matrix[3] ).toMatch ['S', 'S', 'I', 'S']
+
+  it "the point of 'DOES' should be 5", ->
+    expect( Score.scoreWord 'DOES' ).toBe 5
+
+  it "the point of 'CLOUD' from the object 'score' should be 0, because this word doesn't belong the dictionary", ->
+    expect( score.scoreWord 'CLOUD' ).toBe 0
