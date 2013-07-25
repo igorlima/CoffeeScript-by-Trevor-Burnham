@@ -37,10 +37,10 @@ Score.move = ({grid, swapCoordinates: {x1: col1, y1: row1, x2: col2, y2: row2} }
 
 Score.moveScore = ({grid, dictionary, swapCoordinates}) ->
   words_before_moving = @words {grid, dictionary}
-  @move {grid, swapCoordinates}
-  words_after_moving = @words {grid, dictionary}
-  new_words = @newWords before: words_before_moving, after: words_after_moving
-  {scoreMove: @scoreWords(new_words), newWords: new_words}
+  if @move {grid, swapCoordinates}
+    words_after_moving = @words {grid, dictionary}
+    new_words = @newWords before: words_before_moving, after: words_after_moving
+    {scoreMove: @scoreWords(new_words), newWords: new_words}
 
 Score.scoreWord = (word) ->
   score = 0

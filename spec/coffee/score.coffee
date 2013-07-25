@@ -110,3 +110,6 @@ describe "Score class", ->
   it "the new words should contain 'OGA', after moving letter 'G' from (x:3, y:0) to (x:3, y:1)", ->
     {moveScore, newWords} = score.moveScore x1: 3, y1: 0, x2: 3, y2: 1
     expect( newWords ).toContain 'OGA'
+
+  it "the result of moving moving down the letter 'S' on (x:3, y:3) SHOULD NOT be defined, because it is NOT a legal moving", ->
+    expect( score.moveScore x1: 3, y1: 3, x2: 3, y2: 3 ).not.toBeDefined()
