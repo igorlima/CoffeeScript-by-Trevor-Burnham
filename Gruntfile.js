@@ -1,8 +1,22 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     jasmine: {
-      main: {
+      all: {
         src: ['src/js/**/*.js'],
+        options: {
+          specs:   'spec/js/**/*.js',
+          version: '1.3.1'
+        }
+      },
+      main: {
+        src: ['dist/main.js'],
+        options: {
+          specs:   'spec/js/**/*.js',
+          version: '1.3.1'
+        }
+      },
+      minified: {
+        src: ['dist/main.min.js'],
         options: {
           specs:   'spec/js/**/*.js',
           version: '1.3.1'
@@ -57,7 +71,7 @@ module.exports = function(grunt) {
     watch: {
       main: {
         files: ['spec/coffee/**/*.coffee', 'src/coffee/**/*.coffee'],
-        tasks: ['clean', 'coffee', 'concat', 'uglify', 'jasmine']
+        tasks: ['clean', 'coffee', 'concat', 'uglify', 'jasmine:all']
       }
     }
 
