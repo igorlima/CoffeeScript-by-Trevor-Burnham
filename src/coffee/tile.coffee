@@ -19,8 +19,8 @@ Tile.alphabet = ->
   alphabet[0...] #do a copy
 
 Tile.randomLetter = ->
-  randomNumber = Math.ceil Math.random() * @total()
+  randomNumber = Math.ceil Math.random() * totalTiles
   x = 1
-  for letter in @alphabet()
+  for letter in alphabet
     x += tileCounts[letter]
     return letter if x > randomNumber
