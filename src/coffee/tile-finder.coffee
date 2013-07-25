@@ -1,16 +1,14 @@
 TileFinder = @TileFinder = class
 MIN_TILE_LENGTH = TileFinder.MIN_TILE_LENGTH = 2
 
-findOne = (params, funcDirectionLetter) ->
-  {grid, range, x: col, y: row} = params
+findOne = ({grid, range, x: col, y: row}, funcDirectionLetter) ->
   tile = ""
   for i in [0...range]
     letter = funcDirectionLetter i
     tile += letter if letter?
   tile if tile.length is range
 
-findMany = (params, function_to_match_tile) ->
-  {grid, range, x, y} = params
+findMany = ({grid, range, x, y}, function_to_match_tile) ->
   tiles = []
   for tile_length in [MIN_TILE_LENGTH..range]
     for offset in [0...tile_length]

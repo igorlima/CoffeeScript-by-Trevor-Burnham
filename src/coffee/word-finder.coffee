@@ -1,7 +1,6 @@
 WordFinder = @WordFinder = class
 
-WordFinder.isWord = (params) ->
-  {word, dictionary} = params
+WordFinder.isWord = ({word, dictionary}) ->
   word in dictionary
 
 WordFinder.all = (params) ->

@@ -1,7 +1,6 @@
 Game = @Game = class
 
-  constructor: (options={}) ->
-    {size, words, grid} = options
+  constructor: ({size, words, grid}) ->
     if Util.isMatrixQuadratic grid then size = Util.sizeMatrix grid
     else grid = undefined
 

@@ -3,15 +3,13 @@ Util = @Util = class
 Util.isInteger = (num) ->
   num is Math.round num
 
-Util.inRange = (params) ->
-  {value, range, x, y} = params
+Util.inRange = ({value, range, x, y}) ->
   if value?
     (@isInteger value) and 0 <= value < range
   else if x? and y?
     (@inRange {value: x, range}) and (@inRange {value: y, range})
 
-Util.setCoordinate = (params) ->
-  {coordinates, range, x, y, value} = params
+Util.setCoordinate = ({coordinates, range, x, y, value}) ->
   coordinates[x] ||= []
 
   if @inRange({ value: x, range }) and @inRange({ value: y, range })
@@ -21,8 +19,7 @@ Util.setCoordinate = (params) ->
 
   !!coordinates[x][y]
 
-Util.getCoordinate = (params) ->
-  {coordinates, x, y} = params
+Util.getCoordinate = ({coordinates, x, y}) ->
   coordinates[x][y]
 
 Util.generateGrid = (size) ->
@@ -40,8 +37,7 @@ Util.matrix = (grid) ->
     for y in [0...grid[x].length]
       grid[x][y]
 
-Util.wordList = (params) ->
-  {size, words} = params
+Util.wordList = ({size, words}) ->
   (word for word in words when TileFinder.MIN_TILE_LENGTH <= word.length <= size)
 
 Util.isMatrixQuadratic = (matrix) ->
@@ -53,8 +49,7 @@ Util.isMatrixQuadratic = (matrix) ->
 Util.sizeMatrix = (matrix) ->
   if @isMatrixQuadratic matrix then matrix.length else undefined
 
-Util.isValidSwapCoordinates = (params) ->
-  {x1, y1, x2, y2, range} = params
+Util.isValidSwapCoordinates = ({x1, y1, x2, y2, range}) ->
   isMovingHorizontaly = Math.abs( x2 - x1 ) is 1
   isMovingVerticaly = Math.abs( y2 - y1 ) is 1
   isMovingDiagonaly = isMovingHorizontaly and isMovingVerticaly

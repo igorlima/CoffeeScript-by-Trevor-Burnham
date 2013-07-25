@@ -5,8 +5,7 @@ VALUES =
   Y: 4, Z: 10
 
 Score = @Score = class
-  constructor: (options={}) ->
-    {grid, dictionary} = options
+  constructor: ({grid, dictionary}) ->
 
     @printGrid = -> Util.printGrid grid
     @matrix = -> Util.matrix grid
@@ -19,8 +18,7 @@ Score = @Score = class
 
     @words = -> Score.words {grid, dictionary}
 
-Score.words = (params) ->
-  {grid, dictionary} = params
+Score.words = ({grid, dictionary}) ->
   [words, SIZE] = [[], grid.length]
   for x in [0...SIZE]
     for y in [0...SIZE]
@@ -28,13 +26,11 @@ Score.words = (params) ->
       words.push word for word in words_on_xy when word not in words
   words
 
-Score.move = (params) ->
-  {grid, swapCoordinates: {x1: col1, y1: row1, x2: col2, y2: row2} } = params
+Score.move = ({grid, swapCoordinates: {x1: col1, y1: row1, x2: col2, y2: row2} }) ->
   [grid[row2][col2], grid[row1][col1]] = [grid[row1][col1], grid[row2][col2]]
   grid
 
-Score.moveScore = (params) ->
-  {grid, dictionary, swapCoordinates} = params
+Score.moveScore = ({grid, dictionary, swapCoordinates}) ->
   words_before_moving = @words {grid, dictionary}
   @move {grid, swapCoordinates}
   words_after_moving = @words {grid, dictionary}
@@ -51,6 +47,5 @@ Score.scoreWords = (words) ->
   score += @scoreWord word for word in words
   score * multiplier
 
-Score.newWords = (params) ->
-  {before: words_before, after: words_after} = params
+Score.newWords = ({before: words_before, after: words_after}) ->
   new_word for new_word in words_after when new_word not in words_before
