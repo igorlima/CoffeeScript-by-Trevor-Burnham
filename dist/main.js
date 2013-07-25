@@ -286,45 +286,75 @@
     return tiles;
   };
 
-  TileFinder.verticalOne = function(params) {
-    var col, grid, range, row;
-    grid = params.grid, range = params.range, col = params.x, row = params.y;
+  TileFinder.verticalOne = function(_arg) {
+    var col, grid, params, range, row;
+    grid = _arg.grid, range = _arg.range, col = _arg.x, row = _arg.y;
+    params = {
+      grid: grid,
+      range: range,
+      x: col,
+      y: row
+    };
     return findOne(params, function(i) {
       var _ref;
       return (_ref = grid[row + i]) != null ? _ref[col] : void 0;
     });
   };
 
-  TileFinder.horizontalOne = function(params) {
-    var col, grid, range, row;
-    grid = params.grid, range = params.range, col = params.x, row = params.y;
+  TileFinder.horizontalOne = function(_arg) {
+    var col, grid, params, range, row;
+    grid = _arg.grid, range = _arg.range, col = _arg.x, row = _arg.y;
+    params = {
+      grid: grid,
+      range: range,
+      x: col,
+      y: row
+    };
     return findOne(params, function(i) {
       var _ref;
       return (_ref = grid[row]) != null ? _ref[col + i] : void 0;
     });
   };
 
-  TileFinder.diagonalOne_upperLeft_to_lowerRight = function(params) {
-    var col, grid, range, row;
-    grid = params.grid, range = params.range, col = params.x, row = params.y;
+  TileFinder.diagonalOne_upperLeft_to_lowerRight = function(_arg) {
+    var col, grid, params, range, row;
+    grid = _arg.grid, range = _arg.range, col = _arg.x, row = _arg.y;
+    params = {
+      grid: grid,
+      range: range,
+      x: col,
+      y: row
+    };
     return findOne(params, function(i) {
       var _ref;
       return (_ref = grid[row + i]) != null ? _ref[col + i] : void 0;
     });
   };
 
-  TileFinder.diagonalOne_lowerLeft_to_upperRight = function(params) {
-    var col, grid, range, row;
-    grid = params.grid, range = params.range, col = params.x, row = params.y;
+  TileFinder.diagonalOne_lowerLeft_to_upperRight = function(_arg) {
+    var col, grid, params, range, row;
+    grid = _arg.grid, range = _arg.range, col = _arg.x, row = _arg.y;
+    params = {
+      grid: grid,
+      range: range,
+      x: col,
+      y: row
+    };
     return findOne(params, function(i) {
       var _ref;
       return (_ref = grid[row - i]) != null ? _ref[col + i] : void 0;
     });
   };
 
-  TileFinder.verticalTiles = function(params) {
-    var grid, range, x, y;
-    grid = params.grid, range = params.range, x = params.x, y = params.y;
+  TileFinder.verticalTiles = function(_arg) {
+    var grid, params, range, x, y;
+    grid = _arg.grid, range = _arg.range, x = _arg.x, y = _arg.y;
+    params = {
+      grid: grid,
+      range: range,
+      x: x,
+      y: y
+    };
     return findMany(params, function(tile_length, offset) {
       return TileFinder.verticalOne({
         grid: grid,
@@ -335,9 +365,15 @@
     });
   };
 
-  TileFinder.horizontalTiles = function(params) {
-    var grid, range, x, y;
-    grid = params.grid, range = params.range, x = params.x, y = params.y;
+  TileFinder.horizontalTiles = function(_arg) {
+    var grid, params, range, x, y;
+    grid = _arg.grid, range = _arg.range, x = _arg.x, y = _arg.y;
+    params = {
+      grid: grid,
+      range: range,
+      x: x,
+      y: y
+    };
     return findMany(params, function(tile_length, offset) {
       return TileFinder.horizontalOne({
         grid: grid,
@@ -348,9 +384,15 @@
     });
   };
 
-  TileFinder.diagonalTiles_upperLeft_to_lowerRight = function(params) {
-    var grid, range, x, y;
-    grid = params.grid, range = params.range, x = params.x, y = params.y;
+  TileFinder.diagonalTiles_upperLeft_to_lowerRight = function(_arg) {
+    var grid, params, range, x, y;
+    grid = _arg.grid, range = _arg.range, x = _arg.x, y = _arg.y;
+    params = {
+      grid: grid,
+      range: range,
+      x: x,
+      y: y
+    };
     return findMany(params, function(tile_length, offset) {
       return TileFinder.diagonalOne_upperLeft_to_lowerRight({
         grid: grid,
@@ -361,9 +403,15 @@
     });
   };
 
-  TileFinder.diagonalTiles_lowerLeft_to_upperRight = function(params) {
-    var grid, range, x, y;
-    grid = params.grid, range = params.range, x = params.x, y = params.y;
+  TileFinder.diagonalTiles_lowerLeft_to_upperRight = function(_arg) {
+    var grid, params, range, x, y;
+    grid = _arg.grid, range = _arg.range, x = _arg.x, y = _arg.y;
+    params = {
+      grid: grid,
+      range: range,
+      x: x,
+      y: y
+    };
     return findMany(params, function(tile_length, offset) {
       return TileFinder.diagonalOne_lowerLeft_to_upperRight({
         grid: grid,
@@ -374,13 +422,19 @@
     });
   };
 
-  TileFinder.all = function(params) {
-    var allTiles, finderTiles, tile, tiles, _i, _j, _len, _len1, _ref;
+  TileFinder.all = function(_arg) {
+    var allTiles, finderTiles, grid, range, tile, tiles, x, y, _i, _j, _len, _len1, _ref;
+    grid = _arg.grid, range = _arg.range, x = _arg.x, y = _arg.y;
     allTiles = [];
     _ref = [this.verticalTiles, this.horizontalTiles, this.diagonalTiles_upperLeft_to_lowerRight, this.diagonalTiles_lowerLeft_to_upperRight];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       finderTiles = _ref[_i];
-      tiles = finderTiles(params);
+      tiles = finderTiles({
+        grid: grid,
+        range: range,
+        x: x,
+        y: y
+      });
       for (_j = 0, _len1 = tiles.length; _j < _len1; _j++) {
         tile = tiles[_j];
         if (__indexOf.call(allTiles, tile) < 0) {
@@ -648,10 +702,16 @@
     return __indexOf.call(dictionary, word) >= 0;
   };
 
-  WordFinder.all = function(params) {
+  WordFinder.all = function(_arg) {
     var all_tiles, dictionary, grid, range, tile, x, y, _i, _len, _results;
-    grid = params.grid, dictionary = params.dictionary, range = params.range, x = params.x, y = params.y;
-    all_tiles = TileFinder.all(params);
+    grid = _arg.grid, dictionary = _arg.dictionary, range = _arg.range, x = _arg.x, y = _arg.y;
+    all_tiles = TileFinder.all({
+      grid: grid,
+      dictionary: dictionary,
+      range: range,
+      x: x,
+      y: y
+    });
     _results = [];
     for (_i = 0, _len = all_tiles.length; _i < _len; _i++) {
       tile = all_tiles[_i];
