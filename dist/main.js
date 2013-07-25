@@ -400,7 +400,7 @@
 }).call(this);
 
 (function() {
-  var Tile, tileCounts;
+  var Tile, alphabet, count, letter, tileCounts, totalTiles;
 
   Tile = this.Tile = (function() {
     function _Class() {}
@@ -438,35 +438,36 @@
     Z: 1
   };
 
-  Tile.total = function() {
-    var count, letter, totalTiles;
-    totalTiles = 0;
+  totalTiles = 0;
+
+  for (letter in tileCounts) {
+    count = tileCounts[letter];
+    totalTiles += count;
+  }
+
+  alphabet = ((function() {
+    var _results;
+    _results = [];
     for (letter in tileCounts) {
-      count = tileCounts[letter];
-      totalTiles += count;
+      _results.push(letter);
     }
+    return _results;
+  })()).sort();
+
+  Tile.total = function() {
     return totalTiles;
   };
 
   Tile.alphabet = function() {
-    var letter;
-    return ((function() {
-      var _results;
-      _results = [];
-      for (letter in tileCounts) {
-        _results.push(letter);
-      }
-      return _results;
-    })()).sort();
+    return alphabet.slice(0);
   };
 
   Tile.randomLetter = function() {
-    var letter, randomNumber, x, _i, _len, _ref;
-    randomNumber = Math.ceil(Math.random() * this.total());
+    var randomNumber, x, _i, _len;
+    randomNumber = Math.ceil(Math.random() * totalTiles);
     x = 1;
-    _ref = this.alphabet();
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      letter = _ref[_i];
+    for (_i = 0, _len = alphabet.length; _i < _len; _i++) {
+      letter = alphabet[_i];
       x += tileCounts[letter];
       if (x > randomNumber) {
         return letter;
