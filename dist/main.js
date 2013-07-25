@@ -183,10 +183,9 @@
   };
 
   Score.move = function(params) {
-    var col1, col2, firstLetter, grid, row1, row2, secondLetter, _ref, _ref1, _ref2;
+    var col1, col2, grid, row1, row2, _ref, _ref1;
     grid = params.grid, (_ref = params.swapCoordinates, col1 = _ref.x1, row1 = _ref.y1, col2 = _ref.x2, row2 = _ref.y2);
-    _ref1 = [grid[row1][col1], grid[row2][col2]], firstLetter = _ref1[0], secondLetter = _ref1[1];
-    _ref2 = [secondLetter, firstLetter], grid[row1][col1] = _ref2[0], grid[row2][col2] = _ref2[1];
+    _ref1 = [grid[row1][col1], grid[row2][col2]], grid[row2][col2] = _ref1[0], grid[row1][col1] = _ref1[1];
     return grid;
   };
 
