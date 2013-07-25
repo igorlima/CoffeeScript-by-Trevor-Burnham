@@ -202,22 +202,23 @@
       grid: grid,
       dictionary: dictionary
     });
-    this.move({
+    if (this.move({
       grid: grid,
       swapCoordinates: swapCoordinates
-    });
-    words_after_moving = this.words({
-      grid: grid,
-      dictionary: dictionary
-    });
-    new_words = this.newWords({
-      before: words_before_moving,
-      after: words_after_moving
-    });
-    return {
-      scoreMove: this.scoreWords(new_words),
-      newWords: new_words
-    };
+    })) {
+      words_after_moving = this.words({
+        grid: grid,
+        dictionary: dictionary
+      });
+      new_words = this.newWords({
+        before: words_before_moving,
+        after: words_after_moving
+      });
+      return {
+        scoreMove: this.scoreWords(new_words),
+        newWords: new_words
+      };
+    }
   };
 
   Score.scoreWord = function(word) {
