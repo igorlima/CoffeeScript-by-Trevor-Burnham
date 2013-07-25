@@ -2,7 +2,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     jasmine: {
       main: {
-        src: ['lib/**/*.js', 'src/js/**/*.js'],
+        src: ['dist/main.js'],
         options: {
           specs:   'spec/js/**/*.js',
           version: '1.3.1'
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
     watch: {
       main: {
         files: ['spec/coffee/**/*.coffee', 'src/coffee/**/*.coffee'],
-        tasks: ['clean', 'coffee', 'jasmine', 'concat', 'uglify']
+        tasks: ['clean', 'coffee', 'concat', 'uglify', 'jasmine']
       }
     }
 
@@ -71,6 +71,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('default', ['jshint', 'clean', 'coffee', 'jasmine', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'clean', 'coffee', 'concat', 'uglify', 'jasmine']);
 
 };
