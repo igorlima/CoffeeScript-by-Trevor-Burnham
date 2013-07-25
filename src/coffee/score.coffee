@@ -28,7 +28,6 @@ Score.words = ({grid, dictionary}) ->
 
 Score.move = ({grid, swapCoordinates: {x1: col1, y1: row1, x2: col2, y2: row2} }) ->
   [grid[row2][col2], grid[row1][col1]] = [grid[row1][col1], grid[row2][col2]]
-  grid
 
 Score.moveScore = ({grid, dictionary, swapCoordinates}) ->
   words_before_moving = @words {grid, dictionary}
