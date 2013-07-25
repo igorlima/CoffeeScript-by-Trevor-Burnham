@@ -1,33 +1,21 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     jasmine: {
+      options: {
+        specs:   'spec/js/**/*.js',
+        version: '1.3.1'
+      },
       all: {
-        src: ['src/js/**/*.js'],
-        options: {
-          specs:   'spec/js/**/*.js',
-          version: '1.3.1'
-        }
+        src: ['src/js/**/*.js']
       },
       main: {
-        src: ['dist/main.js'],
-        options: {
-          specs:   'spec/js/**/*.js',
-          version: '1.3.1'
-        }
+        src: ['dist/main.js']
       },
       minified: {
-        src: ['dist/main.min.js'],
-        options: {
-          specs:   'spec/js/**/*.js',
-          version: '1.3.1'
-        }
+        src: ['dist/main.min.js']
       },
       gcc: {
-        src: ['dist/main-gcc.min.js'],
-        options: {
-          specs:   'spec/js/**/*.js',
-          version: '1.3.1'
-        }
+        src: ['dist/main-gcc.min.js']
       }
     },
 
@@ -76,9 +64,16 @@ module.exports = function(grunt) {
     },
 
     gcc: {
-      dist: {
+      normal: {
         src: ['dist/main.js'],
         dest: 'dist/main-gcc.min.js'
+      },
+      advanced: {
+        options: {
+          compilation_level: 'ADVANCED_OPTIMIZATIONS'
+        },
+        src: ['dist/main.js'],
+        dest: 'dist/main-gcc-advanced.min.js'
       }
     },
 
