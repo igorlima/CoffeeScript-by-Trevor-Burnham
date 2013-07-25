@@ -177,10 +177,22 @@
   };
 
   Score.move = function(_arg) {
-    var col1, col2, grid, row1, row2, _ref, _ref1;
+    var col1, col2, grid, isValidMove, range, row1, row2, _ref, _ref1;
     grid = _arg.grid, (_ref = _arg.swapCoordinates, col1 = _ref.x1, row1 = _ref.y1, col2 = _ref.x2, row2 = _ref.y2);
-    _ref1 = [grid[row1][col1], grid[row2][col2]], grid[row2][col2] = _ref1[0], grid[row1][col1] = _ref1[1];
-    return grid;
+    range = Util.sizeMatrix(grid);
+    isValidMove = Util.isValidSwapCoordinates({
+      x1: col1,
+      y1: row1,
+      x2: col2,
+      y2: row2,
+      range: range
+    });
+    if ((range != null) && isValidMove) {
+      _ref1 = [grid[row1][col1], grid[row2][col2]], grid[row2][col2] = _ref1[0], grid[row1][col1] = _ref1[1];
+      return true;
+    } else {
+      return false;
+    }
   };
 
   Score.moveScore = function(_arg) {
@@ -672,11 +684,11 @@
       return this.inRange({
         x: x1,
         y: y1,
-        size: range
+        range: range
       }) && this.inRange({
         x: x2,
         y: y2,
-        size: range
+        range: range
       });
     } else {
       return isValid;
