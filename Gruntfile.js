@@ -67,13 +67,6 @@ module.exports = function(grunt) {
       normal: {
         src: ['dist/main.js'],
         dest: 'dist/main-gcc.min.js'
-      },
-      advanced: {
-        options: {
-          compilation_level: 'ADVANCED_OPTIMIZATIONS'
-        },
-        src: ['dist/main.js'],
-        dest: 'dist/main-gcc-advanced.min.js'
       }
     },
 
