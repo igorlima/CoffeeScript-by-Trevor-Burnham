@@ -73,6 +73,11 @@ describe "Util class", ->
     wordList = Util.wordList size: 2, words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
     expect( wordList ).toContain 'DO'
 
+  it "the minimum word size should be 2", ->
+    wordList = Util.wordList size: 2, words: ['A', 'B', 'DOES', 'DO', 'DID', 'GET', 'MOVE']
+    expect( wordList ).not.toContain 'A'
+    expect( wordList ).not.toContain 'B'
+
   it "the matrix of following grid 4x4 method should be
         A | A | A | A
         X | A | B | A

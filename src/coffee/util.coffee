@@ -42,7 +42,7 @@ Util.matrix = (grid) ->
 
 Util.wordList = (params) ->
   {size, words} = params
-  (word for word in words when word.length <= size)
+  (word for word in words when TileFinder.MIN_TILE_LENGTH <= word.length <= size)
 
 Util.isMatrixQuadratic = (matrix) ->
   return false unless matrix
