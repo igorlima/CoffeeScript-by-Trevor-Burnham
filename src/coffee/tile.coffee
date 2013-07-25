@@ -7,13 +7,16 @@ tileCounts =
   M: 2, N: 6, O: 8, P: 2, Q: 1,  R: 6, S: 4, T: 6, U: 4, V: 2, W: 2, X: 1
   Y: 2, Z: 1
 
+totalTiles = 0
+totalTiles += count for letter, count of tileCounts
+
+alphabet = (letter for letter of tileCounts).sort()
+
 Tile.total = ->
-  totalTiles = 0
-  totalTiles += count for letter, count of tileCounts
   totalTiles
 
 Tile.alphabet = ->
-  (letter for letter of tileCounts).sort()
+  alphabet[0...] #do a copy
 
 Tile.randomLetter = ->
   randomNumber = Math.ceil Math.random() * @total()
