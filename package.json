@@ -20,6 +20,7 @@
     "grunt-contrib-watch":   "*",
     "grunt-contrib-clean":   "*",
     "grunt-contrib-concat":  "*",
-    "grunt-contrib-uglify":  "*"
+    "grunt-contrib-uglify":  "*",
+    "grunt-gcc":             "*"
   }
 }

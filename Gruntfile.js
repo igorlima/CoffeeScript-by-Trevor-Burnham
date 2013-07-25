@@ -21,6 +21,13 @@ module.exports = function(grunt) {
           specs:   'spec/js/**/*.js',
           version: '1.3.1'
         }
+      },
+      gcc: {
+        src: ['dist/main-gcc.min.js'],
+        options: {
+          specs:   'spec/js/**/*.js',
+          version: '1.3.1'
+        }
       }
     },
 
@@ -68,10 +75,17 @@ module.exports = function(grunt) {
       }
     },
 
+    gcc: {
+      dist: {
+        src: ['dist/main.js'],
+        dest: 'dist/main-gcc.min.js'
+      }
+    },
+
     watch: {
       main: {
         files: ['spec/coffee/**/*.coffee', 'src/coffee/**/*.coffee'],
-        tasks: ['clean', 'coffee', 'concat', 'uglify', 'jasmine:all']
+        tasks: ['clean', 'coffee', 'jasmine:all']
       }
     }
 
@@ -84,7 +98,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-gcc');
 
-  grunt.registerTask('default', ['jshint', 'clean', 'coffee', 'concat', 'uglify', 'jasmine']);
+  grunt.registerTask('default', ['jshint', 'clean', 'coffee', 'concat', 'uglify', 'gcc', 'jasmine']);
 
 };
