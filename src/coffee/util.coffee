@@ -1,4 +1,6 @@
-Util = @Util = class
+Scrablle = @Scrablle or= {}
+
+Util = Scrablle.Util = class
 
 Util.isInteger = (num) ->
   num is Math.round num
@@ -25,7 +27,7 @@ Util.getCoordinate = ({coordinates, x, y}) ->
 Util.generateGrid = (size) ->
   for x in [0...size]
     for y in [0...size]
-      Tile.randomLetter()
+      Scrablle.Tile.randomLetter()
 
 Util.printGrid = (grid) ->
   rows = @matrix grid
@@ -38,7 +40,7 @@ Util.matrix = (grid) ->
       grid[x][y]
 
 Util.wordList = ({size, words}) ->
-  (word for word in words when TileFinder.MIN_TILE_LENGTH <= word.length <= size)
+  (word for word in words when Scrablle.TileFinder.MIN_TILE_LENGTH <= word.length <= size)
 
 Util.isMatrixQuadratic = (matrix) ->
   return false unless matrix

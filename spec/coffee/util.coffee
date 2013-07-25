@@ -1,3 +1,5 @@
+{Util, Tile} = Scrablle
+
 describe "Util class", ->
 
   grid_for_printing = [

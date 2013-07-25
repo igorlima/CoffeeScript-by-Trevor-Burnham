@@ -1,3 +1,5 @@
+TileFinder = Scrablle.TileFinder
+
 describe "TileFinder class", ->
   grid = [
     ['B', 'D', 'A', 'A']

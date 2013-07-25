@@ -1,4 +1,6 @@
-Tile = @Tile = class
+Scrablle = @Scrablle or= {}
+
+Tile = Scrablle.Tile = class
   
 # Probabilities are taken from Scrablle, except that there are no blanks
 # See http://www.zyzzyva.net/wordlists.shtml

@@ -1,4 +1,6 @@
-TileFinder = @TileFinder = class
+Scrablle = @Scrablle or= {}
+
+TileFinder = Scrablle.TileFinder = class
 MIN_TILE_LENGTH = TileFinder.MIN_TILE_LENGTH = 2
 
 findOne = ({grid, range, x: col, y: row}, funcDirectionLetter) ->

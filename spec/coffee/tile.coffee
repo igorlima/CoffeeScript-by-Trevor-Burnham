@@ -1,3 +1,5 @@
+Tile = Scrablle.Tile
+
 describe "Tile class", ->
 
   it "the tile total should be 98", ->

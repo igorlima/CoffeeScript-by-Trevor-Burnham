@@ -1,3 +1,5 @@
+{Util, Score} = Scrablle
+
 describe "Score class", ->
   score = grid = dictionary = undefined
 

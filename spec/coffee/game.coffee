@@ -1,3 +1,4 @@
+Game = Scrablle.Game
 
 describe "Game class", ->
 
