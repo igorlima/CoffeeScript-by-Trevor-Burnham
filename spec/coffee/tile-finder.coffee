@@ -1,4 +1,4 @@
-TileFinder = Scrablle.TileFinder
+TileFinder = Scrabble.TileFinder
 
 describe "TileFinder class", ->
   grid = [

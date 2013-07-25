@@ -1,3 +1,5 @@
+WordFinder = Scrabble.WordFinder
+
 describe "WordFinder class", ->
 
   wordList = ['DOES', 'DO', 'THINK', 'BATH', 'DOGS', 'BOSS', 'DOG', 'SEGA']

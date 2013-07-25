@@ -1,8 +1,8 @@
-Scrablle = @Scrablle or= {}
+Scrabble = @Scrabble or= {}
 
-Tile = Scrablle.Tile = class
+Tile = Scrabble.Tile = class
   
-# Probabilities are taken from Scrablle, except that there are no blanks
+# Probabilities are taken from Scrabble, except that there are no blanks
 # See http://www.zyzzyva.net/wordlists.shtml
 tileCounts =
   A: 9, B: 2, C: 2, D: 4, E: 12, F: 2, G: 3, H: 2, I: 9, J: 1, K: 1, L: 4

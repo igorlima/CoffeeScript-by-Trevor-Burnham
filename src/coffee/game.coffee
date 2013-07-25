@@ -1,34 +1,34 @@
-Scrablle = @Scrablle or= {}
+Scrabble = @Scrabble or= {}
 
-Game = Scrablle.Game = class
+Game = Scrabble.Game = class
 
   constructor: ({size, words, grid}) ->
-    if Scrablle.Util.isMatrixQuadratic grid then size = Scrablle.Util.sizeMatrix grid
+    if Scrabble.Util.isMatrixQuadratic grid then size = Scrabble.Util.sizeMatrix grid
     else grid = undefined
 
     throw "Grid size not given" unless Game.isValidSize size
-    grid or= Scrablle.Util.generateGrid size
-    wordList = Scrablle.Util.wordList {size, words}
-    score = new Scrablle.Score grid: grid, dictionary: words
+    grid or= Scrabble.Util.generateGrid size
+    wordList = Scrabble.Util.wordList {size, words}
+    score = new Scrabble.Score grid: grid, dictionary: words
 
     @size = -> size
     @isWord = (str) ->
-      WordFinder.isWord word: str, dictionary: wordList
+      Scrabble.WordFinder.isWord word: str, dictionary: wordList
     @move = (swapCoordinates) -> score.moveScore swapCoordinates
 
-    @str = -> Scrablle.Util.printGrid grid
-    @matrix = -> Scrablle.Util.matrix grid
+    @str = -> Scrabble.Util.printGrid grid
+    @matrix = -> Scrabble.Util.matrix grid
 
     @set = (coordinate) ->
       {x, y, value} = coordinate
-      Scrablle.Util.setCoordinate { coordinates: grid, range: size, x, y, value }
+      Scrabble.Util.setCoordinate { coordinates: grid, range: size, x, y, value }
 
     @get = (coordinate) ->
       {x, y} = coordinate
-      Scrablle.Util.getCoordinate { coordinates: grid, x, y }
+      Scrabble.Util.getCoordinate { coordinates: grid, x, y }
 
   inRange: (num) ->
-    Scrablle.Util.inRange value: num, range: @size()
+    Scrabble.Util.inRange value: num, range: @size()
 
 Game.isValidSize = (size) ->
   if (not size) or size < 0 then false else true

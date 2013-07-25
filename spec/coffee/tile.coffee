@@ -1,4 +1,4 @@
-Tile = Scrablle.Tile
+Tile = Scrabble.Tile
 
 describe "Tile class", ->
 

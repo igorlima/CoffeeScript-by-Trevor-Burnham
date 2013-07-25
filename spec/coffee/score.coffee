@@ -1,4 +1,4 @@
-{Util, Score} = Scrablle
+{Util, Score} = Scrabble
 
 describe "Score class", ->
   score = grid = dictionary = undefined

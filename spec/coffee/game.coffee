@@ -1,4 +1,4 @@
-Game = Scrablle.Game
+Game = Scrabble.Game
 
 describe "Game class", ->
 

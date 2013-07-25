@@ -1,4 +1,4 @@
-{Util, Tile} = Scrablle
+{Util, Tile} = Scrabble
 
 describe "Util class", ->
 
