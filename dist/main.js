@@ -1,9 +1,9 @@
 (function() {
-  var Game, Scrabble;
+  var Board, Scrabble;
 
   Scrabble = this.Scrabble || (this.Scrabble = {});
 
-  Game = Scrabble.Game = (function() {
+  Board = Scrabble.Board = (function() {
     function _Class(_arg) {
       var grid, score, size, wordList, words;
       size = _arg.size, words = _arg.words, grid = _arg.grid;
@@ -12,7 +12,7 @@
       } else {
         grid = void 0;
       }
-      if (!Game.isValidSize(size)) {
+      if (!Board.isValidSize(size)) {
         throw "Grid size not given";
       }
       grid || (grid = Scrabble.Util.generateGrid(size));
@@ -75,7 +75,7 @@
 
   })();
 
-  Game.isValidSize = function(size) {
+  Board.isValidSize = function(size) {
     if ((!size) || size < 0) {
       return false;
     } else {

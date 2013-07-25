@@ -1,12 +1,12 @@
 Scrabble = @Scrabble or= {}
 
-Game = Scrabble.Game = class
+Board = Scrabble.Board = class
 
   constructor: ({size, words, grid}) ->
     if Scrabble.Util.isMatrixQuadratic grid then size = Scrabble.Util.sizeMatrix grid
     else grid = undefined
 
-    throw "Grid size not given" unless Game.isValidSize size
+    throw "Grid size not given" unless Board.isValidSize size
     grid or= Scrabble.Util.generateGrid size
     wordList = Scrabble.Util.wordList {size, words}
     score = new Scrabble.Score grid: grid, dictionary: words
@@ -30,5 +30,5 @@ Game = Scrabble.Game = class
   inRange: (num) ->
     Scrabble.Util.inRange value: num, range: @size()
 
-Game.isValidSize = (size) ->
+Board.isValidSize = (size) ->
   if (not size) or size < 0 then false else true
