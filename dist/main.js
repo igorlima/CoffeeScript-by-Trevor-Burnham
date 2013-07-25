@@ -579,12 +579,12 @@
   };
 
   Util.wordList = function(params) {
-    var size, word, words, _i, _len, _results;
+    var size, word, words, _i, _len, _ref, _results;
     size = params.size, words = params.words;
     _results = [];
     for (_i = 0, _len = words.length; _i < _len; _i++) {
       word = words[_i];
-      if (word.length <= size) {
+      if ((TileFinder.MIN_TILE_LENGTH <= (_ref = word.length) && _ref <= size)) {
         _results.push(word);
       }
     }
