@@ -165,3 +165,6 @@ describe "Util class", ->
 
     it "from (x: -1, y: 0) to (x: 0, y: 0) whith the range as 4 SHOULD NOT be a valid move, because it SHOULD validate if there is a negative coordinate", ->
       expect( Util.isValidSwapCoordinates x1: -1, y1: 0, x2: 0, y2: 0, range: 4 ).toBe false
+
+    it "from (x: 1, y: 0) to (x: 0, y: 0) whith the range as 4 SHOULD be a valid move", ->
+      expect( Util.isValidSwapCoordinates x1: 1, y1: 0, x2: 0, y2: 0, range: 4 ).toBe true

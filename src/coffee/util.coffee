@@ -55,6 +55,6 @@ Util.isValidSwapCoordinates = ({x1, y1, x2, y2, range}) ->
   isMovingDiagonaly = isMovingHorizontaly and isMovingVerticaly
   isValid = if isMovingDiagonaly then false else isMovingHorizontaly or isMovingVerticaly
   if isValid and range?
-    @inRange( x: x1, y: y1, size: range ) and @inRange( x: x2, y: y2, size: range )
+    @inRange({ x: x1, y: y1, range }) and @inRange({ x: x2, y: y2, range })
   else
     isValid
