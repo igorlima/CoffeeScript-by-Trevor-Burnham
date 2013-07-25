@@ -36,6 +36,23 @@ describe "Score class", ->
     expect( matrix[2] ).toMatch ['A', 'E', 'G', 'A']
     expect( matrix[3] ).toMatch ['S', 'S', 'I', 'S']
 
+  it "the letter 'G' on (x:2, y:1) should move down", ->
+    swapCoordinates = x1: 2, y1: 1, x2: 2, y2: 2
+    expect( Score.move {grid, swapCoordinates} ).toBe true
+
+  it "the letter 'S' should NOT move from (x:3, y:3) to (x:3, y:4), because this coordinate does NOT exist in the grid", ->
+    swapCoordinates = x1: 3, y1: 3, x2: 3, y2: 4
+    Score.move {grid, swapCoordinates}
+    matrix = Util.matrix grid
+    expect( matrix[0] ).toMatch ['D', 'B', 'O', 'A']
+    expect( matrix[1] ).toMatch ['D', 'O', 'G', 'S']
+    expect( matrix[2] ).toMatch ['A', 'E', 'S', 'A']
+    expect( matrix[3] ).toMatch ['S', 'S', 'I', 'S']
+
+  it "the letter 'S' on (x:3, y:3) should NOT move down", ->
+    swapCoordinates = x1: 3, y1: 3, x2: 3, y2: 4
+    expect( Score.move {grid, swapCoordinates} ).toBe false
+
   it "the point of 'DOES' should be 5", ->
     expect( Score.scoreWord 'DOES' ).toBe 5
 

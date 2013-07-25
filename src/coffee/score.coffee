@@ -27,7 +27,13 @@ Score.words = ({grid, dictionary}) ->
   words
 
 Score.move = ({grid, swapCoordinates: {x1: col1, y1: row1, x2: col2, y2: row2} }) ->
-  [grid[row2][col2], grid[row1][col1]] = [grid[row1][col1], grid[row2][col2]]
+  range = Util.sizeMatrix grid
+  isValidMove = Util.isValidSwapCoordinates {x1: col1, y1: row1, x2: col2, y2: row2, range}
+  if range? and isValidMove
+    [grid[row2][col2], grid[row1][col1]] = [grid[row1][col1], grid[row2][col2]]
+    true
+  else
+    false
 
 Score.moveScore = ({grid, dictionary, swapCoordinates}) ->
   words_before_moving = @words {grid, dictionary}
