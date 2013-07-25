@@ -30,8 +30,7 @@ Score.words = (params) ->
 
 Score.move = (params) ->
   {grid, swapCoordinates: {x1: col1, y1: row1, x2: col2, y2: row2} } = params
-  [firstLetter, secondLetter] = [grid[row1][col1], grid[row2][col2]]
-  [grid[row1][col1], grid[row2][col2]] = [secondLetter, firstLetter]
+  [grid[row2][col2], grid[row1][col1]] = [grid[row1][col1], grid[row2][col2]]
   grid
 
 Score.moveScore = (params) ->
