@@ -16,46 +16,46 @@ findMany = ({grid, range, x, y}, function_to_match_tile) ->
       tiles.push tile if tile? and not (tile in tiles)
   tiles
 
-TileFinder.verticalOne = (params) ->
-  {grid, range, x: col, y: row} = params
+TileFinder.verticalOne = ({grid, range, x: col, y: row}) ->
+  params = {grid, range, x: col, y: row}
   findOne params, (i) -> grid[row+i]?[col]
 
-TileFinder.horizontalOne = (params) ->
-  {grid, range, x: col, y: row} = params
+TileFinder.horizontalOne = ({grid, range, x: col, y: row}) ->
+  params = {grid, range, x: col, y: row}
   findOne params, (i) -> grid[row]?[col+i]
 
-TileFinder.diagonalOne_upperLeft_to_lowerRight = (params) ->
-  {grid, range, x: col, y: row} = params
+TileFinder.diagonalOne_upperLeft_to_lowerRight = ({grid, range, x: col, y: row}) ->
+  params = {grid, range, x: col, y: row}
   findOne params, (i) -> grid[row+i]?[col+i]
 
-TileFinder.diagonalOne_lowerLeft_to_upperRight = (params) ->
-  {grid, range, x: col, y: row} = params
+TileFinder.diagonalOne_lowerLeft_to_upperRight = ({grid, range, x: col, y: row}) ->
+  params = {grid, range, x: col, y: row}
   findOne params, (i) -> grid[row-i]?[col+i]
 
-TileFinder.verticalTiles = (params) ->
-  {grid, range, x, y} = params
+TileFinder.verticalTiles = ({grid, range, x, y}) ->
+  params = {grid, range, x, y}
   findMany params, (tile_length, offset) ->
     TileFinder.verticalOne {grid, x, y: y - offset, range: tile_length}
 
-TileFinder.horizontalTiles = (params) ->
-  {grid, range, x, y} = params
+TileFinder.horizontalTiles = ({grid, range, x, y}) ->
+  params = {grid, range, x, y}
   findMany params, (tile_length, offset) ->
     TileFinder.horizontalOne {grid, x: x - offset, y, range: tile_length}
 
-TileFinder.diagonalTiles_upperLeft_to_lowerRight = (params) ->
-  {grid, range, x, y} = params
+TileFinder.diagonalTiles_upperLeft_to_lowerRight = ({grid, range, x, y}) ->
+  params = {grid, range, x, y}
   findMany params, (tile_length, offset) ->
     TileFinder.diagonalOne_upperLeft_to_lowerRight {grid, x: x - offset, y: y - offset, range: tile_length}
 
-TileFinder.diagonalTiles_lowerLeft_to_upperRight = (params) ->
-  {grid, range, x, y} = params
+TileFinder.diagonalTiles_lowerLeft_to_upperRight = ({grid, range, x, y}) ->
+  params = {grid, range, x, y}
   findMany params, (tile_length, offset) ->
     TileFinder.diagonalOne_lowerLeft_to_upperRight {grid, x: x - offset, y: y + offset, range: tile_length}
 
-TileFinder.all = (params) ->
+TileFinder.all = ({grid, range, x, y}) ->
   allTiles = []
   for finderTiles in [@verticalTiles, @horizontalTiles, @diagonalTiles_upperLeft_to_lowerRight, @diagonalTiles_lowerLeft_to_upperRight]
-    tiles = finderTiles params
+    tiles = finderTiles {grid, range, x, y}
     for tile in tiles
       allTiles.push tile unless tile in allTiles
   allTiles
