@@ -2,12 +2,9 @@
   var Game;
 
   Game = this.Game = (function() {
-    function _Class(options) {
+    function _Class(_arg) {
       var grid, score, size, wordList, words;
-      if (options == null) {
-        options = {};
-      }
-      size = options.size, words = options.words, grid = options.grid;
+      size = _arg.size, words = _arg.words, grid = _arg.grid;
       if (Util.isMatrixQuadratic(grid)) {
         size = Util.sizeMatrix(grid);
       } else {
@@ -120,12 +117,9 @@
   };
 
   Score = this.Score = (function() {
-    function _Class(options) {
+    function _Class(_arg) {
       var dictionary, grid;
-      if (options == null) {
-        options = {};
-      }
-      grid = options.grid, dictionary = options.dictionary;
+      grid = _arg.grid, dictionary = _arg.dictionary;
       this.printGrid = function() {
         return Util.printGrid(grid);
       };
@@ -158,9 +152,9 @@
 
   })();
 
-  Score.words = function(params) {
+  Score.words = function(_arg) {
     var SIZE, dictionary, grid, word, words, words_on_xy, x, y, _i, _j, _k, _len, _ref;
-    grid = params.grid, dictionary = params.dictionary;
+    grid = _arg.grid, dictionary = _arg.dictionary;
     _ref = [[], grid.length], words = _ref[0], SIZE = _ref[1];
     for (x = _i = 0; 0 <= SIZE ? _i < SIZE : _i > SIZE; x = 0 <= SIZE ? ++_i : --_i) {
       for (y = _j = 0; 0 <= SIZE ? _j < SIZE : _j > SIZE; y = 0 <= SIZE ? ++_j : --_j) {
@@ -182,16 +176,16 @@
     return words;
   };
 
-  Score.move = function(params) {
+  Score.move = function(_arg) {
     var col1, col2, grid, row1, row2, _ref, _ref1;
-    grid = params.grid, (_ref = params.swapCoordinates, col1 = _ref.x1, row1 = _ref.y1, col2 = _ref.x2, row2 = _ref.y2);
+    grid = _arg.grid, (_ref = _arg.swapCoordinates, col1 = _ref.x1, row1 = _ref.y1, col2 = _ref.x2, row2 = _ref.y2);
     _ref1 = [grid[row1][col1], grid[row2][col2]], grid[row2][col2] = _ref1[0], grid[row1][col1] = _ref1[1];
     return grid;
   };
 
-  Score.moveScore = function(params) {
+  Score.moveScore = function(_arg) {
     var dictionary, grid, new_words, swapCoordinates, words_after_moving, words_before_moving;
-    grid = params.grid, dictionary = params.dictionary, swapCoordinates = params.swapCoordinates;
+    grid = _arg.grid, dictionary = _arg.dictionary, swapCoordinates = _arg.swapCoordinates;
     words_before_moving = this.words({
       grid: grid,
       dictionary: dictionary
@@ -234,9 +228,9 @@
     return score * multiplier;
   };
 
-  Score.newWords = function(params) {
+  Score.newWords = function(_arg) {
     var new_word, words_after, words_before, _i, _len, _results;
-    words_before = params.before, words_after = params.after;
+    words_before = _arg.before, words_after = _arg.after;
     _results = [];
     for (_i = 0, _len = words_after.length; _i < _len; _i++) {
       new_word = words_after[_i];
@@ -262,9 +256,9 @@
 
   MIN_TILE_LENGTH = TileFinder.MIN_TILE_LENGTH = 2;
 
-  findOne = function(params, funcDirectionLetter) {
+  findOne = function(_arg, funcDirectionLetter) {
     var col, grid, i, letter, range, row, tile, _i;
-    grid = params.grid, range = params.range, col = params.x, row = params.y;
+    grid = _arg.grid, range = _arg.range, col = _arg.x, row = _arg.y;
     tile = "";
     for (i = _i = 0; 0 <= range ? _i < range : _i > range; i = 0 <= range ? ++_i : --_i) {
       letter = funcDirectionLetter(i);
@@ -277,9 +271,9 @@
     }
   };
 
-  findMany = function(params, function_to_match_tile) {
+  findMany = function(_arg, function_to_match_tile) {
     var grid, offset, range, tile, tile_length, tiles, x, y, _i, _j;
-    grid = params.grid, range = params.range, x = params.x, y = params.y;
+    grid = _arg.grid, range = _arg.range, x = _arg.x, y = _arg.y;
     tiles = [];
     for (tile_length = _i = MIN_TILE_LENGTH; MIN_TILE_LENGTH <= range ? _i <= range : _i >= range; tile_length = MIN_TILE_LENGTH <= range ? ++_i : --_i) {
       for (offset = _j = 0; 0 <= tile_length ? _j < tile_length : _j > tile_length; offset = 0 <= tile_length ? ++_j : --_j) {
@@ -491,9 +485,9 @@
     return num === Math.round(num);
   };
 
-  Util.inRange = function(params) {
+  Util.inRange = function(_arg) {
     var range, value, x, y;
-    value = params.value, range = params.range, x = params.x, y = params.y;
+    value = _arg.value, range = _arg.range, x = _arg.x, y = _arg.y;
     if (value != null) {
       return (this.isInteger(value)) && (0 <= value && value < range);
     } else if ((x != null) && (y != null)) {
@@ -507,9 +501,9 @@
     }
   };
 
-  Util.setCoordinate = function(params) {
+  Util.setCoordinate = function(_arg) {
     var coordinates, range, value, x, y;
-    coordinates = params.coordinates, range = params.range, x = params.x, y = params.y, value = params.value;
+    coordinates = _arg.coordinates, range = _arg.range, x = _arg.x, y = _arg.y, value = _arg.value;
     coordinates[x] || (coordinates[x] = []);
     if (this.inRange({
       value: x,
@@ -525,9 +519,9 @@
     return !!coordinates[x][y];
   };
 
-  Util.getCoordinate = function(params) {
+  Util.getCoordinate = function(_arg) {
     var coordinates, x, y;
-    coordinates = params.coordinates, x = params.x, y = params.y;
+    coordinates = _arg.coordinates, x = _arg.x, y = _arg.y;
     return coordinates[x][y];
   };
 
@@ -578,9 +572,9 @@
     return _results;
   };
 
-  Util.wordList = function(params) {
+  Util.wordList = function(_arg) {
     var size, word, words, _i, _len, _ref, _results;
-    size = params.size, words = params.words;
+    size = _arg.size, words = _arg.words;
     _results = [];
     for (_i = 0, _len = words.length; _i < _len; _i++) {
       word = words[_i];
@@ -613,9 +607,9 @@
     }
   };
 
-  Util.isValidSwapCoordinates = function(params) {
+  Util.isValidSwapCoordinates = function(_arg) {
     var isMovingDiagonaly, isMovingHorizontaly, isMovingVerticaly, isValid, range, x1, x2, y1, y2;
-    x1 = params.x1, y1 = params.y1, x2 = params.x2, y2 = params.y2, range = params.range;
+    x1 = _arg.x1, y1 = _arg.y1, x2 = _arg.x2, y2 = _arg.y2, range = _arg.range;
     isMovingHorizontaly = Math.abs(x2 - x1) === 1;
     isMovingVerticaly = Math.abs(y2 - y1) === 1;
     isMovingDiagonaly = isMovingHorizontaly && isMovingVerticaly;
@@ -648,9 +642,9 @@
 
   })();
 
-  WordFinder.isWord = function(params) {
+  WordFinder.isWord = function(_arg) {
     var dictionary, word;
-    word = params.word, dictionary = params.dictionary;
+    word = _arg.word, dictionary = _arg.dictionary;
     return __indexOf.call(dictionary, word) >= 0;
   };
 
