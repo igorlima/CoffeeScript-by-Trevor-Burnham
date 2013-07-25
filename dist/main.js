@@ -1,24 +1,26 @@
 (function() {
-  var Game;
+  var Game, Scrablle;
 
-  Game = this.Game = (function() {
+  Scrablle = this.Scrablle || (this.Scrablle = {});
+
+  Game = Scrablle.Game = (function() {
     function _Class(_arg) {
       var grid, score, size, wordList, words;
       size = _arg.size, words = _arg.words, grid = _arg.grid;
-      if (Util.isMatrixQuadratic(grid)) {
-        size = Util.sizeMatrix(grid);
+      if (Scrablle.Util.isMatrixQuadratic(grid)) {
+        size = Scrablle.Util.sizeMatrix(grid);
       } else {
         grid = void 0;
       }
       if (!Game.isValidSize(size)) {
         throw "Grid size not given";
       }
-      grid || (grid = Util.generateGrid(size));
-      wordList = Util.wordList({
+      grid || (grid = Scrablle.Util.generateGrid(size));
+      wordList = Scrablle.Util.wordList({
         size: size,
         words: words
       });
-      score = new Score({
+      score = new Scrablle.Score({
         grid: grid,
         dictionary: words
       });
@@ -35,15 +37,15 @@
         return score.moveScore(swapCoordinates);
       };
       this.str = function() {
-        return Util.printGrid(grid);
+        return Scrablle.Util.printGrid(grid);
       };
       this.matrix = function() {
-        return Util.matrix(grid);
+        return Scrablle.Util.matrix(grid);
       };
       this.set = function(coordinate) {
         var value, x, y;
         x = coordinate.x, y = coordinate.y, value = coordinate.value;
-        return Util.setCoordinate({
+        return Scrablle.Util.setCoordinate({
           coordinates: grid,
           range: size,
           x: x,
@@ -54,7 +56,7 @@
       this.get = function(coordinate) {
         var x, y;
         x = coordinate.x, y = coordinate.y;
-        return Util.getCoordinate({
+        return Scrablle.Util.getCoordinate({
           coordinates: grid,
           x: x,
           y: y
@@ -63,7 +65,7 @@
     }
 
     _Class.prototype.inRange = function(num) {
-      return Util.inRange({
+      return Scrablle.Util.inRange({
         value: num,
         range: this.size()
       });
@@ -84,8 +86,10 @@
 }).call(this);
 
 (function() {
-  var Score, VALUES,
+  var Score, Scrablle, VALUES,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+  Scrablle = this.Scrablle || (this.Scrablle = {});
 
   VALUES = {
     A: 1,
@@ -116,15 +120,15 @@
     Z: 10
   };
 
-  Score = this.Score = (function() {
+  Score = Scrablle.Score = (function() {
     function _Class(_arg) {
       var dictionary, grid;
       grid = _arg.grid, dictionary = _arg.dictionary;
       this.printGrid = function() {
-        return Util.printGrid(grid);
+        return Scrablle.Util.printGrid(grid);
       };
       this.matrix = function() {
-        return Util.matrix(grid);
+        return Scrablle.Util.matrix(grid);
       };
       this.moveScore = function(swapCoordinates) {
         return Score.moveScore({
@@ -179,8 +183,8 @@
   Score.move = function(_arg) {
     var col1, col2, grid, isValidMove, range, row1, row2, _ref, _ref1;
     grid = _arg.grid, (_ref = _arg.swapCoordinates, col1 = _ref.x1, row1 = _ref.y1, col2 = _ref.x2, row2 = _ref.y2);
-    range = Util.sizeMatrix(grid);
-    isValidMove = Util.isValidSwapCoordinates({
+    range = Scrablle.Util.sizeMatrix(grid);
+    isValidMove = Scrablle.Util.isValidSwapCoordinates({
       x1: col1,
       y1: row1,
       x2: col2,
@@ -257,10 +261,12 @@
 }).call(this);
 
 (function() {
-  var MIN_TILE_LENGTH, TileFinder, findMany, findOne,
+  var MIN_TILE_LENGTH, Scrablle, TileFinder, findMany, findOne,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  TileFinder = this.TileFinder = (function() {
+  Scrablle = this.Scrablle || (this.Scrablle = {});
+
+  TileFinder = Scrablle.TileFinder = (function() {
     function _Class() {}
 
     return _Class;
@@ -461,9 +467,11 @@
 }).call(this);
 
 (function() {
-  var Tile, alphabet, count, letter, tileCounts, totalTiles;
+  var Scrablle, Tile, alphabet, count, letter, tileCounts, totalTiles;
 
-  Tile = this.Tile = (function() {
+  Scrablle = this.Scrablle || (this.Scrablle = {});
+
+  Tile = Scrablle.Tile = (function() {
     function _Class() {}
 
     return _Class;
@@ -539,9 +547,11 @@
 }).call(this);
 
 (function() {
-  var Util;
+  var Scrablle, Util;
 
-  Util = this.Util = (function() {
+  Scrablle = this.Scrablle || (this.Scrablle = {});
+
+  Util = Scrablle.Util = (function() {
     function _Class() {}
 
     return _Class;
@@ -600,7 +610,7 @@
         var _j, _results1;
         _results1 = [];
         for (y = _j = 0; 0 <= size ? _j < size : _j > size; y = 0 <= size ? ++_j : --_j) {
-          _results1.push(Tile.randomLetter());
+          _results1.push(Scrablle.Tile.randomLetter());
         }
         return _results1;
       })());
@@ -645,7 +655,7 @@
     _results = [];
     for (_i = 0, _len = words.length; _i < _len; _i++) {
       word = words[_i];
-      if ((TileFinder.MIN_TILE_LENGTH <= (_ref = word.length) && _ref <= size)) {
+      if ((Scrablle.TileFinder.MIN_TILE_LENGTH <= (_ref = word.length) && _ref <= size)) {
         _results.push(word);
       }
     }
@@ -699,8 +709,10 @@
 }).call(this);
 
 (function() {
-  var WordFinder,
+  var Scrablle, WordFinder,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+  Scrablle = this.Scrablle || (this.Scrablle = {});
 
   WordFinder = this.WordFinder = (function() {
     function _Class() {}
@@ -718,7 +730,7 @@
   WordFinder.all = function(_arg) {
     var all_tiles, dictionary, grid, range, tile, x, y, _i, _len, _results;
     grid = _arg.grid, dictionary = _arg.dictionary, range = _arg.range, x = _arg.x, y = _arg.y;
-    all_tiles = TileFinder.all({
+    all_tiles = Scrablle.TileFinder.all({
       grid: grid,
       dictionary: dictionary,
       range: range,
