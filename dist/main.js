@@ -86,6 +86,46 @@
 }).call(this);
 
 (function() {
+  var Player, Scrabble;
+
+  Scrabble = this.Scrabble || (this.Scrabble = {});
+
+  Player = Scrabble.Player = (function() {
+    function _Class(_arg) {
+      var moveCount, name, score, _ref;
+      name = _arg.name;
+      _ref = [0, 0], score = _ref[0], moveCount = _ref[1];
+      this.name = function() {
+        return name;
+      };
+      this.score = function() {
+        return score;
+      };
+      this.moveCount = function() {
+        return moveCount;
+      };
+      this.move = function(_arg1) {
+        var board, result, swapCoordinates, _ref1;
+        _ref1 = _arg1 != null ? _arg1 : {}, board = _ref1.board, swapCoordinates = _ref1.swapCoordinates;
+        if (!((board != null) || (swapCoordinates != null))) {
+          return;
+        }
+        result = board.move(swapCoordinates);
+        if (result != null) {
+          moveCount++;
+          score += result.scoreMove;
+        }
+        return result;
+      };
+    }
+
+    return _Class;
+
+  })();
+
+}).call(this);
+
+(function() {
   var Score, Scrabble, VALUES,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
