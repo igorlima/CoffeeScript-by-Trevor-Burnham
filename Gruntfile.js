@@ -71,7 +71,7 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      main: {
+      spec_js: {
         files: ['spec/coffee/**/*.coffee', 'src/coffee/**/*.coffee'],
         tasks: ['clean', 'coffee', 'jasmine:all']
       }
