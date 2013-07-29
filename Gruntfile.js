@@ -117,7 +117,7 @@ module.exports = function(grunt) {
         tasks: ['clean:spec', 'cleam:script', 'coffee', 'jasmine:all']
       },
       view: {
-        files: ['assets/view/jade/**/*.jade'],
+        files: ['assets/view/jade/**/*.jade', 'assets/style/css/**/*.css'],
         tasks: ['clean:view', 'concat:style', 'cssmin', 'jade:compile', 'jade:main']
       }
     }
