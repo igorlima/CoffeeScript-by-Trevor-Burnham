@@ -2,3 +2,5 @@ node_modules/
 _SpecRunner.html
 .grunt
 spec/js/*
+assets/script/js/*
+assets/view/html/*
