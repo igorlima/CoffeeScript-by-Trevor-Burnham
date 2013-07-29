@@ -21,6 +21,7 @@
     "grunt-contrib-clean":   "*",
     "grunt-contrib-concat":  "*",
     "grunt-contrib-uglify":  "*",
-    "grunt-gcc":             "*"
+    "grunt-gcc":             "*",
+    "grunt-contrib-jade":    "*"
   }
 }
