@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         version: '1.3.1'
       },
       all: {
-        src: ['src/js/**/*.js']
+        src: ['assets/script/js/**/*.js']
       },
       main: {
         src: ['dist/main.js']
@@ -25,7 +25,8 @@ module.exports = function(grunt) {
 
     clean: {
       spec:   ['spec/js/**/*.js'],
-      source: ['src/js/**/*.js']
+      script: ['assets/script/js/**/*.js'],
+      view:   ['assets/view/html/**/*.html']
     },
 
     coffee: {
@@ -40,9 +41,9 @@ module.exports = function(grunt) {
       source: {
         expand: true,
         flatten: true,
-        cwd: 'src/coffee/',
+        cwd: 'assets/script/coffee/',
         src: ['**/*.coffee'],
-        dest: 'src/js/',
+        dest: 'assets/script/js/',
         ext: '.js'
       }
     },
@@ -50,7 +51,7 @@ module.exports = function(grunt) {
     concat: {
       main: {
         files: {
-          'dist/main.js': ['src/js/**/*.js']
+          'dist/main.js': ['assets/script/js/**/*.js']
         }
       }
     },
@@ -77,14 +78,14 @@ module.exports = function(grunt) {
       compile: {
         expand: true,
         flatten: true,
-        cwd: 'view/jade/',
+        cwd: 'assets/view/jade/',
         src: ['**/*.jade'],
-        dest: 'view/html/',
+        dest: 'assets/view/html/',
         ext: '.html'
       },
       main: {
         files: {
-          "dist/index.html": ["view/jade/*.jade"]
+          "dist/index.html": ["assets/view/jade/*.jade"]
         }
       },
       dist: {
@@ -92,19 +93,19 @@ module.exports = function(grunt) {
           pretty: false
         },
         files: {
-          "dist/index.html": ["view/jade/*.jade"]
+          "dist/index.html": ["assets/view/jade/*.jade"]
         }
       }
     },
 
     watch: {
       spec_js: {
-        files: ['spec/coffee/**/*.coffee', 'src/coffee/**/*.coffee'],
-        tasks: ['clean', 'coffee', 'jasmine:all']
+        files: ['spec/coffee/**/*.coffee', 'assets/script/coffee/**/*.coffee'],
+        tasks: ['clean:spec', 'cleam:script', 'coffee', 'jasmine:all']
       },
       view: {
-        files: ['view/jade/**/*.jade'],
-        tasks: ['jade:compile', 'jade:main']
+        files: ['assets/view/jade/**/*.jade'],
+        tasks: ['clean:view', 'jade:compile', 'jade:main']
       }
     }
 
