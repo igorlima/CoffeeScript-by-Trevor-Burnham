@@ -1,6 +1,19 @@
 doctype 5
 html
   head
-    title Learning CoffeeScript
+    title Learning CoffeeScript by Trevor Burnham
+    script(type='text/javascript', src='main.js')
+    script(type='text/javascript', src='../lib/word.js')
+    script(type='text/javascript', src='../lib/dom/jquery-2.0.3.min.js')
+
+    link(rel='stylesheet', type='text/css', href='./style.css')
   body
-    h1 Teste
+    p#message
+    #grid
+    table#scores
+      tr
+        th#p1name
+        th#p2name
+      tr
+        td#p1score
+        td#p2score
