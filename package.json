@@ -22,6 +22,7 @@
     "grunt-contrib-concat":  "*",
     "grunt-contrib-uglify":  "*",
     "grunt-gcc":             "*",
-    "grunt-contrib-jade":    "*"
+    "grunt-contrib-jade":    "*",
+    "grunt-contrib-cssmin":  "*"
   }
 }

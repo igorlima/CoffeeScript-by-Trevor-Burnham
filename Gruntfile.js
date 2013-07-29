@@ -49,9 +49,22 @@ module.exports = function(grunt) {
     },
 
     concat: {
-      main: {
+      script: {
         files: {
           'dist/main.js': ['assets/script/js/**/*.js']
+        }
+      },
+      style: {
+        files: {
+          'dist/main.css': ['assets/style/css/**/*.css']
+        }
+      }
+    },
+
+    cssmin: {
+      main: {
+        files: {
+          'dist/main.min.css': ['dist/main.css']
         }
       }
     },
@@ -105,7 +118,7 @@ module.exports = function(grunt) {
       },
       view: {
         files: ['assets/view/jade/**/*.jade'],
-        tasks: ['clean:view', 'jade:compile', 'jade:main']
+        tasks: ['clean:view', 'concat:style', 'cssmin', 'jade:compile', 'jade:main']
       }
     }
 
@@ -120,7 +133,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-gcc');
   grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('default', ['jshint', 'clean', 'coffee', 'concat', 'uglify', 'gcc', 'jasmine', 'jade:dist']);
+  grunt.registerTask('default', ['jshint', 'clean', 'coffee', 'concat', 'cssmin', 'uglify', 'gcc', 'jasmine', 'jade:dist']);
 
 };
