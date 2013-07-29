@@ -86,6 +86,46 @@
 }).call(this);
 
 (function() {
+  var Game, Scrabble;
+
+  Scrabble = this.Scrabble || (this.Scrabble = {});
+
+  Game = Scrabble.Game = (function() {
+    function _Class(_arg) {
+      var _ref;
+      _ref = _arg != null ? _arg : {}, this.board = _ref.board, this.player1 = _ref.player1, this.player2 = _ref.player2;
+      this.currentPlayer = this.player1;
+    }
+
+    _Class.prototype["new"] = function() {
+      this.board = Scrabble.Board({
+        size: 5,
+        words: Words
+      });
+      this.currPLayer = this.player1 = new Scrabble.Player({
+        name: 'Player 1'
+      });
+      return this.player2 = new Scrabble.Player({
+        name: 'Player 2'
+      });
+    };
+
+    _Class.prototype.updateView = function() {
+      if ((this.player1 != null) && (this.player2 != null)) {
+        $("#p1name").html(this.player1.name());
+        $("#p1score").html(0);
+        $("#p2name").html(this.player2.name());
+        return $("#p2score").html(0);
+      }
+    };
+
+    return _Class;
+
+  })();
+
+}).call(this);
+
+(function() {
   var Player, Scrabble;
 
   Scrabble = this.Scrabble || (this.Scrabble = {});
