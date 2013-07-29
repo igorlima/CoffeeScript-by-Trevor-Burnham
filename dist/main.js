@@ -93,7 +93,7 @@
   Player = Scrabble.Player = (function() {
     function _Class(_arg) {
       var moveCount, name, score, _ref;
-      name = _arg.name;
+      name = (_arg != null ? _arg : {}).name;
       _ref = [0, 0], score = _ref[0], moveCount = _ref[1];
       this.name = function() {
         return name;
