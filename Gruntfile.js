@@ -70,10 +70,41 @@ module.exports = function(grunt) {
       }
     },
 
+    jade: {
+      options: {
+        pretty: true
+      },
+      compile: {
+        expand: true,
+        flatten: true,
+        cwd: 'view/jade/',
+        src: ['**/*.jade'],
+        dest: 'view/html/',
+        ext: '.html'
+      },
+      main: {
+        files: {
+          "dist/index.html": ["view/jade/*.jade"]
+        }
+      },
+      dist: {
+        options: {
+          pretty: false
+        },
+        files: {
+          "dist/index.html": ["view/jade/*.jade"]
+        }
+      }
+    },
+
     watch: {
       spec_js: {
         files: ['spec/coffee/**/*.coffee', 'src/coffee/**/*.coffee'],
         tasks: ['clean', 'coffee', 'jasmine:all']
+      },
+      view: {
+        files: ['view/jade/**/*.jade'],
+        tasks: ['jade:compile', 'jade:main']
       }
     }
 
@@ -89,6 +120,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-gcc');
   grunt.loadNpmTasks('grunt-contrib-jade');
 
-  grunt.registerTask('default', ['jshint', 'clean', 'coffee', 'concat', 'uglify', 'gcc', 'jasmine']);
+  grunt.registerTask('default', ['jshint', 'clean', 'coffee', 'concat', 'uglify', 'gcc', 'jasmine', 'jade:dist']);
 
 };
