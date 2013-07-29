@@ -114,7 +114,7 @@ module.exports = function(grunt) {
     watch: {
       spec_js: {
         files: ['spec/coffee/**/*.coffee', 'assets/script/coffee/**/*.coffee'],
-        tasks: ['clean:spec', 'cleam:script', 'coffee', 'jasmine:all']
+        tasks: ['clean:spec', 'clean:script', 'coffee', 'jasmine:all']
       },
       view: {
         files: ['assets/view/jade/**/*.jade', 'assets/style/css/**/*.css'],
