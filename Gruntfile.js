@@ -24,13 +24,22 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      spec:   ['spec/jasmine/js/**/*.js'],
-      script: ['assets/script/js/**/*.js'],
-      view:   ['assets/view/html/**/*.html']
+      vows:    ['spec/vows/js/**/*.js'],
+      jasmine: ['spec/jasmine/js/**/*.js'],
+      script:  ['assets/script/js/**/*.js'],
+      view:    ['assets/view/html/**/*.html']
     },
 
     coffee: {
-      spec: {
+      vows: {
+        expand: true,
+        flatten: true,
+        cwd: 'spec/vows/coffee/',
+        src: ['**/*.coffee'],
+        dest: 'spec/vows/js/',
+        ext: '.js'
+      },
+      jasmine: {
         expand: true,
         flatten: true,
         cwd: 'spec/jasmine/coffee/',
@@ -112,9 +121,13 @@ module.exports = function(grunt) {
     },
 
     watch: {
+      vows: {
+        files: ['spec/vows/coffee/**/*.coffee'],
+        tasks: ['clean:vows', 'coffee:vows']
+      },
       spec_js: {
         files: ['spec/jasmine/coffee/**/*.coffee', 'assets/script/coffee/**/*.coffee'],
-        tasks: ['clean:spec', 'clean:script', 'coffee', 'jasmine:all', 'concat:script']
+        tasks: ['clean:jasmine', 'clean:script', 'coffee:jasmine', 'coffee:source', 'jasmine:all', 'concat:script']
       },
       view: {
         files: ['assets/view/jade/**/*.jade', 'assets/style/css/**/*.css'],
