@@ -4,7 +4,7 @@ assert = require 'assert'
 config = require '../lib/sauce-conf.js'
 
 #Create a Test Suite
-vows.describe('An example').addBatch(
+vows.describe(' An example ').addBatch(
   'Sauce Labs page':
     topic: config.browser
     'Check page title': (browser) ->
