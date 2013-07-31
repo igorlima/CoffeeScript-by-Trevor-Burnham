@@ -2,7 +2,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     jasmine: {
       options: {
-        specs:   'spec/js/**/*.js',
+        specs:   'spec/jasmine/js/**/*.js',
         version: '1.3.1'
       },
       all: {
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      spec:   ['spec/js/**/*.js'],
+      spec:   ['spec/jasmine/js/**/*.js'],
       script: ['assets/script/js/**/*.js'],
       view:   ['assets/view/html/**/*.html']
     },
@@ -33,9 +33,9 @@ module.exports = function(grunt) {
       spec: {
         expand: true,
         flatten: true,
-        cwd: 'spec/coffee/',
+        cwd: 'spec/jasmine/coffee/',
         src: ['**/*.coffee'],
-        dest: 'spec/js/',
+        dest: 'spec/jasmine/js/',
         ext: '.js'
       },
       source: {
@@ -113,7 +113,7 @@ module.exports = function(grunt) {
 
     watch: {
       spec_js: {
-        files: ['spec/coffee/**/*.coffee', 'assets/script/coffee/**/*.coffee'],
+        files: ['spec/jasmine/coffee/**/*.coffee', 'assets/script/coffee/**/*.coffee'],
         tasks: ['clean:spec', 'clean:script', 'coffee', 'jasmine:all', 'concat:script']
       },
       view: {
