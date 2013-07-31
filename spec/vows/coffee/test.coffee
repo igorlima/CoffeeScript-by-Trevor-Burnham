@@ -1,7 +1,7 @@
 async  = require 'async'
 vows   = require 'vows'
 assert = require 'assert'
-config = require '../lib/sauce-conf.js'
+config = require '../../lib/sauce-conf.js'
 
 #Create a Test Suite
 vows.describe(' An example ').addBatch(
