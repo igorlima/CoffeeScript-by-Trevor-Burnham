@@ -23,6 +23,11 @@
     "grunt-contrib-uglify":  "*",
     "grunt-gcc":             "*",
     "grunt-contrib-jade":    "*",
-    "grunt-contrib-cssmin":  "*"
+    "grunt-contrib-cssmin":  "*",
+
+    "vows":                  "*",
+    "assert":                "*",
+    "async":                 "*",
+    "wd":                    "*"
   }
 }
