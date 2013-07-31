@@ -17,5 +17,5 @@ script:
 # http://about.travis-ci.org/docs/user/build-configuration/#Secure-environment-variables
 env:
   global:
-    - secure: "XDZMq2j2QIdsf2TIiOJV/BzLUDNOMv+fepsfhTB72UbjOpw18oUCQg9I1kbj\n6f5HFXxjmAd+Eqi2/jGltVsOKFXzq8mYg0WpajMNKG+IKzCo6p+BjX4DiYKK\niEvprgXFvffK6uyoUZs+ysn8IvkqEqAtbycM0JpE5VJuva+lr3A="
-    - secure: "j8scT7feztRHZu/Eqz4eY9WhXvZD4HyqJ0KwOzedDFOUuVkWlEodm1mf86Fu\n3NGp4bMoUAEnCKaxCAz6DfenCRzHN7HGMWnzblUxhL1Uqe5saD+fAQKc51FI\nATJy114yLxQdPJDK0MjhNekJlSC7e7pIEzlFle9Br/kAc+Ua/Ik="
+    - secure: "cOSqllxPSc4DmtVO8xuRQecl4Sl16Iwhckv4ue1u/WQ+GtTv0+Io70jhOpuG\nPmb/dbwmWJa4KqR/+esVogn6mc9nidqkGyp9mjRsAOFlvKnNf0nb6quAA8NW\nt243y08VmFR/VtCJUEB6VVdnFlXBkH+ZyRpanHQ+yyJpRBFPY8Q="
+    - secure: "RKUzw2WNe+qknVKIs/SCcQCPTTqRdBkNznnR9f7QODPpwV9Vqmm8tEK01eXp\nUrir1BChJlBOYgYez+mnGgDfQagd8tlI16aqWnCQaHcKvwMx5EUSur2GkMZE\nHvgGUtRiQF66ZxqxrnqDyaRzKTInAvqxZQAIz6csSwd8IzKTfao="
