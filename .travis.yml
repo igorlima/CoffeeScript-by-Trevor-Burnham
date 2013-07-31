@@ -6,9 +6,10 @@ before_script:
   # https://saucelabs.com/opensource/travis
   - curl https://gist.github.com/santiycr/5139565/raw/sauce_connect_setup.sh | bash
   - npm install -g grunt-cli
+  - npm install -g vows
 script:
   - grunt
-  - vows spec/vows/js/*
+  - vows spec/vows/js/* --spec
 
 # Run tests using Travis CI and Sauce Labs
 # https://saucelabs.com/opensource/travis
