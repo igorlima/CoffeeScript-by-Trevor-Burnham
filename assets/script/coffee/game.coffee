@@ -1,6 +1,10 @@
 Scrabble = @Scrabble or= {}
 
 Game = Scrabble.Game = class
+  constructor: ({@words}={}) ->
+    throw "Board or words was not given" unless @words?
+
+###
   constructor: ({@board, @player1, @player2}={}) ->
     @currentPlayer = @player1
 
@@ -16,3 +20,4 @@ Game = Scrabble.Game = class
 
       $("#p2name").html @player2.name()
       $("#p2score").html 0
+###
