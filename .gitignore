@@ -1,6 +1,6 @@
 node_modules/
 _SpecRunner.html
 .grunt
-spec/js/*
+spec/jasmine/js/*
 assets/script/js/*
 assets/view/html/*
