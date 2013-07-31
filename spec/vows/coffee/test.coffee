@@ -10,6 +10,8 @@ vows.describe(' An example ').addBatch(
     'Check page title': (browser) ->
       async.waterfall [
         (callback) ->
+          browser.init config.desired, callback
+        (callback) ->
           browser.get "http://saucelabs.com/test/guinea-pig", callback
         (callback) ->
           browser.title (err, title) -> callback err, title
