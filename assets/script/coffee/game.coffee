@@ -4,10 +4,9 @@ Game = Scrabble.Game = class
   constructor: ({@words}={}) ->
     throw "Board or words was not given" unless @words?
 
+  new: ->
+    @currentPlayer = @player1 = new Scrabble.Player name: 'Player 1'
 ###
-  constructor: ({@board, @player1, @player2}={}) ->
-    @currentPlayer = @player1
-
   new: ->
     @board = Scrabble.Board size: 5, words: Words
     @currPLayer = @player1 = new Scrabble.Player name: 'Player 1'
