@@ -98,19 +98,24 @@
       }
     }
 
+    _Class.prototype["new"] = function() {
+      this.board = new Scrabble.Board({
+        size: 5,
+        words: this.words
+      });
+      this.currentPlayer = this.player1 = new Scrabble.Player({
+        name: 'Player 1'
+      });
+      return this.player2 = new Scrabble.Player({
+        name: 'Player 2'
+      });
+    };
+
     return _Class;
 
   })();
 
   /*
-    constructor: ({@board, @player1, @player2}={}) ->
-      @currentPlayer = @player1
-  
-    new: ->
-      @board = Scrabble.Board size: 5, words: Words
-      @currPLayer = @player1 = new Scrabble.Player name: 'Player 1'
-      @player2 = new Scrabble.Player name: 'Player 2'
-  
     updateView: ->
       if @player1? and @player2?
         $("#p1name").html @player1.name()

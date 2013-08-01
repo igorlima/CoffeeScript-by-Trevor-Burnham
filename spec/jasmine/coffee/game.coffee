@@ -13,16 +13,25 @@ describe "Game class", ->
       expect( game.words ).toBeDefined()
 
   describe "Starting a new game", ->
-    game = new Game words: words
+    game = undefined
+    beforeEach ->
+      game = new Game words: words
 
-    it "the player 1 should be the current player when starting a game", ->
-      game.new()
-      expect( game.currentPlayer ).toBe game.player1
+    describe "Default game", ->
+      beforeEach -> game.new()
 
-    it "the method 'new' should have a board with size 5 as default", ->
+      it "the player 1 should be the current player when starting a game", ->
+        expect( game.currentPlayer ).toBe game.player1
 
-    it "the method 'new' should have an argument to define the size of board", ->
+      it "a new game should have a second player", ->
+        expect( game.player2 ).toBeDefined()
 
-    it "the game should have two players", ->
+      it "a new game should have a board", ->
+        expect( game.board ).toBeDefined()
 
-    it "the game should have a board", ->
+      it "the method 'new' should have a board with size 5 as default", ->
+        expect( game.board.size() ).toBe 5
+
+    describe "Customized game", ->
+
+      it "the method 'new' should have an argument to define the size of board", ->

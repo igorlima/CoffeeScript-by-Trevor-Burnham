@@ -5,13 +5,10 @@ Game = Scrabble.Game = class
     throw "Board or words was not given" unless @words?
 
   new: ->
+    @board = new Scrabble.Board size: 5, words: @words
     @currentPlayer = @player1 = new Scrabble.Player name: 'Player 1'
-###
-  new: ->
-    @board = Scrabble.Board size: 5, words: Words
-    @currPLayer = @player1 = new Scrabble.Player name: 'Player 1'
     @player2 = new Scrabble.Player name: 'Player 2'
-
+###
   updateView: ->
     if @player1? and @player2?
       $("#p1name").html @player1.name()
