@@ -98,9 +98,11 @@
       }
     }
 
-    _Class.prototype["new"] = function() {
+    _Class.prototype["new"] = function(_arg) {
+      var size;
+      size = (_arg != null ? _arg : {}).size;
       this.board = new Scrabble.Board({
-        size: 5,
+        size: size || 5,
         words: this.words
       });
       this.currentPlayer = this.player1 = new Scrabble.Player({
