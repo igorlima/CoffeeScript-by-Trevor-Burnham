@@ -99,16 +99,16 @@
     }
 
     _Class.prototype["new"] = function(_arg) {
-      var size;
-      size = (_arg != null ? _arg : {}).size;
-      this.board = new Scrabble.Board({
+      var board, player1, player2, size, _ref;
+      _ref = _arg != null ? _arg : {}, size = _ref.size, player1 = _ref.player1, player2 = _ref.player2, board = _ref.board;
+      this.board = board || new Scrabble.Board({
         size: size || 5,
         words: this.words
       });
-      this.currentPlayer = this.player1 = new Scrabble.Player({
+      this.currentPlayer = this.player1 = player1 || new Scrabble.Player({
         name: 'Player 1'
       });
-      return this.player2 = new Scrabble.Player({
+      return this.player2 = player2 || new Scrabble.Player({
         name: 'Player 2'
       });
     };

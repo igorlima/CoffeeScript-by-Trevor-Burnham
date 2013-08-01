@@ -4,10 +4,10 @@ Game = Scrabble.Game = class
   constructor: ({@words}={}) ->
     throw "Board or words was not given" unless @words?
 
-  new: ({size}={}) ->
-    @board = new Scrabble.Board size: size or 5, words: @words
-    @currentPlayer = @player1 = new Scrabble.Player name: 'Player 1'
-    @player2 = new Scrabble.Player name: 'Player 2'
+  new: ({size, player1, player2, board}={}) ->
+    @board = board or new Scrabble.Board size: size or 5, words: @words
+    @currentPlayer = @player1 = player1 or new Scrabble.Player name: 'Player 1'
+    @player2 = player2 or new Scrabble.Player name: 'Player 2'
 ###
   updateView: ->
     if @player1? and @player2?

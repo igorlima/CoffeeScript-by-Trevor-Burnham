@@ -40,8 +40,31 @@ describe "Game class", ->
 
     describe "Customized game", ->
 
-      it "the size of game SHOULD be Customized", ->
+      it "the size of game might be customized", ->
         game.new size: 3
         expect( game.board.size() ).toBe 3
 
-      it "the method 'new' should have an argument to define the size of board", ->
+      it "the player1 might be customized", ->
+        game.new player1: new Scrabble.Player name: 'Fist player'
+        expect( game.player1.name() ).toBe 'Fist player'
+
+      it "the current player should be the player1 when customized", ->
+        game.new player1: new Scrabble.Player name: 'Fist player'
+        expect( game.currentPlayer ).toBe game.player1
+
+      it "the player2 might be customized", ->
+        game.new player2: new Scrabble.Player name: 'Second player'
+        expect( game.player2.name() ).toBe 'Second player'
+
+      it "the board might be customized", ->
+        grid = [['D', 'A'], ['S', 'O']]
+        game.new board: new Board {words, grid}
+        expect( game.board.size() ).toBe 2
+
+  describe "Game actions", ->
+
+    it "the tile should move", ->
+
+  describe "Updating a game on DOM", ->
+
+    it "", ->
