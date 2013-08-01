@@ -174,6 +174,27 @@
     return $id.html(message);
   };
 
+  Game.View.createGridLine = function(line) {
+    var lineHtml, value, _i, _len;
+    lineHtml = '';
+    for (_i = 0, _len = line.length; _i < _len; _i++) {
+      value = line[_i];
+      lineHtml += "<li>" + value + "</li>";
+    }
+    return $(lineHtml);
+  };
+
+  Game.View.createGrid = function(grid) {
+    var gridHtml, line, ul, _i, _len;
+    gridHtml = $('<div>');
+    for (_i = 0, _len = grid.length; _i < _len; _i++) {
+      line = grid[_i];
+      ul = $('<ul>');
+      gridHtml.append(ul.append(this.createGridLine(line)));
+    }
+    return gridHtml.contents();
+  };
+
 }).call(this);
 
 (function() {

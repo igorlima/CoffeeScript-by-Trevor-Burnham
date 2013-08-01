@@ -49,3 +49,16 @@ Game.View = class
 Game.View.showMessage = ({message, context, id}={}) ->
   $id = $ "##{id or DEFAULT_VIEW.MESSAGE}", context
   $id.html message
+
+Game.View.createGridLine = (line) ->
+  lineHtml = ''
+  for value in line
+    lineHtml += "<li>#{value}</li>"
+  $ lineHtml
+
+Game.View.createGrid = (grid) ->
+  gridHtml = $ '<div>'
+  for line in grid
+    ul = $ '<ul>'
+    gridHtml.append ul.append(@createGridLine line)
+  gridHtml.contents()

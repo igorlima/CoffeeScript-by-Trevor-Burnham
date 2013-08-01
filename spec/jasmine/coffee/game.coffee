@@ -118,6 +118,44 @@ describe "Game View Class", ->
       Game.View.showMessage message: 'Hello World', context: DOM, id: 'message'
       expect( $("#message", DOM).html() ).toBe 'Hello World'
 
+    describe "Create a grid line by ['A', 'B', 'C']", ->
+      lis = undefined
+      beforeEach ->
+        lis = Game.View.createGridLine ['A', 'B', 'C']
+
+      it "the lis should contain three elements", ->
+        expect( lis.length ).toBe 3
+
+      it "the first element should be an li tag", ->
+        expect( $(lis[0]).is('li') ).toBe true
+
+      it "the first element should contain the letter 'A'", ->
+        expect( $(lis[0]).html() ).toContain 'A'
+
+      it "the second element should contain the letter 'B'", ->
+        expect( $(lis[1]).html() ).toContain 'B'
+
+    describe "Create a grid by
+              A | A | A
+              X | A | I
+              Z | C | D
+            ", ->
+      uls = undefined
+      beforeEach -> uls = Game.View.createGrid [
+          ['A', 'A', 'A']
+          ['X', 'A', 'I']
+          ['Z', 'C', 'D']
+        ]
+
+      it "the uls should contain three elements", ->
+        expect( uls.length ).toBe 3
+
+      it "the first element should be an ul tag", ->
+        expect( $(uls[0]).is('ul') ).toBe true
+
+      it "the first ul should contain 3 li elements", ->
+        expect( $('li', uls[0]).length ).toBe 3
+
   describe "Each instance of GameView", ->
 
     it "the $p1score should be an element DOM wrap by $", ->
