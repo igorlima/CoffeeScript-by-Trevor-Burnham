@@ -86,9 +86,20 @@
 }).call(this);
 
 (function() {
-  var Game, Scrabble;
+  var DEFAULT_VIEW, Game, Scrabble;
 
   Scrabble = this.Scrabble || (this.Scrabble = {});
+
+  DEFAULT_VIEW = {
+    PLAYER_ONE: {
+      SCORE: 'p1score',
+      NAME: 'p1name'
+    },
+    PLAYER_TWO: {
+      SCORE: 'p2score',
+      NAME: 'p2name'
+    }
+  };
 
   Game = Scrabble.Game = (function() {
     function _Class(_arg) {
@@ -99,8 +110,8 @@
     }
 
     _Class.prototype["new"] = function(_arg) {
-      var board, player1, player2, size, _ref;
-      _ref = _arg != null ? _arg : {}, size = _ref.size, player1 = _ref.player1, player2 = _ref.player2, board = _ref.board;
+      var DOM, VIEW, board, player1, player2, size, _ref;
+      _ref = _arg != null ? _arg : {}, size = _ref.size, player1 = _ref.player1, player2 = _ref.player2, board = _ref.board, DOM = _ref.DOM, VIEW = _ref.VIEW;
       this.board = board || new Scrabble.Board({
         size: size || 5,
         words: this.words
@@ -108,25 +119,49 @@
       this.currentPlayer = this.player1 = player1 || new Scrabble.Player({
         name: 'Player 1'
       });
-      return this.player2 = player2 || new Scrabble.Player({
+      this.player2 = player2 || new Scrabble.Player({
         name: 'Player 2'
       });
+      VIEW || (VIEW = DEFAULT_VIEW);
+      this.view = new Game.View({
+        p1score: VIEW.PLAYER_ONE.SCORE,
+        p2score: VIEW.PLAYER_TWO.SCORE,
+        p1name: VIEW.PLAYER_ONE.NAME,
+        p2name: VIEW.PLAYER_TWO.NAME,
+        context: DOM,
+        game: this
+      });
+      this.view.updateScore();
+      return this.view.updatePlayerNames();
     };
 
     return _Class;
 
   })();
 
-  /*
-    updateView: ->
-      if @player1? and @player2?
-        $("#p1name").html @player1.name()
-        $("#p1score").html 0
-  
-        $("#p2name").html @player2.name()
-        $("#p2score").html 0
-  */
+  Game.View = (function() {
+    function _Class(_arg) {
+      var context, p1name, p1score, p2name, p2score, _ref;
+      _ref = _arg != null ? _arg : {}, p1score = _ref.p1score, p2score = _ref.p2score, p1name = _ref.p1name, p2name = _ref.p2name, context = _ref.context, this.game = _ref.game;
+      this.$p1name = $("#" + p1name, context);
+      this.$p1score = $("#" + p1score, context);
+      this.$p2name = $("#" + p2name, context);
+      this.$p2score = $("#" + p2score, context);
+    }
 
+    _Class.prototype.updateScore = function() {
+      this.$p1score.html(0);
+      return this.$p2score.html(0);
+    };
+
+    _Class.prototype.updatePlayerNames = function() {
+      this.$p1name.html(this.game.player1.name());
+      return this.$p2name.html(this.game.player2.name());
+    };
+
+    return _Class;
+
+  })();
 
 }).call(this);
 

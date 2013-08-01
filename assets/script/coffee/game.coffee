@@ -1,19 +1,44 @@
 Scrabble = @Scrabble or= {}
+DEFAULT_VIEW =
+  PLAYER_ONE:
+    SCORE: 'p1score'
+    NAME:  'p1name'
+  PLAYER_TWO:
+    SCORE: 'p2score'
+    NAME:  'p2name'
 
 Game = Scrabble.Game = class
   constructor: ({@words}={}) ->
     throw "Board or words was not given" unless @words?
 
-  new: ({size, player1, player2, board}={}) ->
+  new: ({size, player1, player2, board, DOM, VIEW}={}) ->
     @board = board or new Scrabble.Board size: size or 5, words: @words
     @currentPlayer = @player1 = player1 or new Scrabble.Player name: 'Player 1'
     @player2 = player2 or new Scrabble.Player name: 'Player 2'
-###
-  updateView: ->
-    if @player1? and @player2?
-      $("#p1name").html @player1.name()
-      $("#p1score").html 0
 
-      $("#p2name").html @player2.name()
-      $("#p2score").html 0
-###
+    VIEW or= DEFAULT_VIEW
+    @view = new Game.View
+      p1score: VIEW.PLAYER_ONE.SCORE
+      p2score: VIEW.PLAYER_TWO.SCORE
+      p1name:  VIEW.PLAYER_ONE.NAME
+      p2name:  VIEW.PLAYER_TWO.NAME
+      context: DOM
+      game: @
+    @view.updateScore()
+    @view.updatePlayerNames()
+
+Game.View = class
+  constructor: ({p1score, p2score, p1name, p2name, context, @game}={}) ->
+    @$p1name  = $ "##{p1name}", context
+    @$p1score = $ "##{p1score}", context
+
+    @$p2name  = $ "##{p2name}", context
+    @$p2score = $ "##{p2score}", context
+
+  updateScore: ->
+    @$p1score.html 0
+    @$p2score.html 0
+
+  updatePlayerNames: ->
+    @$p1name.html @game.player1.name()
+    @$p2name.html @game.player2.name()

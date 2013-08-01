@@ -1,4 +1,27 @@
-{Game, Board} = Scrabble
+{Game, Board, Player} = Scrabble
+ELEMENTS_VIEW =
+  PLAYER_ONE:
+    SCORE: 'p1score'
+    NAME:  'p1name'
+  PLAYER_TWO:
+    SCORE: 'p2score'
+    NAME:  'p2name'
+
+DOM_STRINGFIED = "
+  <body>
+    <p id='message'></p>
+    <div id='grid'></div>
+    <table id='scores'>
+      <tr>
+        <th id='p1name'></th>
+        <th id='p2name'></th>
+      </tr>
+      <tr>
+        <td id='p1score'></td>
+        <td id='p2score'></td>
+      </tr>
+    </table>
+  </body>"
 
 describe "Game class", ->
   words = ['DOES', 'DO', 'DID', 'GET', 'MOVE']
@@ -35,7 +58,7 @@ describe "Game class", ->
       it "a new game should have a board", ->
         expect( game.board ).toBeDefined()
 
-      it "the method 'new' should have a board with size 5 as default", ->
+      it "the default board size should be 5", ->
         expect( game.board.size() ).toBe 5
 
     describe "Customized game", ->
@@ -45,15 +68,15 @@ describe "Game class", ->
         expect( game.board.size() ).toBe 3
 
       it "the player1 might be customized", ->
-        game.new player1: new Scrabble.Player name: 'Fist player'
+        game.new player1: new Player name: 'Fist player'
         expect( game.player1.name() ).toBe 'Fist player'
 
       it "the current player should be the player1 when customized", ->
-        game.new player1: new Scrabble.Player name: 'Fist player'
+        game.new player1: new Player name: 'Fist player'
         expect( game.currentPlayer ).toBe game.player1
 
       it "the player2 might be customized", ->
-        game.new player2: new Scrabble.Player name: 'Second player'
+        game.new player2: new Player name: 'Second player'
         expect( game.player2.name() ).toBe 'Second player'
 
       it "the board might be customized", ->
@@ -65,6 +88,61 @@ describe "Game class", ->
 
     it "the tile should move", ->
 
-  describe "Updating a game on DOM", ->
 
-    it "", ->
+describe "Game View Class", ->
+  DOM = game = undefined
+
+  beforeEach ->
+    DOM = $ DOM_STRINGFIED
+    player1 = new Player name: 'John Doe'
+    player2 = new Player name: 'John Smith'
+    board = new Board
+      words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
+      grid: [
+        ['A', 'D', 'A', 'T']
+        ['I', 'O', 'E', 'S']
+        ['D', 'G', 'D', 'E']
+        ['M', 'O', 'V', 'S']
+      ]
+    game = new Game words: []
+    game.new {board, player1, player2, DOM, VIEW: ELEMENTS_VIEW}
+
+  describe "Each instance of game view", ->
+
+    it "the $p1score should be an element DOM wrap by $", ->
+      view = new Game.View context: DOM, p1score: 'p1score'
+      expect( view.$p1score.length ).toBeGreaterThan 0
+
+    it "the $p2score should be an element DOM wrap by $", ->
+      view = new Game.View context: DOM, p2score: 'p2score'
+      expect( view.$p2score.length ).toBeGreaterThan 0
+
+    it "the $p1name should be an element DOM wrap by $", ->
+      view = new Game.View context: DOM, p1name: 'p1name'
+      expect( view.$p1name.length ).toBeGreaterThan 0
+
+    it "the $p2name should be an element DOM wrap by $", ->
+      view = new Game.View context: DOM, p2name: 'p2name'
+      expect( view.$p2name.length ).toBeGreaterThan 0
+
+    it "the game should be defined", ->
+      view = new Game.View game: game
+      expect( view.game ).toBeDefined()
+
+  describe "Updating the DOM", ->
+
+    describe "Updating the score", ->
+
+      it "the player 1 score should be set", ->
+        expect( $("#p1score", DOM).html() ).toBe '0'
+
+      it "the player 2 score should be set", ->
+        expect( $("#p2score", DOM).html() ).toBe '0'
+
+    describe "Updating player names", ->
+
+      it "the player 1 name should be set", ->
+        expect( $("#p1name", DOM).html() ).toBe 'John Doe'
+
+      it "the player 2 name should be set", ->
+        expect( $("#p2name", DOM).html() ).toBe 'John Smith'
