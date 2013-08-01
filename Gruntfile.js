@@ -3,6 +3,7 @@ module.exports = function(grunt) {
     jasmine: {
       options: {
         specs:   'spec/jasmine/js/**/*.js',
+        vendor:  ['lib/dom/zepto.min.js'],
         version: '1.3.1'
       },
       all: {
