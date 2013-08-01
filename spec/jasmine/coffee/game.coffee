@@ -9,7 +9,7 @@ ELEMENTS_VIEW =
       NAME:  'p2name'
 
 DOM_STRINGFIED = "
-  <body>
+  <div class='body'>
     <p id='message'></p>
     <div id='grid'></div>
     <table id='scores'>
@@ -22,7 +22,7 @@ DOM_STRINGFIED = "
         <td id='p2score'></td>
       </tr>
     </table>
-  </body>"
+  </div>"
 
 describe "Game class", ->
   words = ['DOES', 'DO', 'DID', 'GET', 'MOVE']
@@ -112,7 +112,13 @@ describe "Game View Class", ->
     game = new Game words: []
     game.new {board, player1, player2, DOM, VIEW: ELEMENTS_VIEW}
 
-  describe "Each instance of game view", ->
+  describe "Class Methods", ->
+
+    it "the message 'Hello World' should be displayed", ->
+      Game.View.showMessage message: 'Hello World', context: DOM, id: 'message'
+      expect( $("#message", DOM).html() ).toBe 'Hello World'
+
+  describe "Each instance of GameView", ->
 
     it "the $p1score should be an element DOM wrap by $", ->
       view = new Game.View context: DOM, p1score: 'p1score'

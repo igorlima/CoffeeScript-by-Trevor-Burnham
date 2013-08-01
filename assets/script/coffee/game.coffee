@@ -7,6 +7,7 @@ DEFAULT_VIEW =
     TWO:
       SCORE: 'p2score'
       NAME:  'p2name'
+  MESSAGE: 'message'
 
 Game = Scrabble.Game = class
   constructor: ({@words}={}) ->
@@ -44,3 +45,7 @@ Game.View = class
   updatePlayerNames: ->
     @$p1name.html @game.player1.name()
     @$p2name.html @game.player2.name()
+
+Game.View.showMessage = ({message, context, id}={}) ->
+  $id = $ "##{id or DEFAULT_VIEW.MESSAGE}", context
+  $id.html message

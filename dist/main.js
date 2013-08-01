@@ -100,7 +100,8 @@
         SCORE: 'p2score',
         NAME: 'p2name'
       }
-    }
+    },
+    MESSAGE: 'message'
   };
 
   Game = Scrabble.Game = (function() {
@@ -165,6 +166,13 @@
     return _Class;
 
   })();
+
+  Game.View.showMessage = function(_arg) {
+    var $id, context, id, message, _ref;
+    _ref = _arg != null ? _arg : {}, message = _ref.message, context = _ref.context, id = _ref.id;
+    $id = $("#" + (id || DEFAULT_VIEW.MESSAGE), context);
+    return $id.html(message);
+  };
 
 }).call(this);
 
