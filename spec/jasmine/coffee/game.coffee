@@ -40,6 +40,10 @@ describe "Game class", ->
     beforeEach ->
       game = new Game words: words
 
+    it "the result of a new game should be an instance of Game class", ->
+      instance_of_game = game.new()
+      expect( instance_of_game instanceof Game ).toBe true
+
     describe "Default game", ->
       beforeEach -> game.new()
 

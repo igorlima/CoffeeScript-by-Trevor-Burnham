@@ -132,7 +132,8 @@
         game: this
       });
       this.view.updateScore();
-      return this.view.updatePlayerNames();
+      this.view.updatePlayerNames();
+      return this;
     };
 
     return _Class;

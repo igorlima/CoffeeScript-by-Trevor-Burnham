@@ -26,6 +26,7 @@ Game = Scrabble.Game = class
       game: @
     @view.updateScore()
     @view.updatePlayerNames()
+    @
 
 Game.View = class
   constructor: ({p1score, p2score, p1name, p2name, context, @game}={}) ->
