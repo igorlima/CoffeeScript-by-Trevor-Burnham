@@ -1,11 +1,12 @@
 {Game, Board, Player} = Scrabble
 ELEMENTS_VIEW =
-  PLAYER_ONE:
-    SCORE: 'p1score'
-    NAME:  'p1name'
-  PLAYER_TWO:
-    SCORE: 'p2score'
-    NAME:  'p2name'
+  PLAYER:
+    ONE:
+      SCORE: 'p1score'
+      NAME:  'p1name'
+    TWO:
+      SCORE: 'p2score'
+      NAME:  'p2name'
 
 DOM_STRINGFIED = "
   <body>

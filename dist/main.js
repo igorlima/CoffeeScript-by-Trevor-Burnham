@@ -91,13 +91,15 @@
   Scrabble = this.Scrabble || (this.Scrabble = {});
 
   DEFAULT_VIEW = {
-    PLAYER_ONE: {
-      SCORE: 'p1score',
-      NAME: 'p1name'
-    },
-    PLAYER_TWO: {
-      SCORE: 'p2score',
-      NAME: 'p2name'
+    PLAYER: {
+      ONE: {
+        SCORE: 'p1score',
+        NAME: 'p1name'
+      },
+      TWO: {
+        SCORE: 'p2score',
+        NAME: 'p2name'
+      }
     }
   };
 
@@ -124,10 +126,10 @@
       });
       VIEW || (VIEW = DEFAULT_VIEW);
       this.view = new Game.View({
-        p1score: VIEW.PLAYER_ONE.SCORE,
-        p2score: VIEW.PLAYER_TWO.SCORE,
-        p1name: VIEW.PLAYER_ONE.NAME,
-        p2name: VIEW.PLAYER_TWO.NAME,
+        p1score: VIEW.PLAYER.ONE.SCORE,
+        p2score: VIEW.PLAYER.TWO.SCORE,
+        p1name: VIEW.PLAYER.ONE.NAME,
+        p2name: VIEW.PLAYER.TWO.NAME,
         context: DOM,
         game: this
       });
