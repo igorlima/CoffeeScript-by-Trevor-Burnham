@@ -7,6 +7,7 @@ ELEMENTS_VIEW =
     TWO:
       SCORE: 'p2score'
       NAME:  'p2name'
+  GRID: 'grid'
 
 DOM_STRINGFIED = "
   <div class='body'>
@@ -174,6 +175,10 @@ describe "Game View Class", ->
       view = new Game.View context: DOM, p2name: 'p2name'
       expect( view.$p2name.length ).toBeGreaterThan 0
 
+    it "the $grid should be an element DOM wrap by $", ->
+      view = new Game.View context: DOM, grid: 'grid'
+      expect( view.$grid.length ).toBeGreaterThan 0
+
     it "the game should be defined", ->
       view = new Game.View game: game
       expect( view.game ).toBeDefined()
@@ -195,3 +200,15 @@ describe "Game View Class", ->
 
       it "the player 2 name should be set", ->
         expect( $("#p2name", DOM).html() ).toBe 'John Smith'
+
+    describe "Updating grid", ->
+      $uls = undefined
+      beforeEach ->
+        $grid = $ '#grid', DOM
+        $uls = $ 'ul', $grid
+
+      it "the grid should have elements ul", ->
+        expect( $uls.length ).toBe 4
+
+      it "the first ul should have 4 li elements", ->
+        expect( ($ 'li', $uls[0]).length ).toBe 4

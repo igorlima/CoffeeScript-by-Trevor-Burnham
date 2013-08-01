@@ -101,7 +101,8 @@
         NAME: 'p2name'
       }
     },
-    MESSAGE: 'message'
+    MESSAGE: 'message',
+    GRID: 'grid'
   };
 
   Game = Scrabble.Game = (function() {
@@ -131,11 +132,13 @@
         p2score: VIEW.PLAYER.TWO.SCORE,
         p1name: VIEW.PLAYER.ONE.NAME,
         p2name: VIEW.PLAYER.TWO.NAME,
+        grid: VIEW.GRID,
         context: DOM,
         game: this
       });
       this.view.updateScore();
       this.view.updatePlayerNames();
+      this.view.updateGrid();
       return this;
     };
 
@@ -145,12 +148,13 @@
 
   Game.View = (function() {
     function _Class(_arg) {
-      var context, p1name, p1score, p2name, p2score, _ref;
-      _ref = _arg != null ? _arg : {}, p1score = _ref.p1score, p2score = _ref.p2score, p1name = _ref.p1name, p2name = _ref.p2name, context = _ref.context, this.game = _ref.game;
+      var context, grid, p1name, p1score, p2name, p2score, _ref;
+      _ref = _arg != null ? _arg : {}, p1score = _ref.p1score, p2score = _ref.p2score, p1name = _ref.p1name, p2name = _ref.p2name, context = _ref.context, grid = _ref.grid, this.game = _ref.game;
       this.$p1name = $("#" + p1name, context);
       this.$p1score = $("#" + p1score, context);
       this.$p2name = $("#" + p2name, context);
       this.$p2score = $("#" + p2score, context);
+      this.$grid = $("#" + grid, context);
     }
 
     _Class.prototype.updateScore = function() {
@@ -161,6 +165,10 @@
     _Class.prototype.updatePlayerNames = function() {
       this.$p1name.html(this.game.player1.name());
       return this.$p2name.html(this.game.player2.name());
+    };
+
+    _Class.prototype.updateGrid = function() {
+      return this.$grid.empty().append(Game.View.createGrid(this.game.board.matrix()));
     };
 
     return _Class;

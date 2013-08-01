@@ -8,6 +8,7 @@ DEFAULT_VIEW =
       SCORE: 'p2score'
       NAME:  'p2name'
   MESSAGE: 'message'
+  GRID: 'grid'
 
 Game = Scrabble.Game = class
   constructor: ({@words}={}) ->
@@ -24,19 +25,23 @@ Game = Scrabble.Game = class
       p2score: VIEW.PLAYER.TWO.SCORE
       p1name:  VIEW.PLAYER.ONE.NAME
       p2name:  VIEW.PLAYER.TWO.NAME
+      grid:    VIEW.GRID
       context: DOM
       game: @
     @view.updateScore()
     @view.updatePlayerNames()
+    @view.updateGrid()
     @
 
 Game.View = class
-  constructor: ({p1score, p2score, p1name, p2name, context, @game}={}) ->
+  constructor: ({p1score, p2score, p1name, p2name, context, grid, @game}={}) ->
     @$p1name  = $ "##{p1name}", context
     @$p1score = $ "##{p1score}", context
 
     @$p2name  = $ "##{p2name}", context
     @$p2score = $ "##{p2score}", context
+
+    @$grid = $ "##{grid}", context
 
   updateScore: ->
     @$p1score.html 0
@@ -45,6 +50,9 @@ Game.View = class
   updatePlayerNames: ->
     @$p1name.html @game.player1.name()
     @$p2name.html @game.player2.name()
+
+  updateGrid: ->
+    @$grid.empty().append( Game.View.createGrid @game.board.matrix() )
 
 Game.View.showMessage = ({message, context, id}={}) ->
   $id = $ "##{id or DEFAULT_VIEW.MESSAGE}", context
