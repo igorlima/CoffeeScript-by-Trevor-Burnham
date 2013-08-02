@@ -14,9 +14,6 @@ module.exports = (grunt) ->
       gcc:
         src: ['dist/main-gcc.min.js']
 
-    jshint:
-      all: []
-
     clean:
       vows:    ['spec/vows/js/**/*.js']
       jasmine: ['spec/jasmine/js/**/*.js']
@@ -101,7 +98,6 @@ module.exports = (grunt) ->
 
 
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
-  grunt.loadNpmTasks 'grunt-contrib-jshint'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-clean'
@@ -111,4 +107,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-jade'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
 
-  grunt.registerTask 'default', ['jshint', 'clean', 'coffee', 'concat', 'cssmin', 'uglify', 'gcc', 'jasmine', 'jade:dist']
+  grunt.registerTask 'default', ['clean', 'coffee', 'concat', 'cssmin', 'uglify', 'gcc', 'jasmine', 'jade:dist']

@@ -15,7 +15,6 @@
   "devDependencies": {
     "grunt": "*",
     "grunt-contrib-jasmine": "*",
-    "grunt-contrib-jshint":  "*",
     "grunt-contrib-coffee":  "*",
     "grunt-contrib-watch":   "*",
     "grunt-contrib-clean":   "*",
@@ -26,7 +25,6 @@
     "grunt-contrib-cssmin":  "*",
 
     "vows":                  "*",
-    "assert":                "*",
     "async":                 "*",
     "wd":                    "*"
   }
