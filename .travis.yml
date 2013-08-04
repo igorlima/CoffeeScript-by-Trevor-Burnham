@@ -1,11 +1,14 @@
 language: node_js
 node_js:
   - "0.11"
+before_install:
+  - npm install -g karma
 before_script:
   # Run tests completely in the cloud using Travis CI and Sauce Labs
   # https://saucelabs.com/opensource/travis
   - curl https://gist.github.com/santiycr/5139565/raw/sauce_connect_setup.sh | bash
-  - npm install -g grunt-cli vows karma
+  - npm install -g grunt-cli
+  - npm install -g vows
 script:
   - grunt
   - vows spec/vows/js/* --spec
