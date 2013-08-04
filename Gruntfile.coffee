@@ -23,8 +23,18 @@ module.exports = (grunt) ->
     coffeelint:
       config:  ['Gruntfile.coffee']
       vows:    ['spec/vows/coffee/**/*.coffee']
-      jasmine: ['spec/jasmine/coffee/**/*.coffee']
-      source:  ['assets/script/coffee/**/*.coffee']
+      jasmine:
+        files:
+          src: ['spec/jasmine/coffee/**/*.coffee']
+        options:
+          max_line_length:
+            level: 'ignore'
+      source:
+        files:
+          src: ['assets/script/coffee/**/*.coffee']
+        options:
+          max_line_length:
+            level: 'warn'
 
     coffee:
       vows:
