@@ -20,6 +20,12 @@ module.exports = (grunt) ->
       script:  ['assets/script/js/**/*.js']
       view:    ['assets/view/html/**/*.html']
 
+    coffeelint:
+      config:  ['Gruntfile.coffee']
+      vows:    ['spec/vows/coffee/**/*.coffee']
+      jasmine: ['spec/jasmine/coffee/**/*.coffee']
+      source:  ['assets/script/coffee/**/*.coffee']
+
     coffee:
       vows:
         expand: true
@@ -90,11 +96,27 @@ module.exports = (grunt) ->
         files: ['spec/vows/coffee/**/*.coffee']
         tasks: ['clean:vows', 'coffee:vows']
       spec_js:
-        files: ['spec/jasmine/coffee/**/*.coffee', 'assets/script/coffee/**/*.coffee']
-        tasks: ['clean:jasmine', 'clean:script', 'coffee:jasmine', 'coffee:source', 'jasmine:all', 'concat:script']
+        files: [
+          'spec/jasmine/coffee/**/*.coffee'
+          'assets/script/coffee/**/*.coffee'
+        ]
+        tasks: [
+          'clean:jasmine'
+          'clean:script'
+          'coffee:jasmine'
+          'coffee:source'
+          'jasmine:all'
+          'concat:script'
+        ]
       view:
         files: ['assets/view/jade/**/*.jade', 'assets/style/css/**/*.css']
-        tasks: ['clean:view', 'concat:style', 'cssmin', 'jade:compile', 'jade:main']
+        tasks: [
+          'clean:view'
+          'concat:style'
+          'cssmin'
+          'jade:compile'
+          'jade:main'
+        ]
 
 
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
@@ -106,5 +128,16 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-gcc'
   grunt.loadNpmTasks 'grunt-contrib-jade'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
+  grunt.loadNpmTasks 'grunt-coffeelint'
 
-  grunt.registerTask 'default', ['clean', 'coffee', 'concat', 'cssmin', 'uglify', 'gcc', 'jasmine', 'jade:dist']
+  grunt.registerTask 'default', [
+    'clean'
+    'coffeelint'
+    'coffee'
+    'concat'
+    'cssmin'
+    'uglify'
+    'gcc'
+    'jasmine'
+    'jade:dist'
+  ]

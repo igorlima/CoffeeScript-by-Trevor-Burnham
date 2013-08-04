@@ -23,6 +23,7 @@
     "grunt-gcc":             "*",
     "grunt-contrib-jade":    "*",
     "grunt-contrib-cssmin":  "*",
+    "grunt-coffeelint":      "*",
 
     "vows":                  "*",
     "async":                 "*",
