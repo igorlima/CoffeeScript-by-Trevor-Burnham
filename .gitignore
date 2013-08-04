@@ -1,7 +1,9 @@
 node_modules/
 _SpecRunner.html
 .grunt
-libpeerconnection.log
+libpeerconnection.log*
+sauce_connect.log*
+
 spec/jasmine/js/*
 spec/vows/js/*
 assets/script/js/*
