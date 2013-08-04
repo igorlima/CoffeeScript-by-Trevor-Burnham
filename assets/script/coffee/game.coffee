@@ -12,7 +12,7 @@ DEFAULT_VIEW =
 
 Game = Scrabble.Game = class
   constructor: ({@words}={}) ->
-    throw "Board or words was not given" unless @words?
+    unless @words? then throw new Error "Board or words was not given"
 
   new: ({size, player1, player2, board, DOM, VIEW}={}) ->
     @board = board or new Scrabble.Board size: size or 5, words: @words

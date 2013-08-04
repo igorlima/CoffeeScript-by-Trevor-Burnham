@@ -74,15 +74,18 @@ describe "Game class", ->
         expect( game.board.size() ).toBe 3
 
       it "the player1 might be customized", ->
-        game.new player1: new Player name: 'Fist player'
+        player1 = new Player name: 'Fist player'
+        game.new {player1}
         expect( game.player1.name() ).toBe 'Fist player'
 
       it "the current player should be the player1 when customized", ->
-        game.new player1: new Player name: 'Fist player'
+        player1 = new Player name: 'Fist player'
+        game.new {player1}
         expect( game.currentPlayer ).toBe game.player1
 
       it "the player2 might be customized", ->
-        game.new player2: new Player name: 'Second player'
+        player2 = new Player name: 'Second player'
+        game.new {player2}
         expect( game.player2.name() ).toBe 'Second player'
 
       it "the board might be customized", ->

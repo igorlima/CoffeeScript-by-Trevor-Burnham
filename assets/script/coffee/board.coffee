@@ -6,7 +6,7 @@ Board = Scrabble.Board = class
     if Scrabble.Util.isMatrixQuadratic grid then size = Scrabble.Util.sizeMatrix grid
     else grid = undefined
 
-    throw "Grid size not given" unless Board.isValidSize size
+    unless Board.isValidSize size then throw new Error "Grid size not given"
     grid or= Scrabble.Util.generateGrid size
     wordList = Scrabble.Util.wordList {size, words}
     score = new Scrabble.Score grid: grid, dictionary: words

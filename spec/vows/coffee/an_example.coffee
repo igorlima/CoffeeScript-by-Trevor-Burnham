@@ -11,7 +11,8 @@ vows.describe('An example')
     topic: ->
       async.waterfall [
         (callback) -> browser.init config.desired, -> callback null
-        (callback) -> browser.get "http://saucelabs.com/test/guinea-pig", -> callback null
+        (callback) ->
+          browser.get "http://saucelabs.com/test/guinea-pig", -> callback null
       ], (err, result) => @callback null, result
       return
     'Page title':
