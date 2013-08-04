@@ -13,7 +13,7 @@
         grid = void 0;
       }
       if (!Board.isValidSize(size)) {
-        throw "Grid size not given";
+        throw new Error("Grid size not given");
       }
       grid || (grid = Scrabble.Util.generateGrid(size));
       wordList = Scrabble.Util.wordList({
@@ -109,7 +109,7 @@
     function _Class(_arg) {
       this.words = (_arg != null ? _arg : {}).words;
       if (this.words == null) {
-        throw "Board or words was not given";
+        throw new Error("Board or words was not given");
       }
     }
 
