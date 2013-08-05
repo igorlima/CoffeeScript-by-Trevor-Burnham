@@ -19,4 +19,4 @@ launchers:
     protocol: browser
 
 launch_in_ci: [WinXP_Opera, Win7_IE_9, iPhone]
-launch_in_dev: [iPhone]
+launch_in_dev: [phantomjs]

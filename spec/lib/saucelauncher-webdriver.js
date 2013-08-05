@@ -62,3 +62,5 @@ browser.init(desired).then(function () {
 }).fin(function () {
   return browser.quit();
 }).done();
+
+process.exit();
