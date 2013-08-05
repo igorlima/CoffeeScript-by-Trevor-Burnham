@@ -22,7 +22,7 @@ vows.describe('An example')
 ).addBatch(
   'Exiting the browser':
     topic: ->
-      browser.quit @callback
+      config.updateJobStatus '{passed:true}', (err, result) => browser.quit @callback
       return
     'The end': ->
 ).export module
