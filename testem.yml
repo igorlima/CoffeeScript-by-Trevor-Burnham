@@ -8,15 +8,12 @@ src_files:
 launchers:
   WinXP_Opera:
     command: node spec/lib/saucelauncher-webdriver.js 'opera' '12' 'Windows XP'
-    protocol: browser
 
   Win7_IE_9:
     command: node spec/lib/saucelauncher-webdriver.js 'internet explorer' '9' 'Windows 7'
-    protocol: browser
 
   iPhone:
     command: node spec/lib/saucelauncher-webdriver.js 'iphone' '6' 'OS X 10.8'
-    protocol: browser
 
 launch_in_ci: [WinXP_Opera, Win7_IE_9, iPhone]
 launch_in_dev: [phantomjs]

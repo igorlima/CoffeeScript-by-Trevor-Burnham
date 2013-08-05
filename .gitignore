@@ -3,6 +3,7 @@ _SpecRunner.html
 .grunt
 libpeerconnection.log*
 sauce_connect.log*
+testem.log*
 
 spec/jasmine/js/*
 spec/vows/js/*

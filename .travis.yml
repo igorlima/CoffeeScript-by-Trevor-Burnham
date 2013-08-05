@@ -11,7 +11,7 @@ before_script:
 script:
   # java -jar node_modules/karma-sauce-launcher/node_modules/sauce-connect-launcher/lib/Sauce-Connect.jar $SAUCE_USERNAME $SAUCE_ACCESS_KEY --tunnel-identifier $TRAVIS_JOB_NUMBER
   - grunt
-  - testem ci -f testem.yml --port 8080
+  - testem ci -f testem.yml --port 8080 -d
   - vows spec/vows/js/* --spec
 
 # Run tests using Travis CI and Sauce Labs
