@@ -1,5 +1,9 @@
+<a href="https://api.travis-ci.org/igorlima/CoffeeScript-by-Trevor-Burnham">
+  <img src="https://api.travis-ci.org/igorlima/CoffeeScript-by-Trevor-Burnham.png" alt="Travis CI badge" />
+</a>
+
 <a href="https://saucelabs.com/u/Scrabble">
-  <img src="https://saucelabs.com/browser-matrix/Scrabble.svg" alt="Selenium Tests Status" />
+  <img src="https://saucelabs.com/browser-matrix/Scrabble.svg" alt="SauceLabs badge" />
 </a>
 
 CoffeeScript-by-Trevor-Burnham
