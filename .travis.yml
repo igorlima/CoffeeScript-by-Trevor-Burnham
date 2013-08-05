@@ -5,7 +5,7 @@ before_install:
   # Run tests completely in the cloud using Travis CI and Sauce Labs
   # https://saucelabs.com/opensource/travis
   # http://saucelabs.com/downloads/Sauce-Connect-latest.zip
-  - curl https://gist.github.com/santiycr/5139565/raw/sauce_connect_setup.sh | bash
+  - curl https://gist.github.com/santiycr/5139565/raw/sauce_connect_setup.sh | bash &> sauce_connect_setup.log
 before_script:
   - npm install -g grunt-cli testem vows
 script:
