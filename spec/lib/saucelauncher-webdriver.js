@@ -5,18 +5,11 @@
 var config  = require('./sauce-conf.js'),
     Q       = require("q"),
     request = require("request"),
-    $       = require('jquery'),
     async   = require('async'),
     username = process.env.SAUCE_USERNAME,
     accessKey = process.env.SAUCE_ACCESS_KEY,
     browser = config.browser,
-    desired = {};
-
-$.extend(desired, config.desired, {
-  "browserName": process.argv[2],
-  "version"    : process.argv[3],
-  "platform"   : process.argv[4]
-});
+    desired = config.desired;
 
 // general rest call helper function using promises
 var api = function (url, method, data) {

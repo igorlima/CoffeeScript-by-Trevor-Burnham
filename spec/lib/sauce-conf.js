@@ -1,20 +1,21 @@
 var webdriver = require('wd'),
-    exports = module.exports = {},
-    host = "ondemand.saucelabs.com",
-    port = 80,
-    username = process.env.SAUCE_USERNAME,
+    argv      = require('optimist').argv,
+    exports   = module.exports = {},
+    host      = "ondemand.saucelabs.com",
+    port      = 80,
+    username  = process.env.SAUCE_USERNAME,
     accessKey = process.env.SAUCE_ACCESS_KEY,
     browser = exports.browser = webdriver.remote(host, port, username, accessKey),
-    promiseBrowser = exports.promiseBrowser = webdriver.promiseRemote(host, port, username, accessKey),
+
     desired = exports.desired = {
-      "browserName": "chrome",
-      "version"    : "",
-      "platform"   : "Linux",
+      "browserName": argv.browserNameSL || "chrome",
+      "version"    : argv.versionSL     || "",
+      "platform"   : argv.platformSL    || "Linux",
       "tags"       : ["Scrabble", "test"],
       "name"       : "Scrabble tests",
       "public"     : "public",
-      "build"      : process.env.TRAVIS_BUILD_NUMBER ? process.env.TRAVIS_BUILD_NUMBER : "dev-tests",
-      "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER ? process.env.TRAVIS_JOB_NUMBER : "Scrabble",
+      "build"      : process.env.TRAVIS_BUILD_NUMBER || "dev-tests",
+      "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER || "Scrabble",
       "record-video": true
     },
 
@@ -28,8 +29,6 @@ var webdriver = require('wd'),
 
 browser.on("status", info);
 browser.on("command", command);
-promiseBrowser.on("status", info);
-promiseBrowser.on("command", command);
 
 /**
 Vows Errored » callback not fired

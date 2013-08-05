@@ -25,9 +25,9 @@
     "grunt-contrib-cssmin":  "*",
     "grunt-coffeelint":      "*",
 
+    "optimist":              "*",
     "wd":                    "*",
     "async":                 "*",
-    "jquery":                "*",
     "q":                     "*",
     "request":               "*",
     "vows":                  "*"

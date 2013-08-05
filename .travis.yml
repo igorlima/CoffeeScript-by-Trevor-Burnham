@@ -12,6 +12,7 @@ script:
   # java -jar node_modules/karma-sauce-launcher/node_modules/sauce-connect-launcher/lib/Sauce-Connect.jar $SAUCE_USERNAME $SAUCE_ACCESS_KEY --tunnel-identifier $TRAVIS_JOB_NUMBER
   - grunt
   - vows spec/vows/js/* --spec
+  - vows spec/vows/js/* --spec --browserNameSL='ipad' --versionSL='6' --platformSL='OS X 10.8'
   - testem ci -f testem.yml --port 8080
 
 # Run tests using Travis CI and Sauce Labs

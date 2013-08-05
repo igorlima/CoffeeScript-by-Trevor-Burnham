@@ -7,13 +7,13 @@ src_files:
 
 launchers:
   WinXP_Opera:
-    command: node spec/lib/saucelauncher-webdriver.js 'opera' '12' 'Windows XP'
+    command: node spec/lib/saucelauncher-webdriver.js --browserNameSL='opera' --versionSL='12' --platformSL='Windows XP'
 
   Win7_IE_9:
-    command: node spec/lib/saucelauncher-webdriver.js 'internet explorer' '9' 'Windows 7'
+    command: node spec/lib/saucelauncher-webdriver.js --browserNameSL='internet explorer' --versionSL='9' --platformSL='Windows 7'
 
   iPhone:
-    command: node spec/lib/saucelauncher-webdriver.js 'iphone' '6' 'OS X 10.8'
+    command: node spec/lib/saucelauncher-webdriver.js --browserNameSL='iphone' --versionSL='6' --platformSL='OS X 10.8'
 
 launch_in_ci: [WinXP_Opera, Win7_IE_9, iPhone]
 launch_in_dev: [phantomjs]
