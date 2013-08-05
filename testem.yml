@@ -18,9 +18,5 @@ launchers:
     command: node spec/lib/saucelauncher-webdriver.js 'iphone' '6' 'OS X 10.8'
     protocol: browser
 
-  iPad:
-    command: node spec/lib/saucelauncher-webdriver.js 'ipad' '6' 'OS X 10.8'
-    protocol: browser
-
-launch_in_ci: [WinXP_Opera, Win7_IE_9, iPhone, iPad]
+launch_in_ci: [WinXP_Opera, Win7_IE_9, iPhone]
 launch_in_dev: [phantomjs]
