@@ -76,12 +76,12 @@ async.waterfall([
   },
 
   function(body, callback) {
-    console.log("CONGRATS - WE'RE DONE\n", "Check out test results at http://saucelabs.com/jobs/" + browser.sessionID + "\n");
+    console.warn("Check out test results at http://saucelabs.com/jobs/" + browser.sessionID + "\n");
     //console.log(body);
     callback(null);
   }
 
 ], function(err) {
-  err && console.log('Caught exception: ' + err);
+  err && console.error('Caught exception: ' + err);
   browser.quit();
 });

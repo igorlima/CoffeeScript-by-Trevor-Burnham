@@ -31,5 +31,5 @@ http://birkett.no/blog/2013/05/01/vows-errored-callback-not-fired/
 */
 process.on('uncaughtException', function(err) {
   browser.quit();
-  console.log('Caught exception: ' + err.stack );
+  console.error('Caught exception: ' + err.stack );
 });
