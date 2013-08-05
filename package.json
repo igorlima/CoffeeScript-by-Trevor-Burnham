@@ -25,8 +25,11 @@
     "grunt-contrib-cssmin":  "*",
     "grunt-coffeelint":      "*",
 
-    "vows":                  "*",
+    "wd":                    "*",
     "async":                 "*",
-    "wd":                    "*"
+    "jquery":                "*",
+    "q":                     "*",
+    "request":               "*",
+    "vows":                  "*"
   }
 }

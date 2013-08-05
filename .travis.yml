@@ -2,15 +2,16 @@ language: node_js
 node_js:
   - "0.11"
 before_install:
-  - npm install -g grunt-cli
-  - npm install -g vows
+  - npm install -g grunt-cli testem vows
 before_script:
   # Run tests completely in the cloud using Travis CI and Sauce Labs
   # https://saucelabs.com/opensource/travis
+  # http://saucelabs.com/downloads/Sauce-Connect-latest.zip
   - curl https://gist.github.com/santiycr/5139565/raw/sauce_connect_setup.sh | bash
 script:
   # java -jar node_modules/karma-sauce-launcher/node_modules/sauce-connect-launcher/lib/Sauce-Connect.jar $SAUCE_USERNAME $SAUCE_ACCESS_KEY --tunnel-identifier $TRAVIS_JOB_NUMBER
   - grunt
+  - testem ci -f testem.yml --port 8080
   - vows spec/vows/js/* --spec
 
 # Run tests using Travis CI and Sauce Labs
