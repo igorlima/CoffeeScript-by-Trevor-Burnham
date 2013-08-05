@@ -10,9 +10,12 @@ before_script:
   - npm install -g grunt-cli testem vows
 script:
   # java -jar node_modules/karma-sauce-launcher/node_modules/sauce-connect-launcher/lib/Sauce-Connect.jar $SAUCE_USERNAME $SAUCE_ACCESS_KEY --tunnel-identifier $TRAVIS_JOB_NUMBER
-  - grunt
-  - vows spec/vows/js/* --spec
-  - testem ci -f testem.yml --port 8080
+  grunt:
+    - grunt
+  vows:
+    - vows spec/vows/js/* --spec
+  testem:
+    - testem ci -f testem.yml --port 8080
 
 # Run tests using Travis CI and Sauce Labs
 # https://saucelabs.com/opensource/travis
