@@ -79,9 +79,14 @@ async.waterfall([
     console.warn("Check out test results at http://saucelabs.com/jobs/" + browser.sessionID + "\n");
     //console.log(body);
     callback(null);
+  },
+
+  function(callback) {
+    browser.quit(function(err){
+      callback(err);
+    });
   }
 
 ], function(err) {
-  err && console.error('Caught exception: ' + err);
-  browser.quit();
+  err && console.error('Caught exception: ' + err.stack);
 });
