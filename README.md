@@ -1,3 +1,7 @@
+<a href="https://saucelabs.com/u/Scrabble">
+  <img src="https://saucelabs.com/browser-matrix/Scrabble.svg" alt="Selenium Tests Status" />
+</a>
+
 CoffeeScript-by-Trevor-Burnham
 ==============================
 
