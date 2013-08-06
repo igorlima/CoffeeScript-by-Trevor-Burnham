@@ -13,7 +13,7 @@ script:
   - grunt
   - vows spec/vows/js/* --spec
   - vows spec/vows/js/* --spec --browserNameSL='ipad' --versionSL='6' --platformSL='OS X 10.8'
-  - testem ci -f testem.yml --port 8080
+  - testem ci -P 3 -f testem.yml --port 8080
 
 # Run tests using Travis CI and Sauce Labs
 # https://saucelabs.com/opensource/travis
