@@ -2,7 +2,7 @@ async   = require 'async'
 vows    = require 'vows'
 assert  = require 'assert'
 config  = require '../../lib/sauce-conf.js'
-updateJobStatus = require './sauce-update-job-status.js'
+updateJobStatus = require '../../lib/sauce-update-job-status.js'
 browser = config.browser
 
 #Create a Test Suite
