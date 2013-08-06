@@ -2,6 +2,7 @@ async   = require 'async'
 vows    = require 'vows'
 assert  = require 'assert'
 config  = require '../../lib/sauce-conf.js'
+updateJobStatus = require './sauce-update-job-status.js'
 browser = config.browser
 
 #Create a Test Suite
@@ -22,7 +23,7 @@ vows.describe('An example')
 ).addBatch(
   'Exiting the browser':
     topic: ->
-      config.updateJobStatus '{passed:true}', (err, result) =>
+      updateJobStatus '{passed:true}', (err, result) =>
         browser.quit @callback
       return
     'The end': ->
