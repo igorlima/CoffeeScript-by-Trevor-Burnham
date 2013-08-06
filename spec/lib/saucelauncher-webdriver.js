@@ -4,8 +4,6 @@
  */
 var config  = require('./sauce-conf.js'),
     async   = require('async'),
-    username = process.env.SAUCE_USERNAME,
-    accessKey = process.env.SAUCE_ACCESS_KEY,
     browser = config.browser,
     desired = config.desired;
 

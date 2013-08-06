@@ -57,15 +57,15 @@ exports.updateJobStatus = function(script, callback) {
     },
 
     function(obj, callback) {
-      var data = resultScript = obj.resultScript;
+      var data = resultScript = obj.resultScript,
+          url  = ["/v1/", username, "/jobs/", browser.sessionID].join("");
       data.passed = resultScript.passed || resultScript.failedCount === 0;
 
-      api(["/v1/", username, "/jobs/", browser.sessionID].join(""), "PUT", data)
-        .then(function(body) {
-          obj.body = body;
-          console.warn("Check out test results at http://saucelabs.com/jobs/" + browser.sessionID + "\n");
-          callback(null, obj);
-        });
+      api(url, "PUT", data).then( function(body) {
+        obj.body = body;
+        console.warn("Check out test results at http://saucelabs.com/jobs/" + browser.sessionID + "\n");
+        callback(null, obj);
+      });
     }
   ], function(err, result) {
     callback(err, result);
