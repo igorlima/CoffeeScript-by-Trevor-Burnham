@@ -5,7 +5,7 @@ var webdriver = require('wd'),
 
     libraryName = exports.libraryName = "Scrabble",
 
-    auth      = exports.browser = {
+    auth      = exports.auth = {
       username:  process.env.SAUCE_USERNAME,
       accessKey: process.env.SAUCE_ACCESS_KEY,
       build:     process.env.TRAVIS_BUILD_NUMBER || "dev-tests",
