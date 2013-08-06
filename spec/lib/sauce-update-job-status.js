@@ -32,7 +32,7 @@ var async   = require('async'),
       }
     };
 
-module.exports.updateJobStatus = function(script_for_sauce_data_schemas, callback) {
+module.exports = function(script_for_sauce_data_schemas, callback) {
   async.waterfall([
 
     function(callback) {
