@@ -1,7 +1,7 @@
-var webdriver   = require('wd'),
+var exports     = module.exports = {},
+    webdriver   = require('wd'),
     async       = require('async'),
     argv        = exports.argv = require('optimist').argv,
-    exports     = module.exports = {},
     libraryName = exports.libraryName = "Scrabble",
 
     auth        = exports.auth = {
