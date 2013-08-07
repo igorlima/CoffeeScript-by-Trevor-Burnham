@@ -40,7 +40,7 @@ module.exports = function(script_for_sauce_data_schemas, callback) {
     },
 
     function(obj, callback) {
-      var data = resultScript = obj.resultScript,
+      var data = resultScript = obj.resultScript || {},
           url  = ["/v1/", auth.username, "/jobs/", browser.sessionID].join("");
       data.passed = resultScript.passed || resultScript.failedCount === 0;
 

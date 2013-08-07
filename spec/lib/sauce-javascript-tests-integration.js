@@ -8,17 +8,17 @@ var config  = require('./sauce-conf.js'),
     browser = config.browser,
     desired = config.desired;
 
-module.exports = function(localhost_Url, script_for_sauce_data_schemas) {
+module.exports = function(localhost_url, script_for_sauce_data_schemas) {
   async.waterfall([
     function(callback) {
-      browser.init(desired, function(){
-        callback(null);
+      browser.init(desired, function(err){
+        callback(err);
       });
     },
 
     function(callback) {
-      browser.get(localhost_Url, function(){
-        callback(null);
+      browser.get(localhost_url, function(err){
+        callback(err);
       });
     },
 
