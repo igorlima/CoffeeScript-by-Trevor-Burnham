@@ -1,20 +1,15 @@
-var webdriver = require('wd'),
-    async     = require('async'),
-    argv      = require('optimist').argv,
-    exports   = module.exports = {},
-
+var webdriver   = require('wd'),
+    async       = require('async'),
+    argv        = exports.argv = require('optimist').argv,
+    exports     = module.exports = {},
     libraryName = exports.libraryName = "Scrabble",
 
-    auth      = exports.auth = {
+    auth        = exports.auth = {
       username:  process.env.SAUCE_USERNAME,
       accessKey: process.env.SAUCE_ACCESS_KEY,
       build:     process.env.TRAVIS_BUILD_NUMBER || "dev-tests",
       tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER || libraryName
     },
-
-    host      = "ondemand.saucelabs.com",
-    port      = 80,
-    browser = exports.browser = webdriver.remote(host, port, auth.username, auth.accessKey),
 
     desired = exports.desired = {
       "browserName": argv.browserNameSL || "chrome",
@@ -26,7 +21,21 @@ var webdriver = require('wd'),
       "build"      : auth.build,
       "tunnel-identifier": auth.tunnelIdentifier,
       "record-video": true
-    };
+    },
+
+    launcherOptions = exports.launcherOptions = {
+      username: auth.username,
+      accessKey: auth.accessKey,
+      verbose: true,
+      logfile: 'sauce-example.log', //optionally change sauce connect logfile location
+      tunnelIdentifier: auth.tunnelIdentifier, // optionally identity the tunnel for concurrent tunnels
+      logger: console.log,
+      no_progress: false // optionally hide progress bar
+    },
+
+    host    = "ondemand.saucelabs.com",
+    port    = 80,
+    browser = exports.browser = webdriver.remote(host, port, auth.username, auth.accessKey);
 
 browser.on("status", function(info) {
   //console.log("\x1b[36m%s\x1b[0m", info);

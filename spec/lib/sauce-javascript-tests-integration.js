@@ -8,7 +8,7 @@ var config  = require('./sauce-conf.js'),
     browser = config.browser,
     desired = config.desired;
 
-module.exports = function(localhost_url, script_for_sauce_data_schemas) {
+module.exports = function(localhost_url, script_for_sauce_data_schemas, callback) {
   async.waterfall([
     function(callback) {
       browser.init(desired, function(err){
@@ -34,5 +34,6 @@ module.exports = function(localhost_url, script_for_sauce_data_schemas) {
 
   ], function(err) {
     err && console.error('Caught exception: ' + err.stack);
+    callback && callback(err);
   });
 };
