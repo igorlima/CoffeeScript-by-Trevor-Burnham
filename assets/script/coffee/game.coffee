@@ -70,3 +70,11 @@ Game.View.createGrid = (grid) ->
     ul = $ '<ul>'
     gridHtml.append ul.append(@createGridLine line)
   gridHtml.contents()
+
+Game.View.getCoordinate = ({grid, tile}) ->
+  $li = $ tile
+  $ul = $li.parent()
+  $lis = $ul.children()
+  $uls = $ul.parent().children()
+
+  x: $lis.index($li), y: $uls.index($ul)

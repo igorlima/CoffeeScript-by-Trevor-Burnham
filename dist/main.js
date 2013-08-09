@@ -203,6 +203,19 @@
     return gridHtml.contents();
   };
 
+  Game.View.getCoordinate = function(_arg) {
+    var $li, $lis, $ul, $uls, grid, tile;
+    grid = _arg.grid, tile = _arg.tile;
+    $li = $(tile);
+    $ul = $li.parent();
+    $lis = $ul.children();
+    $uls = $ul.parent().children();
+    return {
+      x: $lis.index($li),
+      y: $uls.index($ul)
+    };
+  };
+
 }).call(this);
 
 (function() {

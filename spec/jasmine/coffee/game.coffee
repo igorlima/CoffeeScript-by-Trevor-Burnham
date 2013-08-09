@@ -99,6 +99,7 @@ describe "Game class", ->
 
 
 describe "Game View Class", ->
+  {View} = Game
   DOM = game = undefined
 
   beforeEach ->
@@ -119,13 +120,13 @@ describe "Game View Class", ->
   describe "Class Methods", ->
 
     it "the message 'Hello World' should be displayed", ->
-      Game.View.showMessage message: 'Hello World', context: DOM, id: 'message'
+      View.showMessage message: 'Hello World', context: DOM, id: 'message'
       expect( $("#message", DOM).html() ).toBe 'Hello World'
 
     describe "Create a grid line by ['A', 'B', 'C']", ->
       lis = undefined
       beforeEach ->
-        lis = Game.View.createGridLine ['A', 'B', 'C']
+        lis = View.createGridLine ['A', 'B', 'C']
 
       it "the lis should contain three elements", ->
         expect( lis.length ).toBe 3
@@ -145,7 +146,7 @@ describe "Game View Class", ->
               Z | C | D
             ", ->
       uls = undefined
-      beforeEach -> uls = Game.View.createGrid [
+      beforeEach -> uls = View.createGrid [
           ['A', 'A', 'A']
           ['X', 'A', 'I']
           ['Z', 'C', 'D']
@@ -163,30 +164,30 @@ describe "Game View Class", ->
   describe "Each instance of GameView", ->
 
     it "the $p1score should be an element DOM wrap by $", ->
-      view = new Game.View context: DOM, p1score: 'p1score'
+      view = new View context: DOM, p1score: 'p1score'
       expect( view.$p1score.length ).toBeGreaterThan 0
 
     it "the $p2score should be an element DOM wrap by $", ->
-      view = new Game.View context: DOM, p2score: 'p2score'
+      view = new View context: DOM, p2score: 'p2score'
       expect( view.$p2score.length ).toBeGreaterThan 0
 
     it "the $p1name should be an element DOM wrap by $", ->
-      view = new Game.View context: DOM, p1name: 'p1name'
+      view = new View context: DOM, p1name: 'p1name'
       expect( view.$p1name.length ).toBeGreaterThan 0
 
     it "the $p2name should be an element DOM wrap by $", ->
-      view = new Game.View context: DOM, p2name: 'p2name'
+      view = new View context: DOM, p2name: 'p2name'
       expect( view.$p2name.length ).toBeGreaterThan 0
 
     it "the $grid should be an element DOM wrap by $", ->
-      view = new Game.View context: DOM, grid: 'grid'
+      view = new View context: DOM, grid: 'grid'
       expect( view.$grid.length ).toBeGreaterThan 0
 
     it "the game should be defined", ->
-      view = new Game.View game: game
+      view = new View game: game
       expect( view.game ).toBeDefined()
 
-  describe "Updating the DOM", ->
+  describe "DOM", ->
 
     describe "Updating the score", ->
 
@@ -215,3 +216,27 @@ describe "Game View Class", ->
 
       it "the first ul should have 4 li elements", ->
         expect( ($ 'li', $uls[0]).length ).toBe 4
+
+    describe "Getting a coordinate of a tile", ->
+      $grid = tile_0_0 = tile_1_2 = tile_2_1 = undefined
+      beforeEach ->
+        $grid = $ "
+          <div id='grid'>
+            <ul>
+              <li>B</li><li>D</li><li>E</li>
+            </ul>
+            <ul>
+              <li>U</li><li>S</li><li>E</li>
+            </ul>
+            <ul>
+              <li>E</li><li>E</li><li>O</li>
+            </ul>
+          </div>"
+        $lis = $ 'li', $grid
+        {0: tile_0_0, 7: tile_1_2, 5: tile_2_1} = $lis
+
+      it "the tile coordinate (0,0) SHOULD be {x: 0, y:0}", ->
+        expect( View.getCoordinate grid: $grid, tile: tile_0_0 ).toEqual x: 0, y: 0
+
+      it "the tile coordinate (1,2) SHOULD be {x: 1, y:2}", ->
+        expect( View.getCoordinate grid: $grid, tile: tile_1_2 ).toEqual x: 1, y: 2
