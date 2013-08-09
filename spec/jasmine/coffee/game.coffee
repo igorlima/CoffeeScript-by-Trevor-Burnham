@@ -161,6 +161,30 @@ describe "Game View Class", ->
       it "the first ul should contain 3 li elements", ->
         expect( $('li', uls[0]).length ).toBe 3
 
+    describe "Getting a coordinate of a tile", ->
+      $grid = tile_0_0 = tile_1_2 = tile_2_1 = undefined
+      beforeEach ->
+        $grid = $ "
+          <div id='grid'>
+            <ul>
+              <li>B</li><li>D</li><li>E</li>
+            </ul>
+            <ul>
+              <li>U</li><li>S</li><li>E</li>
+            </ul>
+            <ul>
+              <li>E</li><li>E</li><li>O</li>
+            </ul>
+          </div>"
+        $lis = $ 'li', $grid
+        {0: tile_0_0, 7: tile_1_2, 5: tile_2_1} = $lis
+
+      it "the tile coordinate (0,0) SHOULD be {x: 0, y:0}", ->
+        expect( View.getCoordinate grid: $grid, tile: tile_0_0 ).toEqual x: 0, y: 0
+
+      it "the tile coordinate (1,2) SHOULD be {x: 1, y:2}", ->
+        expect( View.getCoordinate grid: $grid, tile: tile_1_2 ).toEqual x: 1, y: 2
+
   describe "Each instance of GameView", ->
 
     it "the $p1score should be an element DOM wrap by $", ->
@@ -216,27 +240,3 @@ describe "Game View Class", ->
 
       it "the first ul should have 4 li elements", ->
         expect( ($ 'li', $uls[0]).length ).toBe 4
-
-    describe "Getting a coordinate of a tile", ->
-      $grid = tile_0_0 = tile_1_2 = tile_2_1 = undefined
-      beforeEach ->
-        $grid = $ "
-          <div id='grid'>
-            <ul>
-              <li>B</li><li>D</li><li>E</li>
-            </ul>
-            <ul>
-              <li>U</li><li>S</li><li>E</li>
-            </ul>
-            <ul>
-              <li>E</li><li>E</li><li>O</li>
-            </ul>
-          </div>"
-        $lis = $ 'li', $grid
-        {0: tile_0_0, 7: tile_1_2, 5: tile_2_1} = $lis
-
-      it "the tile coordinate (0,0) SHOULD be {x: 0, y:0}", ->
-        expect( View.getCoordinate grid: $grid, tile: tile_0_0 ).toEqual x: 0, y: 0
-
-      it "the tile coordinate (1,2) SHOULD be {x: 1, y:2}", ->
-        expect( View.getCoordinate grid: $grid, tile: tile_1_2 ).toEqual x: 1, y: 2
