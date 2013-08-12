@@ -252,23 +252,27 @@ describe "Game View Class", ->
         expect( ($ 'li', $uls[0]).length ).toBe 4
 
     describe "Watching click on tiles", ->
-      view = $tile_0_0 = coordinate_watch = undefined
+      view = $tile_0_0 = tile = undefined
       beforeEach ->
         view = new View context: DOM, grid: 'grid'
-        view.watchTiles ({coordinate}) -> coordinate_watch = coordinate
+        view.watchTiles (obj) -> tile = obj
         $lis = $ '#grid li', DOM
         $tile_0_0 = $ $lis[0]
-        coordinate_watch = undefined
+        tile = undefined
 
       it "an object should be catch by watchTiles", ->
         $tile_0_0.click()
-        runs -> expect(coordinate_watch).toBeDefined()
+        runs -> expect(tile).toBeDefined()
+
+      it "a coordinate should be catch by watchTiles", ->
+        $tile_0_0.click()
+        runs -> expect(tile.coordinate).toBeDefined()
 
       it "the tile catch by watchTiles should be {x:0, y:0}", ->
         $tile_0_0.click()
-        runs -> expect(coordinate_watch).toEqual x: 0, y: 0
+        runs -> expect(tile.coordinate).toEqual x: 0, y: 0
 
       it "the unwatchTiles should detaches all event handlers registered", ->
         view.unwatchTiles()
         $tile_0_0.click()
-        runs -> expect(coordinate_watch).not.toBeDefined()
+        runs -> expect(tile).not.toBeDefined()
