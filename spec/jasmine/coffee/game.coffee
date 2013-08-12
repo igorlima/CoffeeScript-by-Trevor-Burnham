@@ -258,7 +258,7 @@ describe "Game View Class", ->
         $lis = $ '#grid li', DOM
         {0: tile_0_0, 7: tile_1_2, 5: tile_2_1} = $lis
 
-      it "when tile {x:0, y:0} is clicked then ", ->
+      it "the tile {x:0, y:0} should be catch by watchTile", ->
         tile_clicked = undefined
         $tile_0_0 = $ tile_0_0
         view.watchTile (tile) -> tile_clicked = tile
