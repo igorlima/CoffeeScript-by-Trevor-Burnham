@@ -180,7 +180,9 @@
           grid: $grid,
           tile: this
         });
-        return callback(coordinate);
+        return callback({
+          coordinate: coordinate
+        });
       });
     };
 

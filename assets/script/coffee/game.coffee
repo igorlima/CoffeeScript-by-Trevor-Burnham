@@ -58,7 +58,7 @@ View = Game.View = class
     $grid = @$grid
     $grid.find('li').on 'click', ->
       coordinate = View.getCoordinate grid: $grid, tile: @
-      callback coordinate
+      callback {coordinate}
 
   unwatchTiles: ->
     @$grid.find('li').off 'click'
