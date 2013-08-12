@@ -261,12 +261,7 @@ describe "Game View Class", ->
       it "when tile {x:0, y:0} is clicked then ", ->
         tile_clicked = undefined
         $tile_0_0 = $ tile_0_0
-        view.watch (tile) ->
-          tile_clicked = tile
+        view.watchTile (tile) -> tile_clicked = tile
 
         do $tile_0_0.click
-        waitsFor ->
-          !!tile_clicked
-        , "a tile should be clicked", 750
-
         runs -> expect(tile_clicked).toBeDefined()

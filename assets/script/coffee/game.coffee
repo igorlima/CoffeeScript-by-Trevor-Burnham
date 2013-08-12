@@ -54,7 +54,7 @@ View = Game.View = class
   updateGrid: ->
     @$grid.empty().append( View.createGrid @game.board.matrix() )
 
-  watch: (callback) ->
+  watchTile: (callback) ->
     $grid = @$grid
     $grid.find('li').on 'click', ->
       coordinate = View.getCoordinate grid: $grid, tile: @

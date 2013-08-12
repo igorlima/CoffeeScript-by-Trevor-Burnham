@@ -171,7 +171,7 @@
       return this.$grid.empty().append(View.createGrid(this.game.board.matrix()));
     };
 
-    _Class.prototype.watch = function(callback) {
+    _Class.prototype.watchTile = function(callback) {
       var $grid;
       $grid = this.$grid;
       return $grid.find('li').on('click', function() {
