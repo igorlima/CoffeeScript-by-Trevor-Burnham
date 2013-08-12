@@ -268,6 +268,14 @@ describe "Game View Class", ->
         $tile_0_0.click()
         runs -> expect(tile.coordinate).toBeDefined()
 
+      it "an element should be catch by watchTiles", ->
+        $tile_0_0.click()
+        runs -> expect(tile.el).toBeDefined()
+
+      it "an element wraped by $ should be catch by watchTiles", ->
+        $tile_0_0.click()
+        runs -> expect(tile.$el.length).toBe 1
+
       it "the tile catch by watchTiles should be {x:0, y:0}", ->
         $tile_0_0.click()
         runs -> expect(tile.coordinate).toEqual x: 0, y: 0

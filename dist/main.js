@@ -181,7 +181,9 @@
           tile: this
         });
         return callback({
-          coordinate: coordinate
+          coordinate: coordinate,
+          el: this,
+          $el: $(this)
         });
       });
     };
