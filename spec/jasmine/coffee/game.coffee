@@ -252,29 +252,25 @@ describe "Game View Class", ->
         expect( ($ 'li', $uls[0]).length ).toBe 4
 
     describe "Watching click on tiles", ->
-      view = tile_0_0 = tile_1_2 = tile_2_1 = undefined
+      view = $tile_0_0 = tile_clicked = undefined
       beforeEach ->
         view = new View context: DOM, grid: 'grid'
         $lis = $ '#grid li', DOM
-        {0: tile_0_0, 7: tile_1_2, 5: tile_2_1} = $lis
+        tile_0_0 = $lis[0]
+        $tile_0_0 = $ tile_0_0
+        tile_clicked = undefined
 
       it "an object should be catch by watchTiles", ->
-        tile_clicked = undefined
-        $tile_0_0 = $ tile_0_0
         view.watchTiles (tile) -> tile_clicked = tile
         do $tile_0_0.click
         runs -> expect(tile_clicked).toBeDefined()
 
       it "the tile catch by watchTiles should be {x:0, y:0}", ->
-        tile_clicked = undefined
-        $tile_0_0 = $ tile_0_0
         view.watchTiles (tile) -> tile_clicked = tile
         do $tile_0_0.click
         runs -> expect(tile_clicked).toEqual x: 0, y: 0
 
       it "the unwatchTiles should detaches all event handlers registered", ->
-        tile_clicked = undefined
-        $tile_0_0 = $ tile_0_0
         view.watchTiles (tile) -> tile_clicked = tile
         view.watchTiles (tile) -> tile_clicked or= tile
         view.unwatchTiles()
