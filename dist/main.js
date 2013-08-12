@@ -259,6 +259,22 @@
     };
   };
 
+  View.createSwipeCoordinate = function(_arg, _arg1) {
+    var x, xi, y, yi;
+    x = _arg.x, y = _arg.y;
+    xi = _arg1.x, yi = _arg1.y;
+    if (xi != null) {
+      x += xi;
+    }
+    if (yi != null) {
+      y += yi;
+    }
+    return {
+      x: x,
+      y: y
+    };
+  };
+
 }).call(this);
 
 (function() {

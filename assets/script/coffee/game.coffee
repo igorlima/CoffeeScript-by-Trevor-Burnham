@@ -95,3 +95,8 @@ View.getCoordinate = ({grid, tile}) ->
 
 View.createSwapCoordinate = ({x: x1, y: y1}, {x: x2, y: y2}) ->
   {x1, y1, x2, y2}
+
+View.createSwipeCoordinate = ({x, y}, {x: xi, y: yi}) ->
+  x += xi if xi?
+  y += yi if yi?
+  {x, y: y}
