@@ -250,3 +250,23 @@ describe "Game View Class", ->
 
       it "the first ul should have 4 li elements", ->
         expect( ($ 'li', $uls[0]).length ).toBe 4
+
+    describe "Watching click on tiles", ->
+      view = tile_0_0 = tile_1_2 = tile_2_1 = undefined
+      beforeEach ->
+        view = new View context: DOM, grid: 'grid'
+        $lis = $ '#grid li', DOM
+        {0: tile_0_0, 7: tile_1_2, 5: tile_2_1} = $lis
+
+      it "when tile {x:0, y:0} is clicked then ", ->
+        tile_clicked = undefined
+        $tile_0_0 = $ tile_0_0
+        view.watch (tile) ->
+          tile_clicked = tile
+
+        do $tile_0_0.click
+        waitsFor ->
+          !!tile_clicked
+        , "a tile should be clicked", 750
+
+        runs -> expect(tile_clicked).toBeDefined()

@@ -54,6 +54,12 @@ View = Game.View = class
   updateGrid: ->
     @$grid.empty().append( View.createGrid @game.board.matrix() )
 
+  watch: (callback) ->
+    $grid = @$grid
+    $grid.find('li').on 'click', ->
+      coordinate = View.getCoordinate grid: $grid, tile: @
+      callback coordinate
+
 View.showMessage = ({message, context, id}={}) ->
   $id = $ "##{id or DEFAULT_VIEW.MESSAGE}", context
   $id.html message
