@@ -69,7 +69,7 @@ View = Game.View = class
         callback tile
 
   unwatchTiles: ->
-    @$grid.find('li').off 'click'
+    @$grid.find('li').off()
 
 View.showMessage = ({message, context, id}={}) ->
   $id = $ "##{id or DEFAULT_VIEW.MESSAGE}", context
