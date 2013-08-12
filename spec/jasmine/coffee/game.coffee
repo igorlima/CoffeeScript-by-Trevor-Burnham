@@ -262,33 +262,37 @@ describe "Game View Class", ->
 
       describe "Watching by click", ->
 
-        it "an object should be catch by watchTiles", ->
+        beforeEach ->
           $tile_1_1.click()
+
+        it "an object should be catch by watchTiles", ->
           runs -> expect(tile).toBeDefined()
 
         it "a coordinate should be catch by watchTiles", ->
-          $tile_1_1.click()
           runs -> expect(tile.coordinate).toBeDefined()
 
         it "an element should be catch by watchTiles", ->
-          $tile_1_1.click()
           runs -> expect(tile.el).toBeDefined()
 
         it "an element wraped by $ should be catch by watchTiles", ->
-          $tile_1_1.click()
           runs -> expect(tile.$el.length).toBe 1
 
-        it "the tile catch by watchTiles should be {x:1, y:1}", ->
-          $tile_1_1.click()
+        it "the coordinate tile catch by watchTiles should be {x:1, y:1}", ->
           runs -> expect(tile.coordinate).toEqual x: 1, y: 1
 
-        it "the unwatchTiles should detaches all event handlers registered", ->
+      describe "Unwatching tile", ->
+
+        beforeEach ->
           view.unwatchTiles()
+
+        it "the unwatchTiles should detaches all event handlers registered", ->
           $tile_1_1.click()
           runs -> expect(tile).not.toBeDefined()
 
-      describe "Watching by swipe", ->
+      describe "Watching by swipe right", ->
+
+        beforeEach ->
+          $tile_1_1.trigger 'swipeRight'
 
         it "an object should be catch by watchTiles", ->
-          $tile_1_1.trigger 'swipeRight'
           runs -> expect(tile).toBeDefined()
