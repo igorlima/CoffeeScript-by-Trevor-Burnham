@@ -182,19 +182,18 @@
             grid: $grid,
             tile: this
           });
-          return $.extend(tile, {
+          $.extend(tile, {
             coordinate: coordinate,
             el: this,
             $el: $(this)
           });
+          return callback(tile);
         },
         "click": function() {
-          $(this).trigger('catchTileInfo');
-          return callback(tile);
+          return $(this).trigger('catchTileInfo');
         },
         "swipeRight": function() {
-          $(this).trigger('catchTileInfo');
-          return callback(tile);
+          return $(this).trigger('catchTileInfo');
         }
       });
     };

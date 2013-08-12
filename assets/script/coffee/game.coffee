@@ -61,12 +61,9 @@ View = Game.View = class
       "catchTileInfo": (event) ->
         coordinate = View.getCoordinate grid: $grid, tile: @
         $.extend tile, {coordinate, el: @, $el: $(@)}
-      "click": ->
-        $(@).trigger 'catchTileInfo'
         callback tile
-      "swipeRight": ->
-        $(@).trigger 'catchTileInfo'
-        callback tile
+      "click": -> $(@).trigger 'catchTileInfo'
+      "swipeRight": -> $(@).trigger 'catchTileInfo'
 
   unwatchTiles: ->
     @$grid.find('li').off()
