@@ -86,7 +86,7 @@
 }).call(this);
 
 (function() {
-  var DEFAULT_VIEW, Game, Scrabble;
+  var DEFAULT_VIEW, Game, Scrabble, View;
 
   Scrabble = this.Scrabble || (this.Scrabble = {});
 
@@ -127,7 +127,7 @@
         name: 'Player 2'
       });
       VIEW || (VIEW = DEFAULT_VIEW);
-      this.view = new Game.View({
+      this.view = new View({
         p1score: VIEW.PLAYER.ONE.SCORE,
         p2score: VIEW.PLAYER.TWO.SCORE,
         p1name: VIEW.PLAYER.ONE.NAME,
@@ -146,7 +146,7 @@
 
   })();
 
-  Game.View = (function() {
+  View = Game.View = (function() {
     function _Class(_arg) {
       var context, grid, p1name, p1score, p2name, p2score, _ref;
       _ref = _arg != null ? _arg : {}, p1score = _ref.p1score, p2score = _ref.p2score, p1name = _ref.p1name, p2name = _ref.p2name, context = _ref.context, grid = _ref.grid, this.game = _ref.game;
@@ -168,21 +168,21 @@
     };
 
     _Class.prototype.updateGrid = function() {
-      return this.$grid.empty().append(Game.View.createGrid(this.game.board.matrix()));
+      return this.$grid.empty().append(View.createGrid(this.game.board.matrix()));
     };
 
     return _Class;
 
   })();
 
-  Game.View.showMessage = function(_arg) {
+  View.showMessage = function(_arg) {
     var $id, context, id, message, _ref;
     _ref = _arg != null ? _arg : {}, message = _ref.message, context = _ref.context, id = _ref.id;
     $id = $("#" + (id || DEFAULT_VIEW.MESSAGE), context);
     return $id.html(message);
   };
 
-  Game.View.createGridLine = function(line) {
+  View.createGridLine = function(line) {
     var lineHtml, value, _i, _len;
     lineHtml = '';
     for (_i = 0, _len = line.length; _i < _len; _i++) {
@@ -192,7 +192,7 @@
     return $(lineHtml);
   };
 
-  Game.View.createGrid = function(grid) {
+  View.createGrid = function(grid) {
     var gridHtml, line, ul, _i, _len;
     gridHtml = $('<div>');
     for (_i = 0, _len = grid.length; _i < _len; _i++) {
@@ -203,7 +203,7 @@
     return gridHtml.contents();
   };
 
-  Game.View.getCoordinate = function(_arg) {
+  View.getCoordinate = function(_arg) {
     var $li, $lis, $ul, $uls, grid, tile;
     grid = _arg.grid, tile = _arg.tile;
     $li = $(tile);
@@ -216,7 +216,7 @@
     };
   };
 
-  Game.View.createSwapCoordinate = function(_arg, _arg1) {
+  View.createSwapCoordinate = function(_arg, _arg1) {
     var x1, x2, y1, y2;
     x1 = _arg.x, y1 = _arg.y;
     x2 = _arg1.x, y2 = _arg1.y;

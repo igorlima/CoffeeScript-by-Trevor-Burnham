@@ -20,7 +20,7 @@ Game = Scrabble.Game = class
     @player2 = player2 or new Scrabble.Player name: 'Player 2'
 
     VIEW or= DEFAULT_VIEW
-    @view = new Game.View
+    @view = new View
       p1score: VIEW.PLAYER.ONE.SCORE
       p2score: VIEW.PLAYER.TWO.SCORE
       p1name:  VIEW.PLAYER.ONE.NAME
@@ -33,7 +33,7 @@ Game = Scrabble.Game = class
     @view.updateGrid()
     @
 
-Game.View = class
+View = Game.View = class
   constructor: ({p1score, p2score, p1name, p2name, context, grid, @game}={}) ->
     @$p1name  = $ "##{p1name}", context
     @$p1score = $ "##{p1score}", context
@@ -52,26 +52,26 @@ Game.View = class
     @$p2name.html @game.player2.name()
 
   updateGrid: ->
-    @$grid.empty().append( Game.View.createGrid @game.board.matrix() )
+    @$grid.empty().append( View.createGrid @game.board.matrix() )
 
-Game.View.showMessage = ({message, context, id}={}) ->
+View.showMessage = ({message, context, id}={}) ->
   $id = $ "##{id or DEFAULT_VIEW.MESSAGE}", context
   $id.html message
 
-Game.View.createGridLine = (line) ->
+View.createGridLine = (line) ->
   lineHtml = ''
   for value in line
     lineHtml += "<li>#{value}</li>"
   $ lineHtml
 
-Game.View.createGrid = (grid) ->
+View.createGrid = (grid) ->
   gridHtml = $ '<div>'
   for line in grid
     ul = $ '<ul>'
     gridHtml.append ul.append(@createGridLine line)
   gridHtml.contents()
 
-Game.View.getCoordinate = ({grid, tile}) ->
+View.getCoordinate = ({grid, tile}) ->
   $li = $ tile
   $ul = $li.parent()
   $lis = $ul.children()
@@ -79,5 +79,5 @@ Game.View.getCoordinate = ({grid, tile}) ->
 
   x: $lis.index($li), y: $uls.index($ul)
 
-Game.View.createSwapCoordinate = ({x: x1, y: y1}, {x: x2, y: y2}) ->
+View.createSwapCoordinate = ({x: x1, y: y1}, {x: x2, y: y2}) ->
   {x1, y1, x2, y2}
