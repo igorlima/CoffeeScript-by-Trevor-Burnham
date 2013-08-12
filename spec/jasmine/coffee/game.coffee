@@ -251,36 +251,40 @@ describe "Game View Class", ->
       it "the first ul should have 4 li elements", ->
         expect( ($ 'li', $uls[0]).length ).toBe 4
 
-    describe "Watching click on tiles", ->
-      view = $tile_0_0 = tile = undefined
+    describe "Watching tiles", ->
+      view = $tile_1_1 = undefined
       beforeEach ->
         view = new View context: DOM, grid: 'grid'
-        view.watchTiles (obj) -> tile = obj
         $lis = $ '#grid li', DOM
-        $tile_0_0 = $ $lis[0]
+        $tile_1_1 = $ $lis[5]
+
+      describe "Watching by click", ->
         tile = undefined
+        beforeEach ->
+          view.watchTiles (obj) -> tile = obj
+          tile = undefined
 
-      it "an object should be catch by watchTiles", ->
-        $tile_0_0.click()
-        runs -> expect(tile).toBeDefined()
+        it "an object should be catch by watchTiles", ->
+          $tile_1_1.click()
+          runs -> expect(tile).toBeDefined()
 
-      it "a coordinate should be catch by watchTiles", ->
-        $tile_0_0.click()
-        runs -> expect(tile.coordinate).toBeDefined()
+        it "a coordinate should be catch by watchTiles", ->
+          $tile_1_1.click()
+          runs -> expect(tile.coordinate).toBeDefined()
 
-      it "an element should be catch by watchTiles", ->
-        $tile_0_0.click()
-        runs -> expect(tile.el).toBeDefined()
+        it "an element should be catch by watchTiles", ->
+          $tile_1_1.click()
+          runs -> expect(tile.el).toBeDefined()
 
-      it "an element wraped by $ should be catch by watchTiles", ->
-        $tile_0_0.click()
-        runs -> expect(tile.$el.length).toBe 1
+        it "an element wraped by $ should be catch by watchTiles", ->
+          $tile_1_1.click()
+          runs -> expect(tile.$el.length).toBe 1
 
-      it "the tile catch by watchTiles should be {x:0, y:0}", ->
-        $tile_0_0.click()
-        runs -> expect(tile.coordinate).toEqual x: 0, y: 0
+        it "the tile catch by watchTiles should be {x:1, y:1}", ->
+          $tile_1_1.click()
+          runs -> expect(tile.coordinate).toEqual x: 1, y: 1
 
-      it "the unwatchTiles should detaches all event handlers registered", ->
-        view.unwatchTiles()
-        $tile_0_0.click()
-        runs -> expect(tile).not.toBeDefined()
+        it "the unwatchTiles should detaches all event handlers registered", ->
+          view.unwatchTiles()
+          $tile_1_1.click()
+          runs -> expect(tile).not.toBeDefined()
