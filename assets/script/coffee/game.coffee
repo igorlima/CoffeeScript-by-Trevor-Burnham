@@ -60,6 +60,9 @@ View = Game.View = class
       coordinate = View.getCoordinate grid: $grid, tile: @
       callback coordinate
 
+  unwatchTiles: ->
+    @$grid.find('li').off 'click'
+
 View.showMessage = ({message, context, id}={}) ->
   $id = $ "##{id or DEFAULT_VIEW.MESSAGE}", context
   $id.html message

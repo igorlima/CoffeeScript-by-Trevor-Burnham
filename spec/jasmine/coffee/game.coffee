@@ -258,24 +258,25 @@ describe "Game View Class", ->
         $lis = $ '#grid li', DOM
         {0: tile_0_0, 7: tile_1_2, 5: tile_2_1} = $lis
 
-      it "an object should be catch by watchTile", ->
+      it "an object should be catch by watchTiles", ->
         tile_clicked = undefined
         $tile_0_0 = $ tile_0_0
         view.watchTiles (tile) -> tile_clicked = tile
         do $tile_0_0.click
         runs -> expect(tile_clicked).toBeDefined()
 
-      it "the tile catch by watchTile should be {x:0, y:0}", ->
+      it "the tile catch by watchTiles should be {x:0, y:0}", ->
         tile_clicked = undefined
         $tile_0_0 = $ tile_0_0
         view.watchTiles (tile) -> tile_clicked = tile
         do $tile_0_0.click
         runs -> expect(tile_clicked).toEqual x: 0, y: 0
 
-      # it "the watchTile callback should have only one listener. ", ->
-      #   tile_clicked = undefined
-      #   $tile_0_0 = $ tile_0_0
-      #   view.watchTile (tile) -> tile_clicked = tile
-      #   view.watchTile (tile) ->
-      #   do $tile_0_0.click
-      #   runs -> expect(tile_clicked).not.toBeDefined()
+      it "the unwatchTiles should detaches all event handlers registered", ->
+        tile_clicked = undefined
+        $tile_0_0 = $ tile_0_0
+        view.watchTiles (tile) -> tile_clicked = tile
+        view.watchTiles (tile) -> tile_clicked or= tile
+        view.unwatchTiles()
+        do $tile_0_0.click
+        runs -> expect(tile_clicked).not.toBeDefined()

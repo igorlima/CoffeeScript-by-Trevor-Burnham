@@ -184,6 +184,10 @@
       });
     };
 
+    _Class.prototype.unwatchTiles = function() {
+      return this.$grid.find('li').off('click');
+    };
+
     return _Class;
 
   })();
