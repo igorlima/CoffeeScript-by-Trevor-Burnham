@@ -59,11 +59,17 @@ View = Game.View = class
     tile = {}
     $grid.find('li').on
       "catchTileInfo": (event) ->
-        coordinate = View.getCoordinate grid: $grid, tile: @
+        coordinate      = View.getCoordinate grid: $grid, tile: @
+        swipeCoordinate = View.createSwipeCoordinate coordinate, event.data or {}
+        swapCoordinate  = View.createSwapCoordinate coordinate, swipeCoordinate
         $.extend tile, {coordinate, el: @, $el: $(@)}
+        $.extend tile, {swipeCoordinate, swapCoordinate} if event.data?
         callback tile
       "click": -> $(@).trigger 'catchTileInfo'
-      "swipeRight": -> $(@).trigger 'catchTileInfo'
+      "swipeRight": -> $(@).trigger 'catchTileInfo', {x: 1}
+      "swipeLeft":  -> $(@).trigger 'catchTileInfo', {x: -1}
+      "swipeUp":    -> $(@).trigger 'catchTileInfo', {y: -1}
+      "swipeDown":  -> $(@).trigger 'catchTileInfo', {y: 1}
 
   unwatchTiles: ->
     @$grid.find('li').off()

@@ -177,23 +177,48 @@
       tile = {};
       return $grid.find('li').on({
         "catchTileInfo": function(event) {
-          var coordinate;
+          var coordinate, swapCoordinate, swipeCoordinate;
           coordinate = View.getCoordinate({
             grid: $grid,
             tile: this
           });
+          swipeCoordinate = View.createSwipeCoordinate(coordinate, event.data || {});
+          swapCoordinate = View.createSwapCoordinate(coordinate, swipeCoordinate);
           $.extend(tile, {
             coordinate: coordinate,
             el: this,
             $el: $(this)
           });
+          if (event.data != null) {
+            $.extend(tile, {
+              swipeCoordinate: swipeCoordinate,
+              swapCoordinate: swapCoordinate
+            });
+          }
           return callback(tile);
         },
         "click": function() {
           return $(this).trigger('catchTileInfo');
         },
         "swipeRight": function() {
-          return $(this).trigger('catchTileInfo');
+          return $(this).trigger('catchTileInfo', {
+            x: 1
+          });
+        },
+        "swipeLeft": function() {
+          return $(this).trigger('catchTileInfo', {
+            x: -1
+          });
+        },
+        "swipeUp": function() {
+          return $(this).trigger('catchTileInfo', {
+            y: -1
+          });
+        },
+        "swipeDown": function() {
+          return $(this).trigger('catchTileInfo', {
+            y: 1
+          });
         }
       });
     };

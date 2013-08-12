@@ -305,9 +305,34 @@ describe "Game View Class", ->
           runs -> expect(tile).not.toBeDefined()
 
       describe "Watching by swipe right", ->
-
-        beforeEach ->
-          $tile_1_1.trigger 'swipeRight'
+        beforeEach -> $tile_1_1.trigger 'swipeRight'
 
         it "an object should be catch by watchTiles", ->
           runs -> expect(tile).toBeDefined()
+
+        it "after swipe right, the swipe coordinate catch by watchTiles should be {x:2, y:1}", ->
+          runs -> expect(tile.swipeCoordinate).toEqual x: 2, y: 1
+
+      describe "Watching by swipe left", ->
+        beforeEach -> $tile_1_1.trigger 'swipeLeft'
+
+        it "after swipe left, the swipe coordinate catch by watchTiles should be {x:0, y:1}", ->
+          runs -> expect(tile.swipeCoordinate).toEqual x: 0, y: 1
+
+        it "the swapCoordinate should be defined", ->
+          runs -> expect(tile.swapCoordinate).toBeDefined()
+
+      describe "Watching by swipe up", ->
+        beforeEach -> $tile_1_1.trigger 'swipeUp'
+
+        it "after swipe up, the swipe coordinate catch by watchTiles should be {x:1, y:0}", ->
+          runs -> expect(tile.swipeCoordinate).toEqual x: 1, y: 0
+
+        it "the swapCoordinate should be {x1: 1, y1: 1, x2: 1, y2: 0}", ->
+          runs -> expect(tile.swapCoordinate).toEqual {x1: 1, y1: 1, x2: 1, y2: 0}
+
+      describe "Watching by swipe down", ->
+        beforeEach -> $tile_1_1.trigger 'swipeDown'
+
+        it "after swipe down, the swipe coordinate catch by watchTiles should be {x:1, y:2}", ->
+          runs -> expect(tile.swipeCoordinate).toEqual x: 1, y: 2
