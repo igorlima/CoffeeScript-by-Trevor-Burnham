@@ -78,3 +78,6 @@ Game.View.getCoordinate = ({grid, tile}) ->
   $uls = $ul.parent().children()
 
   x: $lis.index($li), y: $uls.index($ul)
+
+Game.View.createSwapCoordinate = ({x: x1, y: y1}, {x: x2, y: y2}) ->
+  {x1, y1, x2, y2}
