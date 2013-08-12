@@ -290,5 +290,5 @@ describe "Game View Class", ->
       describe "Watching by swipe", ->
 
         it "an object should be catch by watchTiles", ->
-          $tile_1_1.trigger 'swipe'
+          $tile_1_1.trigger 'swipeRight'
           runs -> expect(tile).toBeDefined()

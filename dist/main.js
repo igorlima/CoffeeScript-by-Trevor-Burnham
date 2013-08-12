@@ -174,29 +174,27 @@
     _Class.prototype.watchTiles = function(callback) {
       var $grid, tile;
       $grid = this.$grid;
-      tile = void 0;
+      tile = {};
       return $grid.find('li').on({
         "catchTileInfo": function(event) {
-          var coordinate, toCall, _ref;
-          toCall = (_ref = event.data) != null ? _ref.call : void 0;
+          var coordinate;
           coordinate = View.getCoordinate({
             grid: $grid,
             tile: this
           });
-          tile = {
+          return $.extend(tile, {
             coordinate: coordinate,
             el: this,
             $el: $(this)
-          };
-          if (!!toCall || toCall === void 0) {
-            return typeof callback === "function" ? callback(tile) : void 0;
-          }
+          });
         },
         "click": function() {
-          return $(this).trigger('catchTileInfo');
+          $(this).trigger('catchTileInfo');
+          return callback(tile);
         },
-        "swipe": function() {
-          return $(this).trigger('catchTileInfo');
+        "swipeRight": function() {
+          $(this).trigger('catchTileInfo');
+          return callback(tile);
         }
       });
     };

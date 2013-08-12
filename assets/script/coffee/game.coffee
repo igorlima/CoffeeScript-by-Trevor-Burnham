@@ -56,15 +56,17 @@ View = Game.View = class
 
   watchTiles: (callback) ->
     $grid = @$grid
-    tile = undefined
+    tile = {}
     $grid.find('li').on
       "catchTileInfo": (event) ->
-        toCall = event.data?.call
         coordinate = View.getCoordinate grid: $grid, tile: @
-        tile = {coordinate, el: @, $el: $(@)}
-        callback? tile if !!toCall or toCall is undefined
-      "click": -> $(@).trigger 'catchTileInfo'
-      "swipe": -> $(@).trigger 'catchTileInfo'
+        $.extend tile, {coordinate, el: @, $el: $(@)}
+      "click": ->
+        $(@).trigger 'catchTileInfo'
+        callback tile
+      "swipeRight": ->
+        $(@).trigger 'catchTileInfo'
+        callback tile
 
   unwatchTiles: ->
     @$grid.find('li').off 'click'
