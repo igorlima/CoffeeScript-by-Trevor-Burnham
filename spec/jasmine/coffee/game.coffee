@@ -255,24 +255,20 @@ describe "Game View Class", ->
       view = $tile_0_0 = tile_clicked = undefined
       beforeEach ->
         view = new View context: DOM, grid: 'grid'
+        view.watchTiles (tile) -> tile_clicked = tile
         $lis = $ '#grid li', DOM
-        tile_0_0 = $lis[0]
-        $tile_0_0 = $ tile_0_0
+        $tile_0_0 = $ $lis[0]
         tile_clicked = undefined
 
       it "an object should be catch by watchTiles", ->
-        view.watchTiles (tile) -> tile_clicked = tile
-        do $tile_0_0.click
+        $tile_0_0.click()
         runs -> expect(tile_clicked).toBeDefined()
 
       it "the tile catch by watchTiles should be {x:0, y:0}", ->
-        view.watchTiles (tile) -> tile_clicked = tile
-        do $tile_0_0.click
+        $tile_0_0.click()
         runs -> expect(tile_clicked).toEqual x: 0, y: 0
 
       it "the unwatchTiles should detaches all event handlers registered", ->
-        view.watchTiles (tile) -> tile_clicked = tile
-        view.watchTiles (tile) -> tile_clicked or= tile
         view.unwatchTiles()
-        do $tile_0_0.click
+        $tile_0_0.click()
         runs -> expect(tile_clicked).not.toBeDefined()
