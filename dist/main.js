@@ -172,19 +172,32 @@
     };
 
     _Class.prototype.watchTiles = function(callback) {
-      var $grid;
+      var $grid, tile;
       $grid = this.$grid;
-      return $grid.find('li').on('click', function() {
-        var coordinate;
-        coordinate = View.getCoordinate({
-          grid: $grid,
-          tile: this
-        });
-        return callback({
-          coordinate: coordinate,
-          el: this,
-          $el: $(this)
-        });
+      tile = void 0;
+      return $grid.find('li').on({
+        "catchTileInfo": function(event) {
+          var coordinate, toCall, _ref;
+          toCall = (_ref = event.data) != null ? _ref.call : void 0;
+          coordinate = View.getCoordinate({
+            grid: $grid,
+            tile: this
+          });
+          tile = {
+            coordinate: coordinate,
+            el: this,
+            $el: $(this)
+          };
+          if (!!toCall || toCall === void 0) {
+            return typeof callback === "function" ? callback(tile) : void 0;
+          }
+        },
+        "click": function() {
+          return $(this).trigger('catchTileInfo');
+        },
+        "swipe": function() {
+          return $(this).trigger('catchTileInfo');
+        }
       });
     };
 

@@ -252,17 +252,15 @@ describe "Game View Class", ->
         expect( ($ 'li', $uls[0]).length ).toBe 4
 
     describe "Watching tiles", ->
-      view = $tile_1_1 = undefined
+      view = $tile_1_1 = tile = undefined
       beforeEach ->
         view = new View context: DOM, grid: 'grid'
+        view.watchTiles (obj) -> tile = obj
         $lis = $ '#grid li', DOM
         $tile_1_1 = $ $lis[5]
+        tile = undefined
 
       describe "Watching by click", ->
-        tile = undefined
-        beforeEach ->
-          view.watchTiles (obj) -> tile = obj
-          tile = undefined
 
         it "an object should be catch by watchTiles", ->
           $tile_1_1.click()
@@ -288,3 +286,9 @@ describe "Game View Class", ->
           view.unwatchTiles()
           $tile_1_1.click()
           runs -> expect(tile).not.toBeDefined()
+
+      describe "Watching by swipe", ->
+
+        it "an object should be catch by watchTiles", ->
+          $tile_1_1.trigger 'swipe'
+          runs -> expect(tile).toBeDefined()
