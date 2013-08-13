@@ -80,8 +80,7 @@ View.showMessage = ({message, context, id}={}) ->
 
 View.createGridLine = (line) ->
   lineHtml = ''
-  for value in line
-    lineHtml += "<li>#{value}</li>"
+  lineHtml += "<li>#{value}</li>" for value in line
   $ lineHtml
 
 View.createGrid = (grid) ->

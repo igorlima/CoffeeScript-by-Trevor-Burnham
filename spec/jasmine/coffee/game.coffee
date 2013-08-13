@@ -68,28 +68,29 @@ describe "Game class", ->
         expect( game.board.size() ).toBe 5
 
     describe "Customized game", ->
+      player1 = player2 = grid = undefined
+      beforeEach ->
+        player1 = new Player name: 'Fist player'
+        player2 = new Player name: 'Second player'
+        grid = [['D', 'A'], ['S', 'O']]
 
       it "the size of game might be customized", ->
         game.new size: 3
         expect( game.board.size() ).toBe 3
 
       it "the player1 might be customized", ->
-        player1 = new Player name: 'Fist player'
         game.new {player1}
         expect( game.player1.name() ).toBe 'Fist player'
 
       it "the current player should be the player1 when customized", ->
-        player1 = new Player name: 'Fist player'
         game.new {player1}
         expect( game.currentPlayer ).toBe game.player1
 
       it "the player2 might be customized", ->
-        player2 = new Player name: 'Second player'
         game.new {player2}
         expect( game.player2.name() ).toBe 'Second player'
 
       it "the board might be customized", ->
-        grid = [['D', 'A'], ['S', 'O']]
         game.new board: new Board {words, grid}
         expect( game.board.size() ).toBe 2
 
