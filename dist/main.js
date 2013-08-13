@@ -182,8 +182,8 @@
             grid: $grid,
             tile: this
           });
-          swipeCoordinate = View.createSwipeCoordinate(coordinate, event.data || {});
-          swapCoordinate = View.createSwapCoordinate(coordinate, swipeCoordinate);
+          swipeCoordinate = Scrabble.Util.createSwipeCoordinate(coordinate, event.data || {});
+          swapCoordinate = Scrabble.Util.createSwapCoordinate(coordinate, swipeCoordinate);
           $.extend(tile, {
             coordinate: coordinate,
             el: this,
@@ -269,34 +269,6 @@
     return {
       x: $lis.index($li),
       y: $uls.index($ul)
-    };
-  };
-
-  View.createSwapCoordinate = function(_arg, _arg1) {
-    var x1, x2, y1, y2;
-    x1 = _arg.x, y1 = _arg.y;
-    x2 = _arg1.x, y2 = _arg1.y;
-    return {
-      x1: x1,
-      y1: y1,
-      x2: x2,
-      y2: y2
-    };
-  };
-
-  View.createSwipeCoordinate = function(_arg, _arg1) {
-    var x, xi, y, yi;
-    x = _arg.x, y = _arg.y;
-    xi = _arg1.x, yi = _arg1.y;
-    if (xi != null) {
-      x += xi;
-    }
-    if (yi != null) {
-      y += yi;
-    }
-    return {
-      x: x,
-      y: y
     };
   };
 
@@ -961,6 +933,34 @@
     } else {
       return isValid;
     }
+  };
+
+  Util.createSwapCoordinate = function(_arg, _arg1) {
+    var x1, x2, y1, y2;
+    x1 = _arg.x, y1 = _arg.y;
+    x2 = _arg1.x, y2 = _arg1.y;
+    return {
+      x1: x1,
+      y1: y1,
+      x2: x2,
+      y2: y2
+    };
+  };
+
+  Util.createSwipeCoordinate = function(_arg, _arg1) {
+    var x, xi, y, yi;
+    x = _arg.x, y = _arg.y;
+    xi = _arg1.x, yi = _arg1.y;
+    if (xi != null) {
+      x += xi;
+    }
+    if (yi != null) {
+      y += yi;
+    }
+    return {
+      x: x,
+      y: y
+    };
   };
 
 }).call(this);

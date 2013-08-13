@@ -60,8 +60,8 @@ View = Game.View = class
     $grid.find('li').on
       "catchTileInfo": (event) ->
         coordinate      = View.getCoordinate grid: $grid, tile: @
-        swipeCoordinate = View.createSwipeCoordinate coordinate, event.data or {}
-        swapCoordinate  = View.createSwapCoordinate coordinate, swipeCoordinate
+        swipeCoordinate = Scrabble.Util.createSwipeCoordinate coordinate, event.data or {}
+        swapCoordinate  = Scrabble.Util.createSwapCoordinate coordinate, swipeCoordinate
         $.extend tile, {coordinate, el: @, $el: $(@)}
         $.extend tile, {swipeCoordinate, swapCoordinate} if event.data?
         callback tile
@@ -98,11 +98,3 @@ View.getCoordinate = ({grid, tile}) ->
   $uls = $ul.parent().children()
 
   x: $lis.index($li), y: $uls.index($ul)
-
-View.createSwapCoordinate = ({x: x1, y: y1}, {x: x2, y: y2}) ->
-  {x1, y1, x2, y2}
-
-View.createSwipeCoordinate = ({x, y}, {x: xi, y: yi}) ->
-  x += xi if xi?
-  y += yi if yi?
-  {x, y: y}

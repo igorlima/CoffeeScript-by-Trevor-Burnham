@@ -60,3 +60,11 @@ Util.isValidSwapCoordinates = ({x1, y1, x2, y2, range}) ->
     @inRange({ x: x1, y: y1, range }) and @inRange({ x: x2, y: y2, range })
   else
     isValid
+
+Util.createSwapCoordinate = ({x: x1, y: y1}, {x: x2, y: y2}) ->
+  {x1, y1, x2, y2}
+
+Util.createSwipeCoordinate = ({x, y}, {x: xi, y: yi}) ->
+  x += xi if xi?
+  y += yi if yi?
+  {x, y: y}

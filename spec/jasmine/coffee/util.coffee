@@ -170,3 +170,27 @@ describe "Util class", ->
 
     it "from (x: 1, y: 0) to (x: 0, y: 0) whith the range as 4 SHOULD be a valid move", ->
       expect( Util.isValidSwapCoordinates x1: 1, y1: 0, x2: 0, y2: 0, range: 4 ).toBe true
+
+  describe "creating a swap coordinate", ->
+
+    it "{x:1, y:2} and {x:2, y:2} are given, then the swap coordinate should be {x1: 1, y1: 2, x2: 2, y2: 2}", ->
+      swapCoordinate = Util.createSwapCoordinate {x:1, y:2}, {x:2, y:2}
+      expect( swapCoordinate ).toEqual {x1: 1, y1: 2, x2: 2, y2: 2}
+
+    it "{x:1, y:2} and {x:1, y:1} are given, then the swap coordinate should be {x1: 1, y1: 2, x2: 1, y2: 1}", ->
+      swapCoordinate = Util.createSwapCoordinate {x:1, y:2}, {x:1, y:1}
+      expect( swapCoordinate ).toEqual {x1: 1, y1: 2, x2: 1, y2: 1}
+
+  describe "creating a swipe coordinate. It will increase (or decrease) the coordinate", ->
+
+    it "{x:1, y:2} and {x:1} are given, then the swipe coordinate should be {x: 2, y: 2}", ->
+      coordinate = Util.createSwipeCoordinate {x:1, y:2}, {x:1}
+      expect(coordinate).toEqual {x:2, y:2}
+
+    it "{x:1, y:2} and {x:-1} are given, then the swipe coordinate should be {x: 0, y: 2}", ->
+      coordinate = Util.createSwipeCoordinate {x:1, y:2}, {x:-1}
+      expect(coordinate).toEqual {x:0, y:2}
+
+    it "{x:1, y:2} and {y:-1} are given, then the swipe coordinate should be {x: 1, y: 1}", ->
+      coordinate = Util.createSwipeCoordinate {x:1, y:2}, {y:-1}
+      expect(coordinate).toEqual {x:1, y:1}

@@ -185,30 +185,6 @@ describe "Game View Class", ->
       it "the tile coordinate (1,2) SHOULD be {x: 1, y:2}", ->
         expect( View.getCoordinate grid: $grid, tile: tile_1_2 ).toEqual x: 1, y: 2
 
-    describe "Creating a swap coordinate", ->
-
-      it "{x:1, y:2} and {x:2, y:2} are given, then the swap coordinate should be {x1: 1, y1: 2, x2: 2, y2: 2}", ->
-        swapCoordinate = View.createSwapCoordinate {x:1, y:2}, {x:2, y:2}
-        expect( swapCoordinate ).toEqual {x1: 1, y1: 2, x2: 2, y2: 2}
-
-      it "{x:1, y:2} and {x:1, y:1} are given, then the swap coordinate should be {x1: 1, y1: 2, x2: 1, y2: 1}", ->
-        swapCoordinate = View.createSwapCoordinate {x:1, y:2}, {x:1, y:1}
-        expect( swapCoordinate ).toEqual {x1: 1, y1: 2, x2: 1, y2: 1}
-
-    describe "Creating a swipe coordinate. It will increase (or decrease) the coordinate", ->
-
-      it "{x:1, y:2} and {x:1} are given, then the swipe coordinate should be {x: 2, y: 2}", ->
-        coordinate = View.createSwipeCoordinate {x:1, y:2}, {x:1}
-        expect(coordinate).toEqual {x:2, y:2}
-
-      it "{x:1, y:2} and {x:-1} are given, then the swipe coordinate should be {x: 0, y: 2}", ->
-        coordinate = View.createSwipeCoordinate {x:1, y:2}, {x:-1}
-        expect(coordinate).toEqual {x:0, y:2}
-
-      it "{x:1, y:2} and {y:-1} are given, then the swipe coordinate should be {x: 1, y: 1}", ->
-        coordinate = View.createSwipeCoordinate {x:1, y:2}, {y:-1}
-        expect(coordinate).toEqual {x:1, y:1}
-
 
   describe "Each instance of GameView", ->
 
