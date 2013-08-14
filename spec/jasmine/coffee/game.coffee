@@ -107,9 +107,9 @@ describe "Game class", ->
           ['M', 'O', 'V', 'S', 'T']
         ]
       game = new Game words: words
-      game.new {board}
 
     describe "by method game.move(...)", ->
+      beforeEach -> game.new {board}
 
       describe "a first moving to {x1: 3, y1: 3, x2: 3, y2: 4} ", ->
         beforeEach -> game.move {x1: 3, y1: 3, x2: 3, y2: 4}
@@ -151,6 +151,20 @@ describe "Game class", ->
             expect( game.currentPlayer ).toBe game.player1
 
     describe "by clicking", ->
+      DOM = undefined
+      beforeEach ->
+        DOM = $ DOM_STRINGFIED
+        game.new {board, DOM}
+
+      describe "a first click on (3, 1) ", ->
+        beforeEach ->
+          $lis = $ '#grid li', DOM
+          $tile_3_1 = $ $lis[18]
+          $tile_3_1.click()
+
+        it "", ->
+          console.warn 0
+
 
 describe "Game View Class", ->
   {View} = Game
