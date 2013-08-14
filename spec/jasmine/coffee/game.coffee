@@ -95,8 +95,43 @@ describe "Game class", ->
         expect( game.board.size() ).toBe 2
 
   describe "Game actions", ->
+    game = board = undefined
+    beforeEach ->
+      board = new Board
+        words: words
+        grid: [
+          ['A', 'A', 'A', 'A', 'A']
+          ['X', 'A', 'I', 'O', 'A']
+          ['Z', 'C', 'D', 'D', 'G']
+          ['Y', 'A', 'D', 'E', 'A']
+          ['M', 'O', 'V', 'S', 'T']
+        ]
+      game = new Game words: words
+      game.new {board}
 
-    it "the tile should move", ->
+    describe "a first moving to {x1: 3, y1: 3, x2: 3, y2: 4} ", ->
+      beforeEach -> game.move {x1: 3, y1: 3, x2: 3, y2: 4}
+
+      it "lastMove SHOULD be {x1: 3, y1: 3, x2: 3, y2: 4}", ->
+        expect( game.lastMove ).toBeDefined()
+
+      it "lastMove SHOULD have a swapCoordinates", ->
+        expect( game.lastMove.swapCoordinates ).toBeDefined()
+
+      it "lastMove SHOULD have scoreMove", ->
+        expect( game.lastMove.scoreMove ).toBeDefined()
+
+      it "a list of words from the last move SHOULD contains only one word", ->
+        expect( game.lastMove.newWords?.length ).toBe 1
+
+      it "the last move SHOULD contains the word 'MOVE'", ->
+        expect( game.lastMove.newWords ).toContain 'MOVE'
+
+      it "the score of the last move SHOULD be greater than 0", ->
+        expect( game.lastMove.scoreMove ).toBeGreaterThan 0
+
+      it "the tile should move", ->
+        #console.warn game.lastMove.newWords, game.lastMove.scoreMove
 
 
 describe "Game View Class", ->

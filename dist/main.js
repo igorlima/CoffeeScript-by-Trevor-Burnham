@@ -114,7 +114,8 @@
     }
 
     _Class.prototype["new"] = function(_arg) {
-      var DOM, VIEW, board, player1, player2, size, _ref;
+      var DOM, VIEW, board, player1, player2, size, _ref,
+        _this = this;
       _ref = _arg != null ? _arg : {}, size = _ref.size, player1 = _ref.player1, player2 = _ref.player2, board = _ref.board, DOM = _ref.DOM, VIEW = _ref.VIEW;
       this.board = board || new Scrabble.Board({
         size: size || 5,
@@ -126,6 +127,12 @@
       this.player2 = player2 || new Scrabble.Player({
         name: 'Player 2'
       });
+      this.move = function(swapCoordinates) {
+        _this.lastMove = {
+          swapCoordinates: swapCoordinates
+        };
+        return $.extend(_this.lastMove, _this.board.move(swapCoordinates));
+      };
       VIEW || (VIEW = DEFAULT_VIEW);
       this.view = new View({
         p1score: VIEW.PLAYER.ONE.SCORE,
