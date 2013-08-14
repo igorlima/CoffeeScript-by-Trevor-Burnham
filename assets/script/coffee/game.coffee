@@ -19,8 +19,9 @@ Game = Scrabble.Game = class
     @currentPlayer = @player1 = player1 or new Scrabble.Player name: 'Player 1'
     @player2 = player2 or new Scrabble.Player name: 'Player 2'
     @move = (swapCoordinates) =>
-      @lastMove = {swapCoordinates}
-      $.extend @lastMove, @board.move swapCoordinates
+      @lastMove = $.extend {}, {swapCoordinates}
+      $.extend @lastMove, @currentPlayer.move {board: @board, swapCoordinates}
+      @currentPlayer = @player2
 
     VIEW or= DEFAULT_VIEW
     @view = new View

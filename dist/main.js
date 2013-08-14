@@ -128,10 +128,14 @@
         name: 'Player 2'
       });
       this.move = function(swapCoordinates) {
-        _this.lastMove = {
+        _this.lastMove = $.extend({}, {
           swapCoordinates: swapCoordinates
-        };
-        return $.extend(_this.lastMove, _this.board.move(swapCoordinates));
+        });
+        $.extend(_this.lastMove, _this.currentPlayer.move({
+          board: _this.board,
+          swapCoordinates: swapCoordinates
+        }));
+        return _this.currentPlayer = _this.player2;
       };
       VIEW || (VIEW = DEFAULT_VIEW);
       this.view = new View({

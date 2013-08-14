@@ -130,7 +130,18 @@ describe "Game class", ->
       it "the score of the last move SHOULD be greater than 0", ->
         expect( game.lastMove.scoreMove ).toBeGreaterThan 0
 
-      it "the tile should move", ->
+      it "the amount of move from player1 SHOULD be 1", ->
+        expect( game.player1.moveCount() ).toBe 1
+
+      it "after the move, the current player SHOULD be player2", ->
+        expect( game.currentPlayer ).toBe game.player2
+
+      describe "a second moving to {x1: 2, y1: 2, x2: 2, y2: 1} ", ->
+        beforeEach -> game.move {x1: 2, y1: 2, x2: 2, y2: 1}
+
+        it "the amount of move from player2 SHOULD be 1", ->
+          expect( game.player2.moveCount() ).toBe 1
+
         #console.warn game.lastMove.newWords, game.lastMove.scoreMove
 
 
