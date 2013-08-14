@@ -157,13 +157,17 @@ describe "Game class", ->
         game.new {board, DOM}
 
       describe "a first click on (3, 1) ", ->
+        $tile_3_1 = tile_3_1 = undefined
         beforeEach ->
           $lis = $ '#grid li', DOM
-          $tile_3_1 = $ $lis[18]
+          $tile_3_1 = $ tile_3_1 = $lis[18]
           $tile_3_1.click()
 
-        it "", ->
-          console.warn 0
+        it "the selected tile on game view SHOULD be defined", ->
+          expect( game.view.selectedTile ).toBeDefined()
+
+        it "the selected tile SHOULD be a coordinate", ->
+          expect( game.view.selectedTile.coordinate ).toBeDefined()
 
 
 describe "Game View Class", ->

@@ -150,6 +150,9 @@
       this.view.updateScore();
       this.view.updatePlayerNames();
       this.view.updateGrid();
+      this.view.watchTiles(function(tile) {
+        return _this.view.selectedTile = tile;
+      });
       return this;
     };
 

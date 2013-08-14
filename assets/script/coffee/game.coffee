@@ -35,6 +35,8 @@ Game = Scrabble.Game = class
     @view.updateScore()
     @view.updatePlayerNames()
     @view.updateGrid()
+    @view.watchTiles (tile) =>
+      @view.selectedTile = tile
     @
 
 View = Game.View = class
