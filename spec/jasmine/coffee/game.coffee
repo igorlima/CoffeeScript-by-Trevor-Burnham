@@ -109,45 +109,48 @@ describe "Game class", ->
       game = new Game words: words
       game.new {board}
 
-    describe "a first moving to {x1: 3, y1: 3, x2: 3, y2: 4} ", ->
-      beforeEach -> game.move {x1: 3, y1: 3, x2: 3, y2: 4}
+    describe "by method game.move(...)", ->
 
-      it "lastMove SHOULD be {x1: 3, y1: 3, x2: 3, y2: 4}", ->
-        expect( game.lastMove ).toBeDefined()
+      describe "a first moving to {x1: 3, y1: 3, x2: 3, y2: 4} ", ->
+        beforeEach -> game.move {x1: 3, y1: 3, x2: 3, y2: 4}
 
-      it "lastMove SHOULD have a swapCoordinates", ->
-        expect( game.lastMove.swapCoordinates ).toBeDefined()
+        it "lastMove SHOULD be {x1: 3, y1: 3, x2: 3, y2: 4}", ->
+          expect( game.lastMove ).toBeDefined()
 
-      it "lastMove SHOULD have scoreMove", ->
-        expect( game.lastMove.scoreMove ).toBeDefined()
+        it "lastMove SHOULD have a swapCoordinates", ->
+          expect( game.lastMove.swapCoordinates ).toBeDefined()
 
-      it "a list of words from the last move SHOULD contains only one word", ->
-        expect( game.lastMove.newWords?.length ).toBe 1
+        it "lastMove SHOULD have scoreMove", ->
+          expect( game.lastMove.scoreMove ).toBeDefined()
 
-      it "the last move SHOULD contains the word 'MOVE'", ->
-        expect( game.lastMove.newWords ).toContain 'MOVE'
+        it "a list of words from the last move SHOULD contains only one word", ->
+          expect( game.lastMove.newWords?.length ).toBe 1
 
-      it "the score of the last move SHOULD be greater than 0", ->
-        expect( game.lastMove.scoreMove ).toBeGreaterThan 0
-
-      it "the amount of move from player1 SHOULD be 1", ->
-        expect( game.player1.moveCount() ).toBe 1
-
-      it "after the move, the current player SHOULD be player2", ->
-        expect( game.currentPlayer ).toBe game.player2
-
-      describe "a second moving to {x1: 2, y1: 2, x2: 2, y2: 1} ", ->
-        beforeEach -> game.move {x1: 2, y1: 2, x2: 2, y2: 1}
-
-        it "the amount of move from player2 SHOULD be 1", ->
-          expect( game.player2.moveCount() ).toBe 1
+        it "the last move SHOULD contains the word 'MOVE'", ->
+          expect( game.lastMove.newWords ).toContain 'MOVE'
 
         it "the score of the last move SHOULD be greater than 0", ->
           expect( game.lastMove.scoreMove ).toBeGreaterThan 0
 
-        it "after the move, the current player SHOULD be player1", ->
-          expect( game.currentPlayer ).toBe game.player1
+        it "the amount of move from player1 SHOULD be 1", ->
+          expect( game.player1.moveCount() ).toBe 1
 
+        it "after the move, the current player SHOULD be player2", ->
+          expect( game.currentPlayer ).toBe game.player2
+
+        describe "a second moving to {x1: 2, y1: 2, x2: 2, y2: 1} ", ->
+          beforeEach -> game.move {x1: 2, y1: 2, x2: 2, y2: 1}
+
+          it "the amount of move from player2 SHOULD be 1", ->
+            expect( game.player2.moveCount() ).toBe 1
+
+          it "the score of the last move SHOULD be greater than 0", ->
+            expect( game.lastMove.scoreMove ).toBeGreaterThan 0
+
+          it "after the move, the current player SHOULD be player1", ->
+            expect( game.currentPlayer ).toBe game.player1
+
+    describe "by clicking", ->
 
 describe "Game View Class", ->
   {View} = Game
