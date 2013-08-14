@@ -21,7 +21,7 @@ Game = Scrabble.Game = class
     @move = (swapCoordinates) =>
       @lastMove = $.extend {}, {swapCoordinates}
       $.extend @lastMove, @currentPlayer.move {board: @board, swapCoordinates}
-      @currentPlayer = @player2
+      @currentPlayer = if @currentPlayer is @player1 then @player2 else @player1
 
     VIEW or= DEFAULT_VIEW
     @view = new View

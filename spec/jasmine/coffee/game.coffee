@@ -142,7 +142,11 @@ describe "Game class", ->
         it "the amount of move from player2 SHOULD be 1", ->
           expect( game.player2.moveCount() ).toBe 1
 
-        #console.warn game.lastMove.newWords, game.lastMove.scoreMove
+        it "the score of the last move SHOULD be greater than 0", ->
+          expect( game.lastMove.scoreMove ).toBeGreaterThan 0
+
+        it "after the move, the current player SHOULD be player1", ->
+          expect( game.currentPlayer ).toBe game.player1
 
 
 describe "Game View Class", ->
