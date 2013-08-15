@@ -170,18 +170,16 @@ describe "Game View Class", ->
         expect( ($ 'li', $uls[0]).length ).toBe 4
 
     describe "Watching tiles", ->
-      view = $tile_1_1 = tile = undefined
+      $lis      = -> $ '#grid li', DOM
+      $tile_1_1 = -> $ $lis()[5]
+      view = tile = undefined
       beforeEach ->
-        view = new View context: DOM, grid: 'grid'
+        view = new View context: DOM, grid: 'grid', game: game
         view.watchTiles (obj) -> tile = obj
-        $lis = $ '#grid li', DOM
-        $tile_1_1 = $ $lis[5]
         tile = undefined
 
       describe "Watching by click", ->
-
-        beforeEach ->
-          $tile_1_1.click()
+        beforeEach -> $tile_1_1().click()
 
         it "an object should be catch by watchTiles", ->
           runs -> expect(tile).toBeDefined()
@@ -198,17 +196,25 @@ describe "Game View Class", ->
         it "the coordinate tile catch by watchTiles should be {x:1, y:1}", ->
           runs -> expect(tile.coordinate).toEqual x: 1, y: 1
 
+      describe "Updating grid with watcher", ->
+        beforeEach ->
+          view.updateGrid()
+          $tile_1_1().click()
+
+        it "the watcher SHOULD be working", ->
+          #runs -> expect(tile).toBeDefined()
+
       describe "Unwatching tile", ->
 
         beforeEach ->
           view.unwatchTiles()
 
         it "the unwatchTiles should detaches all event handlers registered", ->
-          $tile_1_1.click()
+          $tile_1_1().click()
           runs -> expect(tile).not.toBeDefined()
 
       describe "Watching by swipe right", ->
-        beforeEach -> $tile_1_1.trigger 'swipeRight'
+        beforeEach -> $tile_1_1().trigger 'swipeRight'
 
         it "an object should be catch by watchTiles", ->
           runs -> expect(tile).toBeDefined()
@@ -217,7 +223,7 @@ describe "Game View Class", ->
           runs -> expect(tile.swipeCoordinate).toEqual x: 2, y: 1
 
       describe "Watching by swipe left", ->
-        beforeEach -> $tile_1_1.trigger 'swipeLeft'
+        beforeEach -> $tile_1_1().trigger 'swipeLeft'
 
         it "after swipe left, the swipe coordinate catch by watchTiles should be {x:0, y:1}", ->
           runs -> expect(tile.swipeCoordinate).toEqual x: 0, y: 1
@@ -226,7 +232,7 @@ describe "Game View Class", ->
           runs -> expect(tile.swapCoordinate).toBeDefined()
 
       describe "Watching by swipe up", ->
-        beforeEach -> $tile_1_1.trigger 'swipeUp'
+        beforeEach -> $tile_1_1().trigger 'swipeUp'
 
         it "after swipe up, the swipe coordinate catch by watchTiles should be {x:1, y:0}", ->
           runs -> expect(tile.swipeCoordinate).toEqual x: 1, y: 0
@@ -235,7 +241,7 @@ describe "Game View Class", ->
           runs -> expect(tile.swapCoordinate).toEqual {x1: 1, y1: 1, x2: 1, y2: 0}
 
       describe "Watching by swipe down", ->
-        beforeEach -> $tile_1_1.trigger 'swipeDown'
+        beforeEach -> $tile_1_1().trigger 'swipeDown'
 
         it "after swipe down, the swipe coordinate catch by watchTiles should be {x:1, y:2}", ->
           runs -> expect(tile.swipeCoordinate).toEqual x: 1, y: 2
