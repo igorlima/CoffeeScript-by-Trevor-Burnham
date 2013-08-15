@@ -128,14 +128,16 @@
         name: 'Player 2'
       });
       this.move = function(swapCoordinates) {
+        var moveScore;
         _this.lastMove = $.extend({}, {
           swapCoordinates: swapCoordinates
         });
-        if (Scrabble.Util.isValidSwapCoordinates(swapCoordinates)) {
-          $.extend(_this.lastMove, _this.currentPlayer.move({
-            board: _this.board,
-            swapCoordinates: swapCoordinates
-          }));
+        moveScore = _this.currentPlayer.move({
+          board: _this.board,
+          swapCoordinates: swapCoordinates
+        });
+        if (moveScore) {
+          $.extend(_this.lastMove, moveScore);
           _this.currentPlayer = _this.currentPlayer === _this.player1 ? _this.player2 : _this.player1;
           _this.view.updateGrid();
         }

@@ -20,8 +20,9 @@ Game = Scrabble.Game = class
     @player2 = player2 or new Scrabble.Player name: 'Player 2'
     @move = (swapCoordinates) =>
       @lastMove = $.extend {}, {swapCoordinates}
-      if Scrabble.Util.isValidSwapCoordinates swapCoordinates
-        $.extend @lastMove, @currentPlayer.move {board: @board, swapCoordinates}
+      moveScore = @currentPlayer.move {board: @board, swapCoordinates}
+      if moveScore
+        $.extend @lastMove, moveScore
         @currentPlayer = if @currentPlayer is @player1 then @player2 else @player1
         @view.updateGrid()
       @lastMove
