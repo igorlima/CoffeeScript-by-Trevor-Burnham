@@ -161,14 +161,12 @@
         if (_this.view.selectedTile == null) {
           _this.view.selectedTile = $.extend({}, tile);
           return _this.view.selectedTile.$el.addClass('selected');
-        } else if (_this.view.selectedTile.el === tile.el) {
-          _this.view.selectedTile.$el.removeClass('selected');
-          return _this.view.selectedTile = void 0;
         } else {
           firstCoord = _this.view.selectedTile.coordinate;
           secondCoord = tile.coordinate;
           swapCoordinates = Scrabble.Util.createSwapCoordinate(firstCoord, secondCoord);
           _this.move(swapCoordinates);
+          _this.view.selectedTile.$el.removeClass('selected');
           return _this.view.selectedTile = void 0;
         }
       });

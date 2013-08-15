@@ -43,14 +43,12 @@ Game = Scrabble.Game = class
       unless @view.selectedTile?
         @view.selectedTile = $.extend {}, tile
         @view.selectedTile.$el.addClass 'selected'
-      else if @view.selectedTile.el is tile.el
-        @view.selectedTile.$el.removeClass 'selected'
-        @view.selectedTile = undefined
       else
         firstCoord  = @view.selectedTile.coordinate
         secondCoord = tile.coordinate
         swapCoordinates = Scrabble.Util.createSwapCoordinate firstCoord, secondCoord
         @move swapCoordinates
+        @view.selectedTile.$el.removeClass 'selected'
         @view.selectedTile = undefined
     @
 

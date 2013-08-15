@@ -154,6 +154,7 @@ describe "Game class", ->
       $lis     = -> $ '#grid li', DOM
       tile_3_1 = -> $lis()[8]
       tile_3_2 = -> $lis()[13]
+      tile_3_3 = -> $lis()[18]
       DOM = undefined
       beforeEach ->
         DOM = $ DOM_STRINGFIED
@@ -177,6 +178,13 @@ describe "Game class", ->
 
         it "the tile SHOULD be selected", ->
           expect( $tile_3_1().hasClass('selected') ).toBe true
+
+        describe "a second click on a invalid tile (3, 3) ", ->
+          $tile_3_3 = -> $ tile_3_3()
+          beforeEach -> $tile_3_3().click()
+
+          it "the tile SHOULD not be selected", ->
+            expect( $tile_3_1().hasClass('selected') ).not.toBe true
 
         describe "a second click on the same tile (3, 1) ", ->
           beforeEach -> $tile_3_1().click()
