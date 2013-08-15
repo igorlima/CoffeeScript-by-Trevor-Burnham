@@ -131,11 +131,13 @@
         _this.lastMove = $.extend({}, {
           swapCoordinates: swapCoordinates
         });
-        $.extend(_this.lastMove, _this.currentPlayer.move({
-          board: _this.board,
-          swapCoordinates: swapCoordinates
-        }));
-        return _this.currentPlayer = _this.currentPlayer === _this.player1 ? _this.player2 : _this.player1;
+        if (Scrabble.Util.isValidSwapCoordinates(swapCoordinates)) {
+          $.extend(_this.lastMove, _this.currentPlayer.move({
+            board: _this.board,
+            swapCoordinates: swapCoordinates
+          }));
+          return _this.currentPlayer = _this.currentPlayer === _this.player1 ? _this.player2 : _this.player1;
+        }
       };
       VIEW || (VIEW = DEFAULT_VIEW);
       this.view = new View({
@@ -158,9 +160,7 @@
           firstCoord = _this.view.selectedTile.coordinate;
           secondCoord = tile.coordinate;
           swapCoordinates = Scrabble.Util.createSwapCoordinate(firstCoord, secondCoord);
-          _this.lastMove = {
-            swapCoordinates: swapCoordinates
-          };
+          _this.move(swapCoordinates);
           return _this.view.selectedTile = void 0;
         }
       });

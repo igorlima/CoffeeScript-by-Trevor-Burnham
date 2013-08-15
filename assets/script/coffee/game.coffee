@@ -20,8 +20,9 @@ Game = Scrabble.Game = class
     @player2 = player2 or new Scrabble.Player name: 'Player 2'
     @move = (swapCoordinates) =>
       @lastMove = $.extend {}, {swapCoordinates}
-      $.extend @lastMove, @currentPlayer.move {board: @board, swapCoordinates}
-      @currentPlayer = if @currentPlayer is @player1 then @player2 else @player1
+      if Scrabble.Util.isValidSwapCoordinates swapCoordinates
+        $.extend @lastMove, @currentPlayer.move {board: @board, swapCoordinates}
+        @currentPlayer = if @currentPlayer is @player1 then @player2 else @player1
 
     VIEW or= DEFAULT_VIEW
     @view = new View
@@ -42,7 +43,7 @@ Game = Scrabble.Game = class
         firstCoord  = @view.selectedTile.coordinate
         secondCoord = tile.coordinate
         swapCoordinates = Scrabble.Util.createSwapCoordinate firstCoord, secondCoord
-        @lastMove = {swapCoordinates}
+        @move swapCoordinates
         @view.selectedTile = undefined
     @
 

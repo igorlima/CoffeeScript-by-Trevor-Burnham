@@ -175,6 +175,12 @@ describe "Game class", ->
         it "last move SHOULD not be defined", ->
           expect( game.lastMove ).not.toBeDefined()
 
+        describe "a second click on the same tile (3, 1) ", ->
+          beforeEach -> $tile_3_1.click()
+
+          it "the current player SHOULD be player1", ->
+            expect( game.currentPlayer is game.player1 ).toBe true
+
         describe "a second click on (3, 2) ", ->
           $tile_3_2 = tile_3_2 = undefined
           beforeEach ->
@@ -192,6 +198,9 @@ describe "Game class", ->
 
           it "last move SHOULD have a swapCoordinate as {x1: 3, y1: 1, x2: 3, y2: 2} ", ->
             expect( game.lastMove?.swapCoordinates ).toEqual {x1: 3, y1: 1, x2: 3, y2: 2}
+
+          it "the score of the last move SHOULD be greater than 0", ->
+            expect( game.lastMove.scoreMove ).toBeGreaterThan 0
 
 
 describe "Game View Class", ->
