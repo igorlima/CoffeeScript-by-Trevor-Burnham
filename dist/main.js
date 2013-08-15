@@ -957,12 +957,12 @@
   };
 
   Util.isValidSwapCoordinates = function(_arg) {
-    var isMovingDiagonaly, isMovingHorizontaly, isMovingVerticaly, isValid, range, x1, x2, y1, y2;
+    var isMovingDiagonaly, isValid, movingHorizontaly, movingVerticaly, range, x1, x2, y1, y2;
     x1 = _arg.x1, y1 = _arg.y1, x2 = _arg.x2, y2 = _arg.y2, range = _arg.range;
-    isMovingHorizontaly = Math.abs(x2 - x1) === 1;
-    isMovingVerticaly = Math.abs(y2 - y1) === 1;
-    isMovingDiagonaly = isMovingHorizontaly && isMovingVerticaly;
-    isValid = isMovingDiagonaly ? false : isMovingHorizontaly || isMovingVerticaly;
+    movingHorizontaly = Math.abs(x2 - x1);
+    movingVerticaly = Math.abs(y2 - y1);
+    isMovingDiagonaly = (movingHorizontaly > 0) && (movingVerticaly > 0);
+    isValid = isMovingDiagonaly ? false : (movingHorizontaly === 1) || (movingVerticaly === 1);
     if (isValid && (range != null)) {
       return this.inRange({
         x: x1,

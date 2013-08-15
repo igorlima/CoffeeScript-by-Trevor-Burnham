@@ -171,6 +171,9 @@ describe "Util class", ->
     it "from (x: 1, y: 0) to (x: 0, y: 0) whith the range as 4 SHOULD be a valid move", ->
       expect( Util.isValidSwapCoordinates x1: 1, y1: 0, x2: 0, y2: 0, range: 4 ).toBe true
 
+    it "from (4, 0) to (2, 1) with range as 5 SHOULD not be a valid move", ->
+      expect( Util.isValidSwapCoordinates x1: 4, y1: 0, x2: 2, y2: 1, range: 5 ).not.toBe true
+
   describe "creating a swap coordinate", ->
 
     it "{x:1, y:2} and {x:2, y:2} are given, then the swap coordinate should be {x1: 1, y1: 2, x2: 2, y2: 2}", ->
