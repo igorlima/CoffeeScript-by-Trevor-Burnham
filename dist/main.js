@@ -159,7 +159,8 @@
       this.view.watchTiles(function(tile) {
         var firstCoord, secondCoord, swapCoordinates;
         if (_this.view.selectedTile == null) {
-          return _this.view.selectedTile = $.extend({}, tile);
+          _this.view.selectedTile = $.extend({}, tile);
+          return _this.view.selectedTile.$el.addClass('selected');
         } else {
           firstCoord = _this.view.selectedTile.coordinate;
           secondCoord = tile.coordinate;

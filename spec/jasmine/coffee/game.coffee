@@ -160,10 +160,8 @@ describe "Game class", ->
         game.new {board, DOM}
 
       describe "a first click on (3, 1) ", ->
-        $tile_3_1 = undefined
-        beforeEach ->
-          $tile_3_1 = $ tile_3_1()
-          $tile_3_1.click()
+        $tile_3_1 = -> $ tile_3_1()
+        beforeEach -> $tile_3_1().click()
 
         it "the selected tile on game view SHOULD be defined", ->
           expect( game.view.selectedTile ).toBeDefined()
@@ -177,8 +175,11 @@ describe "Game class", ->
         it "last move SHOULD not be defined", ->
           expect( game.lastMove ).not.toBeDefined()
 
+        it "the tile SHOULD be selected", ->
+          expect( $tile_3_1().hasClass('selected') ).toBe true
+
         describe "a second click on the same tile (3, 1) ", ->
-          beforeEach -> $tile_3_1.click()
+          beforeEach -> $tile_3_1().click()
 
           it "the current player SHOULD be player1", ->
             expect( game.currentPlayer is game.player1 ).toBe true

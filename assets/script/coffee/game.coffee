@@ -42,6 +42,7 @@ Game = Scrabble.Game = class
     @view.watchTiles (tile) =>
       unless @view.selectedTile?
         @view.selectedTile = $.extend {}, tile
+        @view.selectedTile.$el.addClass 'selected'
       else
         firstCoord  = @view.selectedTile.coordinate
         secondCoord = tile.coordinate
