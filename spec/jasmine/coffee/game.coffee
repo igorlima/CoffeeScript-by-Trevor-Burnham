@@ -151,16 +151,16 @@ describe "Game class", ->
             expect( game.currentPlayer ).toBe game.player1
 
     describe "by clicking", ->
-      DOM = $lis = undefined
+      $lis = -> $ '#grid li', DOM
+      DOM = undefined
       beforeEach ->
         DOM = $ DOM_STRINGFIED
         game.new {board, DOM}
-        $lis = $ '#grid li', DOM
 
       describe "a first click on (3, 1) ", ->
         $tile_3_1 = tile_3_1 = undefined
         beforeEach ->
-          $tile_3_1 = $ tile_3_1 = $lis[8]
+          $tile_3_1 = $ tile_3_1 = $lis()[8]
           $tile_3_1.click()
 
         it "the selected tile on game view SHOULD be defined", ->
@@ -187,7 +187,7 @@ describe "Game class", ->
         describe "a second click on (3, 2) ", ->
           $tile_3_2 = tile_3_2 = undefined
           beforeEach ->
-            $tile_3_2 = $ tile_3_2 = $lis[13]
+            $tile_3_2 = $ tile_3_2 = $lis()[13]
             $tile_3_2.click()
 
           it "the selected tile on game view SHOULD not be defined", ->
