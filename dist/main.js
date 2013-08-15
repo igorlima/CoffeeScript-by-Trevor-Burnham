@@ -151,7 +151,18 @@
       this.view.updatePlayerNames();
       this.view.updateGrid();
       this.view.watchTiles(function(tile) {
-        return _this.view.selectedTile = tile;
+        var firstCoord, secondCoord, swapCoordinates;
+        if (_this.view.selectedTile == null) {
+          return _this.view.selectedTile = $.extend({}, tile);
+        } else {
+          firstCoord = _this.view.selectedTile.coordinate;
+          secondCoord = tile.coordinate;
+          swapCoordinates = Scrabble.Util.createSwapCoordinate(firstCoord, secondCoord);
+          _this.lastMove = {
+            swapCoordinates: swapCoordinates
+          };
+          return _this.view.selectedTile = void 0;
+        }
       });
       return this;
     };

@@ -172,11 +172,26 @@ describe "Game class", ->
         it "the coordinate SHOULD be {x:3, y:1}", ->
           expect( game.view.selectedTile.coordinate ).toEqual x: 3, y: 1
 
+        it "last move SHOULD not be defined", ->
+          expect( game.lastMove ).not.toBeDefined()
+
         describe "a second click on (3, 2) ", ->
           $tile_3_2 = tile_3_2 = undefined
           beforeEach ->
-            $tile_3_2 = $ tile_3_2 = $lis[23]
+            $tile_3_2 = $ tile_3_2 = $lis[13]
             $tile_3_2.click()
+
+          it "the selected tile on game view SHOULD not be defined", ->
+            expect( game.view.selectedTile ).not.toBeDefined()
+
+          it "last move SHOULD be defined", ->
+            expect( game.lastMove ).toBeDefined()
+
+          it "last move SHOULD have a swapCoordinate", ->
+            expect( game.lastMove.swapCoordinates ).toBeDefined()
+
+          it "last move SHOULD have a swapCoordinate as {x1: 3, y1: 1, x2: 3, y2: 2} ", ->
+            expect( game.lastMove?.swapCoordinates ).toEqual {x1: 3, y1: 1, x2: 3, y2: 2}
 
 
 describe "Game View Class", ->

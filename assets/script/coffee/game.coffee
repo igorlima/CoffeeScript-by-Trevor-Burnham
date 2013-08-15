@@ -36,7 +36,14 @@ Game = Scrabble.Game = class
     @view.updatePlayerNames()
     @view.updateGrid()
     @view.watchTiles (tile) =>
-      @view.selectedTile = tile
+      unless @view.selectedTile?
+        @view.selectedTile = $.extend {}, tile
+      else
+        firstCoord  = @view.selectedTile.coordinate
+        secondCoord = tile.coordinate
+        swapCoordinates = Scrabble.Util.createSwapCoordinate firstCoord, secondCoord
+        @lastMove = {swapCoordinates}
+        @view.selectedTile = undefined
     @
 
 View = Game.View = class
