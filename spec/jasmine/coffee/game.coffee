@@ -187,6 +187,12 @@ describe "Game class", ->
           it "the player1 score SHOULD be 0", ->
             expect( game.player1.score() ).toBe 0
 
+          it "the tile SHOULD not be selected", ->
+            expect( $tile_3_1().hasClass('selected') ).not.toBe true
+
+          it "the selected tile SHOULD not be defined", ->
+            expect( game.view.selectedTile ).not.toBeDefined()
+
         describe "a second click on (3, 2) ", ->
           $tile_3_2 = undefined
           beforeEach ->
