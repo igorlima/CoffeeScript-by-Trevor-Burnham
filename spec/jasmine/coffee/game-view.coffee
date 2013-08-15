@@ -202,7 +202,7 @@ describe "Game View Class", ->
           $tile_1_1().click()
 
         it "the watcher SHOULD be working", ->
-          #runs -> expect(tile).toBeDefined()
+          runs -> expect(tile).toBeDefined()
 
       describe "Unwatching tile", ->
 
@@ -212,6 +212,9 @@ describe "Game View Class", ->
         it "the unwatchTiles should detaches all event handlers registered", ->
           $tile_1_1().click()
           runs -> expect(tile).not.toBeDefined()
+
+        it "watcherTiles SHOULD be empty", ->
+          expect( view.watcherTiles?.length ).toBe 0
 
       describe "Watching by swipe right", ->
         beforeEach -> $tile_1_1().trigger 'swipeRight'

@@ -51,13 +51,13 @@ Game = Scrabble.Game = class
 
 View = Game.View = class
   constructor: ({p1score, p2score, p1name, p2name, context, grid, @game}={}) ->
+    @watcherTiles = []
+
     @$p1name  = $ "##{p1name}", context
     @$p1score = $ "##{p1score}", context
-
     @$p2name  = $ "##{p2name}", context
     @$p2score = $ "##{p2score}", context
-
-    @$grid = $ "##{grid}", context
+    @$grid    = $ "##{grid}", context
 
   updateScore: ->
     @$p1score.html 0
@@ -69,8 +69,14 @@ View = Game.View = class
 
   updateGrid: ->
     @$grid.empty().append( View.createGrid @game.board.matrix() )
+    @registerWatchTiles watcher for watcher in @watcherTiles
+    @$grid
 
   watchTiles: (callback) ->
+    @watcherTiles.push callback
+    @registerWatchTiles callback
+
+  registerWatchTiles: (callback) ->
     $grid = @$grid
     tile = {}
     $grid.find('li').on
@@ -88,6 +94,7 @@ View = Game.View = class
       "swipeDown":  -> $(@).trigger 'catchTileInfo', {y: 1}
 
   unwatchTiles: ->
+    @watcherTiles = []
     @$grid.find('li').off()
 
 View.showMessage = ({message, context, id}={}) ->

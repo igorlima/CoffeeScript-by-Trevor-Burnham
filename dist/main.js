@@ -177,6 +177,7 @@
     function _Class(_arg) {
       var context, grid, p1name, p1score, p2name, p2score, _ref;
       _ref = _arg != null ? _arg : {}, p1score = _ref.p1score, p2score = _ref.p2score, p1name = _ref.p1name, p2name = _ref.p2name, context = _ref.context, grid = _ref.grid, this.game = _ref.game;
+      this.watcherTiles = [];
       this.$p1name = $("#" + p1name, context);
       this.$p1score = $("#" + p1score, context);
       this.$p2name = $("#" + p2name, context);
@@ -195,10 +196,22 @@
     };
 
     _Class.prototype.updateGrid = function() {
-      return this.$grid.empty().append(View.createGrid(this.game.board.matrix()));
+      var watcher, _i, _len, _ref;
+      this.$grid.empty().append(View.createGrid(this.game.board.matrix()));
+      _ref = this.watcherTiles;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        watcher = _ref[_i];
+        this.registerWatchTiles(watcher);
+      }
+      return this.$grid;
     };
 
     _Class.prototype.watchTiles = function(callback) {
+      this.watcherTiles.push(callback);
+      return this.registerWatchTiles(callback);
+    };
+
+    _Class.prototype.registerWatchTiles = function(callback) {
       var $grid, tile;
       $grid = this.$grid;
       tile = {};
@@ -251,6 +264,7 @@
     };
 
     _Class.prototype.unwatchTiles = function() {
+      this.watcherTiles = [];
       return this.$grid.find('li').off();
     };
 
