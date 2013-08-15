@@ -3,7 +3,7 @@ module.exports = (grunt) ->
     jasmine:
       options:
         specs:   'spec/jasmine/js/**/*.js'
-        vendor:  ['lib/dom/zepto.min.js', 'lib/dom/zepto-touch.js', 'lib/word.js']
+        vendor:  ['lib/dom/zepto.min.js', 'lib/dom/zepto-touch.js']
         version: '1.3.1'
       all:
         src: ['assets/script/js/**/*.js']
