@@ -151,23 +151,32 @@ describe "Game class", ->
             expect( game.currentPlayer ).toBe game.player1
 
     describe "by clicking", ->
-      DOM = undefined
+      DOM = $lis = undefined
       beforeEach ->
         DOM = $ DOM_STRINGFIED
         game.new {board, DOM}
+        $lis = $ '#grid li', DOM
 
       describe "a first click on (3, 1) ", ->
         $tile_3_1 = tile_3_1 = undefined
         beforeEach ->
-          $lis = $ '#grid li', DOM
-          $tile_3_1 = $ tile_3_1 = $lis[18]
+          $tile_3_1 = $ tile_3_1 = $lis[8]
           $tile_3_1.click()
 
         it "the selected tile on game view SHOULD be defined", ->
           expect( game.view.selectedTile ).toBeDefined()
 
-        it "the selected tile SHOULD be a coordinate", ->
+        it "the selected tile SHOULD have a coordinate", ->
           expect( game.view.selectedTile.coordinate ).toBeDefined()
+
+        it "the coordinate SHOULD be {x:3, y:1}", ->
+          expect( game.view.selectedTile.coordinate ).toEqual x: 3, y: 1
+
+        describe "a second click on (3, 2) ", ->
+          $tile_3_2 = tile_3_2 = undefined
+          beforeEach ->
+            $tile_3_2 = $ tile_3_2 = $lis[23]
+            $tile_3_2.click()
 
 
 describe "Game View Class", ->
