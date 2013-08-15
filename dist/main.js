@@ -136,8 +136,10 @@
             board: _this.board,
             swapCoordinates: swapCoordinates
           }));
-          return _this.currentPlayer = _this.currentPlayer === _this.player1 ? _this.player2 : _this.player1;
+          _this.currentPlayer = _this.currentPlayer === _this.player1 ? _this.player2 : _this.player1;
+          _this.view.updateGrid();
         }
+        return _this.lastMove;
       };
       VIEW || (VIEW = DEFAULT_VIEW);
       this.view = new View({

@@ -209,3 +209,6 @@ describe "Game class", ->
 
           it "after player1 moved, the current palyer SHOULD be player2", ->
             expect( game.currentPlayer is game.player2 ).toBe true
+
+          it "after swaped, the tile (3, 1) SHOULD be a letter 'D'", ->
+            expect( tile_3_1()?.innerHTML ).toBe 'D'

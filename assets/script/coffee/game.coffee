@@ -23,6 +23,8 @@ Game = Scrabble.Game = class
       if Scrabble.Util.isValidSwapCoordinates swapCoordinates
         $.extend @lastMove, @currentPlayer.move {board: @board, swapCoordinates}
         @currentPlayer = if @currentPlayer is @player1 then @player2 else @player1
+        @view.updateGrid()
+      @lastMove
 
     VIEW or= DEFAULT_VIEW
     @view = new View
