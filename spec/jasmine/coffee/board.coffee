@@ -55,17 +55,28 @@ describe "Board class", ->
       letters = printing.match /[A-Z]/g
       expect( letters.length ).toBe 16
 
-    it "the matrix of board should have 4 rows and 4 columns in a grid 4x4", ->
-      matrix = generic_board.matrix()
-      expect( matrix.length ).toBe 4
-      expect( matrix[0].length ).toBe 4
-      expect( matrix[1].length ).toBe 4
-      expect( matrix[2].length ).toBe 4
-      expect( matrix[3].length ).toBe 4
-
     it "coordinates (2,3) should be set", ->
       expect(generic_board.set x: 2, y: 3, value: 'a').toBe true
       expect(generic_board.get x: 2, y: 3).toBe 'a'
+
+    describe "the matrix of the board", ->
+      matrix = undefined
+      beforeEach -> matrix = generic_board.matrix()
+
+      it "matrix SHOULD be 4 lines", ->
+        expect( matrix.length ).toBe 4
+
+      it "first line SHOULD be 4 elements", ->
+        expect( matrix[0]?.length ).toBe 4
+
+      it "second line SHOULD be 4 elements", ->
+        expect( matrix[1]?.length ).toBe 4
+
+      it "third line SHOULD be 4 elements", ->
+        expect( matrix[2]?.length ).toBe 4
+
+      it "forth line SHOULD be 4 elements", ->
+        expect( matrix[3]?.length ).toBe 4
 
   describe "Using a given grid instead of a randomic one", ->
     board_with_a_given_matrix_not_quadratic = new Board size: 4, words: ['DO', 'GET', 'AS'], grid: [['D', 'A']]
