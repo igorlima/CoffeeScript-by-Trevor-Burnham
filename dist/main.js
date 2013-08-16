@@ -5,7 +5,7 @@
 
   Board = Scrabble.Board = (function() {
     function _Class(_arg) {
-      var grid, score, size, wordList, words;
+      var grid, size, wordList, words;
       size = _arg.size, words = _arg.words, grid = _arg.grid;
       if (Scrabble.Util.isMatrixQuadratic(grid)) {
         size = Scrabble.Util.sizeMatrix(grid);
@@ -20,9 +20,9 @@
         size: size,
         words: words
       });
-      score = new Scrabble.Score({
+      this.score = new Scrabble.Score({
         grid: grid,
-        dictionary: words
+        dictionary: wordList
       });
       this.size = function() {
         return size;
@@ -34,7 +34,7 @@
         });
       };
       this.move = function(swapCoordinates) {
-        return score.moveScore(swapCoordinates);
+        return this.score.moveScore(swapCoordinates);
       };
       this.str = function() {
         return Scrabble.Util.printGrid(grid);

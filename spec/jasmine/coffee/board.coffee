@@ -3,7 +3,7 @@ Board = Scrabble.Board
 describe "Board class", ->
 
   describe "a generic board", ->
-    generic_board = new Board size: 4, words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
+    generic_board = new Board size: 4, words: ['DOES', 'DO', 'DID', 'GET', 'MOVE', 'MOVED']
 
     it "an exception will be raised if a 'words' property is not given", ->
       expect( -> new Board size: 2 ).toThrow()
@@ -43,6 +43,9 @@ describe "Board class", ->
 
     it "the word 'THINKING' should NOT be a word from a board that the grid has a size 4", ->
       expect( generic_board.isWord 'THINKING' ).toBe false
+
+    it "the word 'MOVED' SHOULD not be scored, because it has 5 letters and the board is 4x4", ->
+      expect( generic_board.score?.scoreWord? 'MOVED' ).toBe 0
 
     it "the printing of grid should be defined", ->
       expect( generic_board.str() ).toBeDefined()

@@ -9,12 +9,12 @@ Board = Scrabble.Board = class
     unless Board.isValidSize size then throw new Error "Grid size not given"
     grid or= Scrabble.Util.generateGrid size
     wordList = Scrabble.Util.wordList {size, words}
-    score = new Scrabble.Score grid: grid, dictionary: words
+    @score = new Scrabble.Score grid: grid, dictionary: wordList
 
     @size = -> size
     @isWord = (str) ->
       Scrabble.WordFinder.isWord word: str, dictionary: wordList
-    @move = (swapCoordinates) -> score.moveScore swapCoordinates
+    @move = (swapCoordinates) -> @score.moveScore swapCoordinates
 
     @str = -> Scrabble.Util.printGrid grid
     @matrix = -> Scrabble.Util.matrix grid
