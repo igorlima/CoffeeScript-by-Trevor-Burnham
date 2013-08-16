@@ -108,7 +108,7 @@ describe "Game class", ->
         ]
       game = new Game words: words
 
-    describe "by method game.move(...)", ->
+    describe "method game.move(...)", ->
       beforeEach -> game.new {board}
 
       describe "a first moving to {x1: 3, y1: 3, x2: 3, y2: 4} ", ->
