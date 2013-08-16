@@ -140,14 +140,25 @@ describe "Game View Class", ->
       expect( view.game ).toBeDefined()
 
   describe "DOM", ->
+    $p1score = -> $ "#p1score", DOM
+    $p2score = -> $ "#p2score", DOM
+    p1score  = -> +$p1score().html()
+    p2score  = -> +$p2score().html()
 
     describe "Updating the score", ->
 
       it "the player 1 score should be set", ->
-        expect( $("#p1score", DOM).html() ).toBe '0'
+        expect( p1score() ).toBe 0
 
       it "the player 2 score should be set", ->
-        expect( $("#p2score", DOM).html() ).toBe '0'
+        expect( p2score() ).toBe 0
+
+      describe "first move", ->
+        beforeEach -> game.move x1: 3, y1: 2, x2: 3, y2: 3
+
+        it "the player 1 score SHOULD be greater than 0", ->
+          #expect( p1score() ).toBe 0
+
 
     describe "Updating player names", ->
 
