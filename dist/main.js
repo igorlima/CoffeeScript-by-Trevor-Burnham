@@ -355,7 +355,7 @@
         result = board.move(swapCoordinates);
         if (result != null) {
           moveCount++;
-          score += result.scoreMove;
+          score += result.points;
         }
         return result;
       };
@@ -501,7 +501,7 @@
         after: words_after_moving
       });
       return {
-        scoreMove: this.scoreWords(new_words),
+        points: this.scoreWords(new_words),
         newWords: new_words
       };
     }

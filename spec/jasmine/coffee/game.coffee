@@ -120,8 +120,8 @@ describe "Game class", ->
         it "lastMove SHOULD have a swapCoordinates", ->
           expect( game.lastMove.swapCoordinates ).toBeDefined()
 
-        it "lastMove SHOULD have scoreMove", ->
-          expect( game.lastMove.scoreMove ).toBeDefined()
+        it "lastMove SHOULD have points", ->
+          expect( game.lastMove.points ).toBeDefined()
 
         it "a list of words from the last move SHOULD contains only one word", ->
           expect( game.lastMove.newWords?.length ).toBe 1
@@ -129,8 +129,8 @@ describe "Game class", ->
         it "the last move SHOULD contains the word 'MOVE'", ->
           expect( game.lastMove.newWords ).toContain 'MOVE'
 
-        it "the score of the last move SHOULD be greater than 0", ->
-          expect( game.lastMove.scoreMove ).toBeGreaterThan 0
+        it "points from last move SHOULD be greater than 0", ->
+          expect( game.lastMove.points ).toBeGreaterThan 0
 
         it "the amount of move from player1 SHOULD be 1", ->
           expect( game.player1.moveCount() ).toBe 1
@@ -144,8 +144,8 @@ describe "Game class", ->
           it "the amount of move from player2 SHOULD be 1", ->
             expect( game.player2.moveCount() ).toBe 1
 
-          it "the score of the last move SHOULD be greater than 0", ->
-            expect( game.lastMove.scoreMove ).toBeGreaterThan 0
+          it "points from last move SHOULD be greater than 0", ->
+            expect( game.lastMove.points ).toBeGreaterThan 0
 
           it "after the move, the current player SHOULD be player1", ->
             expect( game.currentPlayer ).toBe game.player1
@@ -223,8 +223,8 @@ describe "Game class", ->
           it "last move SHOULD have a swapCoordinate as {x1: 3, y1: 1, x2: 3, y2: 2} ", ->
             expect( game.lastMove?.swapCoordinates ).toEqual {x1: 3, y1: 1, x2: 3, y2: 2}
 
-          it "the score of the last move SHOULD be greater than 0", ->
-            expect( game.lastMove.scoreMove ).toBeGreaterThan 0
+          it "points from last move SHOULD be greater than 0", ->
+            expect( game.lastMove.points ).toBeGreaterThan 0
 
           it "after player1 moved, the current palyer SHOULD be player2", ->
             expect( game.currentPlayer is game.player2 ).toBe true

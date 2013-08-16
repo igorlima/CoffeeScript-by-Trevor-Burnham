@@ -12,5 +12,5 @@ Player = Scrabble.Player = class
       result = board.move swapCoordinates
       if result?
         moveCount++
-        score += result.scoreMove
+        score += result.points
       result
