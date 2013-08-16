@@ -43,11 +43,6 @@ describe "Util class", ->
     options = coordinates: [[],[],['','','','a']], x: 2, y: 3
     expect( Util.getCoordinate options ).toBe 'a'
 
-  it "the generate grid should create a grid 2x2 if the size is 2", ->
-    grid = Util.generateGrid 2
-    expect( grid.length ).toBe 2
-    expect( grid[0].length ).toBe 2
-
   it "the word list with 2 letters should NOT contains the word 'DOES', because it has 4 letters instead", ->
     wordList = Util.wordList size: 2, words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
     expect( wordList ).not.toContain 'DOES'
@@ -103,22 +98,30 @@ describe "Util class", ->
       ['Y', 'A', 'A', 'A']
     ] ).not.toBeDefined()
 
-  describe "letters on grid", ->
+  describe "a grid random 2x2", ->
     grid = undefined
     beforeEach ->
       grid = Util.generateGrid 2
 
-    it "tile (0, 0) SHOULD be a letter from the alphabet", ->
-      expect( Tile.alphabet() ).toContain grid[0][0]
+    it "grid SHOULD have 2 lines", ->
+      expect( grid.length ).toBe 2
 
-    it "tile (0, 1) SHOULD be a letter from the alphabet", ->
-      expect( Tile.alphabet() ).toContain grid[0][1]
+    it "first line SHOULD have a length as 2", ->
+      expect( grid[0].length ).toBe 2
 
-    it "tile (1, 0) SHOULD be a letter from the alphabet", ->
-      expect( Tile.alphabet() ).toContain grid[1][0]
+    describe "letters on grid", ->
 
-    it "tile (1, 1) SHOULD be a letter from the alphabet", ->
-      expect( Tile.alphabet() ).toContain grid[1][1]
+      it "tile (0, 0) SHOULD be a letter from the alphabet", ->
+        expect( Tile.alphabet() ).toContain grid[0][0]
+
+      it "tile (0, 1) SHOULD be a letter from the alphabet", ->
+        expect( Tile.alphabet() ).toContain grid[0][1]
+
+      it "tile (1, 0) SHOULD be a letter from the alphabet", ->
+        expect( Tile.alphabet() ).toContain grid[1][0]
+
+      it "tile (1, 1) SHOULD be a letter from the alphabet", ->
+        expect( Tile.alphabet() ).toContain grid[1][1]
 
   describe "printing a grid 4x4
         A | A | A | A
