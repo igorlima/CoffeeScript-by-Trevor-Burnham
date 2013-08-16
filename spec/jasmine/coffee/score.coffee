@@ -55,13 +55,6 @@ describe "Score class", ->
     expect( score.scoreWord 'CLOUD' ).toBe 0
 
   it "the words from the grid should contain ['DO', 'DOG', 'DOGS', 'SEGA']", ->
-    words = Score.words {grid, dictionary}
-    expect( words ).toContain 'DO'
-    expect( words ).toContain 'DOG'
-    expect( words ).toContain 'DOGS'
-    expect( words ).toContain 'SEGA'
-
-  it "the words from the grid should contain ['DO', 'DOG', 'DOGS', 'SEGA']", ->
     words = score.words()
     expect( words ).toContain 'DO'
     expect( words ).toContain 'DOG'
@@ -131,3 +124,20 @@ describe "Score class", ->
 
     it "forth line SHOULD be 'S | S | I | S'", ->
       expect( grid_string_rows[3] ).toMatch "S [|] S [|] I [|] S"
+
+  describe "list of words from a specific grid and dictionary", ->
+    words = undefined
+    beforeEach ->
+      words = Score.words {grid, dictionary}
+
+    it "it SHOULD contains 'DO'", ->
+      expect( words ).toContain 'DO'
+
+    it "it SHOULD contains 'DOG'", ->
+      expect( words ).toContain 'DOG'
+
+    it "it SHOULD contains 'DOGS'", ->
+      expect( words ).toContain 'DOGS'
+
+    it "it SHOULD contains 'SEGA'", ->
+      expect( words ).toContain 'SEGA'
