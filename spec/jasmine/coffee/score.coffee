@@ -54,20 +54,6 @@ describe "Score class", ->
   it "the point of 'CLOUD' from the object 'score' should be 0, because this word doesn't belong the dictionary", ->
     expect( score.scoreWord 'CLOUD' ).toBe 0
 
-  it "the words 'THINK' and 'BATH' should be new words", ->
-    words_before_moving = ['DOES', 'DO', 'DOGS', 'BOSS']
-    words_after_moving = ['DOES', 'DO', 'THINK', 'BATH']
-    new_words = Score.newWords before: words_before_moving, after: words_after_moving
-    expect( new_words ).toContain 'THINK'
-    expect( new_words ).toContain 'BATH'
-
-  it "the words 'DOES' and 'DO' should NOT be new words, because these words were already in the list", ->
-    words_before_moving = ['DOES', 'DO', 'DOGS', 'BOSS']
-    words_after_moving = ['DOES', 'DO', 'THINK', 'BATH']
-    new_words = Score.newWords before: words_before_moving, after: words_after_moving
-    expect( new_words ).not.toContain 'DOES'
-    expect( new_words ).not.toContain 'DO'
-
   it "the new words 'THINK' and 'BATH' should be scored with 42 points
       THINK has 12 points
       BATH has 9 points
@@ -151,3 +137,23 @@ describe "Score class", ->
 
     it "it SHOULD contains 'SEGA'", ->
       expect( words ).toContain 'SEGA'
+
+  describe "new words", ->
+    new_words = undefined
+    words_before_moving = ['DOES', 'DO', 'DOGS', 'BOSS']
+    words_after_moving = ['DOES', 'DO', 'THINK', 'BATH']
+
+    beforeEach ->
+      new_words = Score.newWords before: words_before_moving, after: words_after_moving
+
+    it "it SHOULD contains 'THINK'", ->
+      expect( new_words ).toContain 'THINK'
+
+    it "it SHOULD contains 'BATH'", ->
+      expect( new_words ).toContain 'BATH'
+
+    it "it SHOULD not contains ''", ->
+      expect( new_words ).not.toContain 'DOES'
+
+    it "it SHOULD not contains ''", ->
+      expect( new_words ).not.toContain 'DO'
