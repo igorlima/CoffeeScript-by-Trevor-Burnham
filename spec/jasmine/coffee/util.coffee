@@ -243,7 +243,7 @@ describe "Util class", ->
       player = score = message = undefined
       beforeEach ->
         player = new Player name: 'John'
-        score = scoreMove: 45, newWords: ['OD', 'HID', 'HO']
+        score = points: 45, newWords: ['OD', 'HID', 'HO']
         message = Util.createMessage {player, score}
 
       it "message SHOULD contain '45 points'", ->
@@ -262,31 +262,24 @@ describe "Util class", ->
         expect( message ).toContain '3 word(s)'
 
       it "message SHOULD contain the player name: John", ->
-        expect( message ).toContain player.name()
+        expect( message ).toContain 'John'
 
     describe "a player Biel scored in 90 points with 4 words ", ->
       player = score = message = undefined
       beforeEach ->
         player = new Player name: 'Biel'
-        score = scoreMove: 90, newWords: ['DID', 'DONE', 'MOVE', 'DO']
+        score = points: 90, newWords: ['DID', 'DONE', 'MOVE', 'DO']
         message = Util.createMessage {player, score}
 
       it "message SHOULD contain '90 points'", ->
         expect( message ).toContain '90 points'
 
-      ###
-      it "message SHOULD contain the word 'OD'", ->
-        expect( message ).toContain 'OD'
+      it "message SHOULD contain the player name: Biel", ->
+        expect( message ).toContain 'Biel'
 
-      it "message SHOULD contain the word 'HID'", ->
-        expect( message ).toContain 'HID'
+      it "message SHOULD contain '4 word(s)'", ->
+        expect( message ).toContain '4 word(s)'
 
-      it "message SHOULD contain the word 'HO'", ->
-        expect( message ).toContain 'HO'
-
-      it "message SHOULD contain '3 word(s)'", ->
-        expect( message ).toContain '3 word(s)'
-
-      it "message SHOULD contain the player name: John", ->
-        expect( message ).toContain player.name()
-      ###
+      it "message SHOULD contain the word 'MOVE'", ->
+        console.warn message
+        expect( message ).toContain 'MOVE'

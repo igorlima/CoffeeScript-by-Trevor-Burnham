@@ -1017,9 +1017,14 @@
   };
 
   Util.createMessage = function(_arg) {
-    var player, score;
+    var message, numberWords, player, playerName, points, score, _ref;
     player = _arg.player, score = _arg.score;
-    return "90 points 45 points OD, HID, HO 3 word(s) John";
+    playerName = player != null ? typeof player.name === "function" ? player.name() : void 0 : void 0;
+    numberWords = score != null ? (_ref = score.newWords) != null ? _ref.length : void 0 : void 0;
+    points = score != null ? score.points : void 0;
+    message = "" + playerName + " formed the following " + numberWords + " word(s): ";
+    message += "" + score.newWords + ". ";
+    return message += "Earning " + points + " points";
   };
 
 }).call(this);

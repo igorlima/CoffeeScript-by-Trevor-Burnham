@@ -70,4 +70,9 @@ Util.createSwipeCoordinate = ({x, y}, {x: xi, y: yi}) ->
   {x, y: y}
 
 Util.createMessage = ({player, score}) ->
-  "90 points 45 points OD, HID, HO 3 word(s) John"
+  playerName  = player?.name?()
+  numberWords = score?.newWords?.length
+  points      = score?.points
+  message  = "#{playerName} formed the following #{numberWords} word(s): "
+  message += "#{score.newWords}. "
+  message += "Earning #{points} points"
