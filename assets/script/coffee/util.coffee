@@ -68,3 +68,6 @@ Util.createSwipeCoordinate = ({x, y}, {x: xi, y: yi}) ->
   x += xi if xi?
   y += yi if yi?
   {x, y: y}
+
+Util.createMessage = ({player, score}) ->
+  "90 points 45 points OD, HID, HO 3 word(s) John"

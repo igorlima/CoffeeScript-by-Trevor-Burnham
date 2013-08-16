@@ -1,4 +1,4 @@
-{Util, Tile} = Scrabble
+{Util, Tile, Player} = Scrabble
 
 describe "Util class", ->
 
@@ -236,3 +236,57 @@ describe "Util class", ->
     it "{x:1, y:2} and {y:-1} are given, then the swipe coordinate should be {x: 1, y: 1}", ->
       coordinate = Util.createSwipeCoordinate {x:1, y:2}, {y:-1}
       expect(coordinate).toEqual {x:1, y:1}
+
+  describe "setting message", ->
+
+    describe "a player John scored in 45 points with 3 words ", ->
+      player = score = message = undefined
+      beforeEach ->
+        player = new Player name: 'John'
+        score = scoreMove: 45, newWords: ['OD', 'HID', 'HO']
+        message = Util.createMessage {player, score}
+
+      it "message SHOULD contain '45 points'", ->
+        expect( message ).toContain '45 points'
+
+      it "message SHOULD contain the word 'OD'", ->
+        expect( message ).toContain 'OD'
+
+      it "message SHOULD contain the word 'HID'", ->
+        expect( message ).toContain 'HID'
+
+      it "message SHOULD contain the word 'HO'", ->
+        expect( message ).toContain 'HO'
+
+      it "message SHOULD contain '3 word(s)'", ->
+        expect( message ).toContain '3 word(s)'
+
+      it "message SHOULD contain the player name: John", ->
+        expect( message ).toContain player.name()
+
+    describe "a player Biel scored in 90 points with 4 words ", ->
+      player = score = message = undefined
+      beforeEach ->
+        player = new Player name: 'Biel'
+        score = scoreMove: 90, newWords: ['DID', 'DONE', 'MOVE', 'DO']
+        message = Util.createMessage {player, score}
+
+      it "message SHOULD contain '90 points'", ->
+        expect( message ).toContain '90 points'
+
+      ###
+      it "message SHOULD contain the word 'OD'", ->
+        expect( message ).toContain 'OD'
+
+      it "message SHOULD contain the word 'HID'", ->
+        expect( message ).toContain 'HID'
+
+      it "message SHOULD contain the word 'HO'", ->
+        expect( message ).toContain 'HO'
+
+      it "message SHOULD contain '3 word(s)'", ->
+        expect( message ).toContain '3 word(s)'
+
+      it "message SHOULD contain the player name: John", ->
+        expect( message ).toContain player.name()
+      ###

@@ -1016,6 +1016,12 @@
     };
   };
 
+  Util.createMessage = function(_arg) {
+    var player, score;
+    player = _arg.player, score = _arg.score;
+    return "90 points 45 points OD, HID, HO 3 word(s) John";
+  };
+
 }).call(this);
 
 (function() {
