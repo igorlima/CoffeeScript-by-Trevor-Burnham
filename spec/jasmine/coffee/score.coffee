@@ -54,13 +54,6 @@ describe "Score class", ->
   it "the point of 'CLOUD' from the object 'score' should be 0, because this word doesn't belong the dictionary", ->
     expect( score.scoreWord 'CLOUD' ).toBe 0
 
-  it "the words from the grid should contain ['DO', 'DOG', 'DOGS', 'SEGA']", ->
-    words = score.words()
-    expect( words ).toContain 'DO'
-    expect( words ).toContain 'DOG'
-    expect( words ).toContain 'DOGS'
-    expect( words ).toContain 'SEGA'
-
   it "the words 'THINK' and 'BATH' should be new words", ->
     words_before_moving = ['DOES', 'DO', 'DOGS', 'BOSS']
     words_after_moving = ['DOES', 'DO', 'THINK', 'BATH']
@@ -129,6 +122,23 @@ describe "Score class", ->
     words = undefined
     beforeEach ->
       words = Score.words {grid, dictionary}
+
+    it "it SHOULD contains 'DO'", ->
+      expect( words ).toContain 'DO'
+
+    it "it SHOULD contains 'DOG'", ->
+      expect( words ).toContain 'DOG'
+
+    it "it SHOULD contains 'DOGS'", ->
+      expect( words ).toContain 'DOGS'
+
+    it "it SHOULD contains 'SEGA'", ->
+      expect( words ).toContain 'SEGA'
+
+  describe "list of words from a score object", ->
+    words = undefined
+    beforeEach ->
+      words = score.words()
 
     it "it SHOULD contains 'DO'", ->
       expect( words ).toContain 'DO'
