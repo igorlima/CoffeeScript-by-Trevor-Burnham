@@ -282,3 +282,10 @@ describe "Util class", ->
 
       it "message SHOULD contain the word 'MOVE'", ->
         expect( message ).toContain 'MOVE'
+
+      it "message SHOULD match with this pattern:
+          <1. player name> formed the following <2. number of words> word(s):
+          <3. list of words>
+          Earning <4. number of points> points
+          ", ->
+        expect( message ).toMatch /Biel (.)+ 4 word(.)+ 90 points/
