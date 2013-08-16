@@ -75,18 +75,6 @@ describe "Util class", ->
     wordList = Util.wordList size: 2, words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
     expect( wordList ).toContain 'DO'
 
-  it "the matrix of following grid 4x4 method should be
-        A | A | A | A
-        X | A | B | A
-        Z | C | A | A
-        Y | A | A | A
-      ", ->
-    matrix = Util.matrix grid_for_matrixing
-    expect( matrix[0] ).toEqual ['A', 'A', 'A', 'A']
-    expect( matrix[1] ).toEqual ['X', 'A', 'B', 'A']
-    expect( matrix[2] ).toEqual ['Z', 'C', 'A', 'A']
-    expect( matrix[3] ).toEqual ['Y', 'A', 'A', 'A']
-
   it "undefined should NOT be a matrix quadratic", ->
     expect( Util.isMatrixQuadratic() ).toBe false
 
@@ -133,6 +121,28 @@ describe "Util class", ->
       ['Z', 'C', 'A']
       ['Y', 'A', 'A', 'A']
     ] ).not.toBeDefined()
+
+  describe "a matrix 4x4
+        A | A | A | A
+        X | A | B | A
+        Z | C | A | A
+        Y | A | A | A
+      ", ->
+    matrix = undefined
+    beforeEach ->
+      matrix = Util.matrix grid_for_matrixing
+
+    it "first line SHOULD be ['A', 'A', 'A', 'A']", ->
+      expect( matrix[0] ).toEqual ['A', 'A', 'A', 'A']
+
+    it "second line SHOULD be ['X', 'A', 'B', 'A']", ->
+      expect( matrix[1] ).toEqual ['X', 'A', 'B', 'A']
+
+    it "third line SHOULD be ['Z', 'C', 'A', 'A']", ->
+      expect( matrix[2] ).toEqual ['Z', 'C', 'A', 'A']
+
+    it "forth line SHOULD be ['Y', 'A', 'A', 'A']", ->
+      expect( matrix[3] ).toEqual ['Y', 'A', 'A', 'A']
 
   describe "minimum word size", ->
     wordList = undefined
