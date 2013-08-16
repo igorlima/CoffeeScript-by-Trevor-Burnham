@@ -13,24 +13,6 @@ describe "Score class", ->
     dictionary = ['DOES', 'DO', 'THINK', 'BATH', 'DOGS', 'BOSS', 'DOG', 'SEGA', 'OGA']
     score = new Score {grid, dictionary}
 
-  it "the letter 'B' should move from (x:1, y:0) to (x:0, y:0)", ->
-    swapCoordinates = x1: 1, y1: 0, x2: 0, y2: 0
-    Score.move {grid, swapCoordinates}
-    matrix = Util.matrix grid
-    expect( matrix[0] ).toMatch ['B', 'D', 'O', 'A']
-    expect( matrix[1] ).toMatch ['D', 'O', 'G', 'S']
-    expect( matrix[2] ).toMatch ['A', 'E', 'S', 'A']
-    expect( matrix[3] ).toMatch ['S', 'S', 'I', 'S']
-
-  it "the letter 'G' should move from (x:2, y:1) to (x:2, y:2)", ->
-    swapCoordinates = x1: 2, y1: 1, x2: 2, y2: 2
-    Score.move {grid, swapCoordinates}
-    matrix = Util.matrix grid
-    expect( matrix[0] ).toMatch ['D', 'B', 'O', 'A']
-    expect( matrix[1] ).toMatch ['D', 'O', 'S', 'S']
-    expect( matrix[2] ).toMatch ['A', 'E', 'G', 'A']
-    expect( matrix[3] ).toMatch ['S', 'S', 'I', 'S']
-
   it "the letter 'G' on (x:2, y:1) should move down", ->
     swapCoordinates = x1: 2, y1: 1, x2: 2, y2: 2
     expect( Score.move {grid, swapCoordinates} ).toBe true
@@ -157,3 +139,43 @@ describe "Score class", ->
 
     it "it SHOULD not contains ''", ->
       expect( new_words ).not.toContain 'DO'
+
+  describe "moving letter 'B' from (x:1, y:0) to (x:0, y:0)", ->
+    matrix = undefined
+    swapCoordinates = x1: 1, y1: 0, x2: 0, y2: 0
+
+    beforeEach ->
+      Score.move {grid, swapCoordinates}
+      matrix = Util.matrix grid
+
+    it "first line SHOULD be ['B', 'D', 'O', 'A']", ->
+      expect( matrix[0] ).toMatch ['B', 'D', 'O', 'A']
+
+    it "second line SHOULD be ['D', 'O', 'G', 'S']", ->
+      expect( matrix[1] ).toMatch ['D', 'O', 'G', 'S']
+
+    it "third line SHOULD be ['A', 'E', 'S', 'A']", ->
+      expect( matrix[2] ).toMatch ['A', 'E', 'S', 'A']
+
+    it "forth line SHOULD be ['S', 'S', 'I', 'S']", ->
+      expect( matrix[3] ).toMatch ['S', 'S', 'I', 'S']
+
+  describe "moving letter 'G' from (x:2, y:1) to (x:2, y:2)", ->
+    matrix = undefined
+    swapCoordinates = x1: 2, y1: 1, x2: 2, y2: 2
+
+    beforeEach ->
+      Score.move {grid, swapCoordinates}
+      matrix = Util.matrix grid
+
+    it "first line SHOULD be ['D', 'B', 'O', 'A']", ->
+      expect( matrix[0] ).toMatch ['D', 'B', 'O', 'A']
+
+    it "second line SHOULD be ['D', 'O', 'S', 'S']", ->
+      expect( matrix[1] ).toMatch ['D', 'O', 'S', 'S']
+
+    it "third line SHOULD be ['A', 'E', 'G', 'A']", ->
+      expect( matrix[2] ).toMatch ['A', 'E', 'G', 'A']
+
+    it "forth line SHOULD be ['S', 'S', 'I', 'S']", ->
+      expect( matrix[3] ).toMatch ['S', 'S', 'I', 'S']
