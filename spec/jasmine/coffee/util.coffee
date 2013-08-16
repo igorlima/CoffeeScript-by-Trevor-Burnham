@@ -48,13 +48,6 @@ describe "Util class", ->
     expect( grid.length ).toBe 2
     expect( grid[0].length ).toBe 2
 
-  it "the generate grid should create a grid with letters from the alphabet", ->
-    grid = Util.generateGrid 2
-    expect( Tile.alphabet() ).toContain grid[0][0]
-    expect( Tile.alphabet() ).toContain grid[0][1]
-    expect( Tile.alphabet() ).toContain grid[1][0]
-    expect( Tile.alphabet() ).toContain grid[1][1]
-
   it "the word list with 2 letters should NOT contains the word 'DOES', because it has 4 letters instead", ->
     wordList = Util.wordList size: 2, words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
     expect( wordList ).not.toContain 'DOES'
@@ -109,6 +102,23 @@ describe "Util class", ->
       ['Z', 'C', 'A']
       ['Y', 'A', 'A', 'A']
     ] ).not.toBeDefined()
+
+  describe "letters on grid", ->
+    grid = undefined
+    beforeEach ->
+      grid = Util.generateGrid 2
+
+    it "tile (0, 0) SHOULD be a letter from the alphabet", ->
+      expect( Tile.alphabet() ).toContain grid[0][0]
+
+    it "tile (0, 1) SHOULD be a letter from the alphabet", ->
+      expect( Tile.alphabet() ).toContain grid[0][1]
+
+    it "tile (1, 0) SHOULD be a letter from the alphabet", ->
+      expect( Tile.alphabet() ).toContain grid[1][0]
+
+    it "tile (1, 1) SHOULD be a letter from the alphabet", ->
+      expect( Tile.alphabet() ).toContain grid[1][1]
 
   describe "printing a grid 4x4
         A | A | A | A
