@@ -13,13 +13,6 @@ describe "Score class", ->
     dictionary = ['DOES', 'DO', 'THINK', 'BATH', 'DOGS', 'BOSS', 'DOG', 'SEGA', 'OGA']
     score = new Score {grid, dictionary}
 
-  it "the printing of grid should be a square 4x4", ->
-    grid_string_rows = score.printGrid().split '\n'
-    expect( grid_string_rows[0] ).toMatch "D [|] B [|] O [|] A"
-    expect( grid_string_rows[1] ).toMatch "D [|] O [|] G [|] S"
-    expect( grid_string_rows[2] ).toMatch "A [|] E [|] S [|] A"
-    expect( grid_string_rows[3] ).toMatch "S [|] S [|] I [|] S"
-
   it "the letter 'B' should move from (x:1, y:0) to (x:0, y:0)", ->
     swapCoordinates = x1: 1, y1: 0, x2: 0, y2: 0
     Score.move {grid, swapCoordinates}
@@ -98,12 +91,6 @@ describe "Score class", ->
     new_words = ['THINK', 'BATH']
     expect( Score.scoreWords new_words ).toBe 42
 
-  it "the letter 'B' should have 'BOSS' and 'DOES' as new words, when move from (x:1, y:0) to (x:0, y:0)", ->
-    swapCoordinates = x1: 1, y1: 0, x2: 0, y2: 0
-    {moveScore, newWords} = Score.moveScore {grid, swapCoordinates, dictionary}
-    expect( newWords ).toContain 'BOSS'
-    expect( newWords ).toContain 'DOES'
-
   it "the new words should NOT contain 'DOGS', after moving letter 'G' from (x:2, y:1) to (x:2, y:2).
       Because this word already existed", ->
     {moveScore, newWords} = score.moveScore x1: 2, y1: 1, x2: 2, y2: 2
@@ -115,3 +102,32 @@ describe "Score class", ->
 
   it "the result of moving moving down the letter 'S' on (x:3, y:3) SHOULD NOT be defined, because it is NOT a legal moving", ->
     expect( score.moveScore x1: 3, y1: 3, x2: 3, y2: 3 ).not.toBeDefined()
+
+  describe "moving from (x:1, y:0) to (x:0, y:0)", ->
+    moveScore = newWords = undefined
+    beforeEach ->
+      swapCoordinates = x1: 1, y1: 0, x2: 0, y2: 0
+      {moveScore, newWords} = Score.moveScore {grid, swapCoordinates, dictionary}
+
+    it "it SHOULD have 'BOSS' as a new word", ->
+      expect( newWords ).toContain 'BOSS'
+
+    it "it SHOULD have 'DOES' as a new word", ->
+      expect( newWords ).toContain 'DOES'
+
+  describe "printing a grid 4x4", ->
+    grid_string_rows = undefined
+    beforeEach ->
+      grid_string_rows = score.printGrid().split '\n'
+
+    it "first line SHOULD be 'D | B | O | A'", ->
+      expect( grid_string_rows[0] ).toMatch "D [|] B [|] O [|] A"
+
+    it "second line SHOULD be 'D | O | G | S'", ->
+      expect( grid_string_rows[1] ).toMatch "D [|] O [|] G [|] S"
+
+    it "third line SHOULD be 'A | E | S | A'", ->
+      expect( grid_string_rows[2] ).toMatch "A [|] E [|] S [|] A"
+
+    it "forth line SHOULD be 'S | S | I | S'", ->
+      expect( grid_string_rows[3] ).toMatch "S [|] S [|] I [|] S"
