@@ -281,5 +281,4 @@ describe "Util class", ->
         expect( message ).toContain '4 word(s)'
 
       it "message SHOULD contain the word 'MOVE'", ->
-        console.warn message
         expect( message ).toContain 'MOVE'
