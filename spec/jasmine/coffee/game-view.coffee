@@ -46,7 +46,7 @@ describe "Game View Class", ->
 
   describe "Class Methods", ->
 
-    it "the message 'Hello World' should be displayed", ->
+    it "message 'Hello World' should be displayed", ->
       View.showMessage message: 'Hello World', context: DOM, id: 'message'
       expect( $("#message", DOM).html() ).toBe 'Hello World'
 
@@ -58,13 +58,13 @@ describe "Game View Class", ->
       it "the lis should contain three elements", ->
         expect( lis.length ).toBe 3
 
-      it "the first element should be an li tag", ->
+      it "first element SHOULD be an li tag", ->
         expect( $(lis[0]).is('li') ).toBe true
 
-      it "the first element should contain the letter 'A'", ->
+      it "first element SHOULD contain the letter 'A'", ->
         expect( $(lis[0]).html() ).toContain 'A'
 
-      it "the second element should contain the letter 'B'", ->
+      it "second element SHOULD contain the letter 'B'", ->
         expect( $(lis[1]).html() ).toContain 'B'
 
     describe "Create a grid by
@@ -82,10 +82,10 @@ describe "Game View Class", ->
       it "the uls should contain three elements", ->
         expect( uls.length ).toBe 3
 
-      it "the first element should be an ul tag", ->
+      it "first element should be an ul tag", ->
         expect( $(uls[0]).is('ul') ).toBe true
 
-      it "the first ul should contain 3 li elements", ->
+      it "first ul should contain 3 li elements", ->
         expect( $('li', uls[0]).length ).toBe 3
 
     describe "Getting a coordinate of a tile", ->
@@ -106,36 +106,36 @@ describe "Game View Class", ->
         $lis = $ 'li', $grid
         {0: tile_0_0, 7: tile_1_2, 5: tile_2_1} = $lis
 
-      it "the tile coordinate (0,0) SHOULD be {x: 0, y:0}", ->
+      it "tile coordinate (0,0) SHOULD be {x: 0, y:0}", ->
         expect( View.getCoordinate grid: $grid, tile: tile_0_0 ).toEqual x: 0, y: 0
 
-      it "the tile coordinate (1,2) SHOULD be {x: 1, y:2}", ->
+      it "tile coordinate (1,2) SHOULD be {x: 1, y:2}", ->
         expect( View.getCoordinate grid: $grid, tile: tile_1_2 ).toEqual x: 1, y: 2
 
 
   describe "Each instance of GameView", ->
 
-    it "the $p1score should be an element DOM wrap by $", ->
+    it "$p1score SHOULD be an element DOM wrap by $", ->
       view = new View context: DOM, p1score: 'p1score'
       expect( view.$p1score.length ).toBeGreaterThan 0
 
-    it "the $p2score should be an element DOM wrap by $", ->
+    it "$p2score SHOULD be an element DOM wrap by $", ->
       view = new View context: DOM, p2score: 'p2score'
       expect( view.$p2score.length ).toBeGreaterThan 0
 
-    it "the $p1name should be an element DOM wrap by $", ->
+    it "$p1name SHOULD be an element DOM wrap by $", ->
       view = new View context: DOM, p1name: 'p1name'
       expect( view.$p1name.length ).toBeGreaterThan 0
 
-    it "the $p2name should be an element DOM wrap by $", ->
+    it "$p2name SHOULD be an element DOM wrap by $", ->
       view = new View context: DOM, p2name: 'p2name'
       expect( view.$p2name.length ).toBeGreaterThan 0
 
-    it "the $grid should be an element DOM wrap by $", ->
+    it "$grid SHOULD be an element DOM wrap by $", ->
       view = new View context: DOM, grid: 'grid'
       expect( view.$grid.length ).toBeGreaterThan 0
 
-    it "the game should be defined", ->
+    it "game SHOULD be defined", ->
       view = new View game: game
       expect( view.game ).toBeDefined()
 
@@ -144,28 +144,53 @@ describe "Game View Class", ->
     $p2score = -> $ "#p2score", DOM
     p1score  = -> +$p1score().html()
     p2score  = -> +$p2score().html()
+    view = undefined
+    beforeEach ->
+      view = new View
+        context: DOM
+        p1score: ELEMENTS_VIEW.PLAYER.ONE.SCORE
+        p2score: ELEMENTS_VIEW.PLAYER.TWO.SCORE
+        grid: ELEMENTS_VIEW.GRID
+        game: game
 
     describe "Updating the score", ->
 
-      it "the player 1 score should be set", ->
+      it "player 1 score should be set as 0", ->
         expect( p1score() ).toBe 0
 
-      it "the player 2 score should be set", ->
+      it "player 2 score should be set as 0", ->
         expect( p2score() ).toBe 0
 
-      describe "first move", ->
-        beforeEach -> game.move x1: 3, y1: 2, x2: 3, y2: 3
+      describe "first move from (3, 2) to (3, 3)", ->
+        p1score_on_first_move = undefined
+        beforeEach ->
+          game.move x1: 3, y1: 2, x2: 3, y2: 3
+          view.updateScore()
+          p1score_on_first_move = p1score()
 
-        it "the player 1 score SHOULD be greater than 0", ->
-          #expect( p1score() ).toBe 0
+        it "player 1 score SHOULD be greater than 0", ->
+          expect( p1score_on_first_move ).toBeGreaterThan 0
 
+        it "player 2 score SHOULD be 0", ->
+          expect( p2score() ).toBe 0
+
+        describe "second move from (1, 0) to (0, 0)", ->
+          beforeEach ->
+            game.move x1: 1, y1: 0, x2: 0, y2: 0
+            view.updateScore()
+
+          it "player 1 score SHOULD be same as the first move", ->
+            expect( p1score_on_first_move ).toBe p1score()
+
+          it "player2 score SHOULD be greater than 0", ->
+            expect( p2score() ).toBeGreaterThan 0
 
     describe "Updating player names", ->
 
-      it "the player 1 name should be set", ->
+      it "player 1 name SHOULD be set", ->
         expect( $("#p1name", DOM).html() ).toBe 'John Doe'
 
-      it "the player 2 name should be set", ->
+      it "player 2 name SHOULD be set", ->
         expect( $("#p2name", DOM).html() ).toBe 'John Smith'
 
     describe "Updating grid", ->
@@ -174,10 +199,10 @@ describe "Game View Class", ->
         $grid = $ '#grid', DOM
         $uls = $ 'ul', $grid
 
-      it "the grid should have elements ul", ->
+      it "grid SHOULD have elements ul", ->
         expect( $uls.length ).toBe 4
 
-      it "the first ul should have 4 li elements", ->
+      it "first ul tag SHOULD have 4 li elements", ->
         expect( ($ 'li', $uls[0]).length ).toBe 4
 
     describe "Watching tiles", ->
@@ -212,7 +237,7 @@ describe "Game View Class", ->
           view.updateGrid()
           $tile_1_1().click()
 
-        it "the watcher SHOULD be working", ->
+        it "watcher SHOULD be working", ->
           runs -> expect(tile).toBeDefined()
 
       describe "Unwatching tile", ->
@@ -220,7 +245,7 @@ describe "Game View Class", ->
         beforeEach ->
           view.unwatchTiles()
 
-        it "the unwatchTiles should detaches all event handlers registered", ->
+        it "unwatchTiles SHOULD detaches all event handlers registered", ->
           $tile_1_1().click()
           runs -> expect(tile).not.toBeDefined()
 
@@ -251,7 +276,7 @@ describe "Game View Class", ->
         it "after swipe up, the swipe coordinate catch by watchTiles should be {x:1, y:0}", ->
           runs -> expect(tile.swipeCoordinate).toEqual x: 1, y: 0
 
-        it "the swapCoordinate should be {x1: 1, y1: 1, x2: 1, y2: 0}", ->
+        it "swapCoordinate SHOULD be {x1: 1, y1: 1, x2: 1, y2: 0}", ->
           runs -> expect(tile.swapCoordinate).toEqual {x1: 1, y1: 1, x2: 1, y2: 0}
 
       describe "Watching by swipe down", ->

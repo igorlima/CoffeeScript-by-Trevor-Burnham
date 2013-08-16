@@ -190,8 +190,11 @@
     }
 
     _Class.prototype.updateScore = function() {
-      this.$p1score.html(0);
-      return this.$p2score.html(0);
+      var p1score, p2score, _ref, _ref1, _ref2, _ref3;
+      p1score = (_ref = this.game) != null ? (_ref1 = _ref.player1) != null ? _ref1.score() : void 0 : void 0;
+      p2score = (_ref2 = this.game) != null ? (_ref3 = _ref2.player2) != null ? _ref3.score() : void 0 : void 0;
+      this.$p1score.html(p1score);
+      return this.$p2score.html(p2score);
     };
 
     _Class.prototype.updatePlayerNames = function() {

@@ -63,8 +63,10 @@ View = Game.View = class
     @$grid    = $ "##{grid}", context
 
   updateScore: ->
-    @$p1score.html 0
-    @$p2score.html 0
+    p1score = @game?.player1?.score()
+    p2score = @game?.player2?.score()
+    @$p1score.html p1score
+    @$p2score.html p2score
 
   updatePlayerNames: ->
     @$p1name.html @game.player1.name()
