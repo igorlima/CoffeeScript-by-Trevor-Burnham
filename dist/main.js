@@ -139,7 +139,7 @@
         if (moveScore) {
           $.extend(_this.lastMove, moveScore);
           _this.currentPlayer = _this.currentPlayer === _this.player1 ? _this.player2 : _this.player1;
-          _this.view.updateGrid();
+          _this.view.update();
         }
         return _this.lastMove;
       };
@@ -153,9 +153,8 @@
         context: DOM,
         game: this
       });
-      this.view.updateScore();
       this.view.updatePlayerNames();
-      this.view.updateGrid();
+      this.view.update();
       this.view.watchTiles(function(tile) {
         var firstCoord, secondCoord, swapCoordinates;
         if (_this.view.selectedTile == null) {
@@ -211,6 +210,12 @@
         this.registerWatchTiles(watcher);
       }
       return this.$grid;
+    };
+
+    _Class.prototype.update = function() {
+      this.updateScore();
+      this.updateGrid();
+      return this;
     };
 
     _Class.prototype.watchTiles = function(callback) {

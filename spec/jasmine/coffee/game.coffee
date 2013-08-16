@@ -152,9 +152,13 @@ describe "Game class", ->
 
     describe "by clicking", ->
       $lis     = -> $ '#grid li', DOM
+      $p1score = -> $ "#p1score", DOM
+      $p2score = -> $ "#p2score", DOM
       tile_3_1 = -> $lis()[8]
       tile_3_2 = -> $lis()[13]
       tile_3_3 = -> $lis()[18]
+      p1score  = -> +$p1score().html()
+      p2score  = -> +$p2score().html()
       DOM = undefined
       beforeEach ->
         DOM = $ DOM_STRINGFIED
@@ -186,7 +190,7 @@ describe "Game class", ->
           it "the tile SHOULD not be selected", ->
             expect( $tile_3_1().hasClass('selected') ).not.toBe true
 
-        describe "a second click on the same tile (3, 1) ", ->
+        describe "a second click on same tile (3, 1) ", ->
           beforeEach -> $tile_3_1().click()
 
           it "the current player SHOULD be player1", ->
@@ -227,3 +231,6 @@ describe "Game class", ->
 
           it "after swaped, the tile (3, 1) SHOULD be a letter 'D'", ->
             expect( tile_3_1()?.innerHTML ).toBe 'D'
+
+          it "player1 score SHOULD be greater than 0", ->
+            expect( p1score() ).toBeGreaterThan 0

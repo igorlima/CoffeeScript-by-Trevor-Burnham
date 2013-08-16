@@ -24,7 +24,7 @@ Game = Scrabble.Game = class
       if moveScore
         $.extend @lastMove, moveScore
         @currentPlayer = if @currentPlayer is @player1 then @player2 else @player1
-        @view.updateGrid()
+        @view.update()
       @lastMove
 
     VIEW or= DEFAULT_VIEW
@@ -36,9 +36,8 @@ Game = Scrabble.Game = class
       grid:    VIEW.GRID
       context: DOM
       game: @
-    @view.updateScore()
     @view.updatePlayerNames()
-    @view.updateGrid()
+    @view.update()
     @view.watchTiles (tile) =>
       unless @view.selectedTile?
         @view.selectedTile = $.extend {}, tile
@@ -76,6 +75,11 @@ View = Game.View = class
     @$grid.empty().append( View.createGrid @game.board.matrix() )
     @registerWatchTiles watcher for watcher in @watcherTiles
     @$grid
+
+  update: ->
+    @updateScore()
+    @updateGrid()
+    @
 
   watchTiles: (callback) ->
     @watcherTiles.push callback
