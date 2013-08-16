@@ -125,17 +125,29 @@ describe "Board class", ->
       {scoreMove, newWords} = board.move x1: 3, y1: 3, x2: 4, y2: 3
       expect( newWords ).toContain 'GET'
 
-    it "moving from (x: 3, y: 3) to (x: 3, y: 4) SHOULD have the following grid
+    describe "moving from (3, 3) to (3,4) SHOULD have the following grid
         A | A | A | A | A
         X | A | I | O | A
         Z | C | D | D | G
         Y | A | D | S | A
         M | O | V | E | T
       ", ->
-      board.move x1: 3, y1: 3, x2: 3, y2: 4
-      matrix = board.matrix()
-      expect( matrix[0] ).toEqual ['A', 'A', 'A', 'A', 'A']
-      expect( matrix[1] ).toEqual ['X', 'A', 'I', 'O', 'A']
-      expect( matrix[2] ).toEqual ['Z', 'C', 'D', 'D', 'G']
-      expect( matrix[3] ).toEqual ['Y', 'A', 'D', 'S', 'A']
-      expect( matrix[4] ).toEqual ['M', 'O', 'V', 'E', 'T']
+      matrix = undefined
+      beforeEach ->
+        board.move x1: 3, y1: 3, x2: 3, y2: 4
+        matrix = board.matrix()
+
+      it "first line SHOULD be [A | A | A | A | A]", ->
+        expect( matrix[0] ).toEqual ['A', 'A', 'A', 'A', 'A']
+
+      it "second line SHOULD be [X | A | I | O | A]", ->
+        expect( matrix[1] ).toEqual ['X', 'A', 'I', 'O', 'A']
+
+      it "third line SHOULD be [Z | C | D | D | G]", ->
+        expect( matrix[2] ).toEqual ['Z', 'C', 'D', 'D', 'G']
+
+      it "forth line SHOULD be [Y | A | D | S | A]", ->
+        expect( matrix[3] ).toEqual ['Y', 'A', 'D', 'S', 'A']
+
+      it "fiveth line SHOULD be [M | O | V | E | T]", ->
+        expect( matrix[4] ).toEqual ['M', 'O', 'V', 'E', 'T']
