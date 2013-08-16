@@ -137,6 +137,10 @@
           swapCoordinates: swapCoordinates
         });
         if (moveScore) {
+          _this.showMessage({
+            score: moveScore,
+            context: DOM
+          });
           $.extend(_this.lastMove, moveScore);
           _this.currentPlayer = _this.currentPlayer === _this.player1 ? _this.player2 : _this.player1;
           _this.view.update();
@@ -170,6 +174,19 @@
         }
       });
       return this;
+    };
+
+    _Class.prototype.showMessage = function(_arg) {
+      var context, message, score;
+      score = _arg.score, context = _arg.context;
+      message = Scrabble.Util.createMessage({
+        player: this.currentPlayer,
+        score: score
+      });
+      View.showMessage({
+        message: message,
+        context: context
+      });
     };
 
     return _Class;
@@ -1017,13 +1034,14 @@
   };
 
   Util.createMessage = function(_arg) {
-    var message, numberWords, player, playerName, points, score, _ref;
+    var message, numberWords, player, playerName, points, score, words, _ref;
     player = _arg.player, score = _arg.score;
     playerName = player != null ? typeof player.name === "function" ? player.name() : void 0 : void 0;
     numberWords = score != null ? (_ref = score.newWords) != null ? _ref.length : void 0 : void 0;
     points = score != null ? score.points : void 0;
+    words = (score != null ? score.newWords : void 0) || [];
     message = "" + playerName + " formed the following " + numberWords + " word(s): ";
-    message += "" + score.newWords + ". ";
+    message += "" + words + ". ";
     return message += "Earning " + points + " points";
   };
 

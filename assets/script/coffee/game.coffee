@@ -22,6 +22,7 @@ Game = Scrabble.Game = class
       @lastMove = $.extend {}, {swapCoordinates}
       moveScore = @currentPlayer.move {board: @board, swapCoordinates}
       if moveScore
+        @showMessage score: moveScore, context: DOM
         $.extend @lastMove, moveScore
         @currentPlayer = if @currentPlayer is @player1 then @player2 else @player1
         @view.update()
@@ -50,6 +51,11 @@ Game = Scrabble.Game = class
         @view.selectedTile.$el.removeClass 'selected'
         @view.selectedTile = undefined
     @
+
+  showMessage: ({score, context}) ->
+    message = Scrabble.Util.createMessage player: @currentPlayer, score: score
+    View.showMessage {message, context}
+    return
 
 View = Game.View = class
   constructor: ({p1score, p2score, p1name, p2name, context, grid, @game}={}) ->

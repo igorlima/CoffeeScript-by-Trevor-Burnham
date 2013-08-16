@@ -95,8 +95,11 @@ describe "Game class", ->
         expect( game.board.size() ).toBe 2
 
   describe "Game actions", ->
-    game = board = undefined
+    $message = -> $ "#message", DOM
+    message  = -> $message().html()
+    game = board = DOM = undefined
     beforeEach ->
+      DOM = $ DOM_STRINGFIED
       board = new Board
         words: words
         grid: [
@@ -106,10 +109,10 @@ describe "Game class", ->
           ['Y', 'A', 'D', 'E', 'A']
           ['M', 'O', 'V', 'S', 'T']
         ]
-      game = new Game words: words
+      game = new Game {words}
 
     describe "method game.move(...)", ->
-      beforeEach -> game.new {board}
+      beforeEach -> game.new {board, DOM}
 
       describe "a first moving to {x1: 3, y1: 3, x2: 3, y2: 4} ", ->
         beforeEach -> game.move {x1: 3, y1: 3, x2: 3, y2: 4}
@@ -138,6 +141,9 @@ describe "Game class", ->
         it "after the move, the current player SHOULD be player2", ->
           expect( game.currentPlayer ).toBe game.player2
 
+        it "a message SHOULD appear containing the player name and the points", ->
+          expect( message() ).toMatch /Player 1 (.)+ points/
+
         describe "a second moving to {x1: 2, y1: 2, x2: 2, y2: 1} ", ->
           beforeEach -> game.move {x1: 2, y1: 2, x2: 2, y2: 1}
 
@@ -159,9 +165,7 @@ describe "Game class", ->
       tile_3_3 = -> $lis()[18]
       p1score  = -> +$p1score().html()
       p2score  = -> +$p2score().html()
-      DOM = undefined
       beforeEach ->
-        DOM = $ DOM_STRINGFIED
         game.new {board, DOM}
 
       describe "a first click on (3, 1) ", ->
