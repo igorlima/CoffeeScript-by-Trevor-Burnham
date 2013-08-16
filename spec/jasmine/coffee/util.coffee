@@ -55,18 +55,6 @@ describe "Util class", ->
     expect( Tile.alphabet() ).toContain grid[1][0]
     expect( Tile.alphabet() ).toContain grid[1][1]
 
-  it "the printing of grid 4x4 method should be
-        A | A | A | A
-        A | A | B | A
-        A | C | A | A
-        A | A | A | A
-      ", ->
-    grid_string_rows = (Util.printGrid grid_for_printing).split '\n'
-    expect( grid_string_rows[0] ).toMatch "A [|] A [|] A [|] A"
-    expect( grid_string_rows[1] ).toMatch "A [|] A [|] B [|] A"
-    expect( grid_string_rows[2] ).toMatch "A [|] C [|] A [|] A"
-    expect( grid_string_rows[3] ).toMatch "A [|] A [|] A [|] A"
-
   it "the word list with 2 letters should NOT contains the word 'DOES', because it has 4 letters instead", ->
     wordList = Util.wordList size: 2, words: ['DOES', 'DO', 'DID', 'GET', 'MOVE']
     expect( wordList ).not.toContain 'DOES'
@@ -121,6 +109,28 @@ describe "Util class", ->
       ['Z', 'C', 'A']
       ['Y', 'A', 'A', 'A']
     ] ).not.toBeDefined()
+
+  describe "printing a grid 4x4
+        A | A | A | A
+        A | A | B | A
+        A | C | A | A
+        A | A | A | A
+      ", ->
+    grid_string_rows = undefined
+    beforeEach ->
+      grid_string_rows = (Util.printGrid grid_for_printing).split '\n'
+
+    it "first line SHOULD be 'A | A | A | A'", ->
+      expect( grid_string_rows[0] ).toMatch "A [|] A [|] A [|] A"
+
+    it "second line SHOULD be 'A | A | B | A'", ->
+      expect( grid_string_rows[1] ).toMatch "A [|] A [|] B [|] A"
+
+    it "third line SHOULD be 'A | C | A | A'", ->
+      expect( grid_string_rows[2] ).toMatch "A [|] C [|] A [|] A"
+
+    it "forth line SHOULD be 'A | A | A | A'", ->
+      expect( grid_string_rows[3] ).toMatch "A [|] A [|] A [|] A"
 
   describe "a matrix 4x4
         A | A | A | A
