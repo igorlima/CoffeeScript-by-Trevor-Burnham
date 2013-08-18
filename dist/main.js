@@ -163,7 +163,11 @@
         var firstCoord, secondCoord, swapCoordinates;
         if (_this.view.selectedTile == null) {
           _this.view.selectedTile = $.extend({}, tile);
-          return _this.view.selectedTile.$el.addClass('selected');
+          _this.view.selectedTile.$el.addClass('selected');
+          return View.showMessage({
+            message: 'Tile (3, 1) selected',
+            context: DOM
+          });
         } else {
           firstCoord = _this.view.selectedTile.coordinate;
           secondCoord = tile.coordinate;
@@ -179,12 +183,12 @@
     _Class.prototype.showMessage = function(_arg) {
       var context, message, score;
       score = _arg.score, context = _arg.context;
-      message = Scrabble.Util.createMessage({
+      message = new Scrabble.Util.Message({
         player: this.currentPlayer,
         score: score
       });
       View.showMessage({
-        message: message,
+        message: message.create(),
         context: context
       });
     };
@@ -856,7 +860,7 @@
 }).call(this);
 
 (function() {
-  var Scrabble, Util;
+  var Message, Scrabble, Util;
 
   Scrabble = this.Scrabble || (this.Scrabble = {});
 
@@ -1043,17 +1047,32 @@
     };
   };
 
-  Util.createMessage = function(_arg) {
-    var message, numberWords, player, playerName, points, score, words, _ref;
-    player = _arg.player, score = _arg.score;
-    playerName = player != null ? typeof player.name === "function" ? player.name() : void 0 : void 0;
-    numberWords = score != null ? (_ref = score.newWords) != null ? _ref.length : void 0 : void 0;
-    points = score != null ? score.points : void 0;
-    words = (score != null ? score.newWords : void 0) || [];
-    message = "" + playerName + " formed the following " + numberWords + " word(s): ";
-    message += "" + words + ". ";
-    return message += "Earning " + points + " points";
-  };
+  Message = Util.Message = (function() {
+    function _Class(_arg) {
+      this.player = _arg.player, this.score = _arg.score;
+    }
+
+    _Class.prototype.playerInfo = function() {
+      var _ref, _ref1, _ref2, _ref3, _ref4;
+      return {
+        name: (_ref = this.player) != null ? typeof _ref.name === "function" ? _ref.name() : void 0 : void 0,
+        numberWords: (_ref1 = this.score) != null ? (_ref2 = _ref1.newWords) != null ? _ref2.length : void 0 : void 0,
+        points: (_ref3 = this.score) != null ? _ref3.points : void 0,
+        words: ((_ref4 = this.score) != null ? _ref4.newWords : void 0) || []
+      };
+    };
+
+    _Class.prototype.create = function() {
+      var message, player;
+      player = this.playerInfo();
+      message = "" + player.name + " formed the following " + player.numberWords + " word(s): ";
+      message += "" + player.words + ". ";
+      return message += "Earning " + player.points + " points";
+    };
+
+    return _Class;
+
+  })();
 
 }).call(this);
 

@@ -187,6 +187,9 @@ describe "Game class", ->
         it "the tile SHOULD be selected", ->
           expect( $tile_3_1().hasClass('selected') ).toBe true
 
+        it "a message SHOULD appear containing 'Tile (3, 1) selected'", ->
+          expect( message() ).toContain "Tile (3, 1) selected"
+
         describe "a second click on a invalid tile (3, 3) ", ->
           $tile_3_3 = -> $ tile_3_3()
           beforeEach -> $tile_3_3().click()
