@@ -49,5 +49,23 @@ describe "Player class", ->
     it "the player should return a result object after a legal moviment", ->
       expect( moveScore ).toEqual( jasmine.any Object )
 
-    it "", ->
+    it "list of words SHOULD contain the word 'DID'", ->
+      expect( player.words() ).toContain 'DID'
 
+    describe "move from (1, 1) to (0, 1)", ->
+      beforeEach ->
+        swapCoordinates = x1: 1, y1: 1, x2: 0, y2: 1
+        player.move {board, swapCoordinates}
+
+      it "list of words SHOULD contain the word 'GET'", ->
+        expect( player.words() ).toContain 'GET'
+
+      it "list of words SHOULD have two elements", ->
+        expect( player.words().length ).toBe 2
+
+    describe "invalidily trying to modify the list of wors", ->
+      beforeEach ->
+        player.words().push 'THINK'
+
+      it "list of words SHOULD not contain the word 'THINK'", ->
+        expect( player.words() ).not.toContain 'THINK'

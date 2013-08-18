@@ -351,9 +351,9 @@
 
   Player = Scrabble.Player = (function() {
     function _Class(_arg) {
-      var moveCount, name, score, _ref;
+      var moveCount, name, score, words, _ref;
       name = (_arg != null ? _arg : {}).name;
-      _ref = [0, 0], score = _ref[0], moveCount = _ref[1];
+      _ref = [0, 0, []], score = _ref[0], moveCount = _ref[1], words = _ref[2];
       this.name = function() {
         return name;
       };
@@ -362,6 +362,15 @@
       };
       this.moveCount = function() {
         return moveCount;
+      };
+      this.words = function() {
+        var word, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = words.length; _i < _len; _i++) {
+          word = words[_i];
+          _results.push(word);
+        }
+        return _results;
       };
       this.move = function(_arg1) {
         var board, result, swapCoordinates, _ref1;
@@ -373,6 +382,7 @@
         if (result != null) {
           moveCount++;
           score += result.points;
+          words.push.apply(words, result.newWords);
         }
         return result;
       };
