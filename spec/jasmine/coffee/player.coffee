@@ -64,8 +64,13 @@ describe "Player class", ->
         expect( player.words().length ).toBe 2
 
     describe "invalidily trying to modify the list of wors", ->
+      words = undefined
       beforeEach ->
-        player.words().push 'THINK'
+        words = player.words()
+        words.push 'THINK'
 
       it "list of words SHOULD not contain the word 'THINK'", ->
         expect( player.words() ).not.toContain 'THINK'
+
+      it "the list of words SHOULD be a different instance of array on each call", ->
+        expect( player.words() ).not.toBe words
