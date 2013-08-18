@@ -26,7 +26,7 @@ describe "Player class", ->
   it "the player should return undefined if try to move without pass any paramert", ->
     expect( player.move() ).not.toBeDefined()
 
-  describe "the moviment of player", ->
+  describe "move from (1, 0) to (2, 0)", ->
     moveScore = swapCoordinates = board = undefined
 
     beforeEach ->
