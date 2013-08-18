@@ -27,7 +27,7 @@ describe "Player class", ->
     expect( player.move() ).not.toBeDefined()
 
   describe "the moviment of player", ->
-    board = undefined
+    moveScore = swapCoordinates = board = undefined
 
     beforeEach ->
       board = new Board
@@ -37,17 +37,17 @@ describe "Player class", ->
           ['O', 'E', 'I']
           ['T', 'C', 'D']
         ]
+      swapCoordinates = x1: 1, y1: 0, x2: 2, y2: 0
+      moveScore = player.move {board, swapCoordinates}
 
     it "the player should increase the move count after a legal moviment", ->
-      swapCoordinates = x1: 1, y1: 0, x2: 2, y2: 0
-      player.move {board, swapCoordinates}
       expect( player.moveCount() ).toBe 1
 
     it "the player should increase the score after match a word", ->
-      swapCoordinates = x1: 1, y1: 0, x2: 2, y2: 0
-      player.move {board, swapCoordinates}
       expect( player.score() ).toBeGreaterThan 0
 
     it "the player should return a result object after a legal moviment", ->
-      swapCoordinates = x1: 1, y1: 0, x2: 2, y2: 0
-      expect( player.move {board, swapCoordinates} ).toEqual( jasmine.any Object )
+      expect( moveScore ).toEqual( jasmine.any Object )
+
+    it "", ->
+
