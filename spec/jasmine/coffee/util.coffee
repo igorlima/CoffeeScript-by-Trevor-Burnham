@@ -238,8 +238,28 @@ describe "Util class", ->
       expect(coordinate).toEqual {x:1, y:1}
 
   describe "setting message", ->
+    Message = Util.Message
 
-    describe "a player John scored in 45 points with 3 words ", ->
+    describe "a selected tile", ->
+      message = undefined
+
+      describe "tile (2, 1)", ->
+        beforeEach ->
+          tile = coordinate: {x: 2, y: 1}
+          message = Message.tile tile
+
+        it "message SHOULD be 'Tile (2, 1) selected'", ->
+          expect( message ).toBe "Tile (2, 1) selected"
+
+      describe "tile (1, 3)", ->
+        beforeEach ->
+          tile = coordinate: {x: 1, y: 3}
+          message = Message.tile tile
+
+        it "message SHOULD be 'Tile (1, 3) selected'", ->
+          expect( message ).toBe "Tile (1, 3) selected"
+
+    describe "a player John scored in 45 points with 3 words", ->
       player = score = message = undefined
       beforeEach ->
         player = new Player name: 'John'
@@ -264,7 +284,7 @@ describe "Util class", ->
       it "message SHOULD contain the player name: John", ->
         expect( message ).toContain 'John'
 
-    describe "a player Biel scored in 90 points with 4 words ", ->
+    describe "a player Biel scored in 90 points with 4 words", ->
       player = score = message = undefined
       beforeEach ->
         player = new Player name: 'Biel'

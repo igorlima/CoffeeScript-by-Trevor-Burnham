@@ -1070,6 +1070,12 @@
       return message += "Earning " + player.points + " points";
     };
 
+    _Class.tile = function(tile) {
+      var x, y, _ref;
+      _ref = (tile != null ? tile.coordinate : void 0) || {}, x = _ref.x, y = _ref.y;
+      return "Tile (" + x + ", " + y + ") selected";
+    };
+
     return _Class;
 
   })();

@@ -72,15 +72,19 @@ Util.createSwipeCoordinate = ({x, y}, {x: xi, y: yi}) ->
 
 Message = Util.Message = class
   constructor: ({@player, @score}) ->
+
   playerInfo: ->
-    {
-      name:        @player?.name?()
-      numberWords: @score?.newWords?.length
-      points:      @score?.points
-      words:       @score?.newWords or []
-    }
+    name:        @player?.name?()
+    numberWords: @score?.newWords?.length
+    points:      @score?.points
+    words:       @score?.newWords or []
+
   create: ->
     player = @playerInfo()
     message  = "#{player.name} formed the following #{player.numberWords} word(s): "
     message += "#{player.words}. "
     message += "Earning #{player.points} points"
+
+  @tile: (tile) ->
+    {x, y} = tile?.coordinate or {}
+    "Tile (#{x}, #{y}) selected"
