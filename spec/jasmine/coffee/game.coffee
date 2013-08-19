@@ -195,7 +195,10 @@ describe "Game class", ->
           beforeEach -> $tile_3_3().click()
 
           it "the tile SHOULD not be selected", ->
-            expect( $tile_3_1().hasClass('selected') ).not.toBe true
+            expect( $tile_3_1().hasClass 'selected' ).not.toBe true
+
+          it "a message SHOULD appear containing 'Invalid move'", ->
+            expect( message() ).toContain "Invalid move"
 
         describe "a second click on same tile (3, 1) ", ->
           beforeEach -> $tile_3_1().click()
@@ -241,3 +244,6 @@ describe "Game class", ->
 
           it "player1 score SHOULD be greater than 0", ->
             expect( p1score() ).toBeGreaterThan 0
+
+          it "a message SHOULD appear containing the player name and the points", ->
+            expect( message() ).toMatch /Player 1 (.)+ points/

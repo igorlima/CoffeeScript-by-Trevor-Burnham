@@ -21,8 +21,8 @@ Game = Scrabble.Game = class
     @move = (swapCoordinates) =>
       @lastMove = $.extend {}, {swapCoordinates}
       moveScore = @currentPlayer.move {board: @board, swapCoordinates}
+      @showMessage score: moveScore, context: DOM
       if moveScore
-        @showMessage score: moveScore, context: DOM
         $.extend @lastMove, moveScore
         @currentPlayer = if @currentPlayer is @player1 then @player2 else @player1
         @view.update()
@@ -54,7 +54,10 @@ Game = Scrabble.Game = class
     @
 
   showMessage: ({score, context}) ->
-    message = Scrabble.Util.Message.points {player: @currentPlayer, score: score}
+    if score
+      message = Scrabble.Util.Message.points {player: @currentPlayer, score: score}
+    else
+      message = "Invalid move"
     View.showMessage {message, context}
     return
 

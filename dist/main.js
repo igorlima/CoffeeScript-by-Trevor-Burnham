@@ -136,11 +136,11 @@
           board: _this.board,
           swapCoordinates: swapCoordinates
         });
+        _this.showMessage({
+          score: moveScore,
+          context: DOM
+        });
         if (moveScore) {
-          _this.showMessage({
-            score: moveScore,
-            context: DOM
-          });
           $.extend(_this.lastMove, moveScore);
           _this.currentPlayer = _this.currentPlayer === _this.player1 ? _this.player2 : _this.player1;
           _this.view.update();
@@ -183,10 +183,14 @@
     _Class.prototype.showMessage = function(_arg) {
       var context, message, score;
       score = _arg.score, context = _arg.context;
-      message = Scrabble.Util.Message.points({
-        player: this.currentPlayer,
-        score: score
-      });
+      if (score) {
+        message = Scrabble.Util.Message.points({
+          player: this.currentPlayer,
+          score: score
+        });
+      } else {
+        message = "Invalid move";
+      }
       View.showMessage({
         message: message,
         context: context
