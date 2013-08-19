@@ -79,7 +79,7 @@ Message = Util.Message = class
     points:      @score?.points
     words:       @score?.newWords or []
 
-  create: ->
+  points: ->
     player = @playerInfo()
     message  = "#{player.name} formed the following #{player.numberWords} word(s): "
     message += "#{player.words}. "

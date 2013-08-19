@@ -188,7 +188,7 @@
         score: score
       });
       View.showMessage({
-        message: message.create(),
+        message: message.points(),
         context: context
       });
     };
@@ -1062,7 +1062,7 @@
       };
     };
 
-    _Class.prototype.create = function() {
+    _Class.prototype.points = function() {
       var message, player;
       player = this.playerInfo();
       message = "" + player.name + " formed the following " + player.numberWords + " word(s): ";

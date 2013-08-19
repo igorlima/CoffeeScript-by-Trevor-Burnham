@@ -55,7 +55,7 @@ Game = Scrabble.Game = class
 
   showMessage: ({score, context}) ->
     message = new Scrabble.Util.Message {player: @currentPlayer, score: score}
-    View.showMessage {message: message.create(), context}
+    View.showMessage {message: message.points(), context}
     return
 
 View = Game.View = class

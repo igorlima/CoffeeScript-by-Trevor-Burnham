@@ -264,7 +264,7 @@ describe "Util class", ->
       beforeEach ->
         player = new Player name: 'John'
         score = points: 45, newWords: ['OD', 'HID', 'HO']
-        message = (new Util.Message {player, score}).create()
+        message = (new Util.Message {player, score}).points()
 
       it "message SHOULD contain '45 points'", ->
         expect( message ).toContain '45 points'
@@ -289,7 +289,7 @@ describe "Util class", ->
       beforeEach ->
         player = new Player name: 'Biel'
         score = points: 90, newWords: ['DID', 'DONE', 'MOVE', 'DO']
-        message = (new Util.Message {player, score}).create()
+        message = (new Util.Message {player, score}).points()
 
       it "message SHOULD contain '90 points'", ->
         expect( message ).toContain '90 points'
