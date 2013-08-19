@@ -260,11 +260,11 @@ describe "Util class", ->
           expect( message ).toBe "Tile (1, 3) selected"
 
     describe "a player John scored in 45 points with 3 words", ->
-      player = score = message = undefined
+      message = undefined
       beforeEach ->
         player = new Player name: 'John'
         score = points: 45, newWords: ['OD', 'HID', 'HO']
-        message = (new Util.Message {player, score}).points()
+        message = Message.points {player, score}
 
       it "message SHOULD contain '45 points'", ->
         expect( message ).toContain '45 points'
@@ -285,11 +285,11 @@ describe "Util class", ->
         expect( message ).toContain 'John'
 
     describe "a player Biel scored in 90 points with 4 words", ->
-      player = score = message = undefined
+      message = undefined
       beforeEach ->
         player = new Player name: 'Biel'
         score = points: 90, newWords: ['DID', 'DONE', 'MOVE', 'DO']
-        message = (new Util.Message {player, score}).points()
+        message = Message.points {player, score}
 
       it "message SHOULD contain '90 points'", ->
         expect( message ).toContain '90 points'

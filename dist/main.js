@@ -183,12 +183,12 @@
     _Class.prototype.showMessage = function(_arg) {
       var context, message, score;
       score = _arg.score, context = _arg.context;
-      message = new Scrabble.Util.Message({
+      message = Scrabble.Util.Message.points({
         player: this.currentPlayer,
         score: score
       });
       View.showMessage({
-        message: message.points(),
+        message: message,
         context: context
       });
     };
@@ -1048,23 +1048,28 @@
   };
 
   Message = Util.Message = (function() {
-    function _Class(_arg) {
-      this.player = _arg.player, this.score = _arg.score;
-    }
+    var playerInfo;
 
-    _Class.prototype.playerInfo = function() {
-      var _ref, _ref1, _ref2, _ref3, _ref4;
+    function _Class() {}
+
+    playerInfo = function(_arg) {
+      var player, score, _ref;
+      player = _arg.player, score = _arg.score;
       return {
-        name: (_ref = this.player) != null ? typeof _ref.name === "function" ? _ref.name() : void 0 : void 0,
-        numberWords: (_ref1 = this.score) != null ? (_ref2 = _ref1.newWords) != null ? _ref2.length : void 0 : void 0,
-        points: (_ref3 = this.score) != null ? _ref3.points : void 0,
-        words: ((_ref4 = this.score) != null ? _ref4.newWords : void 0) || []
+        name: player != null ? typeof player.name === "function" ? player.name() : void 0 : void 0,
+        numberWords: score != null ? (_ref = score.newWords) != null ? _ref.length : void 0 : void 0,
+        points: score != null ? score.points : void 0,
+        words: (score != null ? score.newWords : void 0) || []
       };
     };
 
-    _Class.prototype.points = function() {
-      var message, player;
-      player = this.playerInfo();
+    _Class.points = function(_arg) {
+      var message, player, score;
+      player = _arg.player, score = _arg.score;
+      player = playerInfo({
+        player: player,
+        score: score
+      });
       message = "" + player.name + " formed the following " + player.numberWords + " word(s): ";
       message += "" + player.words + ". ";
       return message += "Earning " + player.points + " points";
