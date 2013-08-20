@@ -10,6 +10,7 @@ module.exports = (grunt) ->
     'assets/script/js/score.js'
     'assets/script/js/board.js'
     'assets/script/js/game.js'
+    'assets/script/js/game-view.js'
   ]
 
   grunt.initConfig
