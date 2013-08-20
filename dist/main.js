@@ -942,7 +942,7 @@
           board: _this.board,
           swapCoordinates: swapCoordinates
         });
-        _this.showMessage({
+        _this.message({
           score: moveScore
         });
         if (moveScore) {
@@ -961,7 +961,7 @@
       if (this.view.selectedTile == null) {
         this.view.selectedTile = $.extend({}, tile);
         this.view.selectedTile.$el.addClass('selected');
-        return this.showMessage({
+        return this.message({
           tile: tile
         });
       } else {
@@ -998,7 +998,7 @@
       });
     };
 
-    _Class.prototype.showMessage = function(_arg) {
+    _Class.prototype.message = function(_arg) {
       var message, player, score, tile;
       score = _arg.score, tile = _arg.tile;
       player = this.currentPlayer;

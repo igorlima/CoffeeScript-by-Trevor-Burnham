@@ -14,7 +14,7 @@ Game = Scrabble.Game = class
     @move = (swapCoordinates) =>
       @lastMove = $.extend {}, {swapCoordinates}
       moveScore = @currentPlayer.move {board: @board, swapCoordinates}
-      @showMessage score: moveScore
+      @message score: moveScore
       if moveScore
         $.extend @lastMove, moveScore
         @currentPlayer =
@@ -30,7 +30,7 @@ Game = Scrabble.Game = class
     unless @view.selectedTile?
       @view.selectedTile = $.extend {}, tile
       @view.selectedTile.$el.addClass 'selected'
-      @showMessage tile: tile
+      @message tile: tile
     else
       firstCoord  = @view.selectedTile.coordinate
       secondCoord = tile.coordinate
@@ -55,7 +55,7 @@ Game = Scrabble.Game = class
       else watchTilesDefault.call @, tile
     return
 
-  showMessage: ({score, tile}) ->
+  message: ({score, tile}) ->
     player = @currentPlayer
     message = Util.Message.tile {tile, player} if tile?
     message or=
