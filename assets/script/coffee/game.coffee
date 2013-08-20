@@ -41,11 +41,7 @@ Game = Scrabble.Game = class
 
   initView: ({watchTiles}={}) ->
     @view = new Game.View
-      p1score: @VIEW.PLAYER.ONE.SCORE
-      p2score: @VIEW.PLAYER.TWO.SCORE
-      p1name:  @VIEW.PLAYER.ONE.NAME
-      p2name:  @VIEW.PLAYER.TWO.NAME
-      grid:    @VIEW.GRID
+      ELEMENTS: @VIEW
       context: @DOM
       game: @
     @view.updatePlayerNames()

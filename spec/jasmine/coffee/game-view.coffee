@@ -118,23 +118,23 @@ describe "Game View Class", ->
   describe "Each instance of GameView", ->
 
     it "$p1score SHOULD be an element DOM wrap by $", ->
-      view = new View context: DOM, p1score: 'p1score'
+      view = new View context: DOM, ELEMENTS: ELEMENTS_VIEW
       expect( view.$p1score.length ).toBeGreaterThan 0
 
     it "$p2score SHOULD be an element DOM wrap by $", ->
-      view = new View context: DOM, p2score: 'p2score'
+      view = new View context: DOM, ELEMENTS: ELEMENTS_VIEW
       expect( view.$p2score.length ).toBeGreaterThan 0
 
     it "$p1name SHOULD be an element DOM wrap by $", ->
-      view = new View context: DOM, p1name: 'p1name'
+      view = new View context: DOM, ELEMENTS: ELEMENTS_VIEW
       expect( view.$p1name.length ).toBeGreaterThan 0
 
     it "$p2name SHOULD be an element DOM wrap by $", ->
-      view = new View context: DOM, p2name: 'p2name'
+      view = new View context: DOM, ELEMENTS: ELEMENTS_VIEW
       expect( view.$p2name.length ).toBeGreaterThan 0
 
     it "$grid SHOULD be an element DOM wrap by $", ->
-      view = new View context: DOM, grid: 'grid'
+      view = new View context: DOM, ELEMENTS: ELEMENTS_VIEW
       expect( view.$grid.length ).toBeGreaterThan 0
 
     it "game SHOULD be defined", ->
@@ -150,9 +150,7 @@ describe "Game View Class", ->
     beforeEach ->
       view = new View
         context: DOM
-        p1score: ELEMENTS_VIEW.PLAYER.ONE.SCORE
-        p2score: ELEMENTS_VIEW.PLAYER.TWO.SCORE
-        grid: ELEMENTS_VIEW.GRID
+        ELEMENTS: ELEMENTS_VIEW
         game: game
 
     describe "Updating the score", ->
@@ -212,7 +210,7 @@ describe "Game View Class", ->
       $tile_1_1 = -> $ $lis()[5]
       view = tile = undefined
       beforeEach ->
-        view = new View context: DOM, grid: 'grid', game: game
+        view = new View context: DOM, ELEMENTS: ELEMENTS_VIEW, game: game
         view.watchTiles (obj) -> tile = obj
         tile = undefined
 

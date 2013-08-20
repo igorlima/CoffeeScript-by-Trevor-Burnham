@@ -3,14 +3,14 @@ Scrabble = @Scrabble
 DEFAULT_VIEW = defaultView()
 
 View = Game.View = class
-  constructor: ({p1score, p2score, p1name, p2name, context, grid, @game}={}) ->
+  constructor: ({ELEMENTS, context, @game}={}) ->
     @watcherTiles = []
 
-    @$p1name  = $ "##{p1name}", context
-    @$p1score = $ "##{p1score}", context
-    @$p2name  = $ "##{p2name}", context
-    @$p2score = $ "##{p2score}", context
-    @$grid    = $ "##{grid}", context
+    @$p1name  = $ "##{ELEMENTS?.PLAYER?.ONE?.NAME}", context
+    @$p1score = $ "##{ELEMENTS?.PLAYER?.ONE?.SCORE}", context
+    @$p2name  = $ "##{ELEMENTS?.PLAYER?.TWO?.NAME}", context
+    @$p2score = $ "##{ELEMENTS?.PLAYER?.TWO?.SCORE}", context
+    @$grid    = $ "##{ELEMENTS?.GRID}", context
 
   updateScore: ->
     p1score = @game?.player1?.score()

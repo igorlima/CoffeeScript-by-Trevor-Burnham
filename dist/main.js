@@ -981,11 +981,7 @@
         _this = this;
       watchTiles = (_arg != null ? _arg : {}).watchTiles;
       this.view = new Game.View({
-        p1score: this.VIEW.PLAYER.ONE.SCORE,
-        p2score: this.VIEW.PLAYER.TWO.SCORE,
-        p1name: this.VIEW.PLAYER.ONE.NAME,
-        p2name: this.VIEW.PLAYER.TWO.NAME,
-        grid: this.VIEW.GRID,
+        ELEMENTS: this.VIEW,
         context: this.DOM,
         game: this
       });
@@ -1037,14 +1033,14 @@
 
   View = Game.View = (function() {
     function _Class(_arg) {
-      var context, grid, p1name, p1score, p2name, p2score, _ref;
-      _ref = _arg != null ? _arg : {}, p1score = _ref.p1score, p2score = _ref.p2score, p1name = _ref.p1name, p2name = _ref.p2name, context = _ref.context, grid = _ref.grid, this.game = _ref.game;
+      var ELEMENTS, context, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
+      _ref = _arg != null ? _arg : {}, ELEMENTS = _ref.ELEMENTS, context = _ref.context, this.game = _ref.game;
       this.watcherTiles = [];
-      this.$p1name = $("#" + p1name, context);
-      this.$p1score = $("#" + p1score, context);
-      this.$p2name = $("#" + p2name, context);
-      this.$p2score = $("#" + p2score, context);
-      this.$grid = $("#" + grid, context);
+      this.$p1name = $("#" + (ELEMENTS != null ? (_ref1 = ELEMENTS.PLAYER) != null ? (_ref2 = _ref1.ONE) != null ? _ref2.NAME : void 0 : void 0 : void 0), context);
+      this.$p1score = $("#" + (ELEMENTS != null ? (_ref3 = ELEMENTS.PLAYER) != null ? (_ref4 = _ref3.ONE) != null ? _ref4.SCORE : void 0 : void 0 : void 0), context);
+      this.$p2name = $("#" + (ELEMENTS != null ? (_ref5 = ELEMENTS.PLAYER) != null ? (_ref6 = _ref5.TWO) != null ? _ref6.NAME : void 0 : void 0 : void 0), context);
+      this.$p2score = $("#" + (ELEMENTS != null ? (_ref7 = ELEMENTS.PLAYER) != null ? (_ref8 = _ref7.TWO) != null ? _ref8.SCORE : void 0 : void 0 : void 0), context);
+      this.$grid = $("#" + (ELEMENTS != null ? ELEMENTS.GRID : void 0), context);
     }
 
     _Class.prototype.updateScore = function() {
