@@ -1,23 +1,15 @@
-Scrabble = @Scrabble or= {}
-DEFAULT_VIEW =
-  PLAYER:
-    ONE:
-      SCORE: 'p1score'
-      NAME:  'p1name'
-    TWO:
-      SCORE: 'p2score'
-      NAME:  'p2name'
-  MESSAGE: 'message'
-  GRID: 'grid'
+Scrabble = @Scrabble
+{Board, Player, Util, defaultView} = Scrabble
+DEFAULT_VIEW = defaultView()
 
 Game = Scrabble.Game = class
   constructor: ({@words}={}) ->
     unless @words? then throw new Error "Board or words was not given"
 
   new: ({size, player1, player2, board, @DOM, VIEW}={}) ->
-    @board = board or new Scrabble.Board size: size or 5, words: @words
-    @currentPlayer = @player1 = player1 or new Scrabble.Player name: 'Player 1'
-    @player2 = player2 or new Scrabble.Player name: 'Player 2'
+    @board = board or new Board size: size or 5, words: @words
+    @currentPlayer = @player1 = player1 or new Player name: 'Player 1'
+    @player2 = player2 or new Player name: 'Player 2'
     @VIEW = VIEW or DEFAULT_VIEW
     @move = (swapCoordinates) =>
       @lastMove = $.extend {}, {swapCoordinates}
@@ -40,7 +32,7 @@ Game = Scrabble.Game = class
     else
       firstCoord  = @view.selectedTile.coordinate
       secondCoord = tile.coordinate
-      swapCoordinates = Scrabble.Util.createSwapCoordinate firstCoord, secondCoord
+      swapCoordinates = Util.createSwapCoordinate firstCoord, secondCoord
       @move swapCoordinates
       @view.selectedTile.$el.removeClass 'selected'
       @view.selectedTile = undefined
@@ -62,10 +54,10 @@ Game = Scrabble.Game = class
     return
 
   showMessage: ({score, tile}) ->
-    message = Scrabble.Util.Message.tile tile if tile?
+    message = Util.Message.tile tile if tile?
     message or=
       if score
-        Scrabble.Util.Message.points {player: @currentPlayer, score: score}
+        Util.Message.points {player: @currentPlayer, score: score}
       else
         "Invalid move"
     View.showMessage {message, context: @DOM}
@@ -111,8 +103,8 @@ View = Game.View = class
     $grid.find('li').on
       "catchTileInfo": (event) ->
         coordinate      = View.getCoordinate grid: $grid, tile: @
-        swipeCoordinate = Scrabble.Util.createSwipeCoordinate coordinate, event.data or {}
-        swapCoordinate  = Scrabble.Util.createSwapCoordinate coordinate, swipeCoordinate
+        swipeCoordinate = Util.createSwipeCoordinate coordinate, event.data or {}
+        swapCoordinate  = Util.createSwapCoordinate coordinate, swipeCoordinate
         $.extend tile, {coordinate, el: @, $el: $(@)}
         $.extend tile, {swipeCoordinate, swapCoordinate} if event.data?
         callback tile

@@ -1,6 +1,4 @@
-Scrabble = @Scrabble or= {}
-
-Player = Scrabble.Player = class
+Player = @Scrabble.Player = class
   constructor: ({name}={}) ->
     [score, moveCount, words] = [0, 0, []]
 

@@ -1,4 +1,5 @@
-Scrabble = @Scrabble or= {}
+Scrabble = @Scrabble
+{Util, WordFinder} = Scrabble
 
 # Each letter has the same point value as in Scrabble
 VALUES =
@@ -9,8 +10,8 @@ VALUES =
 Score = Scrabble.Score = class
   constructor: ({grid, dictionary}) ->
 
-    @printGrid = -> Scrabble.Util.printGrid grid
-    @matrix = -> Scrabble.Util.matrix grid
+    @printGrid = -> Util.printGrid grid
+    @matrix = -> Util.matrix grid
 
     @moveScore = (swapCoordinates) ->
       Score.moveScore {grid, dictionary, swapCoordinates}
@@ -24,13 +25,13 @@ Score.words = ({grid, dictionary}) ->
   [words, SIZE] = [[], grid.length]
   for x in [0...SIZE]
     for y in [0...SIZE]
-      words_on_xy = Scrabble.WordFinder.all {grid, dictionary, x, y, range: SIZE}
+      words_on_xy = WordFinder.all {grid, dictionary, x, y, range: SIZE}
       words.push word for word in words_on_xy when word not in words
   words
 
 Score.move = ({grid, swapCoordinates: {x1: col1, y1: row1, x2: col2, y2: row2} }) ->
-  range = Scrabble.Util.sizeMatrix grid
-  isValidMove = Scrabble.Util.isValidSwapCoordinates {x1: col1, y1: row1, x2: col2, y2: row2, range}
+  range = Util.sizeMatrix grid
+  isValidMove = Util.isValidSwapCoordinates {x1: col1, y1: row1, x2: col2, y2: row2, range}
   if range? and isValidMove
     [grid[row2][col2], grid[row1][col1]] = [grid[row1][col1], grid[row2][col2]]
     true

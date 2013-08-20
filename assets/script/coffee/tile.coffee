@@ -1,6 +1,4 @@
-Scrabble = @Scrabble or= {}
-
-Tile = Scrabble.Tile = class
+Tile = @Scrabble.Tile = class
   
 # Probabilities are taken from Scrabble, except that there are no blanks
 # See http://www.zyzzyva.net/wordlists.shtml
