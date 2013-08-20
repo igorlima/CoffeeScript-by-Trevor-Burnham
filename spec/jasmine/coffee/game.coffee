@@ -160,15 +160,13 @@ describe "Game class", ->
       $lis     = -> $ '#grid li', DOM
       $p1score = -> $ "#p1score", DOM
       $p2score = -> $ "#p2score", DOM
-      tile_3_1 = -> $lis()[8]
-      tile_3_2 = -> $lis()[13]
-      tile_3_3 = -> $lis()[18]
       p1score  = -> +$p1score().html()
       p2score  = -> +$p2score().html()
       beforeEach ->
         game.new {board, DOM}
 
       describe "a first click on (3, 1) ", ->
+        tile_3_1  = -> $lis()[8]
         $tile_3_1 = -> $ tile_3_1()
         beforeEach -> $tile_3_1().click()
 
@@ -191,6 +189,7 @@ describe "Game class", ->
           expect( message() ).toContain "Tile (3, 1) selected"
 
         describe "a second click on a invalid tile (3, 3) ", ->
+          tile_3_3  = -> $lis()[18]
           $tile_3_3 = -> $ tile_3_3()
           beforeEach -> $tile_3_3().click()
 
@@ -216,6 +215,7 @@ describe "Game class", ->
             expect( game.view.selectedTile ).not.toBeDefined()
 
         describe "a second click on (3, 2) ", ->
+          tile_3_2  = -> $lis()[13]
           $tile_3_2 = undefined
           beforeEach ->
             $tile_3_2 = $ tile_3_2()
@@ -247,3 +247,6 @@ describe "Game class", ->
 
           it "a message SHOULD appear containing the player name and the points", ->
             expect( message() ).toMatch /Player 1 (.)+ points/
+
+          #describe "a third click on (2, 2) ", ->
+
