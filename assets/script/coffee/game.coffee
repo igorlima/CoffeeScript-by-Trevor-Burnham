@@ -17,7 +17,9 @@ Game = Scrabble.Game = class
       @showMessage score: moveScore
       if moveScore
         $.extend @lastMove, moveScore
-        @currentPlayer = if @currentPlayer is @player1 then @player2 else @player1
+        @currentPlayer =
+          if @currentPlayer is @player1 then @player2
+          else @player1
         @view.update()
       @lastMove
 
