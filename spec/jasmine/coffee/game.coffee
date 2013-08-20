@@ -17,6 +17,7 @@ DOM_STRINGFIED = "
   <div class='body'>
     <p id='message'></p>
     <div id='grid'></div>
+    <p id='notice'></p>
     <table id='scores'>
       <tr>
         <th id='p1name'></th>
@@ -138,7 +139,9 @@ describe "Game class", ->
 
   describe "Game actions", ->
     $message = -> $ "#message", DOM
+    $notice  = -> $ "#notice", DOM
     message  = -> $message().html()
+    notice   = -> $notice().html()
     game = board = undefined
     beforeEach ->
       board = new Board
@@ -182,8 +185,8 @@ describe "Game class", ->
         it "after the move, the current player SHOULD be player2", ->
           expect( game.currentPlayer ).toBe game.player2
 
-        it "a message SHOULD appear containing the player name and the points", ->
-          expect( message() ).toMatch /Player 1 (.)+ points/
+        it "a notice SHOULD appear containing the player name and the points", ->
+          expect( notice() ).toMatch /Player 1 (.)+ points/
 
         describe "a second moving to {x1: 2, y1: 2, x2: 2, y2: 1} ", ->
           beforeEach -> game.move {x1: 2, y1: 2, x2: 2, y2: 1}
@@ -295,8 +298,8 @@ describe "Game class", ->
           it "player1 score SHOULD be greater than 0", ->
             expect( p1score() ).toBeGreaterThan 0
 
-          it "a message SHOULD appear containing the player name and the points", ->
-            expect( message() ).toMatch /Player 1 (.)+ points/
+          it "a notice SHOULD appear containing the player name and the points", ->
+            expect( notice() ).toMatch /Player 1 (.)+ points/
 
           it "word list for player 1 SHOULD contain 'DOES'", ->
             expect( p1message() ).toContain 'DOES'

@@ -1005,23 +1005,24 @@
     };
 
     _Class.prototype.message = function(_arg) {
-      var message, player, score, tile;
+      var id, message, player, score, tile;
       score = _arg.score, tile = _arg.tile;
       player = this.currentPlayer;
+      id = DEFAULT_VIEW.MESSAGE;
       if (tile != null) {
         message = Util.Message.tile({
           tile: tile,
           player: player
         });
       }
-      message || (message = score ? Util.Message.points({
+      message || (message = score ? (id = DEFAULT_VIEW.NOTICE, Util.Message.points({
         player: player,
         score: score
-      }) : "Invalid move");
+      })) : "Invalid move");
       Game.View.showMessage({
         message: message,
         context: this.DOM,
-        id: DEFAULT_VIEW.MESSAGE
+        id: id
       });
     };
 
