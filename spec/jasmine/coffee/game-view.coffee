@@ -24,6 +24,10 @@ DOM_STRINGFIED = "
         <td id='p1score'></td>
         <td id='p2score'></td>
       </tr>
+      <tr>
+        <td id='p1message'></td>
+        <td id='p2message'></td>
+      </tr>
     </table>
   </div>"
 
@@ -132,6 +136,12 @@ describe "Game View Class", ->
     it "$p2name SHOULD be an element DOM wrap by $", ->
       expect( view.$p2name.length ).toBeGreaterThan 0
 
+    it "$p1message SHOULD be an element DOM wrap by $", ->
+      expect( view.$p1message.length ).toBeGreaterThan 0
+
+    it "$p2message SHOULD be an element DOM wrap by $", ->
+      expect( view.$p2message.length ).toBeGreaterThan 0
+
     it "$grid SHOULD be an element DOM wrap by $", ->
       expect( view.$grid.length ).toBeGreaterThan 0
 
@@ -139,10 +149,6 @@ describe "Game View Class", ->
       expect( view.game ).toBeDefined()
 
   describe "DOM", ->
-    $p1score = -> $ "#p1score", DOM
-    $p2score = -> $ "#p2score", DOM
-    p1score  = -> +$p1score().html()
-    p2score  = -> +$p2score().html()
     view = undefined
     beforeEach ->
       view = new View
@@ -151,6 +157,10 @@ describe "Game View Class", ->
         game: game
 
     describe "Updating the score", ->
+      $p1score = -> $ "#p1score", DOM
+      $p2score = -> $ "#p2score", DOM
+      p1score  = -> +$p1score().html()
+      p2score  = -> +$p2score().html()
 
       it "player 1 score should be set as 0", ->
         expect( p1score() ).toBe 0

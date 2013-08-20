@@ -6,11 +6,13 @@ View = Game.View = class
   constructor: ({ELEMENTS, context, @game}={}) ->
     @watcherTiles = []
 
-    @$p1name  = $ "##{ELEMENTS?.PLAYER?.ONE?.NAME}", context
-    @$p1score = $ "##{ELEMENTS?.PLAYER?.ONE?.SCORE}", context
-    @$p2name  = $ "##{ELEMENTS?.PLAYER?.TWO?.NAME}", context
-    @$p2score = $ "##{ELEMENTS?.PLAYER?.TWO?.SCORE}", context
-    @$grid    = $ "##{ELEMENTS?.GRID}", context
+    @$p1name    = $ "##{ELEMENTS?.PLAYER?.ONE?.NAME}", context
+    @$p1score   = $ "##{ELEMENTS?.PLAYER?.ONE?.SCORE}", context
+    @$p1message = $ "##{ELEMENTS?.PLAYER?.ONE?.MSG}", context
+    @$p2name    = $ "##{ELEMENTS?.PLAYER?.TWO?.NAME}", context
+    @$p2score   = $ "##{ELEMENTS?.PLAYER?.TWO?.SCORE}", context
+    @$p2message = $ "##{ELEMENTS?.PLAYER?.TWO?.MSG}", context
+    @$grid      = $ "##{ELEMENTS?.GRID}", context
 
   updateScore: ->
     p1score = @game?.player1?.score()

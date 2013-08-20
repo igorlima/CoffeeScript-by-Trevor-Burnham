@@ -1033,13 +1033,15 @@
 
   View = Game.View = (function() {
     function _Class(_arg) {
-      var ELEMENTS, context, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
+      var ELEMENTS, context, _ref, _ref1, _ref10, _ref11, _ref12, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
       _ref = _arg != null ? _arg : {}, ELEMENTS = _ref.ELEMENTS, context = _ref.context, this.game = _ref.game;
       this.watcherTiles = [];
       this.$p1name = $("#" + (ELEMENTS != null ? (_ref1 = ELEMENTS.PLAYER) != null ? (_ref2 = _ref1.ONE) != null ? _ref2.NAME : void 0 : void 0 : void 0), context);
       this.$p1score = $("#" + (ELEMENTS != null ? (_ref3 = ELEMENTS.PLAYER) != null ? (_ref4 = _ref3.ONE) != null ? _ref4.SCORE : void 0 : void 0 : void 0), context);
-      this.$p2name = $("#" + (ELEMENTS != null ? (_ref5 = ELEMENTS.PLAYER) != null ? (_ref6 = _ref5.TWO) != null ? _ref6.NAME : void 0 : void 0 : void 0), context);
-      this.$p2score = $("#" + (ELEMENTS != null ? (_ref7 = ELEMENTS.PLAYER) != null ? (_ref8 = _ref7.TWO) != null ? _ref8.SCORE : void 0 : void 0 : void 0), context);
+      this.$p1message = $("#" + (ELEMENTS != null ? (_ref5 = ELEMENTS.PLAYER) != null ? (_ref6 = _ref5.ONE) != null ? _ref6.MSG : void 0 : void 0 : void 0), context);
+      this.$p2name = $("#" + (ELEMENTS != null ? (_ref7 = ELEMENTS.PLAYER) != null ? (_ref8 = _ref7.TWO) != null ? _ref8.NAME : void 0 : void 0 : void 0), context);
+      this.$p2score = $("#" + (ELEMENTS != null ? (_ref9 = ELEMENTS.PLAYER) != null ? (_ref10 = _ref9.TWO) != null ? _ref10.SCORE : void 0 : void 0 : void 0), context);
+      this.$p2message = $("#" + (ELEMENTS != null ? (_ref11 = ELEMENTS.PLAYER) != null ? (_ref12 = _ref11.TWO) != null ? _ref12.MSG : void 0 : void 0 : void 0), context);
       this.$grid = $("#" + (ELEMENTS != null ? ELEMENTS.GRID : void 0), context);
     }
 
