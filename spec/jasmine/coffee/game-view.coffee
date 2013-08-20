@@ -116,29 +116,26 @@ describe "Game View Class", ->
 
 
   describe "Each instance of GameView", ->
+    view = undefined
+    beforeEach ->
+      view = new View context: DOM, ELEMENTS: ELEMENTS_VIEW, game: game
 
     it "$p1score SHOULD be an element DOM wrap by $", ->
-      view = new View context: DOM, ELEMENTS: ELEMENTS_VIEW
       expect( view.$p1score.length ).toBeGreaterThan 0
 
     it "$p2score SHOULD be an element DOM wrap by $", ->
-      view = new View context: DOM, ELEMENTS: ELEMENTS_VIEW
       expect( view.$p2score.length ).toBeGreaterThan 0
 
     it "$p1name SHOULD be an element DOM wrap by $", ->
-      view = new View context: DOM, ELEMENTS: ELEMENTS_VIEW
       expect( view.$p1name.length ).toBeGreaterThan 0
 
     it "$p2name SHOULD be an element DOM wrap by $", ->
-      view = new View context: DOM, ELEMENTS: ELEMENTS_VIEW
       expect( view.$p2name.length ).toBeGreaterThan 0
 
     it "$grid SHOULD be an element DOM wrap by $", ->
-      view = new View context: DOM, ELEMENTS: ELEMENTS_VIEW
       expect( view.$grid.length ).toBeGreaterThan 0
 
     it "game SHOULD be defined", ->
-      view = new View game: game
       expect( view.game ).toBeDefined()
 
   describe "DOM", ->
