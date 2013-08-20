@@ -19,10 +19,17 @@ View = Game.View = class
     p2score = @game?.player2?.score()
     @$p1score.html p1score
     @$p2score.html p2score
+    return
 
   updatePlayerNames: ->
     @$p1name.html @game.player1.name()
     @$p2name.html @game.player2.name()
+    return
+
+  updatePlayerWords: ->
+    @$p1message.html "#{@game.player1.words()}"
+    @$p2message.html "#{@game.player2.words()}"
+    return
 
   updateGrid: ->
     @$grid.empty().append( View.createGrid @game.board.matrix() )
@@ -65,6 +72,7 @@ View = Game.View = class
 View.showMessage = ({message, context, id}={}) ->
   $id = $ "##{id or DEFAULT_VIEW.MESSAGE}", context
   $id.html message
+  return
 
 View.createGridLine = (line) ->
   lineHtml = ''

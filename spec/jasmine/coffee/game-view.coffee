@@ -156,11 +156,15 @@ describe "Game View Class", ->
         ELEMENTS: ELEMENTS_VIEW
         game: game
 
-    describe "Updating the score", ->
-      $p1score = -> $ "#p1score", DOM
-      $p2score = -> $ "#p2score", DOM
-      p1score  = -> +$p1score().html()
-      p2score  = -> +$p2score().html()
+    describe "moving tiles", ->
+      $p1score   = -> $ "#p1score", DOM
+      $p2score   = -> $ "#p2score", DOM
+      $p1message = -> $ "#p1message", DOM
+      $p2message = -> $ "#p2message", DOM
+      p1score    = -> +$p1score().html()
+      p2score    = -> +$p2score().html()
+      p1message  = -> $p1message().html()
+      p2message  = -> $p2message().html()
 
       it "player 1 score should be set as 0", ->
         expect( p1score() ).toBe 0
@@ -173,6 +177,7 @@ describe "Game View Class", ->
         beforeEach ->
           game.move x1: 3, y1: 2, x2: 3, y2: 3
           view.updateScore()
+          view.updatePlayerWords()
           p1score_on_first_move = p1score()
 
         it "player 1 score SHOULD be greater than 0", ->
@@ -181,16 +186,23 @@ describe "Game View Class", ->
         it "player 2 score SHOULD be 0", ->
           expect( p2score() ).toBe 0
 
+        it "word list for player 1 SHOULD contain 'MOVE'", ->
+          expect( p1message() ).toContain 'MOVE'
+
         describe "second move from (1, 0) to (0, 0)", ->
           beforeEach ->
             game.move x1: 1, y1: 0, x2: 0, y2: 0
             view.updateScore()
+            view.updatePlayerWords()
 
           it "player 1 score SHOULD be same as the first move", ->
             expect( p1score_on_first_move ).toBe p1score()
 
           it "player2 score SHOULD be greater than 0", ->
             expect( p2score() ).toBeGreaterThan 0
+
+          it "word list for player 2 SHOULD contain 'DID'", ->
+            expect( p2message() ).toContain 'DID'
 
     describe "Updating player names", ->
 

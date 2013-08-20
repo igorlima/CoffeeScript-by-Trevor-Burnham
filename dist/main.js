@@ -1050,12 +1050,17 @@
       p1score = (_ref = this.game) != null ? (_ref1 = _ref.player1) != null ? _ref1.score() : void 0 : void 0;
       p2score = (_ref2 = this.game) != null ? (_ref3 = _ref2.player2) != null ? _ref3.score() : void 0 : void 0;
       this.$p1score.html(p1score);
-      return this.$p2score.html(p2score);
+      this.$p2score.html(p2score);
     };
 
     _Class.prototype.updatePlayerNames = function() {
       this.$p1name.html(this.game.player1.name());
-      return this.$p2name.html(this.game.player2.name());
+      this.$p2name.html(this.game.player2.name());
+    };
+
+    _Class.prototype.updatePlayerWords = function() {
+      this.$p1message.html("" + (this.game.player1.words()));
+      this.$p2message.html("" + (this.game.player2.words()));
     };
 
     _Class.prototype.updateGrid = function() {
@@ -1145,7 +1150,7 @@
     var $id, context, id, message, _ref;
     _ref = _arg != null ? _arg : {}, message = _ref.message, context = _ref.context, id = _ref.id;
     $id = $("#" + (id || DEFAULT_VIEW.MESSAGE), context);
-    return $id.html(message);
+    $id.html(message);
   };
 
   View.createGridLine = function(line) {
