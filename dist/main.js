@@ -114,9 +114,9 @@
     }
 
     _Class.prototype["new"] = function(_arg) {
-      var DOM, VIEW, board, player1, player2, size, _ref,
+      var VIEW, board, player1, player2, size, _ref,
         _this = this;
-      _ref = _arg != null ? _arg : {}, size = _ref.size, player1 = _ref.player1, player2 = _ref.player2, board = _ref.board, DOM = _ref.DOM, VIEW = _ref.VIEW;
+      _ref = _arg != null ? _arg : {}, size = _ref.size, player1 = _ref.player1, player2 = _ref.player2, board = _ref.board, this.DOM = _ref.DOM, VIEW = _ref.VIEW;
       this.board = board || new Scrabble.Board({
         size: size || 5,
         words: this.words
@@ -127,6 +127,7 @@
       this.player2 = player2 || new Scrabble.Player({
         name: 'Player 2'
       });
+      this.VIEW = VIEW || DEFAULT_VIEW;
       this.move = function(swapCoordinates) {
         var moveScore;
         _this.lastMove = $.extend({}, {
@@ -137,8 +138,7 @@
           swapCoordinates: swapCoordinates
         });
         _this.showMessage({
-          score: moveScore,
-          context: DOM
+          score: moveScore
         });
         if (moveScore) {
           $.extend(_this.lastMove, moveScore);
@@ -147,26 +147,30 @@
         }
         return _this.lastMove;
       };
-      VIEW || (VIEW = DEFAULT_VIEW);
+      this.initView();
+      return this;
+    };
+
+    _Class.prototype.initView = function() {
+      var _this = this;
       this.view = new View({
-        p1score: VIEW.PLAYER.ONE.SCORE,
-        p2score: VIEW.PLAYER.TWO.SCORE,
-        p1name: VIEW.PLAYER.ONE.NAME,
-        p2name: VIEW.PLAYER.TWO.NAME,
-        grid: VIEW.GRID,
-        context: DOM,
+        p1score: this.VIEW.PLAYER.ONE.SCORE,
+        p2score: this.VIEW.PLAYER.TWO.SCORE,
+        p1name: this.VIEW.PLAYER.ONE.NAME,
+        p2name: this.VIEW.PLAYER.TWO.NAME,
+        grid: this.VIEW.GRID,
+        context: this.DOM,
         game: this
       });
       this.view.updatePlayerNames();
       this.view.update();
-      this.view.watchTiles(function(tile) {
+      return this.view.watchTiles(function(tile) {
         var firstCoord, secondCoord, swapCoordinates;
         if (_this.view.selectedTile == null) {
           _this.view.selectedTile = $.extend({}, tile);
           _this.view.selectedTile.$el.addClass('selected');
           return _this.showMessage({
-            tile: tile,
-            context: DOM
+            tile: tile
           });
         } else {
           firstCoord = _this.view.selectedTile.coordinate;
@@ -177,12 +181,11 @@
           return _this.view.selectedTile = void 0;
         }
       });
-      return this;
     };
 
     _Class.prototype.showMessage = function(_arg) {
-      var context, message, score, tile;
-      score = _arg.score, context = _arg.context, tile = _arg.tile;
+      var message, score, tile;
+      score = _arg.score, tile = _arg.tile;
       if (tile != null) {
         message = Scrabble.Util.Message.tile(tile);
       }
@@ -192,7 +195,7 @@
       }) : "Invalid move");
       View.showMessage({
         message: message,
-        context: context
+        context: this.DOM
       });
     };
 

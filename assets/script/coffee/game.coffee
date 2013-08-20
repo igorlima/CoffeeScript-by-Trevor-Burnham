@@ -14,28 +14,32 @@ Game = Scrabble.Game = class
   constructor: ({@words}={}) ->
     unless @words? then throw new Error "Board or words was not given"
 
-  new: ({size, player1, player2, board, DOM, VIEW}={}) ->
+  new: ({size, player1, player2, board, @DOM, VIEW}={}) ->
     @board = board or new Scrabble.Board size: size or 5, words: @words
     @currentPlayer = @player1 = player1 or new Scrabble.Player name: 'Player 1'
     @player2 = player2 or new Scrabble.Player name: 'Player 2'
+    @VIEW = VIEW or DEFAULT_VIEW
     @move = (swapCoordinates) =>
       @lastMove = $.extend {}, {swapCoordinates}
       moveScore = @currentPlayer.move {board: @board, swapCoordinates}
-      @showMessage score: moveScore, context: DOM
+      @showMessage score: moveScore
       if moveScore
         $.extend @lastMove, moveScore
         @currentPlayer = if @currentPlayer is @player1 then @player2 else @player1
         @view.update()
       @lastMove
 
-    VIEW or= DEFAULT_VIEW
+    @initView()
+    @
+
+  initView: ->
     @view = new View
-      p1score: VIEW.PLAYER.ONE.SCORE
-      p2score: VIEW.PLAYER.TWO.SCORE
-      p1name:  VIEW.PLAYER.ONE.NAME
-      p2name:  VIEW.PLAYER.TWO.NAME
-      grid:    VIEW.GRID
-      context: DOM
+      p1score: @VIEW.PLAYER.ONE.SCORE
+      p2score: @VIEW.PLAYER.TWO.SCORE
+      p1name:  @VIEW.PLAYER.ONE.NAME
+      p2name:  @VIEW.PLAYER.TWO.NAME
+      grid:    @VIEW.GRID
+      context: @DOM
       game: @
     @view.updatePlayerNames()
     @view.update()
@@ -43,7 +47,7 @@ Game = Scrabble.Game = class
       unless @view.selectedTile?
         @view.selectedTile = $.extend {}, tile
         @view.selectedTile.$el.addClass 'selected'
-        @showMessage tile: tile, context: DOM
+        @showMessage tile: tile
       else
         firstCoord  = @view.selectedTile.coordinate
         secondCoord = tile.coordinate
@@ -51,16 +55,15 @@ Game = Scrabble.Game = class
         @move swapCoordinates
         @view.selectedTile.$el.removeClass 'selected'
         @view.selectedTile = undefined
-    @
 
-  showMessage: ({score, context, tile}) ->
+  showMessage: ({score, tile}) ->
     message = Scrabble.Util.Message.tile tile if tile?
     message or=
       if score
         Scrabble.Util.Message.points {player: @currentPlayer, score: score}
       else
         "Invalid move"
-    View.showMessage {message, context}
+    View.showMessage {message, context: @DOM}
     return
 
 View = Game.View = class
