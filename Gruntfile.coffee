@@ -1,6 +1,7 @@
 module.exports = (grunt) ->
 
   all_js_script_files = [
+    'assets/script/js/scrabble.js'
     'assets/script/js/tile.js'
     'assets/script/js/tile-finder.js'
     'assets/script/js/word-finder.js'
