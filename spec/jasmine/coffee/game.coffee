@@ -217,8 +217,11 @@ describe "Game class", ->
         it "the tile SHOULD be selected", ->
           expect( $tile_3_1().hasClass('selected') ).toBe true
 
-        it "a message SHOULD appear containing 'Tile (3, 1) selected'", ->
-          expect( message() ).toContain "Tile (3, 1) selected"
+        it "a message SHOULD appear containing the word 'selected'", ->
+          expect( message() ).toContain "selected"
+
+        it "a message SHOULD appear containing 'tile (3, 1)'", ->
+          expect( message() ).toMatch /[Tt]ile [(]3, 1[)]/
 
         describe "a second click on a invalid tile (3, 3) ", ->
           tile_3_3  = -> $lis()[18]
@@ -289,5 +292,8 @@ describe "Game class", ->
             it "the coordinate SHOULD be {x:2, y:2}", ->
               expect( game.view.selectedTile.coordinate ).toEqual x: 2, y: 2
 
-            it "a message SHOULD appear containing 'Tile (2, 2) selected'", ->
-              expect( message() ).toContain "Tile (2, 2) selected"
+            it "a message SHOULD appear containing the word 'selected'", ->
+              expect( message() ).toContain "selected"
+
+            it "a message SHOULD appear containing 'Tile (2, 2)'", ->
+              expect( message() ).toMatch /[Tt]ile [(]2, 2[)]/
