@@ -164,7 +164,7 @@
       });
       this.view.updatePlayerNames();
       this.view.update();
-      return this.view.watchTiles(function(tile) {
+      this.view.watchTiles(function(tile) {
         var firstCoord, secondCoord, swapCoordinates;
         if (_this.view.selectedTile == null) {
           _this.view.selectedTile = $.extend({}, tile);

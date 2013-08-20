@@ -26,7 +26,9 @@ DOM_STRINGFIED = "
   </div>"
 
 describe "Game class", ->
+  DOM = undefined
   words = ['DOES', 'DO', 'DID', 'GET', 'MOVE']
+  beforeEach -> DOM = $ DOM_STRINGFIED
 
   describe "Each instance of game", ->
 
@@ -45,6 +47,7 @@ describe "Game class", ->
     it "the result of a new game should be an instance of Game class", ->
       instance_of_game = game.new()
       expect( instance_of_game instanceof Game ).toBe true
+
 
     describe "Default game", ->
       beforeEach -> game.new()
@@ -66,6 +69,9 @@ describe "Game class", ->
 
       it "the default board size should be 5", ->
         expect( game.board.size() ).toBe 5
+
+      it "the initView method SHOULD not have any return", ->
+        expect( game.initView() ).not.toBeDefined()
 
     describe "Customized game", ->
       player1 = player2 = grid = undefined
@@ -97,9 +103,8 @@ describe "Game class", ->
   describe "Game actions", ->
     $message = -> $ "#message", DOM
     message  = -> $message().html()
-    game = board = DOM = undefined
+    game = board = undefined
     beforeEach ->
-      DOM = $ DOM_STRINGFIED
       board = new Board
         words: words
         grid: [

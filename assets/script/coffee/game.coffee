@@ -55,6 +55,7 @@ Game = Scrabble.Game = class
         @move swapCoordinates
         @view.selectedTile.$el.removeClass 'selected'
         @view.selectedTile = undefined
+    return
 
   showMessage: ({score, tile}) ->
     message = Scrabble.Util.Message.tile tile if tile?
