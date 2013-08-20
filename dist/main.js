@@ -7,11 +7,13 @@
         PLAYER: {
           ONE: {
             SCORE: 'p1score',
-            NAME: 'p1name'
+            NAME: 'p1name',
+            MSG: 'p1message'
           },
           TWO: {
             SCORE: 'p2score',
-            NAME: 'p2name'
+            NAME: 'p2name',
+            MSG: 'p2message'
           }
         },
         MESSAGE: 'message',
