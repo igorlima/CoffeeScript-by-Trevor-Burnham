@@ -27,8 +27,11 @@ View = Game.View = class
     return
 
   updatePlayerWords: ->
-    @$p1message.html "#{@game.player1.words()}"
-    @$p2message.html "#{@game.player2.words()}"
+    p2words = p1words = ''
+    p1words += "#{word} " for word in @game.player1.words()
+    p2words += "#{word} " for word in @game.player2.words()
+    @$p1message.html "#{p1words}"
+    @$p2message.html "#{p2words}"
     return
 
   updateGrid: ->

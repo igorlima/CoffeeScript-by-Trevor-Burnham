@@ -1059,8 +1059,20 @@
     };
 
     _Class.prototype.updatePlayerWords = function() {
-      this.$p1message.html("" + (this.game.player1.words()));
-      this.$p2message.html("" + (this.game.player2.words()));
+      var p1words, p2words, word, _i, _j, _len, _len1, _ref, _ref1;
+      p2words = p1words = '';
+      _ref = this.game.player1.words();
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        word = _ref[_i];
+        p1words += "" + word + " ";
+      }
+      _ref1 = this.game.player2.words();
+      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+        word = _ref1[_j];
+        p2words += "" + word + " ";
+      }
+      this.$p1message.html("" + p1words);
+      this.$p2message.html("" + p2words);
     };
 
     _Class.prototype.updateGrid = function() {
