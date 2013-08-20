@@ -574,7 +574,7 @@
     _Class.tile = function(tile) {
       var x, y, _ref;
       _ref = (tile != null ? tile.coordinate : void 0) || {}, x = _ref.x, y = _ref.y;
-      return "Tile (" + x + ", " + y + ") selected";
+      return "Player 1 selected tile (" + x + ", " + y + ")";
     };
 
     return _Class;

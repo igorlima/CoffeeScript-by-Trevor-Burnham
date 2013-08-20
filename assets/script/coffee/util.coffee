@@ -86,4 +86,4 @@ Message = Util.Message = class
 
   @tile: (tile) ->
     {x, y} = tile?.coordinate or {}
-    "Tile (#{x}, #{y}) selected"
+    "Player 1 selected tile (#{x}, #{y})"

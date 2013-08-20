@@ -223,6 +223,9 @@ describe "Game class", ->
         it "a message SHOULD appear containing 'tile (3, 1)'", ->
           expect( message() ).toMatch /[Tt]ile [(]3, 1[)]/
 
+        it "a message SHOULD appear containing 'Player 1'", ->
+          expect( message() ).toContain "Player 1"
+
         describe "a second click on a invalid tile (3, 3) ", ->
           tile_3_3  = -> $lis()[18]
           $tile_3_3 = -> $ tile_3_3()

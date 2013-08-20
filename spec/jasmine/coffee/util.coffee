@@ -248,16 +248,22 @@ describe "Util class", ->
           tile = coordinate: {x: 2, y: 1}
           message = Message.tile tile
 
-        it "message SHOULD be 'Tile (2, 1) selected'", ->
-          expect( message ).toBe "Tile (2, 1) selected"
+        it "message SHOULD contain the word 'selected'", ->
+          expect( message ).toContain "selected"
+
+        it "message SHOULD contain 'Tile (2, 1)'", ->
+          expect( message ).toMatch /[Tt]ile [(]2, 1[)]/
 
       describe "tile (1, 3)", ->
         beforeEach ->
           tile = coordinate: {x: 1, y: 3}
           message = Message.tile tile
 
-        it "message SHOULD be 'Tile (1, 3) selected'", ->
-          expect( message ).toBe "Tile (1, 3) selected"
+        it "message SHOULD contain the word 'selected'", ->
+          expect( message ).toContain "selected"
+
+        it "message SHOULD contatin 'Tile (1, 3)'", ->
+          expect( message ).toMatch /[Tt]ile [(]1, 3[)]/
 
     describe "a player John scored in 45 points with 3 words", ->
       message = undefined
