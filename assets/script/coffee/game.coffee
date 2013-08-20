@@ -32,6 +32,19 @@ Game = Scrabble.Game = class
     @initView()
     @
 
+  watchTilesDefault = (tile) ->
+    unless @view.selectedTile?
+      @view.selectedTile = $.extend {}, tile
+      @view.selectedTile.$el.addClass 'selected'
+      @showMessage tile: tile
+    else
+      firstCoord  = @view.selectedTile.coordinate
+      secondCoord = tile.coordinate
+      swapCoordinates = Scrabble.Util.createSwapCoordinate firstCoord, secondCoord
+      @move swapCoordinates
+      @view.selectedTile.$el.removeClass 'selected'
+      @view.selectedTile = undefined
+
   initView: ->
     @view = new View
       p1score: @VIEW.PLAYER.ONE.SCORE
@@ -43,18 +56,7 @@ Game = Scrabble.Game = class
       game: @
     @view.updatePlayerNames()
     @view.update()
-    @view.watchTiles (tile) =>
-      unless @view.selectedTile?
-        @view.selectedTile = $.extend {}, tile
-        @view.selectedTile.$el.addClass 'selected'
-        @showMessage tile: tile
-      else
-        firstCoord  = @view.selectedTile.coordinate
-        secondCoord = tile.coordinate
-        swapCoordinates = Scrabble.Util.createSwapCoordinate firstCoord, secondCoord
-        @move swapCoordinates
-        @view.selectedTile.$el.removeClass 'selected'
-        @view.selectedTile = undefined
+    @view.watchTiles (tile) => watchTilesDefault.call @, tile
     return
 
   showMessage: ({score, tile}) ->

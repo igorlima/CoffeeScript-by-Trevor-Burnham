@@ -106,6 +106,8 @@
   };
 
   Game = Scrabble.Game = (function() {
+    var watchTilesDefault;
+
     function _Class(_arg) {
       this.words = (_arg != null ? _arg : {}).words;
       if (this.words == null) {
@@ -151,6 +153,24 @@
       return this;
     };
 
+    watchTilesDefault = function(tile) {
+      var firstCoord, secondCoord, swapCoordinates;
+      if (this.view.selectedTile == null) {
+        this.view.selectedTile = $.extend({}, tile);
+        this.view.selectedTile.$el.addClass('selected');
+        return this.showMessage({
+          tile: tile
+        });
+      } else {
+        firstCoord = this.view.selectedTile.coordinate;
+        secondCoord = tile.coordinate;
+        swapCoordinates = Scrabble.Util.createSwapCoordinate(firstCoord, secondCoord);
+        this.move(swapCoordinates);
+        this.view.selectedTile.$el.removeClass('selected');
+        return this.view.selectedTile = void 0;
+      }
+    };
+
     _Class.prototype.initView = function() {
       var _this = this;
       this.view = new View({
@@ -165,21 +185,7 @@
       this.view.updatePlayerNames();
       this.view.update();
       this.view.watchTiles(function(tile) {
-        var firstCoord, secondCoord, swapCoordinates;
-        if (_this.view.selectedTile == null) {
-          _this.view.selectedTile = $.extend({}, tile);
-          _this.view.selectedTile.$el.addClass('selected');
-          return _this.showMessage({
-            tile: tile
-          });
-        } else {
-          firstCoord = _this.view.selectedTile.coordinate;
-          secondCoord = tile.coordinate;
-          swapCoordinates = Scrabble.Util.createSwapCoordinate(firstCoord, secondCoord);
-          _this.move(swapCoordinates);
-          _this.view.selectedTile.$el.removeClass('selected');
-          return _this.view.selectedTile = void 0;
-        }
+        return watchTilesDefault.call(_this, tile);
       });
     };
 
