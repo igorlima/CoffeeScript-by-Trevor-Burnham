@@ -214,6 +214,12 @@ describe "Game View Class", ->
         view.watchTiles (obj) -> tile = obj
         tile = undefined
 
+      it "watchTiles SHOULD not return anything", ->
+        expect( view.watchTiles -> ).not.toBeDefined()
+
+      it "registerWatchTiles SHOULD not return anything", ->
+        expect( view.registerWatchTiles -> ).not.toBeDefined()
+
       describe "Watching by click", ->
         beforeEach -> $tile_1_1().click()
 
@@ -241,9 +247,13 @@ describe "Game View Class", ->
           runs -> expect(tile).toBeDefined()
 
       describe "Unwatching tile", ->
+        unwatchTilesReturn = undefined
 
         beforeEach ->
-          view.unwatchTiles()
+          unwatchTilesReturn = view.unwatchTiles()
+
+        it "unwatchTiles SHOULD SHOULD not return anything", ->
+          expect( unwatchTilesReturn ).not.toBeDefined()
 
         it "unwatchTiles SHOULD detaches all event handlers registered", ->
           $tile_1_1().click()

@@ -35,6 +35,7 @@ View = Game.View = class
   watchTiles: (callback) ->
     @watcherTiles.push callback
     @registerWatchTiles callback
+    return
 
   registerWatchTiles: (callback) ->
     $grid = @$grid
@@ -52,10 +53,12 @@ View = Game.View = class
       "swipeLeft":  -> $(@).trigger 'catchTileInfo', {x: -1}
       "swipeUp":    -> $(@).trigger 'catchTileInfo', {y: -1}
       "swipeDown":  -> $(@).trigger 'catchTileInfo', {y: 1}
+    return
 
   unwatchTiles: ->
     @watcherTiles = []
     @$grid.find('li').off()
+    return
 
 View.showMessage = ({message, context, id}={}) ->
   $id = $ "##{id or DEFAULT_VIEW.MESSAGE}", context

@@ -1071,14 +1071,14 @@
 
     _Class.prototype.watchTiles = function(callback) {
       this.watcherTiles.push(callback);
-      return this.registerWatchTiles(callback);
+      this.registerWatchTiles(callback);
     };
 
     _Class.prototype.registerWatchTiles = function(callback) {
       var $grid, tile;
       $grid = this.$grid;
       tile = {};
-      return $grid.find('li').on({
+      $grid.find('li').on({
         "catchTileInfo": function(event) {
           var coordinate, swapCoordinate, swipeCoordinate;
           coordinate = View.getCoordinate({
@@ -1128,7 +1128,7 @@
 
     _Class.prototype.unwatchTiles = function() {
       this.watcherTiles = [];
-      return this.$grid.find('li').off();
+      this.$grid.find('li').off();
     };
 
     return _Class;
