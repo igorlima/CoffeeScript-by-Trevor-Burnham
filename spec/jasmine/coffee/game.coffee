@@ -248,5 +248,14 @@ describe "Game class", ->
           it "a message SHOULD appear containing the player name and the points", ->
             expect( message() ).toMatch /Player 1 (.)+ points/
 
-          #describe "a third click on (2, 2) ", ->
+          describe "a third click on (2, 2) ", ->
+            tile_2_2  = -> $lis()[12]
+            $tile_2_2 = -> $ tile_2_2()
+            beforeEach ->
+              $tile_2_2().click()
 
+            it "the coordinate SHOULD be {x:2, y:2}", ->
+              expect( game.view.selectedTile.coordinate ).toEqual x: 2, y: 2
+
+            it "a message SHOULD appear containing 'Tile (2, 2) selected'", ->
+              expect( message() ).toContain "Tile (2, 2) selected"

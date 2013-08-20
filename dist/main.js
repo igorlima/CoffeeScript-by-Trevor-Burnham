@@ -164,8 +164,8 @@
         if (_this.view.selectedTile == null) {
           _this.view.selectedTile = $.extend({}, tile);
           _this.view.selectedTile.$el.addClass('selected');
-          return View.showMessage({
-            message: 'Tile (3, 1) selected',
+          return _this.showMessage({
+            tile: tile,
             context: DOM
           });
         } else {
@@ -181,16 +181,15 @@
     };
 
     _Class.prototype.showMessage = function(_arg) {
-      var context, message, score;
-      score = _arg.score, context = _arg.context;
-      if (score) {
-        message = Scrabble.Util.Message.points({
-          player: this.currentPlayer,
-          score: score
-        });
-      } else {
-        message = "Invalid move";
+      var context, message, score, tile;
+      score = _arg.score, context = _arg.context, tile = _arg.tile;
+      if (tile != null) {
+        message = Scrabble.Util.Message.tile(tile);
       }
+      message || (message = score ? Scrabble.Util.Message.points({
+        player: this.currentPlayer,
+        score: score
+      }) : "Invalid move");
       View.showMessage({
         message: message,
         context: context

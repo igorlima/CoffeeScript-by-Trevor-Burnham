@@ -43,7 +43,7 @@ Game = Scrabble.Game = class
       unless @view.selectedTile?
         @view.selectedTile = $.extend {}, tile
         @view.selectedTile.$el.addClass 'selected'
-        View.showMessage message: 'Tile (3, 1) selected', context: DOM
+        @showMessage tile: tile, context: DOM
       else
         firstCoord  = @view.selectedTile.coordinate
         secondCoord = tile.coordinate
@@ -53,11 +53,13 @@ Game = Scrabble.Game = class
         @view.selectedTile = undefined
     @
 
-  showMessage: ({score, context}) ->
-    if score
-      message = Scrabble.Util.Message.points {player: @currentPlayer, score: score}
-    else
-      message = "Invalid move"
+  showMessage: ({score, context, tile}) ->
+    message = Scrabble.Util.Message.tile tile if tile?
+    message or=
+      if score
+        Scrabble.Util.Message.points {player: @currentPlayer, score: score}
+      else
+        "Invalid move"
     View.showMessage {message, context}
     return
 
