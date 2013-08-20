@@ -26,7 +26,8 @@ DOM_STRINGFIED = "
   </div>"
 
 describe "Game class", ->
-  DOM = undefined
+  $lis  = -> $ '#grid li', DOM
+  DOM   = undefined
   words = ['DOES', 'DO', 'DID', 'GET', 'MOVE']
   beforeEach -> DOM = $ DOM_STRINGFIED
 
@@ -70,14 +71,35 @@ describe "Game class", ->
       it "the default board size should be 5", ->
         expect( game.board.size() ).toBe 5
 
-      describe "initView method", ->
+    describe "initView method", ->
+      tile_0_0  = -> $lis()[0]
+      $tile_0_0 = -> $ tile_0_0()
+      beforeEach -> game.new {DOM, VIEW: ELEMENTS_VIEW}
 
-        describe "default", ->
-          resultInitView = undefined
-          beforeEach -> resultInitView = game.initView()
+      describe "default", ->
+        resultInitView = undefined
+        beforeEach -> resultInitView = game.initView()
 
-          it "SHOULD not have any return", ->
-            expect( resultInitView ).not.toBeDefined()
+        it "SHOULD not have any return", ->
+          expect( resultInitView ).not.toBeDefined()
+
+      describe "customized", ->
+        selectedTile = count = undefined
+        beforeEach ->
+          count = 0
+          game.initView watchTiles: (tile) ->
+            selectedTile = tile
+            count++
+          $tile_0_0().click()
+
+        it "count SHOULD be 1", ->
+          expect( count ).toBe 1
+
+        it "selectedTile SHOULD be defined", ->
+          expect( selectedTile ).toBeDefined()
+
+        it "game.view.selectedTile SHOULD not be defined, because the watchTiles default was overridden", ->
+          expect( game.view.selectedTile ).not.toBeDefined()
 
     describe "Customized game", ->
       player1 = player2 = grid = undefined
@@ -168,7 +190,6 @@ describe "Game class", ->
             expect( game.currentPlayer ).toBe game.player1
 
     describe "by clicking", ->
-      $lis     = -> $ '#grid li', DOM
       $p1score = -> $ "#p1score", DOM
       $p2score = -> $ "#p2score", DOM
       p1score  = -> +$p1score().html()

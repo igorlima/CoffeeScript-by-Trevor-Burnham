@@ -45,7 +45,7 @@ Game = Scrabble.Game = class
       @view.selectedTile.$el.removeClass 'selected'
       @view.selectedTile = undefined
 
-  initView: ->
+  initView: ({watchTiles}={}) ->
     @view = new View
       p1score: @VIEW.PLAYER.ONE.SCORE
       p2score: @VIEW.PLAYER.TWO.SCORE
@@ -56,7 +56,9 @@ Game = Scrabble.Game = class
       game: @
     @view.updatePlayerNames()
     @view.update()
-    @view.watchTiles (tile) => watchTilesDefault.call @, tile
+    @view.watchTiles (tile) =>
+      if watchTiles? then watchTiles tile
+      else watchTilesDefault.call @, tile
     return
 
   showMessage: ({score, tile}) ->

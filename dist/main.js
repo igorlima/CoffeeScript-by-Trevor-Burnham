@@ -171,8 +171,10 @@
       }
     };
 
-    _Class.prototype.initView = function() {
-      var _this = this;
+    _Class.prototype.initView = function(_arg) {
+      var watchTiles,
+        _this = this;
+      watchTiles = (_arg != null ? _arg : {}).watchTiles;
       this.view = new View({
         p1score: this.VIEW.PLAYER.ONE.SCORE,
         p2score: this.VIEW.PLAYER.TWO.SCORE,
@@ -185,7 +187,11 @@
       this.view.updatePlayerNames();
       this.view.update();
       this.view.watchTiles(function(tile) {
-        return watchTilesDefault.call(_this, tile);
+        if (watchTiles != null) {
+          return watchTiles(tile);
+        } else {
+          return watchTilesDefault.call(_this, tile);
+        }
       });
     };
 
