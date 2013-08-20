@@ -1,4 +1,16 @@
 module.exports = (grunt) ->
+
+  all_js_script_files = [
+    'assets/script/js/tile.js'
+    'assets/script/js/tile-finder.js'
+    'assets/script/js/word-finder.js'
+    'assets/script/js/util.js'
+    'assets/script/js/player.js'
+    'assets/script/js/score.js'
+    'assets/script/js/board.js'
+    'assets/script/js/game.js'
+  ]
+
   grunt.initConfig
     jasmine:
       options:
@@ -6,7 +18,7 @@ module.exports = (grunt) ->
         vendor:  ['lib/dom/zepto.min.js', 'lib/dom/zepto-touch.js']
         version: '1.3.1'
       all:
-        src: ['assets/script/js/**/*.js']
+        src: all_js_script_files
       main:
         src: ['dist/main.js']
       minified:
@@ -62,7 +74,7 @@ module.exports = (grunt) ->
     concat:
       script:
         files:
-          'dist/main.js': ['assets/script/js/**/*.js']
+          'dist/main.js': all_js_script_files
       style:
         files:
           'dist/main.css': ['assets/style/css/**/*.css']
