@@ -84,6 +84,7 @@ Message = Util.Message = class
     message += "#{player.words}. "
     message += "Earning #{player.points} points"
 
-  @tile: ({tile}) ->
+  @tile: ({tile, player}) ->
+    playerName = player?.name()
     {x, y} = tile?.coordinate or {}
-    "Player 1 selected tile (#{x}, #{y})"
+    "#{playerName} selected tile (#{x}, #{y})"

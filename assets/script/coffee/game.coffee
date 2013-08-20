@@ -56,10 +56,11 @@ Game = Scrabble.Game = class
     return
 
   showMessage: ({score, tile}) ->
-    message = Util.Message.tile {tile} if tile?
+    player = @currentPlayer
+    message = Util.Message.tile {tile, player} if tile?
     message or=
       if score
-        Util.Message.points {player: @currentPlayer, score: score}
+        Util.Message.points {player, score}
       else
         "Invalid move"
     Game.View.showMessage {message, context: @DOM}

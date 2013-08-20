@@ -245,8 +245,9 @@ describe "Util class", ->
 
       describe "tile (2, 1)", ->
         beforeEach ->
+          player = new Player name: 'Player 1'
           tile = coordinate: {x: 2, y: 1}
-          message = Message.tile {tile}
+          message = Message.tile {tile, player}
 
         it "message SHOULD contain the word 'selected'", ->
           expect( message ).toContain "selected"
@@ -254,16 +255,23 @@ describe "Util class", ->
         it "message SHOULD contain 'Tile (2, 1)'", ->
           expect( message ).toMatch /[Tt]ile [(]2, 1[)]/
 
+        it "message SHOULD contain the player name 'Player 1'", ->
+          expect( message ).toContain "Player 1"
+
       describe "tile (1, 3)", ->
         beforeEach ->
+          player = new Player name: 'Player 2'
           tile = coordinate: {x: 1, y: 3}
-          message = Message.tile {tile}
+          message = Message.tile {tile, player}
 
         it "message SHOULD contain the word 'selected'", ->
           expect( message ).toContain "selected"
 
         it "message SHOULD contatin 'Tile (1, 3)'", ->
           expect( message ).toMatch /[Tt]ile [(]1, 3[)]/
+
+        it "message SHOULD contain the player name 'Player 2'", ->
+          expect( message ).toContain "Player 2"
 
     describe "a player John scored in 45 points with 3 words", ->
       message = undefined

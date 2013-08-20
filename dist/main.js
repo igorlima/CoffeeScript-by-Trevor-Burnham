@@ -572,10 +572,11 @@
     };
 
     _Class.tile = function(_arg) {
-      var tile, x, y, _ref;
-      tile = _arg.tile;
+      var player, playerName, tile, x, y, _ref;
+      tile = _arg.tile, player = _arg.player;
+      playerName = player != null ? player.name() : void 0;
       _ref = (tile != null ? tile.coordinate : void 0) || {}, x = _ref.x, y = _ref.y;
-      return "Player 1 selected tile (" + x + ", " + y + ")";
+      return "" + playerName + " selected tile (" + x + ", " + y + ")";
     };
 
     return _Class;
@@ -998,15 +999,17 @@
     };
 
     _Class.prototype.showMessage = function(_arg) {
-      var message, score, tile;
+      var message, player, score, tile;
       score = _arg.score, tile = _arg.tile;
+      player = this.currentPlayer;
       if (tile != null) {
         message = Util.Message.tile({
-          tile: tile
+          tile: tile,
+          player: player
         });
       }
       message || (message = score ? Util.Message.points({
-        player: this.currentPlayer,
+        player: player,
         score: score
       }) : "Invalid move");
       Game.View.showMessage({
