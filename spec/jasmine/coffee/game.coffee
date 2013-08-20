@@ -9,6 +9,8 @@ ELEMENTS_VIEW =
       SCORE: 'p2score'
       NAME:  'p2name'
       MSG:   'p2message'
+  MESSAGE: 'message'
+  NOTICE:  'notice'
   GRID: 'grid'
 
 DOM_STRINGFIED = "

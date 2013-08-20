@@ -10,4 +10,5 @@
         NAME:  'p2name'
         MSG:   'p2message'
     MESSAGE: 'message'
+    NOTICE:  'notice'
     GRID: 'grid'

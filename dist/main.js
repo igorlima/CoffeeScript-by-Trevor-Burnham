@@ -17,6 +17,7 @@
           }
         },
         MESSAGE: 'message',
+        NOTICE: 'notice',
         GRID: 'grid'
       };
     };
@@ -1019,7 +1020,8 @@
       }) : "Invalid move");
       Game.View.showMessage({
         message: message,
-        context: this.DOM
+        context: this.DOM,
+        id: DEFAULT_VIEW.MESSAGE
       });
     };
 
@@ -1167,7 +1169,7 @@
   View.showMessage = function(_arg) {
     var $id, context, id, message, _ref;
     _ref = _arg != null ? _arg : {}, message = _ref.message, context = _ref.context, id = _ref.id;
-    $id = $("#" + (id || DEFAULT_VIEW.MESSAGE), context);
+    $id = $("#" + id, context);
     $id.html(message);
   };
 

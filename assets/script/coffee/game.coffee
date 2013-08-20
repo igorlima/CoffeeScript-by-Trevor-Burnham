@@ -59,5 +59,5 @@ Game = Scrabble.Game = class
         Util.Message.points {player, score}
       else
         "Invalid move"
-    Game.View.showMessage {message, context: @DOM}
+    Game.View.showMessage {message, context: @DOM, id: DEFAULT_VIEW.MESSAGE}
     return

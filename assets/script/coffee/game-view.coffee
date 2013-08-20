@@ -74,7 +74,7 @@ View = Game.View = class
     return
 
 View.showMessage = ({message, context, id}={}) ->
-  $id = $ "##{id or DEFAULT_VIEW.MESSAGE}", context
+  $id = $ "##{id}", context
   $id.html message
   return
 
