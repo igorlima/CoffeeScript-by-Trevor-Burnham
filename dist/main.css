@@ -61,7 +61,7 @@ body {
 #message {
   position: relative;
   text-align: center;
-  margin: 32px;
+  margin: 32px auto;
   font-size: 24px;
   width: 480px;
 }

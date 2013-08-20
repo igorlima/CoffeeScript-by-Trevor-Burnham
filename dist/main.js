@@ -562,14 +562,20 @@
     };
 
     _Class.points = function(_arg) {
-      var message, player, score;
+      var message, player, score, w, words, _i, _len, _ref;
       player = _arg.player, score = _arg.score;
       player = playerInfo({
         player: player,
         score: score
       });
-      message = "" + player.name + " formed the following " + player.numberWords + " word(s): ";
-      message += "" + player.words + ". ";
+      words = '';
+      _ref = player.words;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        w = _ref[_i];
+        words += "" + w + " ";
+      }
+      message = "" + player.name + " formed the following " + player.numberWords + " word(s):";
+      message += "<br>" + words + "<br>";
       return message += "Earning " + player.points + " points";
     };
 
