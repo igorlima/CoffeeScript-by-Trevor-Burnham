@@ -898,7 +898,7 @@
 }).call(this);
 
 (function() {
-  var Board, DEFAULT_VIEW, Game, Player, Scrabble, Util, View, defaultView;
+  var Board, DEFAULT_VIEW, Game, Player, Scrabble, Util, defaultView;
 
   Scrabble = this.Scrabble;
 
@@ -976,7 +976,7 @@
       var watchTiles,
         _this = this;
       watchTiles = (_arg != null ? _arg : {}).watchTiles;
-      this.view = new View({
+      this.view = new Game.View({
         p1score: this.VIEW.PLAYER.ONE.SCORE,
         p2score: this.VIEW.PLAYER.TWO.SCORE,
         p1name: this.VIEW.PLAYER.ONE.NAME,
@@ -1006,7 +1006,7 @@
         player: this.currentPlayer,
         score: score
       }) : "Invalid move");
-      View.showMessage({
+      Game.View.showMessage({
         message: message,
         context: this.DOM
       });
@@ -1015,6 +1015,17 @@
     return _Class;
 
   })();
+
+}).call(this);
+
+(function() {
+  var DEFAULT_VIEW, Game, Scrabble, Util, View, defaultView;
+
+  Scrabble = this.Scrabble;
+
+  Util = Scrabble.Util, Game = Scrabble.Game, defaultView = Scrabble.defaultView;
+
+  DEFAULT_VIEW = defaultView();
 
   View = Game.View = (function() {
     function _Class(_arg) {
