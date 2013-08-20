@@ -70,8 +70,14 @@ describe "Game class", ->
       it "the default board size should be 5", ->
         expect( game.board.size() ).toBe 5
 
-      it "the initView method SHOULD not have any return", ->
-        expect( game.initView() ).not.toBeDefined()
+      describe "initView method", ->
+
+        describe "default", ->
+          resultInitView = undefined
+          beforeEach -> resultInitView = game.initView()
+
+          it "SHOULD not have any return", ->
+            expect( resultInitView ).not.toBeDefined()
 
     describe "Customized game", ->
       player1 = player2 = grid = undefined
