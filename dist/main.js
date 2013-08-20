@@ -571,8 +571,9 @@
       return message += "Earning " + player.points + " points";
     };
 
-    _Class.tile = function(tile) {
-      var x, y, _ref;
+    _Class.tile = function(_arg) {
+      var tile, x, y, _ref;
+      tile = _arg.tile;
       _ref = (tile != null ? tile.coordinate : void 0) || {}, x = _ref.x, y = _ref.y;
       return "Player 1 selected tile (" + x + ", " + y + ")";
     };
@@ -1000,7 +1001,9 @@
       var message, score, tile;
       score = _arg.score, tile = _arg.tile;
       if (tile != null) {
-        message = Util.Message.tile(tile);
+        message = Util.Message.tile({
+          tile: tile
+        });
       }
       message || (message = score ? Util.Message.points({
         player: this.currentPlayer,

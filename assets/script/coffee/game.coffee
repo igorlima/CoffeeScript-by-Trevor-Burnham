@@ -56,7 +56,7 @@ Game = Scrabble.Game = class
     return
 
   showMessage: ({score, tile}) ->
-    message = Util.Message.tile tile if tile?
+    message = Util.Message.tile {tile} if tile?
     message or=
       if score
         Util.Message.points {player: @currentPlayer, score: score}

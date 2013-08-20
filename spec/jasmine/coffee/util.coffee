@@ -246,7 +246,7 @@ describe "Util class", ->
       describe "tile (2, 1)", ->
         beforeEach ->
           tile = coordinate: {x: 2, y: 1}
-          message = Message.tile tile
+          message = Message.tile {tile}
 
         it "message SHOULD contain the word 'selected'", ->
           expect( message ).toContain "selected"
@@ -257,7 +257,7 @@ describe "Util class", ->
       describe "tile (1, 3)", ->
         beforeEach ->
           tile = coordinate: {x: 1, y: 3}
-          message = Message.tile tile
+          message = Message.tile {tile}
 
         it "message SHOULD contain the word 'selected'", ->
           expect( message ).toContain "selected"
