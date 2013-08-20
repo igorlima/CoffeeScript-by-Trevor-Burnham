@@ -624,6 +624,7 @@
           moveCount++;
           score += result.points;
           words.push.apply(words, result.newWords);
+          words.sort();
         }
         return result;
       };

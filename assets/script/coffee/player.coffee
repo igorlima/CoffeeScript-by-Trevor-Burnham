@@ -13,4 +13,5 @@ Player = @Scrabble.Player = class
         moveCount++
         score += result.points
         words.push result.newWords...
+        words.sort()
       result
