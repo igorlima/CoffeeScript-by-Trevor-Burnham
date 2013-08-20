@@ -573,11 +573,11 @@
       _ref = player.words;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         w = _ref[_i];
-        words += "" + w + " ";
+        words += "<strong>" + w + "</strong> ";
       }
       message = "" + player.name + " formed the following " + player.numberWords + " word(s):";
       message += "<br>" + words + "<br>";
-      return message += "Earning " + player.points + " points";
+      return message += "Earning <strong>" + player.points + "</strong> points";
     };
 
     _Class.tile = function(_arg) {

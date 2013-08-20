@@ -81,10 +81,10 @@ Message = Util.Message = class
   @points: ({player, score}) ->
     player = playerInfo {player, score}
     words  = ''
-    words += "#{w} " for w in player.words
+    words += "<strong>#{w}</strong> " for w in player.words
     message  = "#{player.name} formed the following #{player.numberWords} word(s):"
     message += "<br>#{words}<br>"
-    message += "Earning #{player.points} points"
+    message += "Earning <strong>#{player.points}</strong> points"
 
   @tile: ({tile, player}) ->
     playerName = player?.name()

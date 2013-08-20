@@ -281,7 +281,7 @@ describe "Util class", ->
         message = Message.points {player, score}
 
       it "message SHOULD contain '45 points'", ->
-        expect( message ).toContain '45 points'
+        expect( message ).toMatch /(.)*45(.)* points/
 
       it "message SHOULD contain the word 'OD'", ->
         expect( message ).toContain 'OD'
@@ -306,7 +306,7 @@ describe "Util class", ->
         message = Message.points {player, score}
 
       it "message SHOULD contain '90 points'", ->
-        expect( message ).toContain '90 points'
+        expect( message ).toMatch /(.)*90(.)* points/
 
       it "message SHOULD contain the player name: Biel", ->
         expect( message ).toContain 'Biel'
@@ -322,4 +322,4 @@ describe "Util class", ->
           <3. list of words>
           Earning <4. number of points> points
           ", ->
-        expect( message ).toMatch /Biel (.)+ 4 word(.)+ 90 points/
+        expect( message ).toMatch /Biel (.)+ 4 word(.)+ (.)*90(.)* points/
