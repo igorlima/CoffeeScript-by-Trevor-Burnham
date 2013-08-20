@@ -24,6 +24,10 @@ DOM_STRINGFIED = "
         <td id='p1score'></td>
         <td id='p2score'></td>
       </tr>
+      <tr>
+        <td id='p1message'></td>
+        <td id='p2message'></td>
+      </tr>
     </table>
   </div>"
 
@@ -194,8 +198,12 @@ describe "Game class", ->
     describe "by clicking", ->
       $p1score = -> $ "#p1score", DOM
       $p2score = -> $ "#p2score", DOM
+      $p1message = -> $ "#p1message", DOM
+      $p2message = -> $ "#p2message", DOM
       p1score  = -> +$p1score().html()
       p2score  = -> +$p2score().html()
+      p1message  = -> $p1message().html()
+      p2message  = -> $p2message().html()
       beforeEach ->
         game.new {board, DOM}
 
@@ -287,6 +295,9 @@ describe "Game class", ->
 
           it "a message SHOULD appear containing the player name and the points", ->
             expect( message() ).toMatch /Player 1 (.)+ points/
+
+          it "word list for player 1 SHOULD contain 'DOES'", ->
+            expect( p1message() ).toContain 'DOES'
 
           describe "a third click on (2, 2) ", ->
             tile_2_2  = -> $lis()[12]

@@ -1071,13 +1071,12 @@
         watcher = _ref[_i];
         this.registerWatchTiles(watcher);
       }
-      return this.$grid;
     };
 
     _Class.prototype.update = function() {
       this.updateScore();
+      this.updatePlayerWords();
       this.updateGrid();
-      return this;
     };
 
     _Class.prototype.watchTiles = function(callback) {

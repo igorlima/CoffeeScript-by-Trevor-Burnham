@@ -34,12 +34,13 @@ View = Game.View = class
   updateGrid: ->
     @$grid.empty().append( View.createGrid @game.board.matrix() )
     @registerWatchTiles watcher for watcher in @watcherTiles
-    @$grid
+    return
 
   update: ->
     @updateScore()
+    @updatePlayerWords()
     @updateGrid()
-    @
+    return
 
   watchTiles: (callback) ->
     @watcherTiles.push callback
