@@ -2,7 +2,18 @@ framework: jasmine
 
 src_files:
   - lib/dom/zepto.min.js
-  - assets/script/js/**/*.js
+
+  - assets/script/js/scrabble.js
+  - assets/script/js/tile.js
+  - assets/script/js/tile-finder.js
+  - assets/script/js/word-finder.js
+  - assets/script/js/util.js
+  - assets/script/js/player.js
+  - assets/script/js/score.js
+  - assets/script/js/board.js
+  - assets/script/js/game.js
+  - assets/script/js/game-view.js
+
   - spec/jasmine/js/**/*.js
 
 launchers:
