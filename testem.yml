@@ -23,6 +23,9 @@ launchers:
   Win7_IE_9:
     command: node spec/lib/saucelauncher-webdriver.js --browserNameSL='internet explorer' --versionSL='9' --platformSL='Windows 7'
 
+  Win8_IE_10:
+    command: node spec/lib/saucelauncher-webdriver.js --browserNameSL='internet explorer' --versionSL='10' --platformSL='Windows 8'
+
   iPhone:
     command: node spec/lib/saucelauncher-webdriver.js --browserNameSL='iphone' --versionSL='6' --platformSL='OS X 10.8'
 
