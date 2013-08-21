@@ -29,5 +29,5 @@ launchers:
   iPhone:
     command: node spec/lib/saucelauncher-webdriver.js --browserNameSL='iphone' --versionSL='6' --platformSL='OS X 10.8'
 
-launch_in_ci: [WinXP_Opera, Win7_IE_9, iPhone]
+launch_in_ci: [WinXP_Opera, Win7_IE_9, Win8_IE_10, iPhone]
 launch_in_dev: [phantomjs]
