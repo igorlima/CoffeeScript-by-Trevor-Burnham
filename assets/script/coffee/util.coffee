@@ -88,5 +88,8 @@ Message = Util.Message = class
 
   @tile: ({tile, player}) ->
     playerName = player?.name()
-    {x, y} = tile?.coordinate or {}
-    "#{playerName} selected tile (#{x}, #{y})"
+    if tile?
+      {x, y} = tile.coordinate or {}
+      "#{playerName} selected tile (#{x}, #{y}). Please select a second tile."
+    else
+      "#{playerName}, please select a tile."

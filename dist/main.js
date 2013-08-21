@@ -584,8 +584,12 @@
       var player, playerName, tile, x, y, _ref;
       tile = _arg.tile, player = _arg.player;
       playerName = player != null ? player.name() : void 0;
-      _ref = (tile != null ? tile.coordinate : void 0) || {}, x = _ref.x, y = _ref.y;
-      return "" + playerName + " selected tile (" + x + ", " + y + ")";
+      if (tile != null) {
+        _ref = tile.coordinate || {}, x = _ref.x, y = _ref.y;
+        return "" + playerName + " selected tile (" + x + ", " + y + "). Please select a second tile.";
+      } else {
+        return "" + playerName + ", please select a tile.";
+      }
     };
 
     return _Class;
@@ -952,10 +956,9 @@
           board: _this.board,
           swapCoordinates: swapCoordinates
         });
-        _this.message({
-          score: moveScore
-        });
+        _this.message(moveScore);
         if (moveScore) {
+          _this.notice(moveScore);
           $.extend(_this.lastMove, moveScore);
           _this.currentPlayer = _this.currentPlayer === _this.player1 ? _this.player2 : _this.player1;
           _this.view.update();
@@ -971,16 +974,15 @@
       if (this.view.selectedTile == null) {
         this.view.selectedTile = $.extend({}, tile);
         this.view.selectedTile.$el.addClass('selected');
-        return this.message({
-          tile: tile
-        });
+        this.message(false);
       } else {
         firstCoord = this.view.selectedTile.coordinate;
         secondCoord = tile.coordinate;
         swapCoordinates = Util.createSwapCoordinate(firstCoord, secondCoord);
         this.move(swapCoordinates);
         this.view.selectedTile.$el.removeClass('selected');
-        return this.view.selectedTile = void 0;
+        this.view.selectedTile = void 0;
+        this.message(this.lastMove.points);
       }
     };
 
@@ -995,6 +997,7 @@
       });
       this.view.updatePlayerNames();
       this.view.update();
+      this.message(false);
       this.view.watchTiles(function(tile) {
         if (watchTiles != null) {
           return watchTiles(tile);
@@ -1004,26 +1007,40 @@
       });
     };
 
-    _Class.prototype.message = function(_arg) {
-      var id, message, player, score, tile;
-      score = _arg.score, tile = _arg.tile;
+    _Class.prototype.message = function(score) {
+      var id, message, player, tile;
       player = this.currentPlayer;
       id = DEFAULT_VIEW.MESSAGE;
-      if (tile != null) {
-        message = Util.Message.tile({
-          tile: tile,
-          player: player
-        });
+      tile = this.view.selectedTile;
+      message = Util.Message.tile({
+        tile: tile,
+        player: player
+      });
+      if (score == null) {
+        message = "Invalid move. " + message;
       }
-      message || (message = score ? (id = DEFAULT_VIEW.NOTICE, Util.Message.points({
-        player: player,
-        score: score
-      })) : "Invalid move");
       Game.View.showMessage({
         message: message,
         context: this.DOM,
         id: id
       });
+    };
+
+    _Class.prototype.notice = function(score) {
+      var id, message, player;
+      if (score != null) {
+        player = this.currentPlayer;
+        id = DEFAULT_VIEW.NOTICE;
+        message = Util.Message.points({
+          player: player,
+          score: score
+        });
+        Game.View.showMessage({
+          message: message,
+          context: this.DOM,
+          id: id
+        });
+      }
     };
 
     return _Class;

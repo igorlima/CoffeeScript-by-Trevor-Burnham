@@ -238,10 +238,21 @@ describe "Util class", ->
       expect(coordinate).toEqual {x:1, y:1}
 
   describe "setting message", ->
+    message = undefined
     Message = Util.Message
 
+    describe "not selected a tile", ->
+      beforeEach ->
+        player  = new Player name: 'Albert'
+        message = Message.tile {player}
+
+      it "SHOULD contain the name 'Albert'", ->
+        expect( message ).toContain 'Albert'
+
+      it "SHOULD contain 'select a tile'", ->
+        expect( message ).toContain 'select a tile'
+
     describe "a selected tile", ->
-      message = undefined
 
       describe "tile (2, 1)", ->
         beforeEach ->
@@ -257,6 +268,9 @@ describe "Util class", ->
 
         it "message SHOULD contain the player name 'Player 1'", ->
           expect( message ).toContain "Player 1"
+
+        it "message SHOULD contain 'select a second tile'", ->
+          expect( message ).toContain "select a second tile"
 
       describe "tile (1, 3)", ->
         beforeEach ->

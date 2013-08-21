@@ -158,6 +158,12 @@ describe "Game class", ->
     describe "method game.move(...)", ->
       beforeEach -> game.new {board, DOM}
 
+      it "SHOULD have a message containing the player name", ->
+        expect( message() ).toContain "Player 1"
+
+      it "SHOULD not contain 'Invalid move'", ->
+        expect( message() ).not.toContain "Invalid move"
+
       describe "a first moving to {x1: 3, y1: 3, x2: 3, y2: 4} ", ->
         beforeEach -> game.move {x1: 3, y1: 3, x2: 3, y2: 4}
 
@@ -241,6 +247,9 @@ describe "Game class", ->
         it "a message SHOULD appear containing 'Player 1'", ->
           expect( message() ).toContain "Player 1"
 
+        it "message SHOULD not contain 'Invalid move'", ->
+          expect( message() ).not.toContain "Invalid move"
+
         describe "a second click on a invalid tile (3, 3) ", ->
           tile_3_3  = -> $lis()[18]
           $tile_3_3 = -> $ tile_3_3()
@@ -303,6 +312,9 @@ describe "Game class", ->
 
           it "word list for player 1 SHOULD contain 'DOES'", ->
             expect( p1message() ).toContain 'DOES'
+
+          it "message SHOULD contain 'select a tile'", ->
+            expect( message() ).toContain 'select a tile'
 
           describe "a third click on (2, 2) ", ->
             tile_2_2  = -> $lis()[12]

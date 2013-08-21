@@ -14,8 +14,9 @@ Game = Scrabble.Game = class
     @move = (swapCoordinates) =>
       @lastMove = $.extend {}, {swapCoordinates}
       moveScore = @currentPlayer.move {board: @board, swapCoordinates}
-      @message score: moveScore
+      @message moveScore
       if moveScore
+        @notice moveScore
         $.extend @lastMove, moveScore
         @currentPlayer =
           if @currentPlayer is @player1 then @player2
@@ -30,7 +31,7 @@ Game = Scrabble.Game = class
     unless @view.selectedTile?
       @view.selectedTile = $.extend {}, tile
       @view.selectedTile.$el.addClass 'selected'
-      @message tile: tile
+      @message false
     else
       firstCoord  = @view.selectedTile.coordinate
       secondCoord = tile.coordinate
@@ -38,6 +39,8 @@ Game = Scrabble.Game = class
       @move swapCoordinates
       @view.selectedTile.$el.removeClass 'selected'
       @view.selectedTile = undefined
+      @message @lastMove.points
+    return
 
   initView: ({watchTiles}={}) ->
     @view = new Game.View
@@ -46,20 +49,26 @@ Game = Scrabble.Game = class
       game: @
     @view.updatePlayerNames()
     @view.update()
+    @message false
     @view.watchTiles (tile) =>
       if watchTiles? then watchTiles tile
       else watchTilesDefault.call @, tile
     return
 
-  message: ({score, tile}) ->
+  message: (score) ->
     player = @currentPlayer
     id = DEFAULT_VIEW.MESSAGE
-    message = Util.Message.tile {tile, player} if tile?
-    message or=
-      if score
-        id = DEFAULT_VIEW.NOTICE
-        Util.Message.points {player, score}
-      else
-        "Invalid move"
+    tile = @view.selectedTile
+
+    message = Util.Message.tile {tile, player}
+    message = "Invalid move. #{message}" if (not score?)
     Game.View.showMessage {message, context: @DOM, id}
+    return
+
+  notice: (score) ->
+    if score?
+      player = @currentPlayer
+      id = DEFAULT_VIEW.NOTICE
+      message = Util.Message.points {player, score}
+      Game.View.showMessage {message, context: @DOM, id}
     return
