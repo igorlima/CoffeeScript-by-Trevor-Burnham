@@ -2,12 +2,20 @@ doctype 5
 html
   head
     title Learning CoffeeScript by Trevor Burnham
-    script(type='text/javascript', src='main.js')
-    script(type='text/javascript', src='../lib/word.js')
-    script(type='text/javascript', src='../lib/dom/zepto.min.js')
-    script(type='text/javascript', src='../lib/dom/zepto-touch.js')
 
-    link(rel='stylesheet', type='text/css', href='./main.min.css')
+    if dist
+      link(rel='stylesheet', type='text/css', href='./main.min.css')
+      script(type='text/javascript', src='main.min.js')
+      script(type='text/javascript').
+        $(function(){(new Scrabble.Game({words:Words})).new()})
+
+    else
+      link(rel='stylesheet', type='text/css', href='./main.css')
+      script(type='text/javascript', src='main.js')
+      script(type='text/javascript', src='../lib/word.js')
+      script(type='text/javascript', src='../lib/dom/zepto.min.js')
+      script(type='text/javascript', src='../lib/dom/zepto-touch.js')
+
   body
     p#message
     #grid
