@@ -32,5 +32,9 @@
     "q":                      "*",
     "request":                "*",
     "vows":                   "*"
+  },
+  "scripts": {
+    "install": "grunt dist",
+    "test": "grunt test"
   }
 }
