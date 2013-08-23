@@ -6,12 +6,12 @@ before_install:
   # https://saucelabs.com/opensource/travis
   # http://saucelabs.com/downloads/Sauce-Connect-latest.zip
   - curl https://gist.github.com/santiycr/5139565/raw/sauce_connect_setup.sh | bash &> sauce_connect_setup.log
-before_script:
   - npm install -g grunt-cli testem vows
+before_script:
+  - vows spec/vows/js/* --spec
 script:
   # java -jar node_modules/karma-sauce-launcher/node_modules/sauce-connect-launcher/lib/Sauce-Connect.jar $SAUCE_USERNAME $SAUCE_ACCESS_KEY --tunnel-identifier $TRAVIS_JOB_NUMBER
   # node spec/lib/saucelauncher-webdriver.js --connect --localhostSL='localhost:7357' --browserNameSL='chrome' --versionSL='' --platformSL='Linux'
-  - vows spec/vows/js/* --spec
   - vows spec/vows/js/* --spec --browserNameSL='ipad' --versionSL='6' --platformSL='OS X 10.8'
   - testem ci -P 3 -f testem.yml --port 8080
 
