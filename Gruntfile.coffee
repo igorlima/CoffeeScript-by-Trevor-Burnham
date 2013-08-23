@@ -1,5 +1,10 @@
 module.exports = (grunt) ->
 
+  vendor = [
+    'lib/dom/zepto.min.js'
+    'lib/dom/zepto-touch.js'
+  ]
+
   all_js_script_files = [
     'assets/script/js/scrabble.js'
     'assets/script/js/tile.js'
@@ -17,9 +22,10 @@ module.exports = (grunt) ->
     jasmine:
       options:
         specs:   'spec/jasmine/js/**/*.js'
-        vendor:  ['lib/dom/zepto.min.js', 'lib/dom/zepto-touch.js']
         version: '1.3.1'
       all:
+        options:
+          vendor:  vendor
         src: all_js_script_files
       main:
         src: ['dist/main.js']
@@ -74,6 +80,13 @@ module.exports = (grunt) ->
         ext: '.js'
 
     concat:
+      script_for_dist:
+        files:
+          'dist/main.js': [
+            vendor...
+            all_js_script_files...
+            'lib/word_5x5.js'
+          ]
       script:
         files:
           'dist/main.js': all_js_script_files
@@ -99,8 +112,10 @@ module.exports = (grunt) ->
     jade:
       options:
         pretty: true
+        data:
+          dist: false
       compile:
-        expand: true
+        expand:  true
         flatten: true
         cwd: 'assets/view/jade/'
         src: ['**/*.jade']
@@ -112,6 +127,8 @@ module.exports = (grunt) ->
       dist:
         options:
           pretty: false
+          data:
+            dist: true
         files:
           "dist/index.html": ["assets/view/jade/*.jade"]
 
@@ -158,10 +175,26 @@ module.exports = (grunt) ->
     'clean'
     'coffeelint'
     'coffee'
-    'concat'
+    'concat:script'
+    'concat:style'
+    'jasmine:all'
+    'jade:main'
+  ]
+
+  grunt.registerTask 'dist', [
+    'clean'
+    'coffeelint'
+    'coffee'
+    'concat:script_for_dist'
+    'concat:style'
     'cssmin'
     'uglify'
     'gcc'
-    'jasmine'
     'jade:dist'
+  ]
+
+  grunt.registerTask 'test', [
+    'jasmine:main'
+    'jasmine:minified'
+    'jasmine:gcc'
   ]
