@@ -34,6 +34,7 @@
     "vows":                   "*"
   },
   "scripts": {
+    "preinstall": "npm install -g grunt-cli testem vows",
     "install": "grunt dist",
     "test": "grunt test"
   }
