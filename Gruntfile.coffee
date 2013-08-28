@@ -1,22 +1,42 @@
+vendor = [
+  'lib/dom/zepto.min.js'
+  'lib/dom/zepto-touch.js'
+]
+
+all_js_script_files = [
+  'assets/script/js/scrabble.js'
+  'assets/script/js/tile.js'
+  'assets/script/js/tile-finder.js'
+  'assets/script/js/word-finder.js'
+  'assets/script/js/util.js'
+  'assets/script/js/player.js'
+  'assets/script/js/score.js'
+  'assets/script/js/board.js'
+  'assets/script/js/game.js'
+  'assets/script/js/game-view.js'
+]
+
+exec_phantomjs = (callback) ->
+  portscanner = require 'portscanner'
+  exec        = require('child_process').exec
+  PHANTOMJS_PORT = 8910
+  portscanner.checkPortStatus PHANTOMJS_PORT, 'localhost', (error, status) ->
+    if status is 'open'
+      callback()
+    else
+      exec "phantomjs --webdriver=#{PHANTOMJS_PORT}"
+      setTimeout (-> callback()), 500
+
 module.exports = (grunt) ->
 
-  vendor = [
-    'lib/dom/zepto.min.js'
-    'lib/dom/zepto-touch.js'
-  ]
+  grunt.registerTask 'phantomjs', 'Start PhantomJS as a webdriver at 127.0.0.1:8910', ->
+    done = this.async()
+    exec_phantomjs done
 
-  all_js_script_files = [
-    'assets/script/js/scrabble.js'
-    'assets/script/js/tile.js'
-    'assets/script/js/tile-finder.js'
-    'assets/script/js/word-finder.js'
-    'assets/script/js/util.js'
-    'assets/script/js/player.js'
-    'assets/script/js/score.js'
-    'assets/script/js/board.js'
-    'assets/script/js/game.js'
-    'assets/script/js/game-view.js'
-  ]
+  grunt.registerTask 'server', 'Start a custom web server', ->
+    require './scripts/web-server.js'
+    done = this.async()
+    setTimeout (-> done()), 500
 
   grunt.initConfig
     jasmine:
