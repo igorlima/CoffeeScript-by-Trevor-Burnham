@@ -33,9 +33,12 @@ var exports     = module.exports = {},
       no_progress: false // optionally hide progress bar
     },
 
-    host    = "ondemand.saucelabs.com",
-    port    = 80,
-    browser = exports.browser = webdriver.remote(host, port, auth.username, auth.accessKey);
+    browser = exports.browser = webdriver.remote({
+      hostname: process.env.WEBDRIVER_HOST || "ondemand.saucelabs.com",
+      port: process.env.WEBDRIVER_PORT || 80,
+      user: auth.username,
+      pwd:  auth.accessKey
+    });
 
 browser.on("status", function(info) {
   //console.log("\x1b[36m%s\x1b[0m", info);
