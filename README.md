@@ -6,8 +6,7 @@
   <img src="https://saucelabs.com/browser-matrix/Scrabble.svg" alt="SauceLabs badge" />
 </a>
 
-CoffeeScript-by-Trevor-Burnham
-==============================
+# CoffeeScript-by-Trevor-Burnham
 
 Learning from a book named “CoffeeScript - Accelerated JavaScript Development by Trevor Burnham”
 
@@ -23,44 +22,11 @@ if eight words are formed in one move, then the point value of each is multiplie
 eight. Words that have already been used in the game don't count.
 
 
-Syntax highlighting on Sublime Text
-===================================
+## Syntax highlighting on Sublime Text
 
 https://github.com/Xavura/CoffeeScript-Sublime-Plugin
 
 
-## Snippets
+## Contributing and Pair Programing
 
-- Use `TAB` to run a snippet after typing the trigger.
-- Use `TAB` and `shift+TAB` to cycle forward/backward through fields.
-- Use `ESC` to exit snippet mode.
-
-### Snippet Triggers
-
-**Comprehension**
-
-  Array:  forin
-  Object: forof
-  Range:  fori (inclusive)
-  Range:  forx (exclusive)
-
-**Statements**
-
-  If:        if
-  Else:      el
-  If Else:   ifel
-  Else If:   elif
-  Switch:    swi
-  Ternary:   ter
-  Try Catch: try
-  Unless:    unl
-
-**Classes**
-
-  Class - cla
-
-**Other**
-
-  Function:      -
-  Function:      = (bound)
-  Interpolation: #
+Feel free to suggest any thing. The idea is share knowledge. Use this repository to pair program with someone else and let us know what you did as a pull request. Or if you prefer let me pair program with you :smile:.
